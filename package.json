@@ -1,5 +1,5 @@
 {
-  "name": "interview-handbook-checks",
+  "name": "coretrail-checks",
   "private": true,
   "type": "module",
   "scripts": {"test": "node scripts/check-content.mjs && node scripts/test-sql.mjs", "test:browser": "node scripts/test-browser.mjs"},
