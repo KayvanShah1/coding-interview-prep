@@ -13,12 +13,12 @@
 </head>
 <body data-baseurl="{{ site.baseurl }}" data-subject="{{ page.subject | default: 'sql' }}">
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <header class="mobile-header"><button id="nav-toggle" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">☰</button><a href="{{ '/' | relative_url }}">Querybook</a><button class="search-open" aria-label="Search">Search</button></header>
+  <header class="mobile-header"><button id="nav-toggle" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">☰</button><a href="{{ '/' | relative_url }}">Interview Handbook</a><button class="search-open" aria-label="Search">Search</button></header>
   <div class="nav-scrim" hidden></div>
   <aside class="sidebar" id="sidebar" aria-label="Main navigation">
-    <a class="brand" href="{{ '/' | relative_url }}"><span class="brand-mark" aria-hidden="true">[ ]</span><span>Querybook<small>Coding interview prep</small></span></a>
+    <a class="brand" href="{{ '/' | relative_url }}"><span class="brand-mark" aria-hidden="true">[ ]</span><span>Interview Handbook<small>Data · AI · Software Engineering</small></span></a>
     <nav class="subject-tabs" aria-label="Subjects"><a href="{{ '/sql/' | relative_url }}" {% unless page.subject == 'dsa' %}aria-current="page"{% endunless %}>SQL</a><a href="{{ '/dsa/' | relative_url }}" {% if page.subject == 'dsa' %}aria-current="page"{% endif %}>DSA</a></nav>
-    <button class="search-open search-trigger"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>Search the handbook</span><kbd>Ctrl K</kbd></button>
+    <button class="search-open search-trigger"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5-5 5"/></svg><span>Search the handbook</span><kbd>Ctrl K</kbd></button>
     <nav class="chapters" aria-label="Chapters">
       {% if page.subject == 'dsa' %}
       <a class="nav-start active" href="{{ '/dsa/' | relative_url }}">DSA overview</a><p class="nav-empty">No topics added yet.</p>
@@ -41,6 +41,6 @@
     <main id="main-content" tabindex="-1">{{ content }}</main>
     <aside class="page-outline" aria-label="On this page"><a class="github-link" href="https://github.com/{{ site.repository }}">View on GitHub ↗</a><div class="outline-inner"><span class="outline-label">ON THIS PAGE</span><nav id="toc"></nav><a class="back-top" href="#main-content">Back to top ↑</a></div></aside>
   </div>
-  <dialog id="search-dialog" aria-labelledby="search-title"><div class="search-bar"><label class="sr-only" id="search-title" for="search-input">Search the handbook</label><input id="search-input" type="search" placeholder="Search SQL topics, patterns, or code…" autocomplete="off"><button id="search-close" aria-label="Close search">Esc</button></div><div id="search-results" aria-live="polite"><p class="search-message">Type a concept, keyword, or SQL function.</p></div><div class="search-footer">Search across lessons and examples <span>Enter to open · Esc to close</span></div></dialog>
+  <dialog id="search-dialog" aria-labelledby="search-title"><div class="search-bar"><label class="sr-only" id="search-title" for="search-input">Search the handbook</label><input id="search-input" type="search" placeholder="Search topics, patterns, or code…" autocomplete="off"><button id="search-close" aria-label="Close search">Esc</button></div><div id="search-results" aria-live="polite"><p class="search-message">Type a concept, keyword, or function.</p></div><div class="search-footer">Search across lessons and examples <span>Enter to open · Esc to close</span></div></dialog>
 </body>
 </html>
