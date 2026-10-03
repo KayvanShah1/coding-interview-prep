@@ -8,6 +8,108 @@ sequence: 1200
 level: "Chapter overview"
 ---
 
+## Quick reference
+
+| PostgreSQL syntax | Use when | Common combination |
+|---|---|---|
+| `FILTER (WHERE ...)` | Conditional aggregate | `COUNT`, `SUM`, `AVG` |
+| `DISTINCT ON (...)` | Pick first row per key | ordered latest/earliest row |
+| `GENERATE_SERIES` | Generate rows | calendar spines |
+| `STRING_AGG` | Ordered grouped string | `DISTINCT`, `ORDER BY` |
+| `ARRAY_AGG` | Collect group values | `DISTINCT`, `ORDER BY` |
+| `UNNEST` | Expand arrays to rows | `LATERAL` |
+| `WITH ORDINALITY` | Keep array/function element position | `UNNEST` |
+| `LATERAL` | Right-side expression depends on left row | per-row top N, expansion |
+| `ANY(array)` | Test array membership/comparison | `= ANY(array)` |
+| `jsonb -> / ->>` | Extract JSON value | nested fields |
+| `jsonb_array_elements` | Expand JSON arrays | `LATERAL` |
+| `ON CONFLICT` | PostgreSQL upsert | unique constraints |
+| `RETURNING` | Return changed rows | `INSERT/UPDATE/DELETE` |
+| `::type` | PostgreSQL cast shorthand | dates / numeric conversion |
+| `ILIKE` | Case-insensitive LIKE | text search |
+| materialized view | Persist query result | expensive reusable reads |
+
+## DISTINCT ON
+
+Latest row per customer:
+
+```sql
+SELECT DISTINCT ON (customer_id)
+       customer_id, order_id, order_ts
+FROM orders
+ORDER BY customer_id, order_ts DESC, order_id DESC;
+```
+
+The `ORDER BY` chooses which row survives. For portable SQL, use `ROW_NUMBER()`.
+
+## Arrays: expand and preserve position
+
+```sql
+SELECT u.user_id, x.skill, x.position
+FROM user_skills u
+CROSS JOIN LATERAL
+     UNNEST(u.skills) WITH ORDINALITY AS x(skill, position);
+```
+
+Use `LEFT JOIN LATERAL ... ON TRUE` when users with null/empty expansions must remain.
+
+Membership without expansion:
+
+```sql
+WHERE 'SQL' = ANY(skills)
+```
+
+## JSONB: extract vs expand
+
+```sql
+payload -> 'user'         -- JSON/JSONB value
+payload ->> 'user_id'     -- text value
+```
+
+Use expansion functions when one JSON array element should become one SQL row. Expansion changes grain, so check row multiplication just as you would with a join.
+
+## Upsert and changed-row output
+
+```sql
+INSERT INTO users(user_id, name)
+VALUES (1, 'Kayvan')
+ON CONFLICT (user_id)
+DO UPDATE SET name = EXCLUDED.name
+RETURNING *;
+```
+
+`ON CONFLICT` relies on an applicable unique/exclusion constraint. `RETURNING` is useful when the caller needs generated IDs or the final stored row.
+
+## High-value PostgreSQL combinations
+
+```text
+GENERATE_SERIES + LEFT JOIN
+    missing-date/calendar reports
+
+UNNEST + WITH ORDINALITY
+    expand while keeping original array order
+
+LEFT JOIN LATERAL + ORDER BY + LIMIT
+    latest/top-N related rows while preserving parents
+
+FILTER + aggregate
+    concise conditional metrics
+
+DISTINCT ON + ORDER BY
+    PostgreSQL-specific latest/earliest record
+
+JSONB expansion + LATERAL
+    nested repeated data → relational rows
+```
+
+## Common traps
+
+- Two independent `UNNEST`/expansion operations can multiply row counts.
+- `DISTINCT ON` without deterministic `ORDER BY` can choose an unintended survivor.
+- `->` returns JSON; `->>` returns text.
+- `ON CONFLICT` is not a substitute for deciding the correct uniqueness key.
+- PostgreSQL-specific shortcuts are useful in interviews only when the dialect permits them.
+
 ## In this chapter
 
 <ul class="topic-list">
@@ -21,4 +123,4 @@ level: "Chapter overview"
 
 ## How to study
 
-Read the explanation, predict the query output, then run the example. Change one input row to create a tie, a missing value, or a duplicate and explain what changes.
+Treat this page as a dialect toolbox. Know which constructs are PostgreSQL-specific and be ready to give the portable alternative where one exists.
