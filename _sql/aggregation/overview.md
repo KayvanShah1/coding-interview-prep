@@ -8,6 +8,96 @@ sequence: 400
 level: "Chapter overview"
 ---
 
+## Quick reference
+
+| Syntax | Use when | Common combination |
+|---|---|---|
+| `COUNT(*)` | Count input rows | `GROUP BY` |
+| `COUNT(column)` | Count non-null values | `LEFT JOIN` match counts |
+| `COUNT(DISTINCT x)` | Count unique values | `GROUP BY`, `HAVING` |
+| `SUM / AVG / MIN / MAX` | Summarize numeric values | `GROUP BY` |
+| `HAVING` | Filter after aggregation | `GROUP BY + COUNT/SUM` |
+| `CASE WHEN` | Conditional logic | conditional counts, rates, pivots |
+| `FILTER (WHERE ...)` | PostgreSQL conditional aggregate | `COUNT`, `SUM`, `AVG` |
+| `STRING_AGG` | Combine grouped strings | `DISTINCT`, ordered output |
+| `ARRAY_AGG` | Collect grouped values into an array | `DISTINCT`, `ORDER BY` |
+| `PERCENTILE_CONT` | Continuous percentile with interpolation | `WITHIN GROUP (ORDER BY ...)` |
+| `PERCENTILE_DISC` | Percentile that must be an observed value | `WITHIN GROUP` |
+| `MODE()` | Most frequent value | `WITHIN GROUP` |
+| `GROUPING SETS / ROLLUP / CUBE` | Multiple aggregation levels | subtotal and reporting queries |
+
+## Ordered-set aggregates: WITHIN GROUP
+
+`WITHIN GROUP` supplies the ordering **inside an ordered-set aggregate**.
+
+```sql
+PERCENTILE_CONT(0.95)
+WITHIN GROUP (ORDER BY latency_ms)
+```
+
+Use `PERCENTILE_CONT` for interpolated percentiles such as median, p90, p95, or p99. Use `PERCENTILE_DISC` when the result must be an observed value.
+
+```sql
+SELECT service_name,
+       PERCENTILE_CONT(0.95)
+           WITHIN GROUP (ORDER BY latency_ms) AS p95_latency
+FROM requests
+GROUP BY service_name;
+```
+
+Mental model:
+
+| Clause | What it controls |
+|---|---|
+| `GROUP BY` | Which rows belong to each aggregate group |
+| `WITHIN GROUP (ORDER BY ...)` | Ordering of values inside an ordered-set aggregate |
+| `OVER (...)` | Window of rows used by a window function while retaining row detail |
+
+## High-value combinations
+
+**Conditional count**
+
+```sql
+COUNT(*) FILTER (WHERE status = 'paid')
+```
+
+Portable form:
+
+```sql
+SUM(CASE WHEN status = 'paid' THEN 1 ELSE 0 END)
+```
+
+**Percentage of total: aggregate first, then window**
+
+```sql
+WITH customer_revenue AS (
+    SELECT customer_id, SUM(amount) AS revenue
+    FROM orders
+    GROUP BY customer_id
+)
+SELECT customer_id,
+       revenue,
+       100.0 * revenue / NULLIF(SUM(revenue) OVER (), 0) AS pct_total
+FROM customer_revenue;
+```
+
+**Require several categories**
+
+```sql
+GROUP BY user_id
+HAVING COUNT(DISTINCT category) = 3
+```
+
+Useful for wording such as “has all three”, after restricting the input to the three required categories.
+
+## Common traps
+
+- `COUNT(CASE WHEN condition THEN 1 ELSE 0 END)` counts both 1 and 0. Use `SUM` or omit the `ELSE`.
+- `AVG` ignores null inputs. `AVG(COALESCE(x, 0))` answers a different question.
+- After a `LEFT JOIN`, `COUNT(*)` counts the null-extended row. Count a non-null right-side key to count matches.
+- Always identify the denominator before computing a rate.
+- `PERCENTILE_CONT`, `PERCENT_RANK`, `CUME_DIST`, and `NTILE` answer different questions.
+
 ## In this chapter
 
 <ul class="topic-list">
@@ -17,4 +107,4 @@ level: "Chapter overview"
 
 ## How to study
 
-Read the explanation, predict the query output, then run the example. Change one input row to create a tie, a missing value, or a duplicate and explain what changes.
+For revision, start with the tables above. For deeper study, open the linked lesson and change one input row to introduce a null, duplicate, tie, or missing group.
