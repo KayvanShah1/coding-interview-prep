@@ -1,16 +1,16 @@
-# Querybook · Coding interview prep
+# Engineering Interview Handbook
 
-A dark Jekyll handbook for learning SQL through focused lessons, worked results, and interview problems.
+A dark Jekyll handbook for technical interview revision across data, AI, machine learning, software engineering, and related topics.
 
 **Read it:** https://kayvanshah1.github.io/coding-interview-prep/
 
 ## Included
 
-- 65 topic pages across 14 SQL chapters, plus chapter overviews.
+- SQL currently has 65 topic pages across 14 chapters, plus chapter overviews.
 - Expandable navigation, page outlines, and full-text search with Ctrl/Cmd K.
 - Copyable SQL, expandable answers, problem filters, and an interactive window-frame explorer.
 - PostgreSQL-first examples with selected BigQuery/MySQL differences.
-- DSA navigation with an empty section ready for future material.
+- DSA navigation is ready for future material, with broader Data, ML, and AI Engineering sections planned.
 
 ## Run locally
 
