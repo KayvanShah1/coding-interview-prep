@@ -8,6 +8,105 @@ sequence: 200
 level: "Chapter overview"
 ---
 
+## Quick reference
+
+| Syntax | Use when | Common combination |
+|---|---|---|
+| `LOWER / UPPER / TRIM` | Normalize text | comparisons, grouping |
+| `LENGTH` | Count characters | validation |
+| `SPLIT_PART` | Extract a delimited component | email/domain parsing |
+| `REPLACE` | Literal replacement | cleanup |
+| `REGEXP_REPLACE` | Pattern-based cleanup | text normalization |
+| `LIKE / ILIKE` | Simple wildcard matching | `WHERE` |
+| regex `~ / ~*` | Structural text matching | validation/extraction |
+| `CONCAT / CONCAT_WS` | Build strings | presentation output |
+| `ROUND` | Control numeric precision | rates / averages |
+| `ABS` | Magnitude | differences |
+| `CEIL / FLOOR` | Boundary rounding | buckets / quotas |
+| `NULLIF` | Turn a sentinel/zero into null | safe division |
+| `COALESCE` | Supply fallback for null | display / zero-fill |
+| `DATE_TRUNC` | Convert timestamp to period grain | month/week/day aggregation |
+| `EXTRACT` | Pull calendar component | year/month/hour analysis |
+| `INTERVAL` | Date/time arithmetic | gaps, sessions, lookbacks |
+| `AT TIME ZONE` | Convert timestamp interpretation | business-date grouping |
+| `GENERATE_SERIES` | Generate dates/numbers | calendar spine, missing periods |
+
+## Date and time combinations
+
+**Aggregate by month**
+
+```sql
+SELECT DATE_TRUNC('month', order_ts) AS month,
+       SUM(amount) AS revenue
+FROM orders
+GROUP BY 1;
+```
+
+**Month-over-month / week-over-week / year-over-year**
+
+```text
+DATE_TRUNC to desired grain
+→ aggregate
+→ LAG(metric) OVER (ORDER BY period)
+→ difference or percentage change
+```
+
+For YoY monthly comparisons, a 12-row `LAG` is only correct when every month exists exactly once. Otherwise join periods by the actual previous-year date/month key.
+
+**Missing periods**
+
+```text
+GENERATE_SERIES
+→ calendar spine
+→ LEFT JOIN observed aggregate
+→ COALESCE to zero only when absence truly means zero
+```
+
+**Half-open timestamp range**
+
+```sql
+WHERE order_ts >= TIMESTAMP '2026-01-01'
+  AND order_ts <  TIMESTAMP '2026-02-01'
+```
+
+Prefer half-open periods over manually constructing “end of day” timestamps.
+
+## String combinations
+
+**Normalize before grouping/comparing, when business rules allow**
+
+```sql
+LOWER(TRIM(email))
+```
+
+**Ordered grouped text**
+
+```sql
+STRING_AGG(DISTINCT skill, ', ' ORDER BY skill)
+```
+
+**Regex validation**
+
+```sql
+code ~ '^[A-Z]{2}[0-9]{3}$'
+```
+
+## Safe arithmetic
+
+```sql
+100.0 * numerator / NULLIF(denominator, 0)
+```
+
+Do not silently use `COALESCE(denominator, 0)` in division. Decide what a missing or zero denominator means.
+
+## Common traps
+
+- `EXTRACT(MONTH FROM ts)` alone combines the same month across years.
+- `LAG(date)` means previous observed row, not necessarily previous calendar day.
+- Taking `::date` before applying the business timezone can assign an event to the wrong local date.
+- `COALESCE(missing_metric, 0)` is valid only when missing truly means zero rather than absent/late data.
+- String normalization can change meaning for case-sensitive identifiers or codes.
+
 ## In this chapter
 
 <ul class="topic-list">
@@ -18,4 +117,4 @@ level: "Chapter overview"
 
 ## How to study
 
-Read the explanation, predict the query output, then run the example. Change one input row to create a tie, a missing value, or a duplicate and explain what changes.
+Revise the command table first, then practice combinations: period grain + aggregate + `LAG`, calendar spine + `LEFT JOIN`, and normalization + grouping.
