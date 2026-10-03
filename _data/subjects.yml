@@ -1,0 +1,42 @@
+- id: sql
+  title: SQL
+  nav_title: SQL
+  path: /sql/
+  description: Query patterns, databases, performance, and interview practice.
+  status: active
+- id: dsa
+  title: Data Structures & Algorithms
+  nav_title: DSA
+  path: /dsa/
+  description: Core data structures, algorithms, patterns, and problem solving.
+  status: planned
+- id: data-modeling
+  title: Data Modeling
+  nav_title: Modeling
+  path: /data-modeling/
+  description: Relational, analytical, dimensional, and system-level data modeling.
+  status: planned
+- id: data-engineering
+  title: Data Engineering
+  nav_title: Data Eng
+  path: /data-engineering/
+  description: Pipelines, storage, orchestration, reliability, and scale.
+  status: planned
+- id: machine-learning
+  title: Machine Learning
+  nav_title: ML
+  path: /machine-learning/
+  description: Modeling fundamentals, evaluation, feature work, and production ML.
+  status: planned
+- id: ai-engineering
+  title: AI Engineering
+  nav_title: AI Eng
+  path: /ai-engineering/
+  description: LLM systems, retrieval, agents, evaluation, inference, and observability.
+  status: planned
+- id: system-design
+  title: System Design
+  nav_title: Systems
+  path: /system-design/
+  description: Architecture, tradeoffs, distributed systems, APIs, and scaling.
+  status: planned
