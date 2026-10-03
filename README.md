@@ -1,16 +1,17 @@
-# Engineering Interview Handbook
+# CoreTrail
 
-A dark Jekyll handbook for technical interview revision across data, AI, machine learning, software engineering, and related topics.
+A dark Jekyll site for technical interview revision across data, AI, machine learning, software engineering, and related systems.
 
 **Read it:** https://kayvanshah1.github.io/coding-interview-prep/
 
-## Included
+## Structure
 
+- The root landing page routes into subject-specific trails.
 - SQL currently has 65 topic pages across 14 chapters, plus chapter overviews.
+- Data Modeling, Data Engineering, Machine Learning, AI Engineering, System Design, and DSA have overview routes ready for future material.
 - Expandable navigation, page outlines, and full-text search with Ctrl/Cmd K.
 - Copyable SQL, expandable answers, problem filters, and an interactive window-frame explorer.
-- PostgreSQL-first examples with selected BigQuery/MySQL differences.
-- DSA navigation is ready for future material, with broader Data, ML, and AI Engineering sections planned.
+- PostgreSQL-first SQL examples with selected BigQuery/MySQL differences.
 
 ## Run locally
 
