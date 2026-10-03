@@ -1,0 +1,6 @@
+---
+layout: null
+---
+[
+{% assign lessons = site.sql | sort: 'sequence' %}{% for lesson in lessons %}{"title":{{ lesson.title | jsonify }},"chapter":{{ lesson.chapter | jsonify }},"description":{{ lesson.description | jsonify }},"url":{{ lesson.url | relative_url | jsonify }},"content":{{ lesson.content | markdownify | strip_html | normalize_whitespace | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}
+]

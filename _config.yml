@@ -1,0 +1,36 @@
+title: Querybook
+description: A practical SQL handbook for coding interviews. Learn the concept, inspect the result, and understand the edge cases.
+url: https://kayvanshah1.github.io
+baseurl: /coding-interview-prep
+repository: KayvanShah1/coding-interview-prep
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+collections:
+  sql:
+    output: true
+    permalink: /sql/:path/
+defaults:
+  - scope:
+      path: ''
+      type: sql
+    values:
+      layout: lesson
+      subject: sql
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - package-lock.json
+  - node_modules
+  - scripts
+  - tests
+  - README.md
+  - CONTRIBUTING.md
+  - CONTENT_COVERAGE.md
+  - VALIDATION.md
+  - vendor
+  - tmp
+  - test-results

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "foundations",
+    "title": "Foundations",
+    "description": "Understand tables, keys, data types, and how a query is evaluated."
+  },
+  {
+    "id": "filtering",
+    "title": "Filtering & expressions",
+    "description": "Select the right rows and reason carefully about missing values."
+  },
+  {
+    "id": "functions",
+    "title": "Functions & dates",
+    "description": "Transform strings, numbers, dates, and timestamps."
+  },
+  {
+    "id": "joins",
+    "title": "Joins & sets",
+    "description": "Combine tables while preserving the intended grain."
+  },
+  {
+    "id": "aggregation",
+    "title": "Aggregation",
+    "description": "Summarize data and define meaningful denominators."
+  },
+  {
+    "id": "subqueries",
+    "title": "Subqueries & CTEs",
+    "description": "Break down problems and query related or hierarchical data."
+  },
+  {
+    "id": "windows",
+    "title": "Window functions",
+    "description": "Compare ordered rows without losing detail."
+  },
+  {
+    "id": "patterns",
+    "title": "Interview patterns",
+    "description": "Recognize recurring problems and choose a reliable approach."
+  },
+  {
+    "id": "schema",
+    "title": "Schema & data changes",
+    "description": "Define tables, enforce constraints, and modify data safely."
+  },
+  {
+    "id": "design",
+    "title": "Database design",
+    "description": "Model relationships, dependencies, and analytical history."
+  },
+  {
+    "id": "transactions",
+    "title": "Transactions",
+    "description": "Understand concurrent work, isolation, and locks."
+  },
+  {
+    "id": "performance",
+    "title": "Performance",
+    "description": "Read plans, choose indexes, and reduce unnecessary work."
+  },
+  {
+    "id": "postgres",
+    "title": "PostgreSQL toolkit",
+    "description": "Work with arrays, JSON, views, and database routines."
+  },
+  {
+    "id": "practice",
+    "title": "Practice & revision",
+    "description": "Apply the patterns, compare dialects, and test your understanding."
+  }
+]
