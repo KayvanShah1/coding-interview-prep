@@ -18,7 +18,7 @@
   <aside class="sidebar" id="sidebar" aria-label="Main navigation">
     <a class="brand" href="{{ '/' | relative_url }}"><span class="brand-mark" aria-hidden="true">[ ]</span><span>Interview Handbook<small>Data · AI · Software Engineering</small></span></a>
     <nav class="subject-tabs" aria-label="Subjects"><a href="{{ '/sql/' | relative_url }}" {% unless page.subject == 'dsa' %}aria-current="page"{% endunless %}>SQL</a><a href="{{ '/dsa/' | relative_url }}" {% if page.subject == 'dsa' %}aria-current="page"{% endif %}>DSA</a></nav>
-    <button class="search-open search-trigger"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5-5 5"/></svg><span>Search the handbook</span><kbd>Ctrl K</kbd></button>
+    <button class="search-open search-trigger"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>Search the handbook</span><kbd>Ctrl K</kbd></button>
     <nav class="chapters" aria-label="Chapters">
       {% if page.subject == 'dsa' %}
       <a class="nav-start active" href="{{ '/dsa/' | relative_url }}">DSA overview</a><p class="nav-empty">No topics added yet.</p>
