@@ -1,4 +1,4 @@
-name: Build and publish Querybook
+name: Build and publish Interview Handbook
 on:
   push:
     branches: [main, 'site/**']
