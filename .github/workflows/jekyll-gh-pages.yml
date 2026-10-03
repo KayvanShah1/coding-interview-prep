@@ -1,4 +1,4 @@
-name: Build and publish Interview Handbook
+name: Build and publish CoreTrail
 on:
   push:
     branches: [main, 'site/**']
