@@ -3,7 +3,7 @@ title: "JSONB extraction & expansion"
 description: "Query nested data while keeping types, missing keys, and row counts explicit."
 chapter: "postgres"
 order: 3
-sequence: 1203
+sequence: 1303
 level: "Intermediate"
 references: [{"title":"PostgreSQL JSON functions","url":"https://www.postgresql.org/docs/current/functions-json.html"}]
 ---

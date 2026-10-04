@@ -8,6 +8,14 @@ sequence: 200
 level: "Chapter overview"
 ---
 
+## Transform values without changing their meaning
+
+Functions can normalize text, calculate measures, or align timestamps to a reporting period. The difficult part is preserving units, precision, and calendar semantics while composing those operations.
+
+**Suggested route:** Use the syntax map for recall; open the date, string, and numeric lessons to see complete expressions and their outputs.
+
+**By the end:** Distinguish a calendar day from an elapsed duration and explain why replacing null with zero changes a metric.
+
 ## Quick reference
 
 | Syntax | Use when | Common combination |

@@ -2,8 +2,8 @@
 title: "Partitioning & pruning"
 description: "Separate physical data layout from window partitions and logical grouping."
 chapter: "performance"
-order: 4
-sequence: 1104
+order: 8
+sequence: 1108
 level: "Intermediate"
 references: [{"title":"PostgreSQL table partitioning","url":"https://www.postgresql.org/docs/current/ddl-partitioning.html"}]
 ---
@@ -41,3 +41,15 @@ Too many partitions increase planning and management overhead. A partition key u
 PostgreSQL unique constraints on a partitioned table have restrictions involving the partition key. Do not assume a globally unique event ID is automatically enforced by independent per-partition unique indexes.
 
 In warehouses such as BigQuery, discuss partition pruning and clustering in that engine's terms. Their storage model and index options differ from PostgreSQL.
+
+## Choose a partition key and granularity
+
+For time-series events, first list common date ranges, ingestion behavior, retention, and backfills. Monthly partitions may suit some workloads; daily partitions may support different lifecycle boundaries. More partitions do not automatically mean less query work.
+
+If most queries select all history for one asset, time partitioning alone cannot eliminate dates. An asset access path inside the partitions or a different representation may matter more. If queries filter by event time but the table is partitioned by ingestion time, late arrivals can make those two boundaries differ.
+
+Plan how future partitions are created, where out-of-range rows go, and how late events reach old partitions. The operational design is part of the choice, not an afterthought.
+
+## Verify pruning with evidence
+
+Run the [partition lab]({{ '/sql/performance/partition-lab/' | relative_url }}). Compare a January-only query with an asset-only query on the same fixture. Inspect actual child-table access, not just the fact that the table is partitioned. Then explain why an index within a partition and pruning across partitions address different work.

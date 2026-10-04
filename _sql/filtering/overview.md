@@ -8,6 +8,25 @@ sequence: 100
 level: "Chapter overview"
 ---
 
+## Choose the rows before transforming them
+
+Filtering defines the population every later operation sees. Learn inclusive boundaries, membership, pattern matching, and three-valued null logic together: a predicate that becomes unknown can remove rows you expected to keep.
+
+**Suggested route:** Start with predicates, then compare null behavior in CASE, IN, and NOT IN. Follow existence questions into the subqueries chapter.
+
+**By the end:** Explain a date boundary and a null-containing comparison set using concrete rows.
+
+## Decision reference
+
+| Need | Construct and check |
+|---|---|
+| Inclusive range | BETWEEN; both boundaries included |
+| Whole timestamp day | >= start AND < next start |
+| Membership | IN; check null semantics |
+| Missing values | IS NULL / IS NOT NULL |
+| Conditional expression | CASE; decide ELSE behavior |
+| Text match | LIKE / ILIKE / regex; dialect and pattern semantics |
+
 ## In this chapter
 
 <ul class="topic-list">
@@ -17,4 +36,4 @@ level: "Chapter overview"
 
 ## How to study
 
-Read the explanation, predict the query output, then run the example. Change one input row to create a tie, a missing value, or a duplicate and explain what changes.
+Use the suggested route above. For each lesson, explain the decision in your own words, test its example, and identify a situation where a different approach would be needed.

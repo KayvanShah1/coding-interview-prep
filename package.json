@@ -2,6 +2,14 @@
   "name": "coretrail-checks",
   "private": true,
   "type": "module",
-  "scripts": {"test": "node scripts/check-content.mjs && node scripts/test-sql.mjs", "test:browser": "node scripts/test-browser.mjs"},
-  "devDependencies": {"@electric-sql/pglite": "^0.3.0", "playwright": "^1.55.0", "yaml": "^2.8.0"}
+  "scripts": {
+    "test": "node scripts/check-content.mjs && node scripts/test-sql.mjs",
+    "test:plans": "node scripts/test-performance.mjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.3.0",
+    "pg": "^8.23.1",
+    "playwright": "^1.55.0",
+    "yaml": "^2.8.0"
+  }
 }

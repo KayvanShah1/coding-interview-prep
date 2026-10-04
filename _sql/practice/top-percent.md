@@ -3,7 +3,7 @@ title: "Top 5%: thresholds & quotas"
 description: "Distinguish percentile cutoffs from a fixed count of rows."
 chapter: "practice"
 order: 8
-sequence: 1308
+sequence: 1408
 level: "Core"
 references: [{"title":"PostgreSQL window functions","url":"https://www.postgresql.org/docs/current/functions-window.html"}]
 ---

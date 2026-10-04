@@ -8,6 +8,14 @@ sequence: 300
 level: "Chapter overview"
 ---
 
+## Follow the row population through every join
+
+A join is a relationship between row sets. Its multiplicity determines whether measures remain correct. Start with matching and unmatched rows, then reason about independent one-to-many children and set operations.
+
+**Suggested route:** Trace a left join with one unmatched customer, then an order with multiple items and payments. Compare a join with an existence test.
+
+**By the end:** Predict result cardinality, preserve zero-match entities, and avoid inflated totals.
+
 ## Quick reference
 
 | Operation | Returns | Typical use |

@@ -3,7 +3,7 @@ title: "Later purchases of new products"
 description: "Compare later purchases with the complete first-day product set."
 chapter: "practice"
 order: 9
-sequence: 1309
+sequence: 1409
 level: "Core"
 references: [{"title":"PostgreSQL window functions","url":"https://www.postgresql.org/docs/current/functions-window.html"}]
 ---

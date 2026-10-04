@@ -60,6 +60,11 @@
     "description": "Read plans, choose indexes, and reduce unnecessary work."
   },
   {
+    "id": "scaling",
+    "title": "Storage & scaling",
+    "description": "Choose physical layout, distribution, and replication from workload requirements."
+  },
+  {
     "id": "postgres",
     "title": "PostgreSQL toolkit",
     "description": "Work with arrays, JSON, views, and database routines."

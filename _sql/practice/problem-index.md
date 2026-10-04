@@ -3,14 +3,16 @@ title: "Practice problem index"
 description: "Find a problem by technique and difficulty, then compare the worked reasoning."
 chapter: "practice"
 order: 12
-sequence: 1312
+sequence: 1412
 level: "Core"
 references: []
 ---
 
 ## Pick a problem
 
-<div class="filter-controls"><label>Topic <select class="practice-filter" data-field="topic" aria-label="Filter by topic"><option value="">All topics</option value="aggregation">Aggregation</option><option value="joins">Joins & existence</option><option value="windows">Windows</option><option value="dates">Dates & events</option></select></label><label>Level <select class="practice-filter" data-field="level" aria-label="Filter by level"><option value="">All levels</option><option value="core">Core</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></label></div>
+For questions on StrataScratch, LeetCode, and DataLemur, open [Find your next SQL problem]({{ '/sql/practice/platform-problems/' | relative_url }}). The list below contains CoreTrail's worked examples and drills.
+
+<div class="filter-controls"><label>Topic <select class="practice-filter" data-field="topic" aria-label="Filter by topic"><option value="">All topics</option value="aggregation">Aggregation</option><option value="joins">Joins & existence</option><option value="windows">Windows</option><option value="performance">Performance</option><option value="mixed">Mixed practice</option><option value="dates">Dates & events</option></select></label><label>Level <select class="practice-filter" data-field="level" aria-label="Filter by level"><option value="">All levels</option><option value="core">Core</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></label></div>
 <p class="practice-count" aria-live="polite"></p>
 <div class="practice-item" data-topic="aggregation" data-level="core"><small>AGGREGATION · CORE</small><h3><a href="{{ '/sql/practice/largest-olympics/' | relative_url }}">Largest Olympics</a></h3><p>Return every games with the largest number of distinct athletes.</p></div>
 <div class="practice-item" data-topic="aggregation" data-level="intermediate"><small>AGGREGATION · INTERMEDIATE</small><h3><a href="{{ '/sql/practice/apple-users/' | relative_url }}">Apple Product Counts</a></h3><p>Count users by language without counting every device event.</p></div>
@@ -24,6 +26,10 @@ references: []
 <div class="practice-item" data-topic="joins" data-level="intermediate"><small>JOINS · INTERMEDIATE</small><h3><a href="{{ '/sql/practice/retention-joins/' | relative_url }}">Monthly retention</a></h3><p>Preserve non-returning users in the denominator.</p></div>
 <div class="practice-item" data-topic="dates" data-level="advanced"><small>EVENTS · ADVANCED</small><h3><a href="{{ '/sql/patterns/funnels/' | relative_url }}">Ordered conversion funnel</a></h3><p>Require view, cart, and purchase in sequence.</p></div>
 <div class="practice-item" data-topic="windows" data-level="core"><small>WINDOWS · CORE</small><h3><a href="{{ '/sql/windows/ranking/' | relative_url }}">Top salaries per department</a></h3><p>Decide whether the answer needs rows or distinct salary levels.</p></div>
+
+<div class="practice-item" data-topic="mixed" data-level="intermediate"><small>MIXED · INTERMEDIATE</small><h3><a href="{{ '/sql/practice/mixed-drills/' | relative_url }}">Mixed SQL practice</a></h3><p>Choose the pattern yourself, then reveal progressive hints.</p></div>
+<div class="practice-item" data-topic="performance" data-level="intermediate"><small>PERFORMANCE · INTERMEDIATE</small><h3><a href="{{ '/sql/practice/diagnosis-drills/' | relative_url }}">Diagnose before optimizing</a></h3><p>Six scenarios connecting symptoms, evidence, and next steps.</p></div>
+<div class="practice-item" data-topic="performance" data-level="advanced"><small>PERFORMANCE · ADVANCED</small><h3><a href="{{ '/sql/performance/index-lab/' | relative_url }}">Native query-plan labs</a></h3><p>Compare actual execution and unchanged results on a larger fixture.</p></div>
 
 ## Practice method
 

@@ -12,6 +12,20 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: coretrail
+          POSTGRES_PASSWORD: coretrail_ci
+          POSTGRES_DB: coretrail_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U coretrail -d coretrail_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,6 +34,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - run: npm run test:plans
+        env:
+          DATABASE_URL: postgres://coretrail:coretrail_ci@localhost:5432/coretrail_test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: performance-plans
+          path: test-results/performance-plans.json
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'

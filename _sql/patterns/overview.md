@@ -8,6 +8,14 @@ sequence: 700
 level: "Chapter overview"
 ---
 
+## Recognize a problem, then compose a solution
+
+Interview questions often combine a few operations across different grains. The wording map suggests a starting point; the worked lessons show why the stages are needed and where a plausible shortcut breaks.
+
+**Suggested route:** Try a pattern with a tiny fixture, then change the population or tie rule. Use mixed practice when you can identify a technique without its label.
+
+**By the end:** Describe the sequence of transformations and reject an alternative with a concrete counterexample.
+
 ## Wording → first technique
 
 | Interview wording | First technique to consider |
@@ -151,6 +159,8 @@ These decisions usually determine the correct SQL pattern before syntax does.
 <li><a href="{{ '/sql/patterns/retention-calendar/' | relative_url }}">Retention & missing dates</a><span>Define observation windows and construct complete calendars.</span></li>
 <li><a href="{{ '/sql/patterns/mixed-patterns/' | relative_url }}">Pivots, medians & interval overlaps</a><span>Recognize several useful extensions of the core patterns.</span></li>
 <li><a href="{{ '/sql/patterns/funnels/' | relative_url }}">Ordered funnels</a><span>Require the right sequence of events instead of merely counting users with each event.</span></li>
+<li><a href="{{ '/sql/patterns/period-changes/' | relative_url }}">Period changes and missing months</a><span>Aggregate to calendar grain before LAG, and make missing periods explicit.</span></li>
+<li><a href="{{ '/sql/patterns/rates-and-populations/' | relative_url }}">Rates, populations, and weighted averages</a><span>Define numerator and denominator at the same grain before dividing.</span></li>
 </ul>
 
 ## How to study

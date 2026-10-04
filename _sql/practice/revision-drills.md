@@ -3,7 +3,7 @@ title: "Revision drills"
 description: "Work through a deliberate sequence of query challenges."
 chapter: "practice"
 order: 2
-sequence: 1302
+sequence: 1402
 level: "Core"
 references: [{"title":"PostgreSQL window functions","url":"https://www.postgresql.org/docs/current/functions-window.html"}]
 ---

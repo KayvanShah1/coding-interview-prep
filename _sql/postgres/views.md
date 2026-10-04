@@ -3,7 +3,7 @@ title: "Views & materialized views"
 description: "Separate reusable query definitions from stored query results."
 chapter: "postgres"
 order: 4
-sequence: 1204
+sequence: 1304
 level: "Core"
 references: [{"title":"PostgreSQL views","url":"https://www.postgresql.org/docs/current/tutorial-views.html"},{"title":"PostgreSQL materialized views","url":"https://www.postgresql.org/docs/current/rules-materializedviews.html"}]
 ---

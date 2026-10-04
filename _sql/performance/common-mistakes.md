@@ -2,8 +2,8 @@
 title: "Correctness & optimization traps"
 description: "Check semantics before comparing query performance."
 chapter: "performance"
-order: 1
-sequence: 1101
+order: 7
+sequence: 1107
 level: "Core"
 references: [{"title":"PostgreSQL EXPLAIN","url":"https://www.postgresql.org/docs/current/using-explain.html"}]
 ---

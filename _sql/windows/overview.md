@@ -8,6 +8,14 @@ sequence: 600
 level: "Chapter overview"
 ---
 
+## Separate grouping, ordering, and framing
+
+A window calculation adds information while retaining its input rows. The partition chooses companions, the ordering establishes sequence, and the frame selects participating rows for frame-sensitive functions. Those are three separate decisions.
+
+**Suggested route:** Start with OVER, then ranking and LAG/LEAD. Study frames with repeated ordering values and missing dates before using running or moving metrics.
+
+**By the end:** Choose a tie policy and explain why the previous row is not always the previous calendar period.
+
 ## Quick reference
 
 | Need | First function / syntax |

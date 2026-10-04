@@ -1,9 +1,13 @@
 ---
-layout: default
+layout: subject
 title: DSA
 subject: dsa
 permalink: /dsa/
+description: Algorithms, data structures, and problem solving.
 ---
-<div class="breadcrumb"><span>DSA</span></div>
-<header class="article-header"><h1>Data structures & algorithms</h1><p class="lead">A place for the next part of your preparation.</p></header>
-<article class="prose empty-state"><h2>No topics added yet</h2><p>This section is ready for future notes and practice problems.</p><a class="text-link" href="{{ '/sql/' | relative_url }}">Explore the SQL handbook →</a></article>
+
+## Start with the problem shape
+
+The planned path covers arrays, strings, hashing, two pointers, sliding windows, trees, graphs, heaps, and dynamic programming. Each topic will connect a problem constraint to an algorithm, complexity analysis, and edge-case tests.
+
+Until lessons are available, there are no DSA exercises to complete here.

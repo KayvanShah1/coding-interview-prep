@@ -4,9 +4,17 @@ nav_title: "Overview"
 description: "Work with arrays, JSON, views, and database routines."
 chapter: "postgres"
 order: 0
-sequence: 1200
+sequence: 1300
 level: "Chapter overview"
 ---
+
+## Use PostgreSQL features with explicit grain
+
+Arrays, JSONB, lateral expansion, and DISTINCT ON are useful extensions of ordinary relational patterns. Expansion can multiply rows; aggregation can collect them again. Keep track of those transitions.
+
+**Suggested route:** Start from the quick reference, then run the arrays and JSON examples with empty and null inputs. Connect views and routines to their lifecycle and access rules.
+
+**By the end:** Explain when a PostgreSQL-specific construct improves clarity and what must change in another dialect.
 
 ## Quick reference
 

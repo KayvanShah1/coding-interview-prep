@@ -8,6 +8,14 @@ sequence: 500
 level: "Chapter overview"
 ---
 
+## Give each intermediate question a purpose
+
+A subquery can answer a scalar question, test whether a related row exists, or supply a new table to another stage. A CTE names that stage. Choose the form from the result you need, then investigate execution separately.
+
+**Suggested route:** Compare existence and membership before learning correlated, lateral, and recursive forms. State the grain of every CTE.
+
+**By the end:** Explain why a related table should or should not contribute extra output rows.
+
 ## Quick reference
 
 | Syntax | Think | Common use |

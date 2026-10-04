@@ -3,7 +3,7 @@ title: "Country rank changes"
 description: "Rank each period separately before comparing countries."
 chapter: "practice"
 order: 7
-sequence: 1307
+sequence: 1407
 level: "Core"
 references: [{"title":"PostgreSQL window functions","url":"https://www.postgresql.org/docs/current/functions-window.html"}]
 ---

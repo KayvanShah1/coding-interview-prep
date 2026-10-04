@@ -8,6 +8,14 @@ sequence: 400
 level: "Chapter overview"
 ---
 
+## Choose the unit being counted
+
+Aggregation changes grain. Counts, rates, percentiles, and subtotals are reliable only when their populations are clear. Use the command map below as a route into worked examples rather than as a list to memorize.
+
+**Suggested route:** Compare COUNT variants first, then conditional rates and ordered-set aggregates. Finish by combining an aggregate with a window.
+
+**By the end:** Explain the numerator, denominator, null behavior, and tie policy of a reported metric.
+
 ## Quick reference
 
 | Syntax | Use when | Common combination |
@@ -103,6 +111,7 @@ Useful for wording such as “has all three”, after restricting the input to t
 <ul class="topic-list">
 <li><a href="{{ '/sql/aggregation/aggregate-functions/' | relative_url }}">Counts, totals & conditional aggregation</a><span>Choose the counting unit and calculate defensible rates.</span></li>
 <li><a href="{{ '/sql/aggregation/grouping-sets/' | relative_url }}">GROUPING SETS, ROLLUP & CUBE</a><span>Produce several aggregation levels without hand-writing separate queries.</span></li>
+<li><a href="{{ '/sql/aggregation/percentiles/' | relative_url }}">Percentiles, WITHIN GROUP, and thresholds</a><span>Work out the percentile by hand, compare continuous and observed values, and handle tied thresholds.</span></li>
 </ul>
 
 ## How to study

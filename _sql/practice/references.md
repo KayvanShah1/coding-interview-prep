@@ -3,7 +3,7 @@ title: "Sources, scope & coverage"
 description: "Understand what the handbook covers and where to verify dialect-specific details."
 chapter: "practice"
 order: 13
-sequence: 1313
+sequence: 1413
 level: "Core"
 references: []
 ---
