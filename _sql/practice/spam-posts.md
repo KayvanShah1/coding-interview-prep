@@ -3,7 +3,7 @@ title: "Spam Posts"
 description: "See why distinct posts and view records give different percentages."
 chapter: "practice"
 order: 6
-sequence: 1306
+sequence: 1406
 level: "Core"
 references: [{"title":"PostgreSQL window functions","url":"https://www.postgresql.org/docs/current/functions-window.html"}]
 ---

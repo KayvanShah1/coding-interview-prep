@@ -10,6 +10,8 @@ references: [{"title":"PostgreSQL aggregates","url":"https://www.postgresql.org/
 
 ## COUNT variants
 
+Count the entity the question asks about. A row can represent an order, a line item, a user, or an event. Joining tables can change that unit before an aggregate runs. State the population and grain first, then choose the counting expression.
+
 For values `10, 10, NULL, 20`:
 
 | Expression | Result |
@@ -23,6 +25,8 @@ For values `10, 10, NULL, 20`:
 `AVG` uses the three non-null values. `AVG(COALESCE(value, 0))` would instead produce 10, which answers a different question.
 
 ## Group and filter
+
+`WHERE` removes input rows before totals are calculated. `HAVING` decides which completed groups remain. In the example below, unpaid orders never contribute to revenue; the final population contains only customers whose paid revenue exceeds 1000.
 
 ```sql
 SELECT customer_id, COUNT(*) AS paid_orders, SUM(amount) AS revenue

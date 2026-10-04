@@ -3,7 +3,7 @@ title: "Database interview questions"
 description: "Practice concise explanations of the concepts behind SQL queries."
 chapter: "practice"
 order: 11
-sequence: 1311
+sequence: 1411
 level: "Core"
 references: []
 ---

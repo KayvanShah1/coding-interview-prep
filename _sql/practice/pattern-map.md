@@ -3,7 +3,7 @@ title: "Choose the right technique"
 description: "Translate interview wording into candidate query patterns."
 chapter: "practice"
 order: 1
-sequence: 1301
+sequence: 1401
 level: "Core"
 references: [{"title":"PostgreSQL table expressions","url":"https://www.postgresql.org/docs/current/queries-table-expressions.html"}]
 ---

@@ -3,7 +3,7 @@ title: "Privileges & parameterized queries"
 description: "Separate SQL values from SQL code and give database roles only the access they need."
 chapter: "postgres"
 order: 6
-sequence: 1206
+sequence: 1306
 level: "Core"
 references: [{"title":"PostgreSQL privileges","url":"https://www.postgresql.org/docs/current/ddl-priv.html"},{"title":"PostgreSQL PREPARE","url":"https://www.postgresql.org/docs/current/sql-prepare.html"}]
 ---

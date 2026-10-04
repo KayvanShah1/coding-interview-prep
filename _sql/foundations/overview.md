@@ -8,6 +8,24 @@ sequence: 0
 level: "Chapter overview"
 ---
 
+## Start with what one row means
+
+SQL becomes easier when you can name the input population and required output grain before choosing syntax. This chapter connects tables, keys, types, and logical query order so later joins and windows have a clear foundation.
+
+**Suggested route:** Read grain and query order first. Use the practice dataset to predict results, then test the effect of duplicate and missing rows.
+
+**By the end:** Explain why a query returns one row per customer rather than one row per order; distinguish logical evaluation from physical execution.
+
+## Decision reference
+
+| Question | Construct |
+|---|---|
+| Which rows are eligible? | FROM, JOIN, WHERE |
+| What is the reporting grain? | GROUP BY and aggregates |
+| Which groups qualify? | HAVING |
+| Which comparisons retain detail? | Window functions |
+| Which rows are displayed first? | Final ORDER BY, LIMIT |
+
 ## In this chapter
 
 <ul class="topic-list">
@@ -20,4 +38,4 @@ level: "Chapter overview"
 
 ## How to study
 
-Read the explanation, predict the query output, then run the example. Change one input row to create a tie, a missing value, or a duplicate and explain what changes.
+Use the suggested route above. For each lesson, explain the decision in your own words, test its example, and identify a situation where a different approach would be needed.

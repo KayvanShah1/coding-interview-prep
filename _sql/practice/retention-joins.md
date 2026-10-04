@@ -3,7 +3,7 @@ title: "Retention and the denominator"
 description: "Understand why an outer join can be necessary."
 chapter: "practice"
 order: 10
-sequence: 1310
+sequence: 1410
 level: "Core"
 references: [{"title":"PostgreSQL window functions","url":"https://www.postgresql.org/docs/current/functions-window.html"}]
 ---

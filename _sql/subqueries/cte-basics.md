@@ -10,6 +10,8 @@ references: [{"title":"PostgreSQL WITH queries","url":"https://www.postgresql.or
 
 ## Scalar subquery: one value
 
+Before selecting a subquery form, say what the inner question returns: one value, a set of rows, or merely whether a row exists. That choice determines how the outer query can use the answer. A CTE adds a name to a stage; it does not change the required grain.
+
 ```sql
 SELECT employee_id, salary
 FROM employees

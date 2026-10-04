@@ -1,0 +1,8 @@
+[
+  {"id":"sql","title":"SQL","url":"/sql/","status":"Available","description":"Queries, patterns, database design, and performance."},
+  {"id":"dsa","title":"DSA","url":"/dsa/","status":"Planned","description":"Algorithms, data structures, and problem solving."},
+  {"id":"data-engineering","title":"Data Engineering","url":"/data-engineering/","status":"Planned","description":"Pipelines, modeling, orchestration, and reliability."},
+  {"id":"ml","title":"Machine Learning","url":"/ml/","status":"Planned","description":"Models, evaluation, and production systems."},
+  {"id":"ai-engineering","title":"AI Engineering","url":"/ai-engineering/","status":"Planned","description":"Retrieval, agents, evaluation, and inference."},
+  {"id":"systems","title":"Data Modeling and System Design","url":"/systems/","status":"Planned","description":"Data models, architecture, and technical trade-offs."}
+]

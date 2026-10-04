@@ -3,7 +3,7 @@ title: "Functions, procedures & triggers"
 description: "Recognize when logic belongs in a database routine and when hidden behavior adds risk."
 chapter: "postgres"
 order: 5
-sequence: 1205
+sequence: 1305
 level: "Advanced"
 references: [{"title":"PostgreSQL SQL functions","url":"https://www.postgresql.org/docs/current/xfunc-sql.html"},{"title":"PostgreSQL triggers","url":"https://www.postgresql.org/docs/current/triggers.html"}]
 ---

@@ -3,7 +3,7 @@ title: "Apple Product Counts"
 description: "Reduce device events to one flag per user."
 chapter: "practice"
 order: 5
-sequence: 1305
+sequence: 1405
 level: "Core"
 references: [{"title":"PostgreSQL window functions","url":"https://www.postgresql.org/docs/current/functions-window.html"}]
 ---

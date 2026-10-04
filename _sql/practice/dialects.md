@@ -3,7 +3,7 @@ title: "SQL dialect differences"
 description: "Translate common operations between PostgreSQL, BigQuery, and MySQL."
 chapter: "practice"
 order: 3
-sequence: 1303
+sequence: 1403
 level: "Core"
 references: [{"title":"PostgreSQL date functions","url":"https://www.postgresql.org/docs/current/functions-datetime.html"}]
 ---

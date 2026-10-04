@@ -3,7 +3,7 @@ title: "Largest Olympics"
 description: "Count distinct athletes, then keep every tied maximum."
 chapter: "practice"
 order: 4
-sequence: 1304
+sequence: 1404
 level: "Core"
 references: [{"title":"PostgreSQL window functions","url":"https://www.postgresql.org/docs/current/functions-window.html"}]
 ---

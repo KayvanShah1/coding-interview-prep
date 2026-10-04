@@ -8,6 +8,24 @@ sequence: 800
 level: "Chapter overview"
 ---
 
+## Use the schema to enforce the contract
+
+Tables and constraints encode assumptions that query authors otherwise have to guess. Data changes introduce another question: what must happen atomically, and what happens when a write conflicts or repeats?
+
+**Suggested route:** Study DDL and constraints before DML and upserts. Compare a declared uniqueness guarantee with deduplicating a query result.
+
+**By the end:** Choose a constraint from an invariant and explain safe insert/update/delete behavior under that invariant.
+
+## Decision reference
+
+| Operation | Start with |
+|---|---|
+| Define or change structure | CREATE / ALTER TABLE |
+| Enforce identity or relationships | PRIMARY KEY / UNIQUE / FOREIGN KEY |
+| Enforce row rules | NOT NULL / CHECK |
+| Change rows | INSERT / UPDATE / DELETE |
+| Handle conflicts | ON CONFLICT / MERGE; engine-specific semantics |
+
 ## In this chapter
 
 <ul class="topic-list">
@@ -19,4 +37,4 @@ level: "Chapter overview"
 
 ## How to study
 
-Read the explanation, predict the query output, then run the example. Change one input row to create a tie, a missing value, or a duplicate and explain what changes.
+Use the suggested route above. For each lesson, explain the decision in your own words, test its example, and identify a situation where a different approach would be needed.

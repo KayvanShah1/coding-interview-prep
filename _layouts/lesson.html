@@ -3,11 +3,11 @@ layout: default
 ---
 {% assign chapter = site.data.chapters | where: 'id', page.chapter | first %}
 <div class="breadcrumb"><a href="{{ '/sql/' | relative_url }}">SQL</a><span>/</span><a href="{{ '/sql/' | append: chapter.id | append: '/overview/' | relative_url }}">{{ chapter.title }}</a></div>
-<header class="article-header"><h1>{{ page.title }}</h1><p class="lead">{{ page.description }}</p><div class="lesson-meta"><span>{{ page.level | default: 'Core' }}</span><span>PostgreSQL{% if page.dialect_note %} · {{ page.dialect_note }}{% endif %}</span><span>{{ content | number_of_words | divided_by: 180 | plus: 1 }} min read</span></div></header>
+<header class="article-header"><h1>{{ page.title }}</h1><p class="lead">{{ page.description }}</p><div class="lesson-meta"><span>{{ page.level | default: 'Core' }}</span><span>{{ page.dialect | default: 'PostgreSQL' }}{% if page.dialect_note %} · {{ page.dialect_note }}{% endif %}</span><span>{{ content | number_of_words | divided_by: 180 | plus: 1 }} min read</span></div></header>
 <details class="mobile-outline"><summary>On this page</summary><nav id="mobile-toc"></nav></details>
 <article class="prose">{{ content }}</article>
 {% if page.references %}<section class="references prose"><h2 id="references">References</h2><ul>{% for ref in page.references %}<li><a href="{{ ref.url }}">{{ ref.title }}</a></li>{% endfor %}</ul></section>{% endif %}
 {% assign ordered = site.sql | sort: 'sequence' %}
 {% for item in ordered %}{% if item.url == page.url %}{% assign prev_index = forloop.index0 | minus: 1 %}{% assign next_index = forloop.index0 | plus: 1 %}{% if prev_index >= 0 %}{% assign previous = ordered[prev_index] %}{% endif %}{% assign following = ordered[next_index] %}{% endif %}{% endfor %}
 <nav class="lesson-pagination" aria-label="Lesson navigation">{% if previous %}<a href="{{ previous.url | relative_url }}"><small>Previous</small><span>← {{ previous.title }}</span></a>{% else %}<span></span>{% endif %}{% if following %}<a class="next" href="{{ following.url | relative_url }}"><small>Next</small><span>{{ following.title }} →</span></a>{% endif %}</nav>
-<footer class="article-footer"><span>Read it. Run it. Explain it.</span><a href="https://github.com/{{ site.repository }}/edit/main/{{ page.path }}">Edit this page ↗</a></footer>
+<footer class="article-footer"><span>CoreTrail · SQL handbook</span><a href="https://github.com/{{ site.repository }}/edit/main/{{ page.path }}">Edit this page ↗</a></footer>

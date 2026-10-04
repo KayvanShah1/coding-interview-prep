@@ -2,8 +2,8 @@
 title: "Pagination: OFFSET and keysets"
 description: "Return stable pages without repeatedly skipping an ever-growing prefix."
 chapter: "performance"
-order: 5
-sequence: 1105
+order: 9
+sequence: 1109
 level: "Intermediate"
 references: [{"title":"PostgreSQL LIMIT and OFFSET","url":"https://www.postgresql.org/docs/current/queries-limit.html"}]
 ---

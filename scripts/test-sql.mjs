@@ -68,5 +68,12 @@ await test('Sample dataset expected totals',async()=>{const r=await rows('founda
 await test('String transformation example',async()=>{const r=(await rows('functions/strings','normalized_email'))[0];assert.equal(r.normalized_email,'kayvan@example.com');assert.equal(r.domain,'b.com');});
 await test('Exact numeric functions',async()=>{const r=(await rows('functions/numeric-functions','AS rounded'))[0];assert.equal(Number(r.rounded),12.35);assert.equal(r.remainder,2);});
 await test('Null from empty preceding frame',async()=>{const r=(await db.query('SELECT SUM(x) OVER(ORDER BY x ROWS BETWEEN 3 PRECEDING AND 1 PRECEDING) AS s FROM (VALUES(1)) t(x)')).rows[0];assert.equal(r.s,null);});
+await test('Continuous and discrete percentile outputs',async()=>{const r=await rows('aggregation/percentiles','WITH requests');assert.deepEqual(r.map(x=>[x.service,Number(x.median_cont),Number(x.median_disc)]),[['checkout',5,5],['search',25,20]]);});
+await test('Calendar completion precedes monthly LAG',async()=>{const r=await rows('patterns/period-changes','WITH sales');assert.deepEqual(r.map(x=>[Number(x.revenue),x.previous_revenue===null?null:Number(x.previous_revenue),x.pct_change===null?null:Number(x.pct_change)]),[[100,null,null],[0,100,-100],[150,0,null]]);});
+await test('User conversion does not count repeated orders',async()=>{const r=(await rows('patterns/rates-and-populations','WITH users'))[0];assert.equal(Number(r.eligible_users),3);assert.equal(Number(r.purchasing_users),1);assert.equal(Number(r.purchase_pct),33.33);});
+await test('Overall rate is weighted by attempts',async()=>assert.equal(Number((await rows('patterns/rates-and-populations','WITH groups'))[0].overall_pct),10.87));
+await test('Latest order filtering retains unpaid competitors',async()=>assert.deepEqual(await rows('practice/mixed-drills','WITH orders(order_id'),[{customer_id:2}]));
+await test('Relational division handles repeated purchases in mixed drill',async()=>assert.deepEqual(await rows('practice/mixed-drills','WITH customers(customer_id)'),[{customer_id:1}]));
+await test('Mixed drill empty required set keeps all customers',async()=>{const query=block('practice/mixed-drills','WITH customers(customer_id)').replace("required(product) AS (VALUES ('A'), ('B'))", "required(product) AS (SELECT 'A'::text WHERE false)");assert.deepEqual((await db.query(query)).rows,[{customer_id:1},{customer_id:2},{customer_id:3}]);});
 console.log(`${count} PostgreSQL result checks passed (PGlite). Concurrency behavior requires separate multi-session testing.`);
 await db.close();

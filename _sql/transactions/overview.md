@@ -8,6 +8,24 @@ sequence: 1000
 level: "Chapter overview"
 ---
 
+## Reason about interleaved work
+
+Correct SQL can still behave unexpectedly when two sessions act together. Transactions define atomic work; isolation controls what concurrent work can observe. Locks and waits explain operational behavior beyond a single query plan.
+
+**Suggested route:** Read ACID, then walk through an isolation example as two ordered sessions. Use locks to explain blocking and deadlocks.
+
+**By the end:** Describe an anomaly, choose a consistency requirement, and explain retry behavior where needed.
+
+## Decision reference
+
+| Symptom or requirement | Investigate |
+|---|---|
+| Partial multi-step change | Transaction boundaries and rollback |
+| Different results across reads | Isolation and snapshots |
+| Two writers conflict | Locks, constraints, retry rules |
+| Query waits despite a simple plan | Blocking sessions |
+| Circular waiting | Deadlock detection and transaction order |
+
 ## In this chapter
 
 <ul class="topic-list">
@@ -18,4 +36,4 @@ level: "Chapter overview"
 
 ## How to study
 
-Read the explanation, predict the query output, then run the example. Change one input row to create a tie, a missing value, or a duplicate and explain what changes.
+Use the suggested route above. For each lesson, explain the decision in your own words, test its example, and identify a situation where a different approach would be needed.

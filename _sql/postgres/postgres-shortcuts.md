@@ -3,7 +3,7 @@ title: "DISTINCT ON & string types"
 description: "Recognize useful PostgreSQL-specific choices."
 chapter: "postgres"
 order: 2
-sequence: 1202
+sequence: 1302
 level: "Core"
 references: [{"title":"PostgreSQL window functions","url":"https://www.postgresql.org/docs/current/functions-window.html"}]
 ---
