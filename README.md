@@ -1,5 +1,7 @@
 # CoreTrail
 
+What interviews made me revisit.
+
 A dark Jekyll handbook for technical interview revision across data, AI, machine learning, software engineering, and related topics.
 
 **Read it:** https://kayvanshah1.github.io/coding-interview-prep/
