@@ -14,6 +14,8 @@ layout: null
   {{-
     lesson.content
     | markdownify
+    | replace: '<template', '<!--<template'
+    | replace: '</template>', '</template>-->'
     | replace: '<select', '<!--<select'
     | replace: '</select>', '</select>-->'
     | replace: '</', ' </'

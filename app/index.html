@@ -15,8 +15,8 @@ permalink: /
   </p>
   <div class="home-actions">
     <a class="primary-link" href="{{ '/sql/' | relative_url }}"
-      >Start with SQL <span aria-hidden="true">→</span></a
-    ><a href="#subjects">Explore subjects <span aria-hidden="true">→</span></a>
+      >Start with SQL {% include icons/arrow-right.html -%}</a
+    ><a href="#subjects">Explore subjects {% include icons/arrow-right.html %}</a>
   </div>
 </section>
 <section
@@ -32,7 +32,7 @@ permalink: /
       ><strong>{{ subject.title }}</strong><span>{{ subject.description }}</span
       ><small>
         {%- if subject.status == 'Available' -%}
-          Start learning →
+          Start learning {% include icons/arrow-right.html %}
         {%- else -%}
           Planned
         {%- endif -%}
@@ -44,16 +44,22 @@ permalink: /
   <div>
     <h2>Start with a concept</h2>
     <p>Work through an example and see why the query gives that result.</p>
-    <a href="{{ '/sql/foundations/grain/' | relative_url }}">Open the handbook →</a>
+    <a href="{{ '/sql/foundations/grain/' | relative_url }}"
+      >Open the handbook {% include icons/arrow-right.html -%}
+    </a>
   </div>
   <div>
     <h2>Pick a problem</h2>
     <p>Find a question on StrataScratch, LeetCode, or DataLemur and give it a shot.</p>
-    <a href="{{ '/sql/practice/platform-problems/' | relative_url }}">Find a problem →</a>
+    <a href="{{ '/sql/practice/platform-problems/' | relative_url }}"
+      >Find a problem {% include icons/arrow-right.html -%}
+    </a>
   </div>
   <div>
     <h2>Figure out what's slow</h2>
     <p>Read the query plan, test a change, and check whether it helped.</p>
-    <a href="{{ '/sql/performance/workflow/' | relative_url }}">Start investigating →</a>
+    <a href="{{ '/sql/performance/workflow/' | relative_url }}"
+      >Start investigating {% include icons/arrow-right.html -%}
+    </a>
   </div>
 </section>

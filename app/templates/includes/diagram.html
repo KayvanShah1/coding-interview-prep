@@ -1,0 +1,8 @@
+<figure class="diagram" aria-label="{{ include.title | escape }}">
+  {% if include.caption %}
+    <figcaption>{{ include.title }}</figcaption>
+  {% endif %}
+  <template class="diagram-source">{{ include.code | escape }}</template>
+  <div class="diagram-canvas" hidden></div>
+  <div class="diagram-fallback">{{ include.fallback | markdownify }}</div>
+</figure>

@@ -20,6 +20,14 @@ Edit styles in `app/_sass/`. Jekyll compiles `app/assets/css/main.scss` into the
 
 Use the color variables in `app/_sass/_theme.scss` for both light and dark themes. Theme selection runs before styles load in `app/assets/js/theme.js`; search ranking and matching excerpts live in `app/assets/js/search.js`, with regression checks in `tests/search.test.mjs`.
 
+## Diagrams and icons
+
+Use Mermaid for ordered processes and relationships that benefit from a diagram. Set `mermaid: true` in the page's front matter, capture the Mermaid source and a Markdown text version, and pass both to `diagram.html` with `title`, `code`, and `fallback`. Add `caption=true` when the diagram needs a visible title. Existing examples are in `app/subjects/_sql/index.html` and the patterns overview.
+
+Use `flowchart LR` for flows; the renderer switches to a vertical layout when space is limited and redraws when the theme changes. Preserve links in both the source (`click A href "{{ '/sql/...' | relative_url }}" "Open lesson" _self`) and the text version. Only repository-authored diagrams are supported; use ordinary links, not JavaScript callbacks. Mermaid 11.12.0 loads from jsDelivr only on diagram pages, and the text version remains available if JavaScript or the CDN is unavailable. Diagram source is excluded from search; its text version is indexed.
+
+Shared SVG icons live in `app/templates/includes/icons/`. Use the existing Primer Octicons includes and retain their license. Navigation links keep their text labels; arrow icons are decorative.
+
 ## Formatting
 
 Run `npm run format` to apply Prettier or `npm run format:check` to check formatting. CI runs the same check. HTML and the search-index template use the Liquid plugin; JavaScript, JSON, SCSS partials, YAML, and repository documentation use Prettier's built-in parsers.

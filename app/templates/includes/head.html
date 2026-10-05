@@ -12,3 +12,6 @@
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 <script src="{{ '/assets/js/main.js' | relative_url }}" type="module"></script>
+{% if page.mermaid %}
+  <script src="{{ '/assets/js/diagrams.js' | relative_url }}" type="module"></script>
+{% endif %}

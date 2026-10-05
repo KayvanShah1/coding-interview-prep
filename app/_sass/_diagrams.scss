@@ -1,0 +1,42 @@
+.diagram {
+  margin: 20px 0 28px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+}
+.diagram figcaption {
+  color: var(--strong);
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.diagram-canvas {
+  overflow-x: auto;
+  padding: 6px;
+}
+.diagram-canvas > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  fill: initial;
+  stroke: initial;
+  stroke-width: initial;
+}
+.diagram-canvas a .label {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.diagram-canvas a:hover .label-container,
+.diagram-canvas a:focus-visible .label-container {
+  stroke: var(--accent) !important;
+  stroke-width: 3px !important;
+}
+.diagram-fallback > :last-child {
+  margin-bottom: 0;
+}
+@media (max-width: 600px) {
+  .diagram {
+    padding: 16px 10px;
+  }
+}

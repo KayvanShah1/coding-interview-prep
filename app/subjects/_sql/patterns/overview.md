@@ -6,6 +6,7 @@ chapter: "patterns"
 order: 0
 sequence: 700
 level: "Chapter overview"
+mermaid: true
 ---
 
 ## Recognize a problem, then compose a solution
@@ -50,11 +51,19 @@ Interview questions often combine a few operations across different grains. The 
 
 Use whenever a comparison should happen **after** reducing data to the reporting grain.
 
-```text
-raw rows
-→ GROUP BY period/entity
-→ window over aggregated rows
-```
+{% capture diagram_code %}
+flowchart LR
+accTitle: Aggregate before applying a window
+A["Raw rows"] --> B["GROUP BY period or entity"] --> C["Window over aggregated rows"]
+click B href "{{ '/sql/aggregation/aggregate-functions/' | relative_url }}" "Open GROUP BY period or entity" _self
+click C href "{{ '/sql/windows/introduction/' | relative_url }}" "Open Window over aggregated rows" _self
+{% endcapture %}
+{% capture diagram_fallback %}
+1. Raw rows
+2. [GROUP BY period or entity]({{ '/sql/aggregation/aggregate-functions/' | relative_url }})
+3. [Window over aggregated rows]({{ '/sql/windows/introduction/' | relative_url }})
+{% endcapture %}
+{% include diagram.html title="Aggregate before applying a window" code=diagram_code fallback=diagram_fallback %}
 
 Examples: MoM revenue, rank stores by total visits, percentage of total, cumulative monthly sales.
 
@@ -75,54 +84,95 @@ Protect a zero previous value with `NULLIF`.
 
 ### LAG → flag → cumulative SUM
 
-```text
-ordered events
-→ LAG(previous event/state)
-→ CASE boundary = 1
-→ SUM(boundary) OVER (...)
-→ session/island/run id
-```
+{% capture diagram_code %}
+flowchart LR
+accTitle: Turn events into sessions or runs
+A["Ordered events"] --> B["LAG: previous event or state"] --> C["CASE: mark each boundary"] --> D["Cumulative SUM of boundaries"] --> E["Session, island, or run ID"]
+click B href "{{ '/sql/windows/lag-lead/' | relative_url }}" "Open LAG: previous event or state" _self
+click D href "{{ '/sql/windows/running-calculations/' | relative_url }}" "Open Cumulative SUM of boundaries" _self
+click E href "{{ '/sql/patterns/sessions/' | relative_url }}" "Open Session, island, or run ID" _self
+{% endcapture %}
+{% capture diagram_fallback %}
+1. Ordered events
+2. [LAG: previous event or state]({{ '/sql/windows/lag-lead/' | relative_url }})
+3. CASE: mark each boundary
+4. [Cumulative SUM of boundaries]({{ '/sql/windows/running-calculations/' | relative_url }})
+5. [Session, island, or run ID]({{ '/sql/patterns/sessions/' | relative_url }})
+{% endcapture %}
+{% include diagram.html title="Turn events into sessions or runs" code=diagram_code fallback=diagram_fallback %}
 
 Use for sessions, state changes, event runs, and many gaps-and-islands problems.
 
 ### ROW_NUMBER → filter
 
-```text
-PARTITION BY business key
-ORDER BY preferred survivor
-→ rn
-→ rn = 1
-```
+{% capture diagram_code %}
+flowchart LR
+accTitle: Choose one row per business key
+A["Partition by business key"] --> B["Order by preferred survivor"] --> C["Assign ROW_NUMBER"] --> D["Keep rn = 1"]
+click C href "{{ '/sql/windows/ranking/' | relative_url }}" "Open Assign ROW_NUMBER" _self
+click D href "{{ '/sql/patterns/deduplication/' | relative_url }}" "Open Keep rn = 1" _self
+{% endcapture %}
+{% capture diagram_fallback %}
+1. Partition by business key
+2. Order by preferred survivor
+3. [Assign ROW_NUMBER]({{ '/sql/windows/ranking/' | relative_url }})
+4. [Keep rn = 1]({{ '/sql/patterns/deduplication/' | relative_url }})
+{% endcapture %}
+{% include diagram.html title="Choose one row per business key" code=diagram_code fallback=diagram_fallback %}
 
 Use for latest records and deterministic deduplication.
 
 ### Calendar → LEFT JOIN
 
-```text
-generate expected dates
-→ aggregate observed data
-→ LEFT JOIN
-→ fill zero only when semantically correct
-```
+{% capture diagram_code %}
+flowchart LR
+accTitle: Make missing dates explicit
+A["Generate expected dates"] --> B["Aggregate observed data"] --> C["LEFT JOIN on the date"] --> D["Fill zero only when appropriate"]
+click C href "{{ '/sql/joins/join-types/' | relative_url }}" "Open LEFT JOIN on the date" _self
+click D href "{{ '/sql/patterns/retention-calendar/' | relative_url }}" "Open Fill zero only when appropriate" _self
+{% endcapture %}
+{% capture diagram_fallback %}
+1. Generate expected dates
+2. Aggregate observed data
+3. [LEFT JOIN on the date]({{ '/sql/joins/join-types/' | relative_url }})
+4. [Fill zero only when appropriate]({{ '/sql/patterns/retention-calendar/' | relative_url }})
+{% endcapture %}
+{% include diagram.html title="Make missing dates explicit" code=diagram_code fallback=diagram_fallback %}
 
 Needed when “no row” must appear explicitly as a date with zero activity.
 
 ### CROSS JOIN → LEFT JOIN
 
-```text
-expected entity set × expected category/date set
-→ attach observations
-```
+{% capture diagram_code %}
+flowchart LR
+accTitle: Build the expected combinations
+A["Expected entities"] --> B["CROSS JOIN expected categories or dates"] --> C["LEFT JOIN observations"]
+click B href "{{ '/sql/joins/join-types/' | relative_url }}" "Open CROSS JOIN expected categories or dates" _self
+click C href "{{ '/sql/patterns/retention-calendar/' | relative_url }}" "Open LEFT JOIN observations" _self
+{% endcapture %}
+{% capture diagram_fallback %}
+1. Expected entities
+2. [CROSS JOIN expected categories or dates]({{ '/sql/joins/join-types/' | relative_url }})
+3. [LEFT JOIN observations]({{ '/sql/patterns/retention-calendar/' | relative_url }})
+{% endcapture %}
+{% include diagram.html title="Build the expected combinations" code=diagram_code fallback=diagram_fallback %}
 
 Use for students × subjects, stores × days, customers × months.
 
 ### First event → later event
 
-```text
-find MIN(event_time) per entity
-→ establish first-event attributes
-→ search/join for events after first_time
-```
+{% capture diagram_code %}
+flowchart LR
+accTitle: Find events after the first occurrence
+A["MIN(event_time) per entity"] --> B["Establish first-event attributes"] --> C["Find events after first_time"]
+click C href "{{ '/sql/patterns/funnels/' | relative_url }}" "Open Find events after first_time" _self
+{% endcapture %}
+{% capture diagram_fallback %}
+1. MIN(event_time) per entity
+2. Establish first-event attributes
+3. [Find events after first_time]({{ '/sql/patterns/funnels/' | relative_url }})
+{% endcapture %}
+{% include diagram.html title="Find events after the first occurrence" code=diagram_code fallback=diagram_fallback %}
 
 Useful for first purchase, repeat purchase, activation, campaign follow-up, and retention questions.
 
