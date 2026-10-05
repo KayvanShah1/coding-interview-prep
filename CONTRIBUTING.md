@@ -16,6 +16,8 @@ Reusable markup lives in `_includes/`: brand, header, home footer, sidebar, subj
 
 Edit styles in `_sass/`. Jekyll compiles `assets/css/main.scss` into the existing `assets/css/main.css` URL. Keep the `@use` order: shared responsive rules precede home styles so their overrides retain the existing cascade.
 
+Use the color variables in `_sass/_theme.scss` for both light and dark themes. Theme selection runs before styles load in `assets/js/theme.js`; search ranking and matching excerpts live in `assets/js/search.js`, with regression checks in `tests/search.test.mjs`.
+
 ## Formatting
 
 Run `npm run format` to apply Prettier or `npm run format:check` to check formatting. CI runs the same check. HTML and the search-index template use the Liquid plugin; JavaScript, JSON, SCSS partials, YAML, and repository documentation use Prettier's built-in parsers.

@@ -1,3 +1,5 @@
+import { searchLessons, searchSnippet, searchTerms } from './search.js';
+
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 // Build the page outline from actual headings, never from a separately maintained list.
@@ -90,6 +92,7 @@ const dialog = $('#search-dialog'),
   results = $('#search-results');
 let searchData = null;
 let loading = null;
+let searchRequest = 0;
 async function getSearch() {
   if (searchData) return searchData;
   if (!loading)
@@ -98,7 +101,15 @@ async function getSearch() {
         if (!r.ok) throw Error('Search unavailable');
         return r.json();
       })
-      .then((d) => (searchData = d))
+      .then((pages) => {
+        // The index strips tags, but Markdown's HTML entities still need decoding.
+        const decoder = document.createElement('textarea');
+        searchData = pages.map((page) => {
+          decoder.innerHTML = page.content;
+          return { ...page, content: decoder.value };
+        });
+        return searchData;
+      })
       .catch((e) => {
         loading = null;
         throw e;
@@ -112,34 +123,33 @@ function message(s) {
   p.textContent = s;
   results.append(p);
 }
+function highlightMatches(element, text, terms) {
+  let end = 0;
+  for (const match of text.matchAll(/[\p{L}\p{N}_]+/gu)) {
+    if (!terms.some((term) => match[0].toLowerCase().startsWith(term))) continue;
+    element.append(document.createTextNode(text.slice(end, match.index)));
+    const mark = document.createElement('mark');
+    mark.textContent = match[0];
+    element.append(mark);
+    end = match.index + match[0].length;
+  }
+  element.append(document.createTextNode(text.slice(end)));
+}
 async function runSearch() {
+  const request = ++searchRequest;
   const q = input.value.trim().toLowerCase();
   if (!q) {
+    results.setAttribute('aria-busy', 'false');
     message('Type a concept, keyword, or function.');
     return;
   }
+  results.setAttribute('aria-busy', 'true');
+  message('Searching…');
   try {
     const data = await getSearch();
-    if (input.value.trim().toLowerCase() !== q) return;
-    const terms = q.split(/\s+/);
-    const matches = data
-      .map((p) => {
-        const hay = (p.title + ' ' + p.description + ' ' + p.content).toLowerCase();
-        if (!terms.every((t) => hay.includes(t))) return null;
-        return {
-          ...p,
-          score: terms.reduce(
-            (n, t) =>
-              n +
-              (p.title.toLowerCase().includes(t) ? 8 : 0) +
-              (p.description.toLowerCase().includes(t) ? 3 : 0),
-            0,
-          ),
-        };
-      })
-      .filter(Boolean)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 18);
+    if (request !== searchRequest) return;
+    const terms = searchTerms(q);
+    const matches = searchLessons(data, q);
     results.replaceChildren();
     if (!matches.length) {
       message('No matching topics. Try a function name or a shorter phrase.');
@@ -150,14 +160,17 @@ async function runSearch() {
       a.className = 'search-result';
       a.href = p.url;
       const strong = document.createElement('strong');
-      strong.textContent = p.title;
+      highlightMatches(strong, p.title, terms);
       const small = document.createElement('small');
-      small.textContent = p.description;
+      highlightMatches(small, searchSnippet(p, terms), terms);
       a.append(strong, small);
       results.append(a);
     }
   } catch {
-    message('Search could not load. Please retry or browse the chapter navigation.');
+    if (request === searchRequest)
+      message('Search could not load. Please retry or browse the chapter navigation.');
+  } finally {
+    if (request === searchRequest) results.setAttribute('aria-busy', 'false');
   }
 }
 function openSearch() {

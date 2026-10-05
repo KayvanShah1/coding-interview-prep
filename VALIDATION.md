@@ -2,6 +2,7 @@
 
 ## Automated
 
+- Search regression checks cover focused content ranking, exact titles, token prefixes, multi-term queries, stable ordering, and matching excerpts.
 - Lesson metadata, unique reading order, internal links, and balanced code fences.
 - Selected SQL result checks in PostgreSQL via PGlite: window frames and ties, NULL membership, outer joins, aggregation grain, streaks, arrays, JSON, recursion, percentiles, retention, and funnels.
 - Jekyll build in GitHub Actions on Linux.
