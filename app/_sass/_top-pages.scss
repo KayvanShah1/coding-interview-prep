@@ -20,18 +20,18 @@
   line-height: 1.65;
 }
 .about-copy {
-  max-width: 820px;
+  max-width: 760px;
   padding-bottom: 60px;
 }
 .about-copy h2 {
-  margin: 38px 0 12px;
-  font-size: 25px;
+  margin: 36px 0 12px;
+  font-size: 24px;
   letter-spacing: -0.4px;
 }
 .about-copy p {
-  margin: 0 0 17px;
+  margin: 0 0 18px;
   color: var(--nav-text);
-  line-height: 1.75;
+  line-height: 1.72;
 }
 .about-copy .diagram {
   margin: 28px 0 34px;
@@ -39,8 +39,8 @@
 .resource-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
-  margin: 6px 0 36px;
+  gap: 8px;
+  margin: 2px 0 32px;
 }
 .resource-filter {
   padding: 7px 13px;
@@ -57,12 +57,13 @@
   background: var(--active);
 }
 .resource-group {
-  margin: 0 0 34px;
+  margin: 0 0 30px;
 }
 .resource-group-heading {
-  display: flex;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.7fr) 1.55fr auto 20px;
   gap: 18px;
+  align-items: baseline;
   margin-bottom: 9px;
 }
 .resource-group-heading h2 {
@@ -78,6 +79,7 @@
   font-family: 'IBM Plex Mono', monospace;
 }
 .resource-group-heading p {
+  grid-column: 2 / -1;
   margin: 0;
   color: var(--dim);
   font-size: 13px;
@@ -139,6 +141,7 @@
   font-size: 13px;
 }
 @media (max-width: 900px) {
+  .resource-group-heading,
   .resource-row {
     grid-template-columns: minmax(150px, 0.65fr) minmax(220px, 1.35fr) auto 18px;
     gap: 12px;

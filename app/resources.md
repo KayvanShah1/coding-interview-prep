@@ -6,13 +6,13 @@ subject: home
 permalink: /resources/
 ---
 
-<section class="top-page-hero">
+<section class="top-page-hero resources-hero">
   <span class="page-eyebrow">RESOURCES</span>
   <h1>Resources</h1>
   <p class="top-page-lead">Things I come back to for another explanation, more practice, or a different way of looking at something.</p>
 </section>
 
-<div class="resource-filters" role="group" aria-label="Filter resources">
+<nav class="resource-filters" aria-label="Filter resources">
   <button class="resource-filter active" type="button" data-resource-filter="all" aria-pressed="true">All</button>
   <button class="resource-filter" type="button" data-resource-filter="practice" aria-pressed="false">Practice</button>
   <button class="resource-filter" type="button" data-resource-filter="system-design" aria-pressed="false">System Design</button>
@@ -20,7 +20,7 @@ permalink: /resources/
   <button class="resource-filter" type="button" data-resource-filter="ai-ml" aria-pressed="false">AI / ML</button>
   <button class="resource-filter" type="button" data-resource-filter="cloud-devops" aria-pressed="false">Cloud / DevOps</button>
   <button class="resource-filter" type="button" data-resource-filter="software-cs" aria-pressed="false">Software / CS</button>
-</div>
+</nav>
 
 <section class="resource-group" data-resource-group>
   <div class="resource-group-heading">

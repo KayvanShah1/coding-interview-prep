@@ -13,7 +13,7 @@ permalink: /about/
   <p class="top-page-lead">What interviews made me revisit.</p>
 </section>
 
-<article class="about-copy">
+<article class="about-copy prose" markdown="1">
 ## Why I built it
 
 CoreTrail started because I kept relearning the same things.
