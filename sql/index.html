@@ -5,7 +5,82 @@ subject: sql
 permalink: /sql/
 ---
 <div class="breadcrumb"><span>SQL handbook</span></div>
-<header class="article-header"><h1>SQL, one concept at a time.</h1><p class="lead">Understand the query. Read the result. Know why it works.</p></header>
-<article class="prose"><p><a href="{{ '/' | relative_url }}">← All CoreTrail subjects</a></p><p class="overview-intro">A practical path from your first SELECT to window frames, query plans, and database design. Short lessons, worked examples, and the edge cases that make interview answers reliable.</p>
-<div class="learning-route"><a class="route-link" href="{{ '/sql/foundations/grain/' | relative_url }}"><small>01 / BUILD THE FOUNDATION</small><strong>Start with the basics →</strong><p>Tables, grain, filtering, and joins.</p></a><a class="route-link" href="{{ '/sql/windows/frames/' | relative_url }}"><small>02 / UNDERSTAND THE PATTERN</small><strong>Explore window functions →</strong><p>Move a frame and see what changes.</p></a><a class="route-link" href="{{ '/sql/practice/problem-index/' | relative_url }}"><small>03 / PUT IT INTO PRACTICE</small><strong>Work through problems →</strong><p>Apply a concept and check your reasoning.</p></a></div>
-<h2 id="learning-paths">Choose a learning path</h2><ul><li><strong>Build query fluency:</strong> foundations → filtering → joins → aggregation → subqueries → windows.</li><li><strong>Prepare for interviews:</strong> revision maps → worked patterns → <a href="{{ '/sql/practice/mixed-drills/' | relative_url }}">mixed drills</a> → explain edge cases aloud.</li><li><strong>Investigate performance:</strong> <a href="{{ '/sql/performance/workflow/' | relative_url }}">diagnosis workflow</a> → plans and indexes → native labs → storage and scaling.</li></ul><h2 id="chapters">Explore the chapters</h2><div class="chapter-index">{% for chapter in site.data.chapters %}{% assign topics = site.sql | where: 'chapter', chapter.id | where_exp: 'item', 'item.order > 0' %}<a class="chapter-row" href="{{ '/sql/' | append: chapter.id | append: '/overview/' | relative_url }}"><span class="chapter-number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span><div><strong>{{ chapter.title }}</strong><p>{{ chapter.description }}</p></div><span class="count">{{ topics.size }} topics</span></a>{% endfor %}</div><h2 id="how-to-use">Make the examples work for you</h2><p>PostgreSQL is the main dialect. Each lesson states its assumptions; dialect-specific syntax is labelled. Follow the reading order or search directly for a function or problem.</p><p>Before running a query, state the output grain. After running it, add a duplicate, a null, or a tie. Explaining that second result is often where the learning happens.</p><p><a href="{{ '/sql/foundations/sample-data/' | relative_url }}">Get the practice dataset →</a> &nbsp; <a href="{{ '/sql/practice/references/' | relative_url }}">Sources & coverage →</a></p></article>
+<header class="article-header">
+  <h1>SQL, one concept at a time.</h1>
+  <p class="lead">Understand the query. Read the result. Know why it works.</p>
+</header>
+<article class="prose">
+  <p><a href="{{ '/' | relative_url }}">← All CoreTrail subjects</a></p>
+  <p class="overview-intro">
+    A practical path from your first SELECT to window frames, query plans, and database design.
+    Short lessons, worked examples, and the edge cases that make interview answers reliable.
+  </p>
+  <div class="learning-route">
+    <a
+      class="route-link"
+      href="{{ '/sql/foundations/grain/' | relative_url }}"
+      ><small>01 / BUILD THE FOUNDATION</small><strong>Start with the basics →</strong>
+      <p>Tables, grain, filtering, and joins.</p></a
+    ><a
+      class="route-link"
+      href="{{ '/sql/windows/frames/' | relative_url }}"
+      ><small>02 / UNDERSTAND THE PATTERN</small><strong>Explore window functions →</strong>
+      <p>Move a frame and see what changes.</p></a
+    ><a
+      class="route-link"
+      href="{{ '/sql/practice/problem-index/' | relative_url }}"
+      ><small>03 / PUT IT INTO PRACTICE</small><strong>Work through problems →</strong>
+      <p>Apply a concept and check your reasoning.</p>
+    </a>
+  </div>
+  <h2 id="learning-paths">Choose a learning path</h2>
+  <ul>
+    <li>
+      <strong>Build query fluency:</strong> foundations → filtering → joins → aggregation →
+      subqueries → windows.
+    </li>
+    <li>
+      <strong>Prepare for interviews:</strong> revision maps → worked patterns →
+      <a href="{{ '/sql/practice/mixed-drills/' | relative_url }}">mixed drills</a>
+      → explain edge cases aloud.
+    </li>
+    <li>
+      <strong>Investigate performance:</strong>
+      <a href="{{ '/sql/performance/workflow/' | relative_url }}">diagnosis workflow</a>
+      → plans and indexes → native labs → storage and scaling.
+    </li>
+  </ul>
+  <h2 id="chapters">Explore the chapters</h2>
+  <div class="chapter-index">
+    {% for chapter in site.data.chapters -%}
+      {%- assign topics = site.sql
+        | where: 'chapter', chapter.id
+        | where_exp: 'item', 'item.order > 0'
+      -%}
+      <a
+        class="chapter-row"
+        href="{{ '/sql/' | append: chapter.id | append: '/overview/' | relative_url }}"
+        ><span class="chapter-number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+        <div>
+          <strong>{{ chapter.title }}</strong>
+          <p>{{ chapter.description }}</p>
+        </div>
+        <span class="count">{{ topics.size }} topics</span></a
+      >
+    {%- endfor %}
+  </div>
+  <h2 id="how-to-use">Make the examples work for you</h2>
+  <p>
+    PostgreSQL is the main dialect. Each lesson states its assumptions; dialect-specific syntax is
+    labelled. Follow the reading order or search directly for a function or problem.
+  </p>
+  <p>
+    Before running a query, state the output grain. After running it, add a duplicate, a null, or a
+    tie. Explaining that second result is often where the learning happens.
+  </p>
+  <p>
+    <a href="{{ '/sql/foundations/sample-data/' | relative_url }}">Get the practice dataset →</a>
+    &nbsp;
+    <a href="{{ '/sql/practice/references/' | relative_url }}">Sources & coverage →</a>
+  </p>
+</article>

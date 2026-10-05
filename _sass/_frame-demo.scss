@@ -1,0 +1,59 @@
+.frame-demo {
+  margin: 24px 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 20px;
+  background: #141a17;
+}
+.frame-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.frame-controls select {
+  padding: 6px 8px;
+  font-size: 12px;
+}
+.frame-controls input {
+  accent-color: var(--accent);
+  max-width: 150px;
+}
+.frame-grid {
+  display: flex;
+  gap: 8px;
+  margin: 22px 0;
+}
+.frame-cell {
+  flex: 1;
+  text-align: center;
+  padding: 12px 4px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--dim);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px;
+}
+.frame-cell small {
+  display: block;
+  font-size: 10px;
+  font-family: 'DM Sans', sans-serif;
+}
+.frame-cell.in-frame {
+  background: #234035;
+  color: #d0f6e2;
+  border-color: #3e6955;
+}
+.frame-cell.current {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.frame-output {
+  font-size: 13px;
+  color: #b7c9be;
+  margin: 0 !important;
+}
+.frame-output strong {
+  color: var(--accent);
+}

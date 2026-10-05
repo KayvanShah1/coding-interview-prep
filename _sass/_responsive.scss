@@ -1,0 +1,159 @@
+@media (min-width: 1500px) {
+  :root {
+    --sidebar-w: 290px;
+  }
+  .page-shell {
+    grid-template-columns: minmax(0, 1fr) 230px;
+  }
+  main {
+    padding-top: 36px;
+    max-width: 1040px;
+  }
+}
+@media (max-width: 1150px) {
+  .page-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .page-outline {
+    display: none;
+  }
+  .mobile-outline {
+    display: block;
+    font-size: 13px;
+    border-bottom: 1px solid var(--line);
+    padding: 0 0 18px;
+    margin-bottom: 24px;
+  }
+  .mobile-outline summary {
+    cursor: pointer;
+    color: var(--muted);
+  }
+  #mobile-toc a {
+    display: block;
+    padding: 4px 0;
+    font-size: 12px;
+  }
+  main {
+    padding: 30px 36px;
+  }
+}
+@media (max-width: 780px) {
+  :root {
+    --sidebar-w: 278px;
+  }
+  html {
+    scroll-padding-top: 80px;
+  }
+  .mobile-header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    z-index: 25;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+    padding: 0 18px;
+    background: #101214f2;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-header > a {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .mobile-header button {
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 8px;
+  }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.18s;
+  }
+  .nav-open .sidebar {
+    transform: translateX(0);
+  }
+  .nav-scrim {
+    position: fixed;
+    inset: 0;
+    background: #0009;
+    z-index: 29;
+  }
+  .page-shell {
+    margin-left: 0;
+  }
+  .breadcrumb {
+    font-size: 11px;
+    margin-bottom: 18px;
+  }
+  main {
+    padding: 26px 22px;
+  }
+  h1 {
+    font-size: 34px;
+    letter-spacing: -1px;
+  }
+  .lead {
+    font-size: 17px;
+  }
+  .prose {
+    font-size: 15px;
+  }
+  .prose h2 {
+    font-size: 24px;
+  }
+  .learning-route {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .route-link {
+    padding: 15px 0;
+  }
+  .chapter-row {
+    grid-template-columns: 24px minmax(0, 1fr) 46px;
+    gap: 10px;
+  }
+  .lesson-meta {
+    gap: 10px;
+  }
+  .lesson-meta span + span:before {
+    margin-right: 10px;
+  }
+  .article-footer {
+    font-size: 10px;
+  }
+  .frame-demo {
+    padding: 14px;
+  }
+  .frame-grid {
+    gap: 6px;
+  }
+  .frame-cell {
+    font-size: 12px;
+  }
+  .search-footer span {
+    display: none;
+  }
+  .lesson-pagination {
+    gap: 15px;
+  }
+  .prose th,
+  .prose td {
+    padding: 9px 11px;
+    min-width: 90px;
+  }
+  pre {
+    font-size: 12px;
+    padding: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,58 @@
+<aside class="sidebar" id="sidebar" aria-label="Main navigation">
+  {% include brand.html %}
+  {% assign current_subject = site.data.subjects | where: 'id', page.subject | first %}
+  {% include subject-switcher.html current_subject=current_subject %}
+  <button class="search-open search-trigger">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>
+    </svg>
+    <span>Search the handbook</span>
+    <kbd>Ctrl K</kbd>
+  </button>
+  <nav class="chapters" aria-label="Chapters">
+    {% unless page.subject == 'sql' %}
+      <a class="nav-start active" href="{{ current_subject.url | relative_url }}">
+        {{- current_subject.title }} overview</a
+      >
+      <p class="nav-empty">This subject is planned. Explore its scope or continue learning SQL.</p>
+    {% else %}
+      <a
+        class="nav-start {% if page.url == '/sql/' or page.url == '/' %}active{% endif %}"
+        href="{{ '/sql/' | relative_url }}"
+        >Start here <span aria-hidden="true">↗</span></a
+      >
+      {% for chapter in site.data.chapters %}
+        <details
+          class="chapter"
+          {% if page.chapter == chapter.id %}
+            open
+          {% endif %}
+        >
+          <summary>
+            {{ chapter.title }}
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="m6 3 5 5-5 5"/>
+            </svg>
+          </summary>
+          <div class="chapter-links">
+            {% assign lessons = site.sql | where: 'chapter', chapter.id | sort: 'order' %}
+            {% for lesson in lessons %}
+              <a
+                href="{{ lesson.url | relative_url }}"
+                {% if page.url == lesson.url %}
+                  class="active" aria-current="page"
+                {% endif %}
+              >
+                {{- lesson.nav_title | default: lesson.title -}}
+              </a>
+            {% endfor %}
+          </div>
+        </details>
+      {% endfor %}
+    {% endunless %}
+  </nav>
+  <div class="sidebar-footer">
+    <span class="status-dot"></span>Notes & practice
+    <a href="https://github.com/{{ site.repository }}" aria-label="GitHub repository">GitHub ↗</a>
+  </div>
+</aside>

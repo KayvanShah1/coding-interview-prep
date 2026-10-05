@@ -1,0 +1,24 @@
+<details class="subject-switcher">
+  <summary>
+    <span>{{ include.current_subject.title | default: 'SQL' }}</span>
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <path d="m4 6 4 4 4-4"/>
+    </svg>
+  </summary>
+  <nav aria-label="Subjects">
+    {% for subject in site.data.subjects %}
+      <a
+        href="{{ subject.url | relative_url }}"
+        {% if page.subject == subject.id %}
+          aria-current="page"
+        {% endif %}
+      >
+        {{ subject.title -}}
+        {%- if subject.status == 'Planned' -%}
+          <small>Planned</small>
+        {%- endif %}
+      </a>
+    {% endfor %}
+    <a href="{{ '/' | relative_url }}">All subjects →</a>
+  </nav>
+</details>

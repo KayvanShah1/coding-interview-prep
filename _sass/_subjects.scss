@@ -1,0 +1,54 @@
+/* CoreTrail subject navigation and landing page share the lesson palette. */
+.subject-switcher {
+  position: relative;
+  margin: 0 20px 2px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  font-size: 13px;
+}
+.subject-switcher > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  color: var(--accent);
+  gap: 8px;
+}
+.subject-switcher > summary::-webkit-details-marker {
+  display: none;
+}
+.subject-switcher nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  border: 1px solid #46534a;
+  background: var(--sidebar);
+  box-shadow: 0 16px 35px #0007;
+  border-radius: 5px;
+  padding: 6px;
+}
+.subject-switcher nav a {
+  display: block;
+  padding: 8px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.subject-switcher nav a:hover,
+.subject-switcher nav a[aria-current] {
+  background: var(--active);
+  color: var(--accent);
+  text-decoration: none;
+}
+.subject-switcher nav small {
+  display: block;
+  font-size: 10px;
+  color: var(--dim);
+}
+.subject-status {
+  color: var(--accent);
+  font-size: 14px;
+}

@@ -1,0 +1,25 @@
+{% if include.variant == 'home' %}
+  <header class="home-header">
+    <div class="home-container">
+      {% include brand.html class="home-brand" %}
+      <nav aria-label="Main navigation">
+        <a href="{{ '/sql/' | relative_url }}">SQL</a>
+        <a href="#subjects">Subjects</a>
+        <a href="https://github.com/{{ site.repository }}">GitHub</a>
+      </nav>
+    </div>
+  </header>
+{% else %}
+  <header class="mobile-header">
+    <button
+      id="nav-toggle"
+      aria-label="Open navigation"
+      aria-controls="sidebar"
+      aria-expanded="false"
+    >
+      ☰
+    </button>
+    <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <button class="search-open" aria-label="Search">Search</button>
+  </header>
+{% endif %}

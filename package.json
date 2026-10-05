@@ -4,12 +4,16 @@
   "type": "module",
   "scripts": {
     "test": "node scripts/check-content.mjs && node scripts/test-sql.mjs",
-    "test:plans": "node scripts/test-performance.mjs"
+    "test:plans": "node scripts/test-performance.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.3.0",
+    "@shopify/prettier-plugin-liquid": "1.11.2",
     "pg": "^8.23.1",
     "playwright": "^1.55.0",
+    "prettier": "3.9.9",
     "yaml": "^2.8.0"
   }
 }

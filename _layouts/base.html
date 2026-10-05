@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+  </head>
+  <body
+    {% if layout.body_class %}
+      class="{{ layout.body_class }}"
+    {% endif %}
+    data-baseurl="{{ site.baseurl }}"
+    data-subject="{{ page.subject | default: 'sql' }}"
+  >
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    {{ content }}
+    {% include search.html %}
+  </body>
+</html>

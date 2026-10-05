@@ -1,0 +1,21 @@
+# Generated output, dependencies, and local build files.
+_site/
+.jekyll-cache/
+.sass-cache/
+.bundle/
+vendor/
+node_modules/
+tmp/
+test-results/
+package-lock.json
+
+# Preserve authored lesson prose, embedded Liquid, and SQL examples.
+_sql/
+ai-engineering/
+data-engineering/
+dsa/
+ml/
+systems/
+
+# Jekyll front matter is not SCSS; format the partials in _sass/ instead.
+assets/css/main.scss
