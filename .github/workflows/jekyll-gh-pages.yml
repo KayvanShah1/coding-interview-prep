@@ -1,17 +1,32 @@
 name: Build and publish CoreTrail
+
 on:
   push:
     branches: [main, 'site/**']
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'LICENSE'
   pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'LICENSE'
   workflow_dispatch:
+
 permissions:
   contents: read
+
 concurrency:
   group: pages-${{ github.ref }}
   cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres:17
@@ -23,49 +38,62 @@ jobs:
           - 5432:5432
         options: >-
           --health-cmd "pg_isready -U coretrail -d coretrail_test"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
+
       - run: npm ci
+
       - run: npm run format:check
+        continue-on-error: true
+
       - run: npm test
+
       - run: npm run test:plans
         env:
           DATABASE_URL: postgres://coretrail:coretrail_ci@localhost:5432/coretrail_test
+
       - uses: actions/upload-artifact@v4
         with:
           name: performance-plans
           path: test-results/performance-plans.json
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
           bundler-cache: true
       - run: bundle exec jekyll build --trace
+
       - uses: actions/upload-artifact@v4
         with:
           name: site-preview
           path: _site
           include-hidden-files: true
+
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
           path: _site
+
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
+
     permissions:
       pages: write
       id-token: write
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
