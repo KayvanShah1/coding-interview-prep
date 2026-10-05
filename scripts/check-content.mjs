@@ -6,16 +6,11 @@ const walk = (dir) =>
   fs
     .readdirSync(dir, { withFileTypes: true })
     .flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]));
-const pages = walk('_sql').filter((p) => p.endsWith('.md'));
+const sqlDir = 'app/subjects/_sql';
+const pages = walk(sqlDir).filter((p) => p.endsWith('.md'));
 const urls = new Set(
   pages.map(
-    (p) =>
-      '/sql/' +
-      p
-        .replaceAll('\\', '/')
-        .replace(/^_sql\//, '')
-        .replace(/\.md$/, '') +
-      '/',
+    (p) => '/sql/' + path.relative(sqlDir, p).replaceAll('\\', '/').replace(/\.md$/, '') + '/',
   ),
 );
 urls.add('/sql/');
@@ -40,22 +35,23 @@ for (const file of pages) {
 console.log(
   `Content checks passed: ${pages.length} SQL pages, unique ordering, links, and code fences.`,
 );
-const chapters = JSON.parse(fs.readFileSync('_data/chapters.json', 'utf8'));
-const subjects = JSON.parse(fs.readFileSync('_data/subjects.json', 'utf8'));
+const chapters = JSON.parse(fs.readFileSync('app/_data/chapters.json', 'utf8'));
+const subjects = JSON.parse(fs.readFileSync('app/_data/subjects.json', 'utf8'));
+const subjectPages = subjects.map((subject) =>
+  subject.id === 'sql' ? `${sqlDir}/index.html` : `app/subjects/${subject.id}/index.md`,
+);
 for (const subject of subjects) {
   urls.add(subject.url);
-  assert.ok(
-    fs.existsSync(subject.url.slice(1) + 'index.' + (subject.id === 'sql' ? 'html' : 'md')),
-    'subject page ' + subject.id,
-  );
 }
+for (const file of subjectPages) assert.ok(fs.existsSync(file), 'subject page ' + file);
 for (const chapter of chapters) {
-  const overview = fs.readFileSync('_sql/' + chapter.id + '/overview.md', 'utf8');
+  const overview = fs.readFileSync(sqlDir + '/' + chapter.id + '/overview.md', 'utf8');
   assert.ok(overview.includes('Suggested route:'), 'chapter reading route ' + chapter.id);
   assert.ok(overview.includes('By the end:'), 'chapter outcome ' + chapter.id);
   for (const file of pages.filter(
     (p) =>
-      p.replaceAll('\\', '/').startsWith('_sql/' + chapter.id + '/') && !p.endsWith('overview.md'),
+      p.replaceAll('\\', '/').startsWith(sqlDir + '/' + chapter.id + '/') &&
+      !p.endsWith('overview.md'),
   )) {
     const slug = path.basename(file, '.md');
     assert.ok(
@@ -64,7 +60,7 @@ for (const chapter of chapters) {
     );
   }
 }
-const problems = JSON.parse(fs.readFileSync('_data/practice_problems.json', 'utf8'));
+const problems = JSON.parse(fs.readFileSync('app/_data/practice_problems.json', 'utf8'));
 const allowedHosts = new Set(['platform.stratascratch.com', 'leetcode.com', 'datalemur.com']);
 for (const problem of problems) {
   assert.ok(allowedHosts.has(new URL(problem.url).hostname), 'practice URL ' + problem.title);
@@ -72,11 +68,7 @@ for (const problem of problems) {
   for (const key of ['title', 'platform', 'level', 'topic', 'focus'])
     assert.ok(problem[key], 'practice metadata ' + key);
 }
-for (const file of [
-  'index.html',
-  'sql/index.html',
-  ...subjects.filter((s) => s.id !== 'sql').map((s) => s.id + '/index.md'),
-]) {
+for (const file of ['app/index.html', ...subjectPages]) {
   const text = fs.readFileSync(file, 'utf8');
   for (const link of text.matchAll(/{{\s*'((?:\/)[^']*)'\s*\|\s*relative_url/g))
     assert.ok(urls.has(link[1]), 'missing page route ' + link[1]);

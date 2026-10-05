@@ -13,18 +13,17 @@ A Jekyll handbook for technical interview revision across data, AI, machine lear
 
 ### Desktop: Home page (dark mode)
 
-[![CoreTrail desktop home page with the subject directory and learning paths](assets/images/screenshots/desktop-home.png)](assets/images/screenshots/desktop-home.png)
+[![CoreTrail desktop home page with the subject directory and learning paths](app/assets/images/screenshots/desktop-home.png)](app/assets/images/screenshots/desktop-home.png)
 
 ### Mobile: SQL lesson (light mode)
 
-<a href="assets/images/screenshots/mobile-lesson.png"><img src="assets/images/screenshots/mobile-lesson.png" alt="CoreTrail mobile SQL lesson with navigation, page outline, and window-frame explorer" width="390" /></a>
-
+<a href="app/assets/images/screenshots/mobile-lesson.png"><img src="app/assets/images/screenshots/mobile-lesson.png" alt="CoreTrail mobile SQL lesson with navigation, page outline, and window-frame explorer" width="390" /></a>
 
 ## Why I built it
 
 A lot of my interview prep ended up inside ChatGPT.
 
-One question turns into another and the same thread keeps running. Somewhere inside it is a good explanation I will probably need again. After enough chats, I was drowning in them. 
+One question turns into another and the same thread keeps running. Somewhere inside it is a good explanation I will probably need again. After enough chats, I was drowning in them.
 
 I tried saving useful parts as Markdown too, but after a point that becomes another pile to organize and maintain. So I wanted one place where I could keep the parts worth coming back to.
 
@@ -89,9 +88,9 @@ The structure will keep growing around the same idea: **fast recall first, depth
 
 A lot of the revisiting now happens through ChatGPT.
 
-The problem is that the good parts get buried very quickly. Threads just keep growing, topics get mixed together, and after a while even saving useful chats as Markdown stops being worth the effort. 
+The problem is that the good parts get buried very quickly. Threads just keep growing, topics get mixed together, and after a while even saving useful chats as Markdown stops being worth the effort.
 
-**CoreTrail** is partly my answer to that. 
+**CoreTrail** is partly my answer to that.
 
 I still use AI heavily to explore and question things. I just do not want the useful parts to live only inside old chats. Codex also helps me build and maintain the site. The notes themselves still come from the things I actually had to revisit.
 
@@ -106,9 +105,31 @@ I still use AI heavily to explore and question things. I just do not want the us
 
 Jekyll + Liquid, Markdown, custom CSS, vanilla JavaScript, PostgreSQL/PGlite, Playwright, and GitHub Actions.
 
+## Repository structure
+
+```text
+app/
+  templates/          # Liquid layouts and reusable includes
+  subjects/           # SQL collection and planned subject pages
+  _data/              # Subject, chapter, and practice metadata
+  _sass/              # Stylesheet partials
+  assets/             # JavaScript, CSS entry point, images, and SQL fixtures
+  index.html          # Site home
+  search.json         # Generated search index template
+  pages/404.html      # Not-found page, published at /404.html
+
+docs/                 # Content coverage and validation notes
+scripts/              # Content and SQL checks
+tests/                # Search regression tests
+_config.yml           # Jekyll configuration; source is app/
+```
+
+SQL lessons and their landing page share `app/subjects/_sql/`. Source locations are independent of public URLs such as `/sql/windows/frames/`.
+
 ## Run locally
 
 Requirements: Ruby with Bundler, and Node.js 22+ for checks.
+
 ```sh
 bundle install
 bundle exec jekyll serve --baseurl /coretrail
@@ -117,21 +138,23 @@ bundle exec jekyll serve --baseurl /coretrail
 Open [localhost:4000 →](http://localhost:4000/coretrail/)
 
 Run the check with:
+
 ```sh
 npm ci
 npm test
 ```
 
 Performance-plan checks use PostgreSQL:
+
 ```sh
 npm run test:plans
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) to add a lesson, [CONTENT_COVERAGE.md](CONTENT_COVERAGE.md) for the content map, and [VALIDATION.md](VALIDATION.md) for check scope.
+See [CONTRIBUTING.md](CONTRIBUTING.md) to add a lesson, [CONTENT_COVERAGE.md](docs/CONTENT_COVERAGE.md) for the content map, and [VALIDATION.md](docs/VALIDATION.md) for check scope.
 
 ## Deployment
 
-GitHub Actions builds pull requests and pushes to main or site/**. Only successful main-branch builds deploy. Feature builds upload a site-preview artifact for review.
+GitHub Actions builds pull requests and pushes to main or site/**. Only successful main-branch builds deploy. Feature builds upload a site-preview artifact for review. Push and pull-request triggers skip changes limited to `docs/**`, `README.md`, `CONTRIBUTING.md`, and `LICENSE`. Lesson Markdown still triggers checks and builds; manual workflow runs remain available.
 
 ## Direction
 

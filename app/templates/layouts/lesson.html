@@ -36,7 +36,7 @@ layout: default
     </ul>
   </section>
 {% endif %}
-{% assign ordered = site.sql | sort: 'sequence' %}
+{% assign ordered = site.sql | where_exp: 'item', 'item.sequence != nil' | sort: 'sequence' %}
 {% for item in ordered -%}
   {%- if item.url == page.url -%}
     {%- assign prev_index = forloop.index0 | minus: 1 -%}
@@ -61,7 +61,10 @@ layout: default
 </nav>
 <footer class="article-footer">
   <span>CoreTrail · SQL handbook</span
-  ><a class="github-link" href="https://github.com/{{ site.repository }}/edit/main/{{ page.path }}">
+  ><a
+    class="github-link"
+    href="https://github.com/{{ site.repository }}/edit/main/app/{{ site.collections_dir }}/{{ page.path }}"
+  >
     {%- include icons/github.html -%}
     <span>Edit this page</span></a
   >

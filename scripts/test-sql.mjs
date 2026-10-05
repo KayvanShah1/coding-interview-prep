@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { PGlite } from '@electric-sql/pglite';
 const db = new PGlite();
-await db.exec(fs.readFileSync('assets/sql/sample-data.sql', 'utf8'));
+await db.exec(fs.readFileSync('app/assets/sql/sample-data.sql', 'utf8'));
 await db.exec(`
 CREATE TABLE facebook_posts(post_id integer PRIMARY KEY,body text,post_date date,post_keywords text);
 CREATE TABLE facebook_reactions(post_id integer,reaction text);
@@ -33,7 +33,7 @@ CREATE TABLE country_month_comments(country text,month_start date,comment_count 
 INSERT INTO country_month_comments VALUES('A','2019-12-01',10),('B','2019-12-01',20),('A','2020-01-01',30),('B','2020-01-01',20);
 `);
 function block(file, marker) {
-  const text = fs.readFileSync('_sql/' + file + '.md', 'utf8');
+  const text = fs.readFileSync('app/subjects/_sql/' + file + '.md', 'utf8');
   const blocks = [...text.matchAll(/```sql\n([\s\S]*?)```/g)].map((m) => m[1]);
   const found = blocks.find((b) => b.includes(marker));
   assert.ok(found, `block ${file} ${marker}`);

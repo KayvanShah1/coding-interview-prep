@@ -7,7 +7,7 @@
   "proseWrap": "preserve",
   "overrides": [
     {
-      "files": ["**/*.html", "search.json"],
+      "files": ["**/*.html", "app/search.json"],
       "options": { "parser": "liquid-html", "singleQuote": false }
     }
   ]

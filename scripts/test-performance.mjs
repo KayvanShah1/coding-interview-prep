@@ -15,7 +15,7 @@ await db.connect();
 try {
   // Rollback keeps the runner repeatable without dropping any existing schema.
   await db.query('BEGIN');
-  await db.query(fs.readFileSync('assets/sql/performance-lab.sql', 'utf8'));
+  await db.query(fs.readFileSync('app/assets/sql/performance-lab.sql', 'utf8'));
   const lookup = `SELECT order_id, order_ts, amount FROM coretrail_lab.orders
     WHERE customer_id = 42 ORDER BY order_ts DESC, order_id DESC LIMIT 20`;
   const baseline = (await db.query(lookup)).rows;

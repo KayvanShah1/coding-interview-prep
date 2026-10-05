@@ -3,6 +3,11 @@ description: A practical interview handbook for data, AI, machine learning, soft
 url: https://kayvanshah1.github.io
 baseurl: /coretrail
 repository: KayvanShah1/coretrail
+source: app
+destination: _site
+collections_dir: subjects
+layouts_dir: templates/layouts
+includes_dir: templates/includes
 markdown: kramdown
 highlighter: rouge
 sass:
@@ -23,17 +28,4 @@ defaults:
       layout: lesson
       subject: sql
 exclude:
-  - Gemfile
-  - Gemfile.lock
-  - package.json
-  - package-lock.json
-  - node_modules
-  - scripts
-  - tests
-  - README.md
-  - CONTRIBUTING.md
-  - CONTENT_COVERAGE.md
-  - VALIDATION.md
-  - vendor
-  - tmp
-  - test-results
+  - templates

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { searchLessons, searchSnippet, searchTerms } from '../assets/js/search.js';
+import { searchLessons, searchSnippet, searchTerms } from '../app/assets/js/search.js';
 
 const pages = [
   {

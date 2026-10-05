@@ -10,12 +10,7 @@ test-results/
 package-lock.json
 
 # Preserve authored lesson prose, embedded Liquid, and SQL examples.
-_sql/
-ai-engineering/
-data-engineering/
-dsa/
-ml/
-systems/
+app/subjects/**/*.md
 
-# Jekyll front matter is not SCSS; format the partials in _sass/ instead.
-assets/css/main.scss
+# Jekyll front matter is not SCSS; format the partials in app/_sass/ instead.
+app/assets/css/main.scss
