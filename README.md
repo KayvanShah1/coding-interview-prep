@@ -6,6 +6,18 @@ A dark Jekyll handbook for technical interview revision across data, AI, machine
 
 **Read it:** https://kayvanshah1.github.io/coretrail/
 
+## Screenshots
+
+Click a screenshot to open it at full resolution.
+
+### Desktop — home page
+
+[![CoreTrail desktop home page with the subject directory and learning paths](assets/images/screenshots/desktop-home.png)](assets/images/screenshots/desktop-home.png)
+
+### Mobile — SQL lesson
+
+<a href="assets/images/screenshots/mobile-lesson.png"><img src="assets/images/screenshots/mobile-lesson.png" alt="CoreTrail mobile SQL lesson with navigation, page outline, and window-frame explorer" width="390" /></a>
+
 ## Included
 
 - SQL currently has 83 topic pages across 15 chapters, plus chapter overviews.
