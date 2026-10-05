@@ -27,7 +27,7 @@ Individual pages link to the relevant manual sections. Check the database versio
 
 ## Coverage and maintenance
 
-The [content map](https://github.com/KayvanShah1/coding-interview-prep/blob/main/CONTENT_COVERAGE.md) lists every lesson. Contributions should add a focused page with explicit input assumptions, a query, an expected result or interpretation, and edge cases.
+The [content map](https://github.com/{{ site.repository }}/blob/main/CONTENT_COVERAGE.md) lists every lesson. Contributions should add a focused page with explicit input assumptions, a query, an expected result or interpretation, and edge cases.
 
 Executable checks cover selected result-sensitive examples, including ties, null membership, window frames, join multiplication, and streaks. Multi-session locking behavior requires an actual concurrent database setup; a single-session sample cannot validate it.
 

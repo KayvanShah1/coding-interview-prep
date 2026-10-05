@@ -4,7 +4,7 @@ What interviews made me revisit.
 
 A dark Jekyll handbook for technical interview revision across data, AI, machine learning, software engineering, and related topics.
 
-**Read it:** https://kayvanshah1.github.io/coding-interview-prep/
+**Read it:** https://kayvanshah1.github.io/coretrail/
 
 ## Included
 
@@ -22,10 +22,10 @@ Requirements: Ruby with Bundler, and Node.js 22+ for checks.
 
 ```sh
 bundle install
-bundle exec jekyll serve --baseurl /coding-interview-prep
+bundle exec jekyll serve --baseurl /coretrail
 ```
 
-Open http://localhost:4000/coding-interview-prep/.
+Open http://localhost:4000/coretrail/.
 
 ```sh
 npm ci

@@ -1,8 +1,8 @@
 title: CoreTrail
 description: A practical interview handbook for data, AI, machine learning, software engineering, and related technical topics.
 url: https://kayvanshah1.github.io
-baseurl: /coding-interview-prep
-repository: KayvanShah1/coding-interview-prep
+baseurl: /coretrail
+repository: KayvanShah1/coretrail
 markdown: kramdown
 highlighter: rouge
 sass:
