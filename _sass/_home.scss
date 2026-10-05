@@ -67,11 +67,11 @@ main.home-main {
   padding: 11px 26px;
   border-radius: 5px;
   background: var(--accent);
-  color: #101a15;
+  color: var(--button-text);
   font-weight: 650;
 }
 .primary-link:hover {
-  background: #b0e9ca;
+  background: var(--button-hover);
   text-decoration: none;
 }
 .subject-directory {
@@ -97,7 +97,7 @@ main.home-main {
   border-bottom: 1px solid var(--line);
 }
 .subject-row:hover {
-  background: #171e1b;
+  background: var(--home-hover);
   text-decoration: none;
 }
 .subject-row strong {

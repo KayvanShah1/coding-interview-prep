@@ -5,7 +5,15 @@
       <nav aria-label="Main navigation">
         <a href="{{ '/sql/' | relative_url }}">SQL</a>
         <a href="#subjects">Subjects</a>
-        <a href="https://github.com/{{ site.repository }}">GitHub</a>
+        <a
+          class="icon-button"
+          href="https://github.com/{{ site.repository }}"
+          aria-label="GitHub repository"
+          title="GitHub repository"
+        >
+          {%- include icons/github.html -%}
+        </a>
+        {% include theme-toggle.html %}
       </nav>
     </div>
   </header>
@@ -20,6 +28,9 @@
       ☰
     </button>
     <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
-    <button class="search-open" aria-label="Search">Search</button>
+    <div class="header-actions">
+      <button class="search-open" aria-label="Search">Search</button>
+      {% include theme-toggle.html %}
+    </div>
   </header>
 {% endif %}

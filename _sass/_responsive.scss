@@ -53,7 +53,7 @@
     justify-content: space-between;
     height: 58px;
     padding: 0 18px;
-    background: #101214f2;
+    background: var(--header-bg);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
   }
@@ -78,7 +78,7 @@
   .nav-scrim {
     position: fixed;
     inset: 0;
-    background: #0009;
+    background: var(--scrim);
     z-index: 29;
   }
   .page-shell {

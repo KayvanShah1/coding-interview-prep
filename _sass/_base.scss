@@ -1,16 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 :root {
-  color-scheme: dark;
-  --bg: #101214;
-  --sidebar: #15181b;
-  --surface: #191d21;
-  --line: #2b3035;
-  --text: #e8ebed;
-  --muted: #a1a9b1;
-  --dim: #767f88;
-  --accent: #92d4b0;
-  --active: #20352d;
-  --code: #121619;
   --sidebar-w: 278px;
 }
 * {
@@ -73,8 +62,8 @@ svg {
   stroke-width: 1.6;
 }
 ::selection {
-  background: #365647;
-  color: #fff;
+  background: var(--selection);
+  color: var(--selection-text);
 }
 .sr-only {
   position: absolute;

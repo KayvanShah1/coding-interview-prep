@@ -3,7 +3,7 @@
   border: 1px solid var(--line);
   border-radius: 6px;
   padding: 20px;
-  background: #141a17;
+  background: var(--frame-bg);
 }
 .frame-controls {
   display: flex;
@@ -41,9 +41,9 @@
   font-family: 'DM Sans', sans-serif;
 }
 .frame-cell.in-frame {
-  background: #234035;
-  color: #d0f6e2;
-  border-color: #3e6955;
+  background: var(--frame-active);
+  color: var(--frame-text);
+  border-color: var(--frame-border);
 }
 .frame-cell.current {
   outline: 2px solid var(--accent);
@@ -51,7 +51,7 @@
 }
 .frame-output {
   font-size: 13px;
-  color: #b7c9be;
+  color: var(--frame-output);
   margin: 0 !important;
 }
 .frame-output strong {

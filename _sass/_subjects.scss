@@ -25,9 +25,9 @@
   left: 0;
   right: 0;
   z-index: 40;
-  border: 1px solid #46534a;
+  border: 1px solid var(--popover-line);
   background: var(--sidebar);
-  box-shadow: 0 16px 35px #0007;
+  box-shadow: 0 16px 35px var(--popover-shadow);
   border-radius: 5px;
   padding: 6px;
 }

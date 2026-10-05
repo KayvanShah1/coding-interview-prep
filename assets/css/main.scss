@@ -3,6 +3,7 @@
 
 // Preserve cascade order; home rules intentionally follow shared breakpoints.
 @use 'base';
+@use 'theme';
 @use 'sidebar';
 @use 'lesson';
 @use 'directory';
@@ -12,3 +13,4 @@
 @use 'subjects';
 @use 'home';
 @use 'practice';
+@use 'controls';

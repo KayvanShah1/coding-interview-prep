@@ -10,13 +10,20 @@
 }
 .brand {
   display: flex;
-  gap: 15px;
-  align-items: flex-start;
-  padding: 25px 24px 20px;
+  gap: 10px;
+  align-items: center;
+  padding: 24px 24px 20px;
   color: var(--text);
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 650;
-  line-height: 1.4;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+}
+.brand .brand-mark {
+  font-size: 23px;
+  line-height: 1;
+  letter-spacing: -3px;
 }
 .brand:hover {
   text-decoration: none;
@@ -76,7 +83,7 @@
 .search-trigger kbd {
   margin-left: auto;
   font-size: 10px;
-  border: 1px solid #41474e;
+  border: 1px solid var(--border-strong);
   border-radius: 3px;
   padding: 0 3px;
 }
@@ -85,7 +92,7 @@
   flex: 1;
   padding: 0 13px 24px;
   scrollbar-width: thin;
-  scrollbar-color: #3d454b transparent;
+  scrollbar-color: var(--scrollbar) transparent;
 }
 .nav-start {
   display: flex;
@@ -103,7 +110,7 @@
   padding: 8px 12px;
   cursor: pointer;
   font-size: 14px;
-  color: #c4cbd1;
+  color: var(--nav-text);
 }
 .chapter summary::-webkit-details-marker {
   display: none;
@@ -123,7 +130,7 @@
 }
 .chapter-links {
   margin: 2px 0 10px 13px;
-  border-left: 1px solid #38423c;
+  border-left: 1px solid var(--nav-line);
   padding-left: 8px;
 }
 .chapter-links a {
@@ -138,13 +145,13 @@
 .chapter-links a:hover,
 .nav-start:hover {
   color: var(--text);
-  background: #1f2428;
+  background: var(--hover);
   text-decoration: none;
 }
 .chapter-links a.active,
 .nav-start.active {
   background: var(--active);
-  color: #b9eed0;
+  color: var(--active-text);
 }
 .chapter-links a.active:before {
   content: '';

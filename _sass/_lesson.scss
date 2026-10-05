@@ -35,7 +35,7 @@ h1 {
 .lead {
   font-size: 19px;
   line-height: 1.65;
-  color: #b7bfc6;
+  color: var(--lead);
   margin: 0;
   max-width: 760px;
 }
@@ -119,10 +119,10 @@ h1 {
 }
 .prose p {
   margin: 0 0 18px;
-  color: #c5cdd3;
+  color: var(--prose);
 }
 .prose li {
-  color: #c5cdd3;
+  color: var(--prose);
   margin: 6px 0;
 }
 .prose ul,
@@ -131,14 +131,14 @@ h1 {
   margin: 16px 0 23px;
 }
 .prose strong {
-  color: #edf0f2;
+  color: var(--strong);
   font-weight: 600;
 }
 .prose blockquote {
   border-left: 2px solid var(--accent);
   padding: 10px 20px;
   margin: 24px 0;
-  background: #18231e;
+  background: var(--quote-bg);
 }
 .prose blockquote p:last-child {
   margin: 0;
@@ -158,10 +158,10 @@ td code,
 h2 code,
 h3 code {
   font-size: 0.86em;
-  background: #21272b;
+  background: var(--inline-code-bg);
   padding: 2px 5px;
   border-radius: 3px;
-  color: #d7e5de;
+  color: var(--inline-code-text);
 }
 .table-scroll {
   overflow-x: auto;
@@ -177,7 +177,7 @@ h3 code {
   line-height: 1.6;
 }
 .prose th {
-  background: #1b2024;
+  background: var(--table-header);
   text-align: left;
   color: var(--text);
   font-weight: 550;
@@ -192,10 +192,10 @@ h3 code {
   border-bottom: 0;
 }
 .prose td {
-  color: #bdc6cd;
+  color: var(--table-text);
 }
 .prose tr:hover td {
-  background: #171e1c;
+  background: var(--table-hover);
 }
 .highlight {
   margin: 0;
@@ -211,7 +211,7 @@ h3 code {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #191e22;
+  background: var(--code-toolbar);
   border-bottom: 1px solid var(--line);
   padding: 5px 12px;
   font:
@@ -254,30 +254,30 @@ pre code {
 .highlight .kd,
 .highlight .kn,
 .highlight .kt {
-  color: #84baff;
+  color: var(--syntax-keyword);
 }
 .highlight .s,
 .highlight .s1,
 .highlight .s2 {
-  color: #b7daa3;
+  color: var(--syntax-string);
 }
 .highlight .c,
 .highlight .c1,
 .highlight .cm {
-  color: #788791;
+  color: var(--syntax-comment);
   font-style: italic;
 }
 .highlight .mi,
 .highlight .mf,
 .highlight .m {
-  color: #e9be87;
+  color: var(--syntax-number);
 }
 .highlight .nf,
 .highlight .nb {
-  color: #dcc598;
+  color: var(--syntax-function);
 }
 .highlight .o {
-  color: #9ddfce;
+  color: var(--syntax-operator);
 }
 .highlight .err {
   color: inherit;

@@ -53,6 +53,16 @@
   </nav>
   <div class="sidebar-footer">
     <span class="status-dot"></span>Notes & practice
-    <a href="https://github.com/{{ site.repository }}" aria-label="GitHub repository">GitHub ↗</a>
+    <div class="sidebar-actions">
+      <a
+        class="icon-button"
+        href="https://github.com/{{ site.repository }}"
+        aria-label="GitHub repository"
+        title="GitHub repository"
+      >
+        {%- include icons/github.html -%}
+      </a>
+      {% include theme-toggle.html %}
+    </div>
   </div>
 </aside>

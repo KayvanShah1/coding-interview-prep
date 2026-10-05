@@ -61,5 +61,8 @@ layout: default
 </nav>
 <footer class="article-footer">
   <span>CoreTrail · SQL handbook</span
-  ><a href="https://github.com/{{ site.repository }}/edit/main/{{ page.path }}">Edit this page ↗</a>
+  ><a class="github-link" href="https://github.com/{{ site.repository }}/edit/main/{{ page.path }}">
+    {%- include icons/github.html -%}
+    <span>Edit this page</span></a
+  >
 </footer>
