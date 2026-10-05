@@ -20,21 +20,43 @@
   line-height: 1.65;
 }
 .about-copy {
-  max-width: 760px;
+  width: 100%;
   padding-bottom: 60px;
 }
-.about-copy h2 {
-  margin: 36px 0 12px;
-  font-size: 24px;
-  letter-spacing: -0.4px;
+.about-section {
+  display: grid;
+  grid-template-columns: minmax(180px, 230px) minmax(0, 1fr);
+  gap: 42px;
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
 }
-.about-copy p {
-  margin: 0 0 18px;
+.about-section:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.about-section h2 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+.about-section-body {
+  max-width: none;
+}
+.about-section-body p {
+  margin: 0 0 16px;
   color: var(--nav-text);
-  line-height: 1.72;
+  font-size: 15px;
+  line-height: 1.75;
 }
-.about-copy .diagram {
-  margin: 28px 0 34px;
+.about-section-body p:last-child {
+  margin-bottom: 0;
+}
+.about-section .diagram {
+  width: 100%;
+  margin: 28px 0 0;
+}
+.about-closing {
+  color: var(--text);
 }
 .resource-filters {
   display: flex;
@@ -61,7 +83,7 @@
 }
 .resource-group-heading {
   display: grid;
-  grid-template-columns: minmax(180px, 0.7fr) 1.55fr auto 20px;
+  grid-template-columns: max-content minmax(0, 1fr);
   gap: 18px;
   align-items: baseline;
   margin-bottom: 9px;
@@ -79,7 +101,6 @@
   font-family: 'IBM Plex Mono', monospace;
 }
 .resource-group-heading p {
-  grid-column: 2 / -1;
   margin: 0;
   color: var(--dim);
   font-size: 13px;
@@ -141,7 +162,10 @@
   font-size: 13px;
 }
 @media (max-width: 900px) {
-  .resource-group-heading,
+  .about-section {
+    grid-template-columns: minmax(150px, 190px) minmax(0, 1fr);
+    gap: 28px;
+  }
   .resource-row {
     grid-template-columns: minmax(150px, 0.65fr) minmax(220px, 1.35fr) auto 18px;
     gap: 12px;
@@ -153,6 +177,17 @@
   }
   .top-page-lead {
     font-size: 16px;
+  }
+  .about-section {
+    display: block;
+    padding: 26px 0;
+  }
+  .about-section h2 {
+    margin-bottom: 14px;
+  }
+  .about-section-body p {
+    font-size: 14px;
+    line-height: 1.7;
   }
   .resource-filters {
     margin-bottom: 30px;
