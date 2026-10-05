@@ -19,10 +19,6 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: coretrail-pages
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
