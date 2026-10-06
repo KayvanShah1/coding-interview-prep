@@ -57,3 +57,21 @@ WHERE rn = 1;
 ```
 
 Assume `order_ts` is non-null here. `order_id` breaks timestamp ties deterministically.
+
+
+## Compare a row with its group average
+
+When each detail row must remain visible but you also need a group-level benchmark, use a window aggregate:
+
+```sql
+WITH compared AS (
+    SELECT employee_id, department_id, salary,
+           AVG(salary) OVER (PARTITION BY department_id) AS department_average
+    FROM employees
+)
+SELECT employee_id, department_id, salary
+FROM compared
+WHERE salary > department_average;
+```
+
+A grouped aggregate would collapse the employees. The window keeps employee grain and adds the department benchmark, which can then be filtered in an outer query.

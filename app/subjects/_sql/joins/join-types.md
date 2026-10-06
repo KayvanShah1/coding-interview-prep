@@ -76,3 +76,21 @@ LEFT JOIN payment_totals p ON p.order_id = o.order_id;
 ```
 
 `SUM(DISTINCT amount)` is not a general fix: two legitimate payments can have the same amount.
+
+
+## Generate every expected combination, including zeros
+
+Assume `students(student_id)`, `subjects(subject_name)`, and `examinations(student_id, subject_name)`, with one row per attendance.
+
+```sql
+SELECT s.student_id, sub.subject_name,
+       COUNT(e.student_id) AS attendance_count
+FROM students s
+CROSS JOIN subjects sub
+LEFT JOIN examinations e
+  ON e.student_id = s.student_id
+ AND e.subject_name = sub.subject_name
+GROUP BY s.student_id, sub.subject_name;
+```
+
+The `CROSS JOIN` creates the expected student × subject population. The `LEFT JOIN` attaches observations while preserving combinations with no attendance. The same shape works for customer × month and store × date grids. Check the grid size first: M × N expected combinations are created before observations are attached.
