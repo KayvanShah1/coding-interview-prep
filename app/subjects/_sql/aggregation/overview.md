@@ -17,11 +17,12 @@ Aggregation changes grain. Counts, rates, percentiles, and subtotals are reliabl
 
 | Syntax | Use when | Common combination |
 |---|---|---|
+| `WHERE` | Filter input rows before aggregation | predicates, date/status filters |
 | `COUNT(*)` | Count input rows | `GROUP BY` |
 | `COUNT(column)` | Count non-null values | `LEFT JOIN` match counts |
 | `COUNT(DISTINCT x)` | Count unique values | `GROUP BY`, `HAVING` |
 | `SUM / AVG / MIN / MAX` | Summarize numeric values | `GROUP BY` |
-| `HAVING` | Filter after aggregation | `GROUP BY + COUNT/SUM` |
+| `HAVING` | Filter groups after aggregation | `GROUP BY + COUNT/SUM` |
 | `CASE WHEN` | Conditional logic | conditional counts, rates, pivots |
 | `FILTER (WHERE ...)` | PostgreSQL conditional aggregate | `COUNT`, `SUM`, `AVG` |
 | `STRING_AGG` | Combine grouped strings | `DISTINCT`, ordered output |
@@ -30,6 +31,14 @@ Aggregation changes grain. Counts, rates, percentiles, and subtotals are reliabl
 | `PERCENTILE_DISC` | Percentile that must be an observed value | `WITHIN GROUP` |
 | `MODE()` | Most frequent value | `WITHIN GROUP` |
 | `GROUPING SETS / ROLLUP / CUBE` | Multiple aggregation levels | subtotal and reporting queries |
+
+> **WHERE vs HAVING:** `WHERE` decides which rows enter the aggregation. `HAVING` decides which aggregated groups remain.
+>
+> ```sql
+> WHERE status = 'paid'
+> GROUP BY customer_id
+> HAVING SUM(amount) > 1000
+> ```
 
 ## Ordered-set aggregates: WITHIN GROUP
 
