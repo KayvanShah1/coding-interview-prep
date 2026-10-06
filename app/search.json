@@ -8,15 +8,13 @@ layout: null
 -%}
 {%- assign lessons = site.sql | concat: site.ai | concat: site.infra | concat: subject_pages | sort: 'sequence' -%}
 {%- for lesson in lessons -%}
-  {"title":{{ lesson.title | jsonify }},"subject":{{ lesson.subject | default: '' | jsonify }},"chapter":
-  {{- lesson.chapter | default: '' | jsonify -}}
+  {"title":{{ lesson.title | jsonify }},"subject":{{ lesson.subject | jsonify }},"chapter":
+  {{- lesson.chapter | jsonify -}}
   ,"description":{{ lesson.description | default: '' | jsonify }},"keywords":
   {{- lesson.keywords | jsonify -}}
-  ,"aliases":{{ lesson.aliases | jsonify }},"tools":
-  {{- lesson.tools | jsonify -}}
-  ,"interview_queries":{{ lesson.interview_queries | jsonify }},"url":
-  {{- lesson.url | relative_url | jsonify -}}
-  ,"content":
+  ,"aliases":{{ lesson.aliases | jsonify }},"tools":{{ lesson.tools | jsonify }},"interview_queries":
+  {{- lesson.interview_queries | jsonify -}}
+  ,"url":{{ lesson.url | relative_url | jsonify }},"content":
   {{-
     lesson.content
     | markdownify

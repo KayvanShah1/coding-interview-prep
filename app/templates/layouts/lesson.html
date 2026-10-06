@@ -41,12 +41,17 @@ layout: default
     <h2 id="references">References</h2>
     <ul>
       {% for ref in page.references %}
-        <li><a href="{{ ref.url }}">{{ ref.title }}</a></li>
+        <li>
+          <a href="{{ ref.url }}">{{ ref.title }}</a>
+        </li>
       {% endfor %}
     </ul>
   </section>
 {% endif %}
-{% assign ordered = subject_lessons | where_exp: 'item', 'item.sequence != nil' | sort: 'sequence' %}
+{% assign ordered = subject_lessons
+  | where_exp: 'item', 'item.sequence != nil'
+  | sort: 'sequence'
+%}
 {% for item in ordered -%}
   {%- if item.url == page.url -%}
     {%- assign prev_index = forloop.index0 | minus: 1 -%}

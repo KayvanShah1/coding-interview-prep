@@ -8,107 +8,123 @@ const walk = (dir) =>
     .readdirSync(dir, { withFileTypes: true })
     .flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]));
 
-function parseDocument(file) {
+const sqlDir = 'app/subjects/_sql';
+const pages = walk(sqlDir).filter((p) => p.endsWith('.md'));
+const urls = new Set(
+  pages.map(
+    (p) => '/sql/' + path.relative(sqlDir, p).replaceAll('\\', '/').replace(/\.md$/, '') + '/',
+  ),
+);
+urls.add('/sql/');
+urls.add('/dsa/');
+urls.add('/');
+
+const sequences = new Set();
+for (const file of pages) {
   const text = fs.readFileSync(file, 'utf8');
   const match = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   assert.ok(match, 'front matter ' + file);
-  return { text, data: YAML.parse(match[1]), body: match[2] };
+  const data = YAML.parse(match[1]);
+  for (const key of ['title', 'description', 'chapter', 'order', 'sequence'])
+    assert.notEqual(data[key], undefined, key + ' ' + file);
+  assert.ok(!sequences.has(data.sequence), 'duplicate sequence ' + file);
+  sequences.add(data.sequence);
+  assert.equal((match[2].match(/^```/gm) || []).length % 2, 0, 'code fences ' + file);
+  assert.ok(match[2].length > 150, 'empty page ' + file);
+  for (const link of text.matchAll(/'((?:\/sql\/)[^']*)'\s*\|\s*relative_url/g))
+    assert.ok(urls.has(link[1]), 'missing internal URL ' + link[1] + ' ' + file);
+  assert.ok(!/TODO|Lorem ipsum/.test(text), 'unfinished text ' + file);
 }
-
-const urls = new Set(['/']);
-const collections = [
-  { id: 'sql', dir: 'app/subjects/_sql', prefix: '/sql/' },
-  { id: 'ai-engineering', dir: 'app/subjects/_ai', prefix: '/ai-engineering/' },
-  { id: 'infrastructure', dir: 'app/subjects/_infra', prefix: '/infrastructure/' },
-];
+console.log(
+  `Content checks passed: ${pages.length} SQL pages, unique ordering, links, and code fences.`,
+);
 
 const chapters = JSON.parse(fs.readFileSync('app/_data/chapters.json', 'utf8'));
 const subjectChapters = JSON.parse(fs.readFileSync('app/_data/subject_chapters.json', 'utf8'));
 const subjects = JSON.parse(fs.readFileSync('app/_data/subjects.json', 'utf8'));
+const subjectPages = subjects.map((subject) =>
+  subject.id === 'sql' ? `${sqlDir}/index.html` : `app/subjects/${subject.id}/index.md`,
+);
 
 for (const subject of subjects) urls.add(subject.url);
-
-const collectionPages = new Map();
-for (const collection of collections) {
-  const pages = walk(collection.dir).filter((p) => p.endsWith('.md'));
-  collectionPages.set(collection.id, pages);
-  const sequences = new Set();
-  const validChapters =
-    collection.id === 'sql'
-      ? new Set(chapters.map((c) => c.id))
-      : new Set(subjectChapters[collection.id].map((c) => c.id));
-
-  for (const file of pages) {
-    const relative = path
-      .relative(collection.dir, file)
-      .replaceAll('\\', '/')
-      .replace(/\.md$/, '');
-    urls.add(collection.prefix + relative + '/');
-
-    const { text, data, body } = parseDocument(file);
-    for (const key of ['title', 'description', 'chapter', 'order', 'sequence'])
-      assert.notEqual(data[key], undefined, key + ' ' + file);
-    assert.ok(validChapters.has(data.chapter), 'unknown chapter ' + data.chapter + ' ' + file);
-    assert.ok(!sequences.has(data.sequence), 'duplicate sequence ' + collection.id + ' ' + file);
-    sequences.add(data.sequence);
-    assert.equal((body.match(/^\`\`\`/gm) || []).length % 2, 0, 'code fences ' + file);
-    assert.ok(body.length > 150, 'empty page ' + file);
-    assert.ok(!/TODO|Lorem ipsum/.test(text), 'unfinished text ' + file);
-  }
-
-  console.log(
-    `Content checks passed: ${pages.length} ${collection.id} pages, unique ordering, chapters, and code fences.`,
-  );
-}
-
-// Public subject and standalone pages live outside underscore-prefixed collections.
-const standalonePages = walk('app/subjects').filter(
-  (p) => p.endsWith('.md') && !p.replaceAll('\\', '/').includes('/_'),
-);
-for (const file of standalonePages) {
-  const { data } = parseDocument(file);
-  if (data.permalink) urls.add(data.permalink);
-}
-
-const subjectPages = subjects.map((subject) =>
-  subject.id === 'sql' ? 'app/subjects/_sql/index.html' : `app/subjects/${subject.id}/index.md`,
-);
 for (const file of subjectPages) assert.ok(fs.existsSync(file), 'subject page ' + file);
 
 for (const chapter of chapters) {
-  const overview = fs.readFileSync('app/subjects/_sql/' + chapter.id + '/overview.md', 'utf8');
-  for (const file of collectionPages.get('sql').filter(
+  const overview = fs.readFileSync(sqlDir + '/' + chapter.id + '/overview.md', 'utf8');
+  for (const file of pages.filter(
     (p) =>
-      p.replaceAll('\\', '/').startsWith('app/subjects/_sql/' + chapter.id + '/') &&
+      p.replaceAll('\\', '/').startsWith(sqlDir + '/' + chapter.id + '/') &&
       !p.endsWith('overview.md'),
   )) {
     const slug = path.basename(file, '.md');
     assert.ok(
       overview.includes('/sql/' + chapter.id + '/' + slug + '/'),
-      'lesson missing from SQL chapter ' + file,
+      'lesson missing from chapter ' + file,
     );
   }
 }
 
-for (const subjectId of ['ai-engineering', 'infrastructure']) {
-  const dir = subjectId === 'ai-engineering' ? 'app/subjects/_ai' : 'app/subjects/_infra';
-  const prefix = subjectId === 'ai-engineering' ? '/ai-engineering/' : '/infrastructure/';
-  for (const chapter of subjectChapters[subjectId]) {
-    const overviewPath = dir + '/' + chapter.id + '/overview.md';
+const publishedCollections = [
+  { id: 'ai-engineering', dir: 'app/subjects/_ai', prefix: '/ai-engineering/' },
+  { id: 'infrastructure', dir: 'app/subjects/_infra', prefix: '/infrastructure/' },
+];
+const publishedPages = [];
+
+for (const collection of publishedCollections) {
+  const collectionPages = walk(collection.dir).filter((p) => p.endsWith('.md'));
+  publishedPages.push(...collectionPages);
+  const collectionSequences = new Set();
+  const validChapters = new Set(subjectChapters[collection.id].map((chapter) => chapter.id));
+
+  for (const file of collectionPages) {
+    const text = fs.readFileSync(file, 'utf8');
+    const match = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    assert.ok(match, 'front matter ' + file);
+    const data = YAML.parse(match[1]);
+
+    for (const key of ['title', 'description', 'chapter', 'order', 'sequence'])
+      assert.notEqual(data[key], undefined, key + ' ' + file);
+    assert.ok(validChapters.has(data.chapter), 'unknown chapter ' + data.chapter + ' ' + file);
+    assert.ok(!collectionSequences.has(data.sequence), 'duplicate sequence ' + file);
+    collectionSequences.add(data.sequence);
+    assert.equal((match[2].match(/^```/gm) || []).length % 2, 0, 'code fences ' + file);
+    assert.ok(match[2].length > 150, 'empty page ' + file);
+    assert.ok(!/TODO|Lorem ipsum/.test(text), 'unfinished text ' + file);
+
+    const relative = path
+      .relative(collection.dir, file)
+      .replaceAll('\\', '/')
+      .replace(/\.md$/, '');
+    urls.add(collection.prefix + relative + '/');
+  }
+
+  for (const chapter of subjectChapters[collection.id]) {
+    const overviewPath = collection.dir + '/' + chapter.id + '/overview.md';
     assert.ok(fs.existsSync(overviewPath), 'chapter overview ' + overviewPath);
     const overview = fs.readFileSync(overviewPath, 'utf8');
-    for (const file of collectionPages.get(subjectId).filter(
+    for (const file of collectionPages.filter(
       (p) =>
-        p.replaceAll('\\', '/').startsWith(dir + '/' + chapter.id + '/') &&
+        p.replaceAll('\\', '/').startsWith(collection.dir + '/' + chapter.id + '/') &&
         !p.endsWith('overview.md'),
     )) {
       const slug = path.basename(file, '.md');
       assert.ok(
-        overview.includes(prefix + chapter.id + '/' + slug + '/'),
-        'lesson missing from chapter overview ' + file,
+        overview.includes(collection.prefix + chapter.id + '/' + slug + '/'),
+        'lesson missing from chapter ' + file,
       );
     }
   }
+}
+
+const standalonePages = walk('app/subjects').filter(
+  (p) => p.endsWith('.md') && !p.replaceAll('\\', '/').includes('/_'),
+);
+for (const file of standalonePages) {
+  const text = fs.readFileSync(file, 'utf8');
+  const match = text.match(/^---\n([\s\S]*?)\n---\n/);
+  assert.ok(match, 'front matter ' + file);
+  const data = YAML.parse(match[1]);
+  if (data.permalink) urls.add(data.permalink);
 }
 
 const problems = JSON.parse(fs.readFileSync('app/_data/practice_problems.json', 'utf8'));
@@ -120,14 +136,7 @@ for (const problem of problems) {
     assert.ok(problem[key], 'practice metadata ' + key);
 }
 
-// Check authored relative_url links across published content and landing pages.
-const linkedFiles = [
-  'app/index.html',
-  ...subjectPages,
-  ...standalonePages,
-  ...collections.flatMap((collection) => collectionPages.get(collection.id)),
-];
-for (const file of new Set(linkedFiles)) {
+for (const file of ['app/index.html', ...subjectPages, ...publishedPages, ...standalonePages]) {
   const text = fs.readFileSync(file, 'utf8');
   for (const link of text.matchAll(/{{\s*'((?:\/)[^']*)'\s*\|\s*relative_url/g))
     assert.ok(urls.has(link[1]), 'missing page route ' + link[1] + ' in ' + file);

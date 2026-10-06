@@ -20,8 +20,16 @@ export function searchLessons(pages, query) {
       const keywords = fieldTerms(page.keywords);
       const tools = fieldTerms(page.tools);
       const interview = fieldTerms(page.interview_queries);
-      const words = fieldTerms(page.content);
-      const searchable = [...title, ...description, ...aliases, ...keywords, ...tools, ...interview, ...words];
+      const words = (page.content || '').toLowerCase().match(/[\p{L}\p{N}_]+/gu) || [];
+      const searchable = [
+        ...title,
+        ...description,
+        ...aliases,
+        ...keywords,
+        ...tools,
+        ...interview,
+        ...words,
+      ];
       let score = 0;
 
       for (const term of terms) {
