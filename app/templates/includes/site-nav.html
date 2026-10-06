@@ -1,6 +1,33 @@
-<nav class="{{ include.class | default: 'site-nav' }}" aria-label="{{ include.label | default: 'Site navigation' }}">
-  <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a>
-  <a href="{{ '/' | relative_url }}#subjects"{% if page.subject and page.subject != 'home' %} aria-current="page"{% endif %}>Subjects</a>
-  <a href="{{ '/resources/' | relative_url }}"{% if page.url == '/resources/' %} aria-current="page"{% endif %}>Resources</a>
-  <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
+<nav
+  class="{{ include.class | default: 'site-nav' }}"
+  aria-label="{{ include.label | default: 'Site navigation' }}"
+>
+  <a
+    href="{{ '/' | relative_url }}"
+    {% if page.url == '/' %}
+      aria-current="page"
+    {% endif %}
+    >Home</a
+  >
+  <a
+    href="{{ '/' | relative_url }}#subjects"
+    {% if page.subject and page.subject != 'home' %}
+      aria-current="page"
+    {% endif %}
+    >Subjects</a
+  >
+  <a
+    href="{{ '/resources/' | relative_url }}"
+    {% if page.url == '/resources/' %}
+      aria-current="page"
+    {% endif %}
+    >Resources</a
+  >
+  <a
+    href="{{ '/about/' | relative_url }}"
+    {% if page.url == '/about/' %}
+      aria-current="page"
+    {% endif %}
+    >About</a
+  >
 </nav>

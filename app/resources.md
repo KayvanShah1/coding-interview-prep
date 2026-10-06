@@ -21,7 +21,7 @@ permalink: /resources/
 
 {% assign ordered_sections = site.data.resources.sections | sort: 'order' %}
 {% for section in ordered_sections -%}
-  {%- assign section_resources = site.data.resources.resources | where: 'section', section.id | sort: 'priority' -%}
+{%- assign section_resources = site.data.resources.resources | where: 'section', section.id | sort: 'priority' -%}
   <section class="resource-group" data-resource-group data-resource-category="{{ section.id }}">
     <div class="resource-group-heading">
       <h2>{{ section.title }}</h2>

@@ -30,7 +30,11 @@ permalink: /
       class="subject-row"
       href="{{ subject.url | relative_url }}"
       ><strong>{{ subject.title }}</strong><span>{{ subject.description }}</span
-      ><small{% if subject.status == 'Available' %} class="text-icon"{% endif %}>
+      ><small
+        {% if subject.status == 'Available' %}
+          class="text-icon"
+        {% endif %}
+      >
         {%- if subject.status == 'Available' -%}
           Start learning {% include icons/arrow-right.html %}
         {%- else -%}

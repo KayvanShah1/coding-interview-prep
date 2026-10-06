@@ -150,7 +150,9 @@
   border-radius: 4px;
   background: var(--surface);
   color: var(--muted);
-  font: 10px 'IBM Plex Mono', monospace;
+  font:
+    10px 'IBM Plex Mono',
+    monospace;
   white-space: nowrap;
 }
 .resource-open {

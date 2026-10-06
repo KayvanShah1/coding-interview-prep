@@ -135,7 +135,9 @@
   border-radius: 6px;
   background: transparent;
   color: var(--muted);
-  font: 12px 'IBM Plex Mono', monospace;
+  font:
+    12px 'IBM Plex Mono',
+    monospace;
 }
 .header-search:hover {
   border-color: var(--border-strong);

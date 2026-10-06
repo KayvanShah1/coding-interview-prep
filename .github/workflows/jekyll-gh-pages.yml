@@ -2,22 +2,22 @@ name: Build and publish CoreTrail
 
 on:
   push:
-    branches: [main, "site/**"]
+    branches: [main, 'site/**']
     paths-ignore:
-      - "docs/**"
-      - "README.md"
-      - "CONTRIBUTING.md"
-      - "LICENSE"
+      - 'docs/**'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'LICENSE'
   pull_request:
     paths-ignore:
-      - "docs/**"
-      - "README.md"
-      - "CONTRIBUTING.md"
-      - "LICENSE"
+      - 'docs/**'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'LICENSE'
   workflow_dispatch:
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: true
 
 permissions:
@@ -48,7 +48,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: '22'
           cache: npm
 
       - run: npm ci
@@ -69,7 +69,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.3"
+          ruby-version: '3.3'
           bundler-cache: true
       - run: bundle exec jekyll build --trace
 
@@ -80,8 +80,7 @@ jobs:
           include-hidden-files: true
 
       - uses: actions/upload-pages-artifact@v3
-        if:
-          github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
           path: _site
 
