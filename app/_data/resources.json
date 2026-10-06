@@ -10,7 +10,7 @@
       "id": "system-design",
       "filter_label": "System Design",
       "title": "System design",
-      "description": "HLD problems, walkthroughs, and ways of thinking through design rounds."
+      "description": "HLD problems, architecture walkthroughs, and system design interview prep."
     },
     {
       "id": "data",
@@ -22,19 +22,49 @@
       "id": "cloud-devops",
       "filter_label": "Cloud / DevOps",
       "title": "Cloud / DevOps",
-      "description": "Cloud platforms, infrastructure, networking, containers, and operations."
+      "description": "Cloud platforms, containers, infrastructure, and operations."
+    },
+    {
+      "id": "networking-security",
+      "filter_label": "Networking / Security",
+      "title": "Networking / Security",
+      "description": "Networking, Linux, security, and infrastructure fundamentals."
     },
     {
       "id": "ai-ml",
       "filter_label": "AI / ML",
-      "title": "AI / ML / Math",
-      "description": "Visual intuition, ML fundamentals, research, and deeper technical explanations."
+      "title": "AI / ML",
+      "description": "Machine learning, deep learning, GenAI, and current AI research."
+    },
+    {
+      "id": "math-science",
+      "filter_label": "Math / Science",
+      "title": "Math / Science",
+      "description": "Mathematics, physics, science, and visual explanations that rebuild intuition."
+    },
+    {
+      "id": "hardware-deep-tech",
+      "filter_label": "Hardware / Deep Tech",
+      "title": "Hardware / Deep Tech",
+      "description": "Semiconductors, chips, compute hardware, and the physical systems behind modern AI."
     },
     {
       "id": "software-cs",
-      "filter_label": "Software / CS",
-      "title": "Software / CS",
-      "description": "Programming, software design, computer science, and broader engineering thinking."
+      "filter_label": "Software / Systems",
+      "title": "Software / Systems / CS",
+      "description": "Software design, programming, databases, computer science, and systems fundamentals."
+    },
+    {
+      "id": "tech-product",
+      "filter_label": "Tech / Product",
+      "title": "Tech / Product",
+      "description": "AI products, startups, technology shifts, and broader product and industry thinking."
+    },
+    {
+      "id": "university-courses",
+      "filter_label": "University / Courses",
+      "title": "University / Courses",
+      "description": "University lectures, open courses, and research channels I return to for deeper study."
     }
   ],
   "resources": [
@@ -76,7 +106,7 @@
       "section": "system-design",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "System design fundamentals, deep dives, and interview walkthroughs."
+      "description": "System design fundamentals, interview frameworks, and worked architecture walkthroughs."
     },
     {
       "name": "Aced",
@@ -85,7 +115,7 @@
       "section": "system-design",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Tech interview prep across engineering, product, data, system design, and related roles."
+      "description": "System design interview prep, mock interviews, architecture patterns, and broader technical interview guidance."
     },
     {
       "name": "Arjay McCandless",
@@ -93,7 +123,7 @@
       "section": "system-design",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "System design, backend engineering, and practical engineering breakdowns."
+      "description": "System design, backend architecture, and practical engineering breakdowns."
     },
     {
       "name": "Afaque Ahmad",
@@ -146,34 +176,34 @@
     {
       "name": "David Bombal",
       "url": "https://www.youtube.com/@davidbombal",
-      "section": "cloud-devops",
+      "section": "networking-security",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Networking, Linux, security, and infrastructure topics."
+      "description": "Networking, Linux, cybersecurity, infrastructure, and hands-on technical labs."
     },
     {
       "name": "3Blue1Brown",
       "url": "https://www.youtube.com/@3blue1brown",
-      "section": "ai-ml",
+      "section": "math-science",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Visual intuition for linear algebra, calculus, neural networks, and mathematics."
+      "description": "Visual intuition for linear algebra, calculus, differential equations, neural networks, and mathematics."
     },
     {
       "name": "Veritasium",
       "url": "https://www.youtube.com/@veritasium",
-      "section": "ai-ml",
+      "section": "math-science",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Science and engineering explanations that are useful when I want the intuition behind something."
+      "description": "Science and engineering explained through experiments, demonstrations, interviews, and deep conceptual stories."
     },
     {
       "name": "Welch Labs",
       "url": "https://www.youtube.com/@WelchLabs",
-      "section": "ai-ml",
+      "section": "math-science",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Math, machine learning, and technical storytelling with strong visual explanations."
+      "description": "Math, science, and machine learning explained visually with strong technical storytelling."
     },
     {
       "name": "Google DeepMind",
@@ -181,7 +211,7 @@
       "section": "ai-ml",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Research talks, demos, and explanations from current AI research."
+      "description": "Research talks, demos, and explanations from current AI and machine learning research."
     },
     {
       "name": "DeepLearning.AI",
@@ -189,15 +219,15 @@
       "section": "ai-ml",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "ML and GenAI lessons, research discussions, and practical technical material."
+      "description": "Machine learning, deep learning, GenAI, agents, and practical AI engineering lessons."
     },
     {
       "name": "Anastasi in Tech",
       "url": "https://www.youtube.com/@anastasiintech",
-      "section": "ai-ml",
+      "section": "hardware-deep-tech",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "AI, semiconductors, hardware, and the systems underneath modern computing."
+      "description": "Semiconductors, chip architecture, AI hardware, and the technologies underneath modern computing."
     },
     {
       "name": "ArjanCodes",
@@ -205,7 +235,7 @@
       "section": "software-cs",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Python, software design, architecture, testing, and writing maintainable code."
+      "description": "Python, software design, architecture, testing, design patterns, and maintainable code."
     },
     {
       "name": "Ben Dicken",
@@ -213,7 +243,7 @@
       "section": "software-cs",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Computer science, databases, performance, and software engineering from first principles."
+      "description": "Computer science, databases, systems, performance, and software engineering from first principles."
     },
     {
       "name": "IBM Technology",
@@ -221,15 +251,72 @@
       "section": "software-cs",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Short explainers across databases, distributed systems, cloud, AI, and infrastructure."
+      "description": "Technical explainers across software systems, databases, distributed computing, cloud, security, and AI."
     },
     {
       "name": "Varun Mayya",
       "url": "https://www.youtube.com/@varunmayya",
-      "section": "software-cs",
+      "section": "tech-product",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Software, AI, products, and broader technology discussions."
+      "description": "AI products, startups, technology shifts, software businesses, and broader product and industry discussions."
+    },
+    {
+      "name": "Stanford Online",
+      "url": "https://www.youtube.com/@stanfordonline",
+      "section": "university-courses",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Stanford lectures, seminars, engineering courses, AI, computer science, and professional education."
+    },
+    {
+      "name": "Carnegie Mellon University",
+      "alias": "CMU",
+      "url": "https://www.youtube.com/@cmu",
+      "section": "university-courses",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "University lectures, research, talks, and computing work from Carnegie Mellon."
+    },
+    {
+      "name": "MIT OpenCourseWare",
+      "url": "https://www.youtube.com/@mitocw",
+      "section": "university-courses",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Full MIT courses across computer science, mathematics, engineering, and related subjects."
+    },
+    {
+      "name": "UC Berkeley EECS",
+      "url": "https://www.youtube.com/@BerkeleyEECS",
+      "section": "university-courses",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Electrical engineering and computer science lectures, seminars, research, and department talks."
+    },
+    {
+      "name": "NYU Tandon",
+      "url": "https://www.youtube.com/@nyutandon",
+      "section": "university-courses",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Engineering, computer science, AI, research talks, and technical material from NYU Tandon."
+    },
+    {
+      "name": "Michigan EECS 498/598",
+      "url": "https://www.youtube.com/playlist?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r",
+      "section": "university-courses",
+      "type": "Course playlist",
+      "icon": "youtube",
+      "description": "University of Michigan deep learning for computer vision lectures from EECS 498/598."
+    },
+    {
+      "name": "MIT CSAIL",
+      "url": "https://www.youtube.com/@MITCSAIL",
+      "section": "university-courses",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Computer science and AI research, systems, robotics, vision, theory, and research talks from MIT CSAIL."
     }
   ]
 }
