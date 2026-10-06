@@ -1,6 +1,6 @@
 ---
-title: "Consecutive days & streaks"
-description: "Group runs using deduplicated dates and row numbers."
+title: "Gaps & Islands: consecutive days & streaks"
+description: "Recognize the gaps-and-islands pattern and group consecutive runs using deduplicated dates and row numbers."
 chapter: "patterns"
 order: 2
 sequence: 702

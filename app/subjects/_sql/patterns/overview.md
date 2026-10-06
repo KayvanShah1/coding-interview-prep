@@ -14,33 +14,57 @@ mermaid: true
 Interview questions often combine a few operations across different grains. The wording map suggests a starting point; the worked lessons show why the stages are needed and where a plausible shortcut breaks.
 
 
-## Wording → first technique
+## Technique map
 
-| Interview wording | First technique to consider |
-|---|---|
-| latest / earliest row | `ROW_NUMBER` or PostgreSQL `DISTINCT ON` |
-| exactly top N rows per group | `ROW_NUMBER` |
-| top N distinct values / levels | `DENSE_RANK` |
-| previous / next observed value | `LAG / LEAD` |
-| month-over-month / period change | aggregate → `LAG` |
-| percentage of total | aggregate → `SUM(...) OVER ()` |
-| at least one related row | `EXISTS` |
-| never / no matching row | `NOT EXISTS` |
-| every required item | double `NOT EXISTS` or `HAVING COUNT(DISTINCT ...)` |
-| both/all requested categories | conditional aggregation / `HAVING` |
-| consecutive dates | deduplicate → row-number island key |
-| new session after gap | `LAG` → boundary flag → cumulative `SUM` |
-| state/run changes | `LAG` → changed flag → cumulative `SUM` |
-| missing dates / zero-activity periods | calendar spine → `LEFT JOIN` |
-| first event then later event | first-event CTE → join/existence after timestamp |
-| ordered funnel | stage timestamps / ordered existence checks |
-| median / p95 / p99 | `PERCENTILE_CONT ... WITHIN GROUP` |
-| actual observed percentile value | `PERCENTILE_DISC ... WITHIN GROUP` |
-| bucket users into quartiles/deciles | `NTILE` |
-| relative rank of each row | `PERCENT_RANK` / `CUME_DIST` |
-| pivot categories to columns | conditional aggregation |
-| overlapping intervals | self join + overlap condition |
-| all entity × period combinations | `CROSS JOIN` + `LEFT JOIN` |
+Use this when the problem sounds familiar but the SQL shape does not come back immediately. Start from the problem shape, then open the page that owns the detailed explanation.
+
+### Pick the right row
+
+| Problem shape | Technique | Building blocks | Detailed page |
+|---|---|---|---|
+| latest / earliest row per entity | Latest-per-group | `ROW_NUMBER` → filter `rn = 1` | [Duplicates & latest records]({{ '/sql/patterns/deduplication/' | relative_url }}) |
+| exactly top N rows per group | Top-N per group | `ROW_NUMBER` + outer filter | [Ranking]({{ '/sql/windows/ranking/' | relative_url }}) |
+| top N distinct values / levels | Tie-preserving ranking | `DENSE_RANK` + outer filter | [Ranking]({{ '/sql/windows/ranking/' | relative_url }}) |
+| previous / next observed value | Neighbor comparison | `LAG` / `LEAD` | [LAG & LEAD]({{ '/sql/windows/lag-lead/' | relative_url }}) |
+
+### Sequences & events
+
+| Problem shape | Technique | Building blocks | Detailed page |
+|---|---|---|---|
+| consecutive dates / streaks | Gaps & Islands | deduplicate → `ROW_NUMBER` → stable island key | [Gaps & Islands]({{ '/sql/patterns/gaps-islands/' | relative_url }}) |
+| new session after inactivity | Sessionization | `LAG` → boundary flag → cumulative `SUM` | [Sessions & state changes]({{ '/sql/patterns/sessions/' | relative_url }}) |
+| runs of the same state | State-change islands | `LAG` → changed flag → cumulative `SUM` | [Sessions & state changes]({{ '/sql/patterns/sessions/' | relative_url }}) |
+| view → cart → purchase | Ordered funnel | stage timestamps / ordered existence checks | [Ordered funnels]({{ '/sql/patterns/funnels/' | relative_url }}) |
+| first event followed by a later event | First → later | first-event CTE → later join / `EXISTS` | [Ordered funnels]({{ '/sql/patterns/funnels/' | relative_url }}) |
+
+### Time & periods
+
+| Problem shape | Technique | Building blocks | Detailed page |
+|---|---|---|---|
+| month-over-month / year-over-year change | Period comparison | aggregate to period → `LAG` | [Period changes]({{ '/sql/patterns/period-changes/' | relative_url }}) |
+| missing dates must appear | Calendar spine | generate dates → aggregate facts → `LEFT JOIN` | [Retention & missing dates]({{ '/sql/patterns/retention-calendar/' | relative_url }}) |
+| running / cumulative metric | Running window | aggregate if needed → `SUM OVER` + frame | [Running calculations]({{ '/sql/windows/running-calculations/' | relative_url }}) |
+| last N observations / days | Moving window | `ROWS` or time-aware `RANGE` | [Window frames]({{ '/sql/windows/frames/' | relative_url }}) |
+
+### Existence & sets
+
+| Problem shape | Technique | Building blocks | Detailed page |
+|---|---|---|---|
+| at least one related row | Semi-join | correlated `EXISTS` | [EXISTS, IN, ANY & ALL]({{ '/sql/subqueries/exists-in-all/' | relative_url }}) |
+| no related row | Anti-join | `NOT EXISTS` | [EXISTS, IN, ANY & ALL]({{ '/sql/subqueries/exists-in-all/' | relative_url }}) |
+| every required item | Relational division | double `NOT EXISTS` or constrained `HAVING COUNT(DISTINCT ...)` | [Set operations & all-item matches]({{ '/sql/joins/set-operations/' | relative_url }}) |
+| every entity × category/date pair | Expected combinations | `CROSS JOIN` → `LEFT JOIN` | [Joins & row multiplication]({{ '/sql/joins/join-types/' | relative_url }}) |
+
+### Metrics & comparisons
+
+| Problem shape | Technique | Building blocks | Detailed page |
+|---|---|---|---|
+| categories become columns | Conditional pivot | `SUM(CASE ...)` / conditional aggregates | [Conditional aggregation & pivots]({{ '/sql/patterns/pivoting/' | relative_url }}) |
+| percentage / conversion rate | Population-first rate | align numerator + denominator grain | [Rates & populations]({{ '/sql/patterns/rates-and-populations/' | relative_url }}) |
+| combine group rates | Weighted average | sum weighted numerators / denominators | [Rates & populations]({{ '/sql/patterns/rates-and-populations/' | relative_url }}) |
+| median / p95 / threshold | Ordered-set percentile | `PERCENTILE_CONT / DISC ... WITHIN GROUP` | [Percentiles & thresholds]({{ '/sql/aggregation/percentiles/' | relative_url }}) |
+| quartiles / deciles | Equal-row buckets | `NTILE(n) OVER (...)` | [Window distributions]({{ '/sql/windows/distribution/' | relative_url }}) |
+| overlapping bookings / ranges | Interval overlap | self join + overlap condition | [Interval overlaps]({{ '/sql/patterns/interval-overlaps/' | relative_url }}) |
 
 ## High-value composition patterns
 
@@ -201,10 +225,11 @@ These decisions usually determine the correct SQL pattern before syntax does.
 
 <ul class="topic-list">
 <li><a href="{{ '/sql/patterns/deduplication/' | relative_url }}">Duplicates & latest records</a><span>Find repeated business keys and choose one version deterministically.</span></li>
-<li><a href="{{ '/sql/patterns/gaps-islands/' | relative_url }}">Consecutive days & streaks</a><span>Group runs using deduplicated dates and row numbers.</span></li>
+<li><a href="{{ '/sql/patterns/gaps-islands/' | relative_url }}">Gaps & Islands: consecutive days & streaks</a><span>Group runs using deduplicated dates and row numbers.</span></li>
 <li><a href="{{ '/sql/patterns/sessions/' | relative_url }}">Sessions & changes in state</a><span>Turn boundary flags into groups with a cumulative sum.</span></li>
 <li><a href="{{ '/sql/patterns/retention-calendar/' | relative_url }}">Retention & missing dates</a><span>Define observation windows and construct complete calendars.</span></li>
-<li><a href="{{ '/sql/patterns/mixed-patterns/' | relative_url }}">Pivots, medians & interval overlaps</a><span>Recognize several useful extensions of the core patterns.</span></li>
+<li><a href="{{ '/sql/patterns/pivoting/' | relative_url }}">Conditional aggregation & pivots</a><span>Turn category values into columns without losing the intended grain.</span></li>
+<li><a href="{{ '/sql/patterns/interval-overlaps/' | relative_url }}">Interval overlaps</a><span>Detect overlapping ranges while avoiding self-pairs and mirrored duplicates.</span></li>
 <li><a href="{{ '/sql/patterns/funnels/' | relative_url }}">Ordered funnels</a><span>Require the right sequence of events instead of merely counting users with each event.</span></li>
 <li><a href="{{ '/sql/patterns/period-changes/' | relative_url }}">Period changes and missing months</a><span>Aggregate to calendar grain before LAG, and make missing periods explicit.</span></li>
 <li><a href="{{ '/sql/patterns/rates-and-populations/' | relative_url }}">Rates, populations, and weighted averages</a><span>Define numerator and denominator at the same grain before dividing.</span></li>
