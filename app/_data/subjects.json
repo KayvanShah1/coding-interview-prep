@@ -4,6 +4,7 @@
     "title": "SQL",
     "url": "/sql/",
     "status": "Available",
+    "collection": "sql",
     "description": "Queries, patterns, database design, and performance."
   },
   {
@@ -24,8 +25,17 @@
     "id": "ai-engineering",
     "title": "AI Engineering",
     "url": "/ai-engineering/",
-    "status": "Planned",
-    "description": "Retrieval, agents, evaluation, and inference."
+    "status": "Available",
+    "collection": "ai",
+    "description": "Retrieval, agents, evaluation, inference, and production AI systems."
+  },
+  {
+    "id": "infrastructure",
+    "title": "Infrastructure & DevOps",
+    "url": "/infrastructure/",
+    "status": "Available",
+    "collection": "infra",
+    "description": "Containers, Kubernetes, deployment, scaling, and operating production systems."
   },
   {
     "id": "systems",

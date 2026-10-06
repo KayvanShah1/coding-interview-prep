@@ -94,3 +94,39 @@ test('snippets favor a passage covering multiple terms and preserve literal code
     'A title-only match.',
   );
 });
+
+test('aliases, tools, and interview queries are searchable without rendering them', () => {
+  const docs = [
+    {
+      title: 'Autoscaling LLM inference',
+      description: 'Scale serving capacity from demand signals.',
+      aliases: ['inference autoscaling'],
+      keywords: ['queue depth', 'GPU scaling'],
+      tools: ['KEDA', 'Karpenter'],
+      interview_queries: ['how do you autoscale an LLM'],
+      content: 'Use waiting requests and latency to decide when more replicas are needed.',
+      url: '/ai/autoscaling/',
+    },
+  ];
+  assert.equal(searchLessons(docs, 'Karpenter')[0].url, '/ai/autoscaling/');
+  assert.equal(searchLessons(docs, 'gpu scaling')[0].url, '/ai/autoscaling/');
+  assert.equal(searchLessons(docs, 'autoscale llm')[0].url, '/ai/autoscaling/');
+});
+
+test('an explicit alias outranks an incidental body mention', () => {
+  const docs = [
+    {
+      title: 'Overview',
+      content: 'TTFT '.repeat(30),
+      url: '/overview/',
+    },
+    {
+      title: 'What to measure',
+      aliases: ['TTFT'],
+      description: 'Time to first token and generation metrics.',
+      content: 'Measure latency from request arrival to the first generated token.',
+      url: '/metrics/',
+    },
+  ];
+  assert.equal(searchLessons(docs, 'TTFT')[0].url, '/metrics/');
+});

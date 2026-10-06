@@ -10,7 +10,11 @@ layout: default
   <p class="lead">{{ subject.description }}</p>
 </header>
 <article class="prose">
-  <p class="subject-status">Planned subject · Lessons have not been published yet.</p>
+  {% if subject.status == 'Planned' %}
+    <p class="subject-status">Planned subject · Lessons have not been published yet.</p>
+  {% endif %}
   {{ content }}
-  <p><a href="{{ '/sql/' | relative_url }}">Explore the SQL handbook →</a></p>
+  {% if subject.status == 'Planned' %}
+    <p><a href="{{ '/sql/' | relative_url }}">Explore the SQL handbook →</a></p>
+  {% endif %}
 </article>

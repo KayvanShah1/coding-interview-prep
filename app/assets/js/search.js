@@ -2,6 +2,11 @@ export function searchTerms(query) {
   return [...new Set(query.toLowerCase().match(/[\p{L}\p{N}_]+/gu) || [])];
 }
 
+function fieldTerms(value) {
+  if (Array.isArray(value)) return searchTerms(value.join(' '));
+  return searchTerms(value || '');
+}
+
 export function searchLessons(pages, query) {
   const terms = searchTerms(query);
   if (!terms.length) return [];
@@ -9,26 +14,54 @@ export function searchLessons(pages, query) {
 
   return pages
     .map((page) => {
-      const title = searchTerms(page.title);
-      const description = searchTerms(page.description || '');
-      const words = (page.content || '').toLowerCase().match(/[\p{L}\p{N}_]+/gu) || [];
+      const title = fieldTerms(page.title);
+      const description = fieldTerms(page.description);
+      const aliases = fieldTerms(page.aliases);
+      const keywords = fieldTerms(page.keywords);
+      const tools = fieldTerms(page.tools);
+      const interview = fieldTerms(page.interview_queries);
+      const words = fieldTerms(page.content);
+      const searchable = [...title, ...description, ...aliases, ...keywords, ...tools, ...interview, ...words];
       let score = 0;
+
       for (const term of terms) {
-        // Prefer complete words; prefixes still support searches while typing.
-        const exact = [...title, ...description, ...words].includes(term);
+        const exact = searchable.includes(term);
         const matches = (word) => (exact ? word === term : word.startsWith(term));
         const titleMatch = title.some(matches);
         const descriptionMatch = description.some(matches);
+        const aliasMatch = aliases.some(matches);
+        const keywordMatch = keywords.some(matches);
+        const toolMatch = tools.some(matches);
+        const interviewMatch = interview.some(matches);
         const count = words.filter(matches).length;
-        if (!titleMatch && !descriptionMatch && !count) return null;
-        // Saturate repeated mentions and normalize for lesson length. A focused
-        // explanation should outrank an incidental mention in a long overview.
+        if (
+          !titleMatch &&
+          !descriptionMatch &&
+          !aliasMatch &&
+          !keywordMatch &&
+          !toolMatch &&
+          !interviewMatch &&
+          !count
+        )
+          return null;
+
+        // Repeated body mentions saturate quickly. Explicit retrieval metadata is
+        // intentionally stronger than an incidental mention in a long page.
         const contentScore = (10 * count) / (count + 1.2 * (0.25 + (0.75 * words.length) / 500));
         score +=
-          ((titleMatch ? 18 : 0) + (descriptionMatch ? 3 : 0) + contentScore) * (exact ? 1 : 0.6);
+          ((titleMatch ? 18 : 0) +
+            (aliasMatch ? 14 : 0) +
+            (toolMatch ? 10 : 0) +
+            (keywordMatch ? 8 : 0) +
+            (interviewMatch ? 5 : 0) +
+            (descriptionMatch ? 3 : 0) +
+            contentScore) *
+          (exact ? 1 : 0.6);
       }
+
       if (title.join(' ') === phrase) score += 12;
       if (terms.length > 1 && page.title.toLowerCase().includes(phrase)) score += 8;
+      if ((page.aliases || []).some((alias) => alias.toLowerCase() === phrase)) score += 10;
       return { ...page, score };
     })
     .filter(Boolean)
@@ -45,8 +78,6 @@ export function searchSnippet(page, terms) {
   );
   if (!matches.length) return page.description || '';
 
-  // Show the passage containing the most distinct query terms, rather than a
-  // generic description that gives no clue why the page matched.
   let best = matches[0];
   let bestCoverage = 0;
   for (const match of matches) {
