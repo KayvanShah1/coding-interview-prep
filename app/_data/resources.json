@@ -107,6 +107,24 @@
       "priority": 3
     },
     {
+      "name": "HackerRank",
+      "url": "https://www.hackerrank.com/",
+      "section": "practice",
+      "type": "Practice",
+      "icon": "practice",
+      "description": "SQL, Python, DSA, and domain-based coding practice with structured skill tracks.",
+      "priority": 4
+    },
+    {
+      "name": "NeetCode",
+      "url": "https://neetcode.io/",
+      "section": "practice",
+      "type": "Practice",
+      "icon": "practice",
+      "description": "DSA problem roadmaps and explanations organized around recurring interview patterns.",
+      "priority": 5
+    },
+    {
       "name": "SystemCraft",
       "url": "https://systemcraft.in/hld",
       "section": "system-design",
@@ -169,6 +187,16 @@
       "icon": "youtube",
       "description": "Data engineering projects and deep dives across Spark, Databricks, dbt, Airflow, and cloud.",
       "priority": 3
+    },
+    {
+      "name": "DataDriven.io",
+      "alias": "Data Engineering Interview Handbook",
+      "url": "https://github.com/datadriven-io/data-engineering-interview-handbook",
+      "section": "data",
+      "type": "Handbook",
+      "icon": "data",
+      "description": "Free data engineering interview handbook covering SQL, modeling, pipelines, architecture, and system design.",
+      "priority": 4
     },
     {
       "name": "Google Cloud Tech",
