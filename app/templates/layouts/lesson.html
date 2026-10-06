@@ -12,11 +12,14 @@ layout: default
   <h1>{{ page.title }}</h1>
   <p class="lead">{{ page.description }}</p>
   <div class="lesson-meta">
-    <span>{{ page.level | default: 'Core' }}</span
-    ><span>
-      {{- page.dialect | default: 'PostgreSQL' -}}
-      {%- if page.dialect_note %} · {{ page.dialect_note }}{% endif -%}</span
-    ><span>{{ content | number_of_words | divided_by: 180 | plus: 1 }} min read</span>
+    <span>{{ page.level | default: 'Core' }}</span>
+    {% if page.dialect -%}
+      <span>
+        {{- page.dialect -}}
+        {%- if page.dialect_note %} · {{ page.dialect_note }}{% endif -%}
+      </span>
+    {%- endif %}
+    <span>{{ content | number_of_words | divided_by: 180 | plus: 1 }} min read</span>
   </div>
 </header>
 <details class="mobile-outline">
