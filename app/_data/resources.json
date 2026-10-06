@@ -190,12 +190,11 @@
     },
     {
       "name": "DataDriven.io",
-      "alias": "Data Engineering Interview Handbook",
-      "url": "https://github.com/datadriven-io/data-engineering-interview-handbook",
+      "url": "https://datadriven.io",
       "section": "data",
-      "type": "Handbook",
+      "type": "Practice",
       "icon": "data",
-      "description": "Free data engineering interview handbook covering SQL, modeling, pipelines, architecture, and system design.",
+      "description": "Data engineering interview practice platform covering SQL, modeling, pipelines, architecture, and system design.",
       "priority": 4
     },
     {
