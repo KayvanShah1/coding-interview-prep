@@ -131,71 +131,40 @@ Execution time inside the database is not always the whole latency.
 
 A query returning millions of rows can spend significant time serializing results, sending them over the network, and having the application consume them. Returning `SELECT *` from a wide table can therefore be expensive even when the database finds those rows quickly.
 
-## Where plans go wrong
+## When the physical plan is wrong
 
-Most bad plans are not “the optimizer being random.” They usually come from a mismatch between estimates, data shape, available access paths, and the query.
+The optimizer is making predictions, especially about **how many rows each step will produce**. Those estimates come from statistics and influence scan choices, join order, join algorithms, aggregation strategies, and whether a plan is expected to fit in memory.
 
-| Symptom | What may be happening |
-|---|---|
-| Index exists but planner scans | Query reads a large fraction of the table, predicate is not selective, or the expression does not match the usable index |
-| Nested loop becomes very slow | Outer side produced far more rows than estimated, making repeated inner lookups expensive |
-| Hash join or aggregate spills | Hash structure exceeded available memory |
-| Sort spills to disk | Sort input was larger than memory available for the operation |
-| Wrong join order | Cardinality estimates were inaccurate, often because of skew or correlated columns |
-| Partitioned table still reads too much | Predicate does not support pruning or does not constrain the partition key effectively |
-| Plan is fast for one parameter and slow for another | Different parameter values need different strategies but a reused plan may suit only one distribution |
+A useful high-level diagnostic is:
 
-The first useful debugging question is usually:
+> **Where does the estimated amount of work diverge from the actual amount of work?**
 
-> **Where does estimated work diverge from actual work?**
+That question leads into the deeper performance material:
 
-That is why the difference between estimated and actual rows matters so much in `EXPLAIN ANALYZE`.
+- large estimate errors → [Statistics, cardinality, and skew]({{ '/sql/performance/statistics/' | relative_url }})
+- scan versus index choice → [Indexes and access paths]({{ '/sql/performance/indexes/' | relative_url }})
+- predicate shape and rewrites → [Predicates and query rewrites]({{ '/sql/performance/sargability/' | relative_url }})
+- join algorithms, sorts, and spills → [Joins, sorting, and memory]({{ '/sql/performance/joins-sorts/' | relative_url }})
+- actual node-by-node diagnosis → [Reading EXPLAIN plans]({{ '/sql/performance/explain/' | relative_url }})
 
-## EXPLAIN versus EXPLAIN ANALYZE
+## EXPLAIN at this stage
 
-```sql
-EXPLAIN
-SELECT *
-FROM orders
-WHERE customer_id = 42;
-```
+`EXPLAIN` shows the chosen plan and estimates. `EXPLAIN (ANALYZE, BUFFERS)` runs the statement and adds actual execution information.
 
-shows the planner's chosen plan and estimates without running the query.
+At the Foundations level, remember only this distinction:
 
-```sql
-EXPLAIN (ANALYZE, BUFFERS)
-SELECT *
-FROM orders
-WHERE customer_id = 42;
-```
+- **logical SQL** tells you what result the query means;
+- **the plan** tells you how the engine intends to produce it;
+- **actual execution** tells you what really happened on this data.
 
-runs the statement and adds actual timing, row counts, loops, and buffer information.
-
-For a slow query, compare:
-
-- estimated rows versus actual rows;
-- rows removed by filters;
-- scan type;
-- join algorithm and loop counts;
-- sort method and whether it spilled;
-- buffer reads/hits;
-- the node where most time or repeated work accumulates.
-
-Do not optimize from the top line alone. Follow the tree and find where the unexpectedly large amount of work begins.
+The full checklist for estimated versus actual rows, loops, buffers, scans, and spills belongs in [Reading EXPLAIN plans]({{ '/sql/performance/explain/' | relative_url }}).
 
 ## Connect this back to query writing
 
-When writing SQL, you control the **problem definition**:
-
-- correct grain;
-- correct join relationships;
-- useful row filters;
-- whether an unnecessary `DISTINCT` or sort exists;
-- whether predicates are expressed in a form an index or partitioning scheme can use;
-- whether you are asking for 20 rows or 20 million.
+When writing SQL, you control the **problem definition**: grain, joins, filters, grouping, requested columns, ordering, and result size.
 
 The optimizer controls the physical strategy.
 
-Your job is therefore not to manually dictate every operation. Write a query that expresses the right problem cleanly, then use the plan to check whether the engine is doing sensible work.
+Your job is not to manually dictate every operator. Express the right problem clearly, then inspect the plan when performance matters.
 
-For deeper tuning, continue to [Reading EXPLAIN]({{ '/sql/performance/explain/' | relative_url }}), [Indexes]({{ '/sql/performance/indexes/' | relative_url }}), and [Statistics, cardinality, and skew]({{ '/sql/performance/statistics/' | relative_url }}).
+Continue to [Reading EXPLAIN plans]({{ '/sql/performance/explain/' | relative_url }}) when you want to diagnose the physical work in detail.

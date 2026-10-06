@@ -82,29 +82,18 @@ HAVING SUM(amount) > 1000;
 
 Do not move the row-level condition into `HAVING` just because that clause appears later. `status = 'paid'` describes which **orders** are eligible, so it belongs in `WHERE`.
 
-### Example: do not hide an indexable range
+### Keep predicates easy to use
 
-If the question is “orders placed during January 2026,” this form usually gives the optimizer a straightforward timestamp range:
+When two predicates mean the same thing, prefer the form that exposes the original column and range directly. That can make index use and partition pruning easier for the optimizer.
 
-```sql
-WHERE order_ts >= TIMESTAMP '2026-01-01'
-  AND order_ts <  TIMESTAMP '2026-02-01'
-```
-
-instead of:
-
-```sql
-WHERE DATE(order_ts) BETWEEN DATE '2026-01-01' AND DATE '2026-01-31'
-```
-
-The second expression can still be supported by an expression index, but do not make every row compute a transformed value when a direct range expresses the same requirement.
+The detailed cases around timestamp bounds, expressions, outer joins, and when “filter early” changes the answer live in [Predicates and query rewrites]({{ '/sql/performance/sargability/' | relative_url }}).
 
 ## Logical order versus physical execution
 
 The logical model answers **what the query means**. The physical plan answers **how this database chose to produce it**.
 
-For example, even though `WHERE` appears logically after `FROM`, PostgreSQL may apply a selective filter while scanning a table, before joining that table to anything else. It may also reorder inner joins, choose a hash join instead of a nested loop, or use an index to satisfy both filtering and ordering.
+For example, even though `WHERE` appears logically after `FROM`, PostgreSQL may apply a selective filter during a scan and may reorder inner joins while preserving the result.
 
-That is why query tuning should finish with the execution plan rather than with assumptions based on SQL text alone.
+That is why query tuning should finish with the execution plan rather than assumptions based on SQL text alone.
 
 Next: [How a query actually runs]({{ '/sql/foundations/query-execution/' | relative_url }}).
