@@ -5,7 +5,6 @@ chapter: "practice"
 order: 13
 sequence: 1413
 level: "Core"
-references: []
 ---
 
 ## Scope

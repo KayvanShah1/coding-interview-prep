@@ -6,7 +6,6 @@ order: 15
 sequence: 1415
 level: Lab
 dialect: Cross-engine concepts
-references: []
 ---
 
 ## How to use these scenarios

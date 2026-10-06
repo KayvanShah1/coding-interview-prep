@@ -5,7 +5,6 @@ chapter: "practice"
 order: 12
 sequence: 1412
 level: "Core"
-references: []
 ---
 
 ## Pick a problem

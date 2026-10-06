@@ -5,7 +5,6 @@ chapter: practice
 order: 14
 sequence: 1414
 level: Intermediate
-references: []
 ---
 
 ## Attempt first, then reveal

@@ -24,7 +24,7 @@ layout: default
   <nav id="mobile-toc"></nav>
 </details>
 <article class="prose">{{ content }}</article>
-{% if page.references %}
+{% if page.references and page.references != empty %}
   <section class="references prose">
     <h2 id="references">References</h2>
     <ul>

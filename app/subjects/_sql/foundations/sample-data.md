@@ -5,7 +5,6 @@ chapter: "foundations"
 order: 6
 sequence: 6
 level: "Core"
-references: []
 ---
 
 ## Get the dataset

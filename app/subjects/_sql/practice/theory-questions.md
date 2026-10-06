@@ -5,7 +5,6 @@ chapter: "practice"
 order: 11
 sequence: 1411
 level: "Core"
-references: []
 ---
 
 ## Query semantics
