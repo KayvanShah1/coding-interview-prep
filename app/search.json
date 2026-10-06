@@ -11,10 +11,10 @@ layout: null
   {"title":{{ lesson.title | jsonify }},"subject":{{ lesson.subject | default: '' | jsonify }},"chapter":
   {{- lesson.chapter | default: '' | jsonify -}}
   ,"description":{{ lesson.description | default: '' | jsonify }},"keywords":
-  {{- lesson.keywords | default: empty | jsonify -}}
-  ,"aliases":{{ lesson.aliases | default: empty | jsonify }},"tools":
-  {{- lesson.tools | default: empty | jsonify -}}
-  ,"interview_queries":{{ lesson.interview_queries | default: empty | jsonify }},"url":
+  {{- lesson.keywords | jsonify -}}
+  ,"aliases":{{ lesson.aliases | jsonify }},"tools":
+  {{- lesson.tools | jsonify -}}
+  ,"interview_queries":{{ lesson.interview_queries | jsonify }},"url":
   {{- lesson.url | relative_url | jsonify -}}
   ,"content":
   {{-

@@ -63,24 +63,30 @@ The same happens while building. If I run into something worth understanding pro
 
 ## What's here
 
-SQL is the most developed section today, but CoreTrail is meant to cover the broader set of areas I work with and interview for:
+SQL remains the most developed section. AI Engineering now includes an inference-to-production-serving trail, and Infrastructure & DevOps covers the reusable container, Kubernetes, scaling, and observability mechanics behind it.
+
+CoreTrail is meant to grow across:
 
 - Data Engineering
 - Machine Learning
 - AI Engineering
+- Infrastructure & DevOps
 - System Design
 - DSA
 
-The structure will keep growing around the same idea: **fast recall first, depth when needed.**
+The structure keeps the same idea: **fast recall first, depth when needed.**
 
 ### Included
 
 - SQL currently has 83 topic pages across 15 chapters, plus chapter overviews.
+- AI Engineering covers LLM inference, KV cache, continuous batching, inference engines, replicas/parallelism, deployment, autoscaling, failures, and serving observability.
+- Infrastructure & DevOps covers containers, GPU access, Kubernetes workload/network/storage/health primitives, autoscaling layers, and telemetry.
+- Machine Learning includes a bridge comparing conventional model serving with LLM serving.
 - Expandable navigation, page outlines, and full-text search with Ctrl/Cmd K.
+- Search metadata supports aliases, tools, keywords, and interview-style queries without rendering tag clutter; pages also emit DocSearch-friendly metadata and a sitemap.
 - Ranked search results show highlighted matching passages; the sun/moon toggle remembers your theme.
 - Copyable SQL, expandable answers, problem filters, and an interactive window-frame explorer.
 - PostgreSQL-first examples with selected BigQuery/MySQL differences.
-- A CoreTrail landing page and subject switcher; Data Engineering, ML, AI Engineering, System Design, and DSA have clearly marked planned pages.
 - A filterable practice directory links 12 questions from StrataScratch, LeetCode, and DataLemur to related lessons.
 - Native PostgreSQL labs use 120,000 orders and 90,000 events to check index access, date predicates, and partition pruning.
 
@@ -98,7 +104,7 @@ I still use AI heavily to explore and question things. I just do not want the us
 
 ![Jekyll](https://img.shields.io/badge/Jekyll-CC0000?logo=jekyll&logoColor=white)
 ![Liquid](https://img.shields.io/badge/Liquid-67B8DE?logo=shopify&logoColor=white)
-![Markdown](https://img.shields.io/badge/Markdown-000000?logo=markdown&logoColor=white)
+![Markdown](https://img.shields.io/badge/Markdown-000000?logo=markdown&logoColor=000)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=githubactions&logoColor=white)
@@ -110,12 +116,13 @@ Jekyll + Liquid, Markdown, custom CSS, vanilla JavaScript, PostgreSQL/PGlite, Pl
 ```text
 app/
   templates/          # Liquid layouts and reusable includes
-  subjects/           # SQL collection and planned subject pages
+  subjects/           # Published collections and subject landing pages
   _data/              # Subject, chapter, and practice metadata
   _sass/              # Stylesheet partials
   assets/             # JavaScript, CSS entry point, images, and SQL fixtures
   index.html          # Site home
-  search.json         # Generated search index template
+  search.json         # Generated local search index template
+  sitemap.xml         # Crawlable published routes
   pages/404.html      # Not-found page, published at /404.html
 
 docs/                 # Content coverage and validation notes
@@ -124,7 +131,7 @@ tests/                # Search regression tests
 _config.yml           # Jekyll configuration; source is app/
 ```
 
-SQL lessons and their landing page share `app/subjects/_sql/`. Source locations are independent of public URLs such as `/sql/windows/frames/`.
+Published lessons currently live in `app/subjects/_sql/`, `app/subjects/_ai/`, and `app/subjects/_infra/`. Source locations are independent of public routes such as `/sql/windows/frames/` and `/ai-engineering/production/autoscaling/`.
 
 ## Run locally
 
