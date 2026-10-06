@@ -32,6 +32,6 @@ For questions on StrataScratch, LeetCode, and DataLemur, open [Find your next SQ
 
 ## Practice method
 
-Write the expected output grain, identify one edge case, and attempt the query before opening the worked lesson. The linked pages are teaching examples and reconstructions, not claims of exact employer interview questions.
+Pick a problem without opening its linked lesson. After solving it, compare your query with the worked reasoning and note the first assumption, filter, tie rule, or join choice that differs. The linked pages are teaching examples and reconstructions, not claims of exact employer interview questions.
 
 For additional exercises, explore [LeetCode SQL 50](https://leetcode.com/studyplan/top-sql-50/), [DataLemur](https://datalemur.com/questions?category=SQL), and [StrataScratch](https://platform.stratascratch.com/coding). Check the selected dialect and original question requirements before transferring a solution.

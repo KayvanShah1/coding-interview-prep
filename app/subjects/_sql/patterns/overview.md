@@ -207,20 +207,6 @@ Useful for first purchase, repeat purchase, activation, campaign follow-up, and 
 | “What fraction is at or below this row?” | `CUME_DIST()` |
 | “Split rows into 10 groups” | `NTILE(10)` |
 
-## Output-grain checks
-
-Before writing the query, state:
-
-1. What does one input row represent?
-2. What should one output row represent?
-3. Are duplicates meaningful?
-4. Can dates/periods be absent?
-5. How should ties be handled?
-6. Does “previous” mean previous row or previous calendar period?
-7. What population belongs in the denominator?
-
-These decisions usually determine the correct SQL pattern before syntax does.
-
 ## In this chapter
 
 <ul class="topic-list">
@@ -237,4 +223,4 @@ These decisions usually determine the correct SQL pattern before syntax does.
 
 ## Practice without the label
 
-Read the problem wording first and hide the technique column. State the output grain and one edge case, then choose the transformation sequence. Use the worked lesson only after you have committed to an approach.
+Hide the technique column and read only the problem shape. Sketch the transformation sequence you would use, then open the linked lesson and compare where your approach differs.

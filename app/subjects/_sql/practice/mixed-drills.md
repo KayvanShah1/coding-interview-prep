@@ -88,6 +88,6 @@ February's absolute change is −100 and percentage change is −100%. March's a
 
 </details>
 
-## Explain your choices aloud
+## Explain one choice aloud
 
-For one task, explain the population, intermediate grain, edge case, and rejected alternative in under two minutes. Then propose one additional fixture that would expose a plausible wrong solution. This tests understanding beyond remembering syntax.
+For one task, explain why you chose that sequence of transformations rather than another plausible query shape. Then give one small input where the alternative would return a different answer.

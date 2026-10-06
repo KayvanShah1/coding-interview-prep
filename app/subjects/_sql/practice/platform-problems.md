@@ -20,7 +20,7 @@ references:
 
 | Platform | Where to start | How to use it with CoreTrail |
 |---|---|---|
-| [StrataScratch](https://platform.stratascratch.com/coding) | Search by question name or ID | Try the familiar problems below, then explain the grain and edge cases without your old solution. |
+| [StrataScratch](https://platform.stratascratch.com/coding) | Search by question name or ID | Retry familiar problems without your old solution, then compare with the linked CoreTrail lesson. |
 | [LeetCode](https://leetcode.com/studyplan/top-sql-50/) | SQL 50 study plan | Work through its sequence, keeping a short note on the mistakes you repeat. |
 | [DataLemur](https://datalemur.com/questions?category=SQL) | SQL question list | Choose a weak topic, attempt a problem, then revisit the related concept. |
 

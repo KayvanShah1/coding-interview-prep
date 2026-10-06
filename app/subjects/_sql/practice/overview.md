@@ -10,7 +10,7 @@ level: "Chapter overview"
 
 ## Choose the pattern yourself
 
-Practice should expose the decisions behind a solution. Start with a population and expected output, attempt the query, and use hints only when needed. Then introduce an edge case that could invalidate your answer.
+Use this chapter to check whether you can choose the technique without the chapter name giving it away. Attempt the query before opening the worked solution, then keep a short note on the mistake or assumption that changed your answer.
 
 
 ## Decision reference
@@ -44,6 +44,6 @@ Practice should expose the decisions behind a solution. Start with a population 
 <li><a href="{{ '/sql/practice/diagnosis-drills/' | relative_url }}">Practice: diagnose before optimizing</a><span>Use symptoms and evidence to choose your next investigation, then compare the reasoning.</span></li>
 </ul>
 
-## Practice the decision, not the label
+## Mix the problems
 
-On a fresh problem, write **population → grain → operation → edge case → alternative** before looking at hints. If you can solve it only after recognizing the chapter name, it still needs another pass.
+Do not work through ten versions of the same pattern in a row. Mix joins, aggregation, windows, dates, and existence problems so the technique is not obvious from context. When a query fails, keep the smallest input that exposes why and retry it later without the old solution.
