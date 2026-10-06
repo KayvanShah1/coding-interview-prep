@@ -1,16 +1,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="{{ page.description | default: site.description | escape }}">
-<title>
-  {{ page.title | escape }}
-  ·
-  {{ site.title }}
-</title>
+{% assign meta_description = page.description | default: site.description %}
+{% assign meta_title = page.title | default: site.title %}
+{% if page.title %}
+  {% assign meta_title = page.title | append: ' · ' | append: site.title %}
+{% endif %}
+<meta name="description" content="{{ meta_description | escape }}">
+<title>{{ meta_title | escape }}</title>
 <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
 <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:title" content="{{ meta_title | escape }}">
+<meta property="og:description" content="{{ meta_description | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ '/assets/images/social-preview.png' | absolute_url }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="3600">
+<meta property="og:image:height" content="1890">
+<meta
+  property="og:image:alt"
+  content="CoreTrail home page with the handbook headline and subject directory"
+>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta_title | escape }}">
+<meta name="twitter:description" content="{{ meta_description | escape }}">
+<meta name="twitter:image" content="{{ '/assets/images/social-preview.png' | absolute_url }}">
+<meta
+  name="twitter:image:alt"
+  content="CoreTrail home page with the handbook headline and subject directory"
+>
 <script src="{{ '/assets/js/main.js' | relative_url }}" type="module"></script>
 {% if page.mermaid %}
   <script src="{{ '/assets/js/diagrams.js' | relative_url }}" type="module"></script>

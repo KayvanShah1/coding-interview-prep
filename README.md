@@ -13,11 +13,11 @@ A Jekyll handbook for technical interview revision across data, AI, machine lear
 
 ### Desktop: Home page (dark mode)
 
-[![CoreTrail desktop home page with the subject directory and learning paths](app/assets/images/screenshots/desktop-home.png)](app/assets/images/screenshots/desktop-home.png)
+[![CoreTrail desktop home page with Home, Subjects, Resources, and About navigation above the subject directory](app/assets/images/screenshots/desktop-home.png)](app/assets/images/screenshots/desktop-home.png)
 
 ### Mobile: SQL lesson (light mode)
 
-<a href="app/assets/images/screenshots/mobile-lesson.png"><img src="app/assets/images/screenshots/mobile-lesson.png" alt="CoreTrail mobile SQL lesson with navigation, page outline, and window-frame explorer" width="390" /></a>
+<a href="app/assets/images/screenshots/mobile-lesson.png"><img src="app/assets/images/screenshots/mobile-lesson.png" alt="CoreTrail mobile Window frames lesson with the current header, page outline, and interactive frame explorer" width="390" /></a>
 
 ## Why I built it
 
