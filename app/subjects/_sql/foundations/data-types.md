@@ -2,8 +2,8 @@
 title: "Data types & casting"
 description: "Choose representations that preserve precision and meaning."
 chapter: "foundations"
-order: 4
-sequence: 4
+order: 5
+sequence: 5
 level: "Core"
 references: [{"title":"PostgreSQL data types","url":"https://www.postgresql.org/docs/current/datatype.html"}]
 ---

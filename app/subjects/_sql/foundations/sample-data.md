@@ -2,8 +2,8 @@
 title: "Practice dataset & example conventions"
 description: "Use a small, deterministic PostgreSQL dataset to run the handbook's core queries."
 chapter: "foundations"
-order: 5
-sequence: 5
+order: 6
+sequence: 6
 level: "Core"
 references: []
 ---

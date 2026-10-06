@@ -12,9 +12,9 @@ level: "Chapter overview"
 
 SQL becomes easier when you can name the input population and required output grain before choosing syntax. This chapter connects tables, keys, types, and logical query order so later joins and windows have a clear foundation.
 
-**Suggested route:** Read grain and query order first. Use the practice dataset to predict results, then test the effect of duplicate and missing rows.
+**Suggested route:** Read grain and logical query order first, then follow one query through parsing, planning, and execution. Use the practice dataset to predict results before checking the engine.
 
-**By the end:** Explain why a query returns one row per customer rather than one row per order; distinguish logical evaluation from physical execution.
+**By the end:** Explain why a query returns one row per customer rather than one row per order; distinguish logical SQL order from the physical plan the database actually executes.
 
 ## Decision reference
 
@@ -30,7 +30,8 @@ SQL becomes easier when you can name the input population and required output gr
 
 <ul class="topic-list">
 <li><a href="{{ '/sql/foundations/grain/' | relative_url }}">Think in rows and grain</a><span>Establish what one input and output row represents.</span></li>
-<li><a href="{{ '/sql/foundations/query-order/' | relative_url }}">Query structure & execution order</a><span>Understand WHERE, HAVING, windows, and why aliases have limits.</span></li>
+<li><a href="{{ '/sql/foundations/query-order/' | relative_url }}">Query structure & execution order</a><span>Understand logical clause order and what to optimize while writing the query.</span></li>
+<li><a href="{{ '/sql/foundations/query-execution/' | relative_url }}">How a query actually runs</a><span>Follow SQL through parsing, planning, execution, and returned rows.</span></li>
 <li><a href="{{ '/sql/foundations/relational-basics/' | relative_url }}">Relational databases & SQL commands</a><span>Understand relations, keys, and the jobs different SQL statements perform.</span></li>
 <li><a href="{{ '/sql/foundations/data-types/' | relative_url }}">Data types & casting</a><span>Choose representations that preserve precision and meaning.</span></li>
 <li><a href="{{ '/sql/foundations/sample-data/' | relative_url }}">Practice dataset & example conventions</a><span>Use a small, deterministic PostgreSQL dataset to run the handbook's core queries.</span></li>

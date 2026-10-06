@@ -2,8 +2,8 @@
 title: "Relational databases & SQL commands"
 description: "Understand relations, keys, and the jobs different SQL statements perform."
 chapter: "foundations"
-order: 3
-sequence: 3
+order: 4
+sequence: 4
 level: "Core"
 references: [{"title":"PostgreSQL tutorial","url":"https://www.postgresql.org/docs/current/tutorial.html"}]
 ---
