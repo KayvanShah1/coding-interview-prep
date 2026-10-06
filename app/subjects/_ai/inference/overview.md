@@ -1,0 +1,43 @@
+---
+title: "LLM inference"
+nav_title: "Overview"
+description: "Follow a prompt through prefill, decode, memory, batching, and token generation before adding deployment infrastructure."
+chapter: inference
+order: 0
+sequence: 100
+level: "Chapter overview"
+keywords:
+  - LLM inference
+  - token generation
+  - autoregressive inference
+aliases:
+  - language model inference
+interview_queries:
+  - how does LLM inference work
+  - why is LLM serving expensive
+references:
+  - title: vLLM documentation
+    url: https://docs.vllm.ai/en/stable/
+---
+
+## Begin below the API
+
+A request to an LLM endpoint eventually becomes tensor work on an accelerator. Before thinking about Kubernetes or autoscaling, understand what one replica is trying to do.
+
+The serving problems in this chapter follow directly from four facts:
+
+1. the prompt is processed before generation begins;
+2. output is generated autoregressively rather than all at once;
+3. active requests keep attention state in a KV cache;
+4. GPUs become efficient when useful work from several requests can be scheduled together.
+
+## In this chapter
+
+<ul class="topic-list">
+<li><a href="{{ '/ai-engineering/inference/how-inference-works/' | relative_url }}">How LLM inference actually works</a><span>Separate prompt processing from autoregressive token generation.</span></li>
+<li><a href="{{ '/ai-engineering/inference/prefill-decode-kv-cache/' | relative_url }}">Prefill, decode, and KV cache</a><span>See why context length changes latency, memory pressure, and concurrency.</span></li>
+<li><a href="{{ '/ai-engineering/inference/batching-scheduling/' | relative_url }}">Continuous batching and request scheduling</a><span>Understand how many active sequences share expensive GPU execution.</span></li>
+<li><a href="{{ '/ai-engineering/inference/efficient-inference/' | relative_url }}">Making inference faster and cheaper</a><span>Place quantization, prefix caching, PagedAttention, and speculative decoding against the bottleneck they address.</span></li>
+</ul>
+
+A useful rule for the rest of the trail is: **first identify whether the problem is compute, memory, waiting, communication, or model quality.** The optimization follows from that diagnosis.
