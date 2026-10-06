@@ -3,7 +3,7 @@ title: "INSERT, UPDATE & DELETE"
 description: "Change exactly the intended rows and inspect the results."
 chapter: "schema"
 order: 3
-sequence: 803
+sequence: 903
 level: "Core"
 references: [{"title":"PostgreSQL INSERT","url":"https://www.postgresql.org/docs/current/sql-insert.html"},{"title":"PostgreSQL UPDATE","url":"https://www.postgresql.org/docs/current/sql-update.html"}]
 ---

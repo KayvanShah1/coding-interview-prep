@@ -3,7 +3,7 @@ title: "Keys, constraints & defaults"
 description: "Encode data rules in the database and understand what each constraint guarantees."
 chapter: "schema"
 order: 1
-sequence: 801
+sequence: 901
 level: "Core"
 references: [{"title":"PostgreSQL constraints","url":"https://www.postgresql.org/docs/current/ddl-constraints.html"}]
 ---

@@ -4,7 +4,7 @@ nav_title: "Overview"
 description: "Define tables, enforce constraints, and modify data safely."
 chapter: "schema"
 order: 0
-sequence: 800
+sequence: 900
 level: "Chapter overview"
 ---
 

@@ -3,7 +3,7 @@ title: "CREATE, ALTER, DROP & TRUNCATE"
 description: "Distinguish changing a table's structure from changing its rows."
 chapter: "schema"
 order: 2
-sequence: 802
+sequence: 902
 level: "Core"
 references: [{"title":"PostgreSQL ALTER TABLE","url":"https://www.postgresql.org/docs/current/sql-altertable.html"},{"title":"PostgreSQL TRUNCATE","url":"https://www.postgresql.org/docs/current/sql-truncate.html"}]
 ---

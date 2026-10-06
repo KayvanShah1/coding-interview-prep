@@ -3,7 +3,7 @@ title: "Fact tables, dimensions & slowly changing history"
 description: "Choose an analytical grain before choosing keys or columns."
 chapter: "design"
 order: 2
-sequence: 902
+sequence: 802
 level: "Intermediate"
 references: [{"title":"Microsoft dimensional modeling guidance","url":"https://learn.microsoft.com/en-us/power-bi/guidance/star-schema"}]
 ---

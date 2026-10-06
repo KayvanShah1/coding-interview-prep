@@ -4,7 +4,7 @@ nav_title: "Overview"
 description: "Model relationships, dependencies, and analytical history."
 chapter: "design"
 order: 0
-sequence: 900
+sequence: 800
 level: "Chapter overview"
 ---
 

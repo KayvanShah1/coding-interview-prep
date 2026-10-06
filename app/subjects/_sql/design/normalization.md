@@ -3,7 +3,7 @@ title: "Normalization & functional dependencies"
 description: "Reduce update anomalies by storing each fact at its natural grain."
 chapter: "design"
 order: 1
-sequence: 901
+sequence: 801
 level: "Core"
 references: [{"title":"PostgreSQL relational concepts","url":"https://www.postgresql.org/docs/current/tutorial-concepts.html"}]
 ---

@@ -3,7 +3,7 @@ title: "Upserts & MERGE"
 description: "Define how incoming records interact with existing keys."
 chapter: "schema"
 order: 4
-sequence: 804
+sequence: 904
 level: "Intermediate"
 references: [{"title":"PostgreSQL ON CONFLICT","url":"https://www.postgresql.org/docs/current/sql-insert.html"},{"title":"PostgreSQL MERGE","url":"https://www.postgresql.org/docs/current/sql-merge.html"}]
 ---
