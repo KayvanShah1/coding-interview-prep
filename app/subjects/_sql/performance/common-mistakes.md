@@ -43,4 +43,10 @@ First establish correctness. Then explain likely work: scans, joins, aggregation
 - In analytical warehouses, partition pruning and bytes scanned may matter more than traditional B-tree indexes.
 - Inspect the engine's execution plan rather than inferring performance from query length. `EXPLAIN ANALYZE` executes the query in PostgreSQL; use it with awareness of the statement's effects.
 
-**A useful spoken explanation:** “I first reduce the data to one row per customer per day, because that is the unit the question asks about. Then I calculate the window in date order and filter the result in an outer query. That avoids counting multiple events on the same day as multiple days.”
+## Explain the decision, not the slogan
+
+A performance answer is stronger when it names the contract and the evidence. For example:
+
+> The question is at customer-day grain, so I reduce repeated events to one row per customer per day before the window. I would verify that result first, inspect the plan and row counts, then optimize the expensive step without changing that grain.
+
+That is more defensible than saying a CTE, index, join type, or rewrite is “faster” in isolation.

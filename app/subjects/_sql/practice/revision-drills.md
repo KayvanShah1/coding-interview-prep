@@ -21,6 +21,9 @@ This is a suggested learning order, not a measured frequency ranking of intervie
 
 ## Solve these without looking at the examples
 
+Before each query, write one line for the expected output grain and one edge case that could break a plausible solution. After the query works, change the fixture once: add a duplicate, null, tie, missing date, or entity with no related rows.
+
+
 1. Return customers with at least two paid orders in January 2026.
 2. Return customers who placed orders but never a paid order.
 3. Return all posts with at least one heart reaction without duplicating posts.
@@ -77,4 +80,4 @@ These are places to apply the patterns, not claims about exact employer intervie
 - [DataLemur SQL questions](https://datalemur.com/questions?category=SQL): use the question catalog for analytical exercises such as rolling averages and rates.
 - [LeetCode Students and Examinations](https://leetcode.com/problems/students-and-examinations/): practice constructing expected pairs and preserving zero counts.
 
-When practicing, write down the grain and one edge case before writing the query. After solving, alter the input: add a duplicate, a null, a tie, a missing date, and an entity with no related records.
+Do not stop at a passing query. Explain why the chosen technique fits the population and grain, then name one alternative and the case where it would produce a different answer.

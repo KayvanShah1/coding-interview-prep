@@ -8,6 +8,18 @@ level: "Core"
 references: [{"title":"PostgreSQL table expressions","url":"https://www.postgresql.org/docs/current/queries-table-expressions.html"}]
 ---
 
+## Before you reach for a pattern
+
+Do not start with the table below. Start with five questions:
+
+1. **Population:** Which rows or entities are allowed into the answer?
+2. **Grain:** What should one output row represent?
+3. **Operation:** Do you need a match test, an aggregate, an ordered comparison, or a change of grain?
+4. **Edge case:** What happens with duplicates, nulls, ties, missing dates, or no related rows?
+5. **Alternative:** What other query shape could express the same requirement, and where would it differ?
+
+Once those are clear, use the wording map as a shortcut to candidate syntax rather than as a pattern-matching answer key.
+
 | Wording in the question | First technique to consider | Check before writing |
 |---|---|---|
 | “At least one related…” | `EXISTS` | Need columns from the related row? |

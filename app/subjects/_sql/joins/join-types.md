@@ -16,6 +16,18 @@ references: [{"title":"PostgreSQL table expressions","url":"https://www.postgres
 | `CROSS JOIN` | Every possible pair |
 | Self join | A table joined to another alias of itself |
 
+## Predict the cardinality before the join
+
+Suppose one order has three item rows and two payment rows. Joining both child tables directly does not give five rows. It gives six: every item can pair with every payment.
+
+That is the question to ask before writing a join: **for one row on the left, how many rows can match on the right?** Repeat the question at every join. A query can be syntactically correct and still inflate measures because its intermediate grain changed.
+
+| Relationship | One left row can produce |
+|---|---|
+| one-to-one | at most one matched row |
+| one-to-many | several rows |
+| many-to-many | a product of matching rows unless constrained |
+
 ## Preserve customers with zero paid orders
 
 ```sql

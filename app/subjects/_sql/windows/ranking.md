@@ -19,6 +19,16 @@ For salaries `120, 100, 100, 80` sorted descending:
 
 `ROW_NUMBER` assigns different positions to tied rows; which tied row comes first needs a tie-breaker. `RANK` leaves gaps after ties. `DENSE_RANK` numbers distinct ordering values without gaps.
 
+## Let the wording choose the tie policy
+
+These prompts are not equivalent:
+
+- **Top 3 employees per department** usually needs at most three rows, so start with `ROW_NUMBER()` and a deterministic tie-breaker.
+- **Top 3 salary levels per department** preserves everyone tied at one of the three distinct salary values, so use `DENSE_RANK()` on salary.
+- **Competition rank** is the case for `RANK()` when positions after a tie should skip numbers.
+
+Before choosing the function, ask whether the limit applies to **rows**, **distinct values**, or **rank positions**.
+
 ## Three highest distinct salaries in every department
 
 ```sql
