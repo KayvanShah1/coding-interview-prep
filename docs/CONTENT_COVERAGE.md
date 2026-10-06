@@ -138,8 +138,8 @@ PostgreSQL query results are checked with deterministic fixtures. Native Postgre
 
 ## Planned subjects
 
-- DSA
 - Data Engineering
 - Machine Learning
 - AI Engineering
-- Data Modeling and System Design
+- System Design
+- DSA

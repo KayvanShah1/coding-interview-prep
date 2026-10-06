@@ -105,7 +105,7 @@ What stays in CoreTrail is still based on what I actually had to revisit.
 
 SQL is the first part I built out properly because that is where I already had enough material for the structure to become useful.
 
-The broader direction is the stuff I actually interview for and work with: Data Engineering, Data Modeling, System Design, Machine Learning, AI Engineering, DSA, databases, and the things between them.
+The broader direction is the stuff I actually interview for and work with: Data Engineering, Machine Learning, AI Engineering, System Design, DSA, databases, and the things between them. Data modeling sits inside the Data Engineering path rather than as a separate top-level subject.
 
 Those sections will probably grow unevenly. That is fine. I would rather add something because I needed to revisit it than fill a section just because it exists.
 

@@ -1,13 +1,13 @@
 ---
 layout: subject
-title: Data Modeling and System Design
+title: System Design
 subject: systems
 permalink: /systems/
-description: Data models, architecture, and technical trade-offs.
+description: Architecture, distributed systems, scalability, and trade-offs.
 ---
 
-## From requirements to design choices
+## From requirements to architecture
 
-The planned path covers data modeling, access patterns, service boundaries, consistency, capacity, caching, messaging, and failure recovery.
+The planned path covers access patterns, service boundaries, APIs, consistency, caching, messaging, storage choices, capacity, replication, failure recovery, and the trade-offs behind them.
 
-SQL already contains an introduction to normalization, dimensional modeling, transactions, sharding, and replicas.
+The focus is on turning requirements into a design you can explain and defend. Data modeling still appears when a system needs it, but its deeper analytical treatment lives under Data Engineering and the SQL database-design chapters.

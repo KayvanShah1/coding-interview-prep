@@ -7,18 +7,11 @@
     "description": "Queries, patterns, database design, and performance."
   },
   {
-    "id": "dsa",
-    "title": "DSA",
-    "url": "/dsa/",
-    "status": "Planned",
-    "description": "Algorithms, data structures, and problem solving."
-  },
-  {
     "id": "data-engineering",
     "title": "Data Engineering",
     "url": "/data-engineering/",
     "status": "Planned",
-    "description": "Pipelines, modeling, orchestration, and reliability."
+    "description": "Pipelines, data modeling, orchestration, and reliability."
   },
   {
     "id": "ml",
@@ -36,9 +29,16 @@
   },
   {
     "id": "systems",
-    "title": "Data Modeling and System Design",
+    "title": "System Design",
     "url": "/systems/",
     "status": "Planned",
-    "description": "Data models, architecture, and technical trade-offs."
+    "description": "Architecture, distributed systems, scalability, and trade-offs."
+  },
+  {
+    "id": "dsa",
+    "title": "DSA",
+    "url": "/dsa/",
+    "status": "Planned",
+    "description": "Algorithms, data structures, and problem solving."
   }
 ]

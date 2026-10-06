@@ -64,11 +64,9 @@ The same happens while building. If I run into something worth understanding pro
 SQL is the most developed section today, but CoreTrail is meant to cover the broader set of areas I work with and interview for:
 
 - Data Engineering
-- Data Modeling
-- Databases
-- System Design
 - Machine Learning
 - AI Engineering
+- System Design
 - DSA
 
 The structure will keep growing around the same idea: **fast recall first, depth when needed.**
@@ -80,7 +78,7 @@ The structure will keep growing around the same idea: **fast recall first, depth
 - Ranked search results show highlighted matching passages; the sun/moon toggle remembers your theme.
 - Copyable SQL, expandable answers, problem filters, and an interactive window-frame explorer.
 - PostgreSQL-first examples with selected BigQuery/MySQL differences.
-- A CoreTrail landing page and subject switcher; DSA, Data Engineering, ML, AI Engineering, and Data Modeling/System Design have clearly marked planned pages.
+- A CoreTrail landing page and subject switcher; Data Engineering, ML, AI Engineering, System Design, and DSA have clearly marked planned pages.
 - A filterable practice directory links 12 questions from StrataScratch, LeetCode, and DataLemur to related lessons.
 - Native PostgreSQL labs use 120,000 orders and 90,000 events to check index access, date predicates, and partition pruning.
 
