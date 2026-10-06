@@ -54,8 +54,9 @@ This is a scope map, not a claim of exhaustive SQL coverage. Each chapter has a 
 
 - [Duplicates & latest records](../app/subjects/_sql/patterns/deduplication.md)
 - [Ordered funnels](../app/subjects/_sql/patterns/funnels.md)
-- [Consecutive days & streaks](../app/subjects/_sql/patterns/gaps-islands.md)
-- [Pivots, medians & interval overlaps](../app/subjects/_sql/patterns/mixed-patterns.md)
+- [Gaps & Islands: consecutive days & streaks](../app/subjects/_sql/patterns/gaps-islands.md)
+- [Conditional aggregation & pivots](../app/subjects/_sql/patterns/pivoting.md)
+- [Interval overlaps](../app/subjects/_sql/patterns/interval-overlaps.md)
 - [Period changes and missing months](../app/subjects/_sql/patterns/period-changes.md)
 - [Rates, populations, and weighted averages](../app/subjects/_sql/patterns/rates-and-populations.md)
 - [Retention & missing dates](../app/subjects/_sql/patterns/retention-calendar.md)
