@@ -8,13 +8,10 @@ sequence: 300
 level: "Chapter overview"
 ---
 
-## Follow the row population through every join
+## What happens to the row count?
 
 A join is a relationship between row sets. Its multiplicity determines whether measures remain correct. Start with matching and unmatched rows, then reason about independent one-to-many children and set operations.
 
-**Suggested route:** Trace a left join with one unmatched customer, then an order with multiple items and payments. Compare a join with an existence test.
-
-**By the end:** Predict result cardinality, preserve zero-match entities, and avoid inflated totals.
 
 ## Quick reference
 
@@ -110,6 +107,6 @@ Add a condition such as `a.id < b.id` to avoid self-pairs and duplicate mirrored
 <li><a href="{{ '/sql/joins/set-operations/' | relative_url }}">Set operations & all-item matches</a><span>Combine result sets and express every-required-item conditions.</span></li>
 </ul>
 
-## How to study
+## Before you join
 
-Before writing a join, state the grain of both inputs and the intended output. Then decide whether the relationship is one-to-one, one-to-many, or many-to-many.
+Write the grain of each input and estimate whether one left row can match zero, one, or many right rows. If both sides can match many, expect multiplication unless you aggregate or otherwise constrain the relationship.

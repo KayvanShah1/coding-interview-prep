@@ -12,9 +12,6 @@ level: "Chapter overview"
 
 A subquery can answer a scalar question, test whether a related row exists, or supply a new table to another stage. A CTE names that stage. Choose the form from the result you need, then investigate execution separately.
 
-**Suggested route:** Compare existence and membership before learning correlated, lateral, and recursive forms. State the grain of every CTE.
-
-**By the end:** Explain why a related table should or should not contribute extra output rows.
 
 ## Quick reference
 
@@ -118,6 +115,6 @@ LEFT JOIN LATERAL (
 <li><a href="{{ '/sql/subqueries/lateral/' | relative_url }}">LATERAL and per-row subqueries</a><span>Use a preceding table's values inside a FROM-clause subquery.</span></li>
 </ul>
 
-## How to study
+## Pick the shape before the syntax
 
-Map the wording to `EXISTS`, `NOT EXISTS`, membership, or a staged CTE first. Then check null behavior, output grain, and whether related columns are actually needed.
+Ask whether you need a yes/no match, a scalar value, extra columns, or a named intermediate result. That usually narrows the choice before `EXISTS`, a join, or a CTE enters the discussion.

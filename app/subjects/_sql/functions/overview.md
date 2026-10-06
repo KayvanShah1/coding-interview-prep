@@ -12,9 +12,6 @@ level: "Chapter overview"
 
 Functions can normalize text, calculate measures, or align timestamps to a reporting period. The difficult part is preserving units, precision, and calendar semantics while composing those operations.
 
-**Suggested route:** Use the syntax map for recall; open the date, string, and numeric lessons to see complete expressions and their outputs.
-
-**By the end:** Distinguish a calendar day from an elapsed duration and explain why replacing null with zero changes a metric.
 
 ## Quick reference
 
@@ -123,6 +120,6 @@ Do not silently use `COALESCE(denominator, 0)` in division. Decide what a missin
 <li><a href="{{ '/sql/functions/date-time/' | relative_url }}">Dates, intervals & timezones</a><span>Define calendar periods correctly and avoid timestamp boundary errors.</span></li>
 </ul>
 
-## How to study
+## Use this page for recall
 
-Revise the command table first, then practice combinations: period grain + aggregate + `LAG`, calendar spine + `LEFT JOIN`, and normalization + grouping.
+Start with the command table. Open the deeper lesson when the question involves time zones, missing dates, precision, or null-to-zero behavior; those are where a one-line function choice can change the result.

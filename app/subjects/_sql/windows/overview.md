@@ -8,13 +8,10 @@ sequence: 600
 level: "Chapter overview"
 ---
 
-## Separate grouping, ordering, and framing
+## Partition, order, and frame are different decisions
 
 A window calculation adds information while retaining its input rows. The partition chooses companions, the ordering establishes sequence, and the frame selects participating rows for frame-sensitive functions. Those are three separate decisions.
 
-**Suggested route:** Start with OVER, then ranking and LAG/LEAD. Study frames with repeated ordering values and missing dates before using running or moving metrics.
-
-**By the end:** Choose a tie policy and explain why the previous row is not always the previous calendar period.
 
 ## Quick reference
 
@@ -177,6 +174,6 @@ WITHIN GROUP (ORDER BY latency_ms)
 <li><a href="{{ '/sql/windows/distribution/' | relative_url }}">NTILE, PERCENT_RANK & CUME_DIST</a><span>Distinguish equal-row buckets from relative rank and cumulative distribution.</span></li>
 </ul>
 
-## How to study
+## Before you move on
 
-For revision, memorize the function map, frame vocabulary, and high-value combinations above. Then use the linked lessons for edge cases and worked outputs.
+Given a ranking or moving-window question, decide the partition, order, tie policy, and frame before writing syntax. If the prompt talks about calendar time, verify that “previous row” really means “previous period.”

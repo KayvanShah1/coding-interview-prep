@@ -8,13 +8,10 @@ sequence: 100
 level: "Chapter overview"
 ---
 
-## Choose the rows before transforming them
+## Which rows should survive?
 
 Filtering defines the population every later operation sees. Learn inclusive boundaries, membership, pattern matching, and three-valued null logic together: a predicate that becomes unknown can remove rows you expected to keep.
 
-**Suggested route:** Start with predicates, then compare null behavior in CASE, IN, and NOT IN. Follow existence questions into the subqueries chapter.
-
-**By the end:** Explain a date boundary and a null-containing comparison set using concrete rows.
 
 ## Decision reference
 
@@ -34,6 +31,6 @@ Filtering defines the population every later operation sees. Learn inclusive bou
 <li><a href="{{ '/sql/filtering/null-case/' | relative_url }}">NULL, CASE & conditional expressions</a><span>Reason about unknown values and express conditional logic.</span></li>
 </ul>
 
-## How to study
+## Try breaking the predicate
 
-Use the suggested route above. For each lesson, explain the decision in your own words, test its example, and identify a situation where a different approach would be needed.
+Test the same filter with a boundary value, a null, and a timestamp near midnight. If one of those changes the population unexpectedly, the predicate needs another look.

@@ -8,13 +8,10 @@ sequence: 0
 level: "Chapter overview"
 ---
 
-## Start with what one row means
+## Start with the grain
 
 SQL becomes easier when you can name the input population and required output grain before choosing syntax. This chapter connects tables, keys, types, and logical query order so later joins and windows have a clear foundation.
 
-**Suggested route:** Read grain and logical query order first, then follow one query through parsing, planning, and execution. Use the practice dataset to predict results before checking the engine.
-
-**By the end:** Explain why a query returns one row per customer rather than one row per order; distinguish logical SQL order from the physical plan the database actually executes.
 
 ## Decision reference
 
@@ -37,6 +34,6 @@ SQL becomes easier when you can name the input population and required output gr
 <li><a href="{{ '/sql/foundations/sample-data/' | relative_url }}">Practice dataset & example conventions</a><span>Use a small, deterministic PostgreSQL dataset to run the handbook's core queries.</span></li>
 </ul>
 
-## How to study
+## Quick check
 
-Use the suggested route above. For each lesson, explain the decision in your own words, test its example, and identify a situation where a different approach would be needed.
+Take one query and say what one row represents after `FROM`, after `GROUP BY`, and in the final result. If the grain changes and you cannot explain why, revisit that step.

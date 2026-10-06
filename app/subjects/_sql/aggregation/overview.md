@@ -8,13 +8,10 @@ sequence: 400
 level: "Chapter overview"
 ---
 
-## Choose the unit being counted
+## What exactly are you counting?
 
 Aggregation changes grain. Counts, rates, percentiles, and subtotals are reliable only when their populations are clear. Use the command map below as a route into worked examples rather than as a list to memorize.
 
-**Suggested route:** Compare COUNT variants first, then conditional rates and ordered-set aggregates. Finish by combining an aggregate with a window.
-
-**By the end:** Explain the numerator, denominator, null behavior, and tie policy of a reported metric.
 
 ## Quick reference
 
@@ -114,6 +111,6 @@ Useful for wording such as “has all three”, after restricting the input to t
 <li><a href="{{ '/sql/aggregation/percentiles/' | relative_url }}">Percentiles, WITHIN GROUP, and thresholds</a><span>Work out the percentile by hand, compare continuous and observed values, and handle tied thresholds.</span></li>
 </ul>
 
-## How to study
+## Before you trust the number
 
-For revision, start with the tables above. For deeper study, open the linked lesson and change one input row to introduce a null, duplicate, tie, or missing group.
+Name the population, numerator, denominator, and grain. Then add a duplicate, a null, or a tie and check whether the metric still means the same thing.
