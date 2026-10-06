@@ -15,14 +15,14 @@
     "description": "Transform strings, numbers, dates, and timestamps."
   },
   {
-    "id": "joins",
-    "title": "Joins & sets",
-    "description": "Combine tables while preserving the intended grain."
-  },
-  {
     "id": "aggregation",
     "title": "Aggregation",
     "description": "Summarize data and define meaningful denominators."
+  },
+  {
+    "id": "joins",
+    "title": "Joins & sets",
+    "description": "Combine tables while preserving the intended grain."
   },
   {
     "id": "subqueries",
@@ -40,14 +40,14 @@
     "description": "Recognize recurring problems and choose a reliable approach."
   },
   {
-    "id": "schema",
-    "title": "Schema & data changes",
-    "description": "Define tables, enforce constraints, and modify data safely."
-  },
-  {
     "id": "design",
     "title": "Database design",
     "description": "Model relationships, dependencies, and analytical history."
+  },
+  {
+    "id": "schema",
+    "title": "Schema & data changes",
+    "description": "Define tables, enforce constraints, and modify data safely."
   },
   {
     "id": "transactions",

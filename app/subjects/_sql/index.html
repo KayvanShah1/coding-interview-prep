@@ -45,19 +45,19 @@ permalink: /sql/
   {% capture diagram_code %}
 flowchart LR
 accTitle: Build query fluency
-A["Foundations"] --> B["Filtering"] --> C["Joins"] --> D["Aggregation"] --> E["Subqueries"] --> F["Windows"]
+A["Foundations"] --> B["Filtering"] --> C["Aggregation"] --> D["Joins"] --> E["Subqueries"] --> F["Windows"]
 click A href "{{ '/sql/foundations/overview/' | relative_url }}" "Open Foundations" _self
 click B href "{{ '/sql/filtering/overview/' | relative_url }}" "Open Filtering" _self
-click C href "{{ '/sql/joins/overview/' | relative_url }}" "Open Joins" _self
-click D href "{{ '/sql/aggregation/overview/' | relative_url }}" "Open Aggregation" _self
+click C href "{{ '/sql/aggregation/overview/' | relative_url }}" "Open Aggregation" _self
+click D href "{{ '/sql/joins/overview/' | relative_url }}" "Open Joins" _self
 click E href "{{ '/sql/subqueries/overview/' | relative_url }}" "Open Subqueries" _self
 click F href "{{ '/sql/windows/overview/' | relative_url }}" "Open Windows" _self
 {% endcapture %}
   {% capture diagram_fallback %}
 1. [Foundations]({{ '/sql/foundations/overview/' | relative_url }})
 2. [Filtering]({{ '/sql/filtering/overview/' | relative_url }})
-3. [Joins]({{ '/sql/joins/overview/' | relative_url }})
-4. [Aggregation]({{ '/sql/aggregation/overview/' | relative_url }})
+3. [Aggregation]({{ '/sql/aggregation/overview/' | relative_url }})
+4. [Joins]({{ '/sql/joins/overview/' | relative_url }})
 5. [Subqueries]({{ '/sql/subqueries/overview/' | relative_url }})
 6. [Windows]({{ '/sql/windows/overview/' | relative_url }})
 {% endcapture %}

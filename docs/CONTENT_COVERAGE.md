@@ -21,16 +21,16 @@ This is a scope map, not a claim of exhaustive SQL coverage. Each chapter has a 
 - [Numeric functions & safe arithmetic](../app/subjects/_sql/functions/numeric-functions.md)
 - [String functions & regular expressions](../app/subjects/_sql/functions/strings.md)
 
-## Joins & sets
-
-- [Joins & row multiplication](../app/subjects/_sql/joins/join-types.md)
-- [Set operations & all-item matches](../app/subjects/_sql/joins/set-operations.md)
-
 ## Aggregation
 
 - [Counts, totals & conditional aggregation](../app/subjects/_sql/aggregation/aggregate-functions.md)
 - [GROUPING SETS, ROLLUP & CUBE](../app/subjects/_sql/aggregation/grouping-sets.md)
 - [Percentiles, WITHIN GROUP, and thresholds](../app/subjects/_sql/aggregation/percentiles.md)
+
+## Joins & sets
+
+- [Joins & row multiplication](../app/subjects/_sql/joins/join-types.md)
+- [Set operations & all-item matches](../app/subjects/_sql/joins/set-operations.md)
 
 ## Subqueries & CTEs
 
@@ -62,17 +62,17 @@ This is a scope map, not a claim of exhaustive SQL coverage. Each chapter has a 
 - [Retention & missing dates](../app/subjects/_sql/patterns/retention-calendar.md)
 - [Sessions & changes in state](../app/subjects/_sql/patterns/sessions.md)
 
+## Database design
+
+- [Fact tables, dimensions & slowly changing history](../app/subjects/_sql/design/dimensional-modeling.md)
+- [Normalization & functional dependencies](../app/subjects/_sql/design/normalization.md)
+
 ## Schema & data changes
 
 - [Keys, constraints & defaults](../app/subjects/_sql/schema/constraints.md)
 - [CREATE, ALTER, DROP & TRUNCATE](../app/subjects/_sql/schema/ddl.md)
 - [INSERT, UPDATE & DELETE](../app/subjects/_sql/schema/dml.md)
 - [Upserts & MERGE](../app/subjects/_sql/schema/upsert-merge.md)
-
-## Database design
-
-- [Fact tables, dimensions & slowly changing history](../app/subjects/_sql/design/dimensional-modeling.md)
-- [Normalization & functional dependencies](../app/subjects/_sql/design/normalization.md)
 
 ## Transactions
 
