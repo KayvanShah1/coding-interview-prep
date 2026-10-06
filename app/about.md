@@ -8,7 +8,6 @@ permalink: /about/
 ---
 
 <section class="top-page-hero">
-  <span class="page-eyebrow">ABOUT</span>
   <h1>About CoreTrail</h1>
   <p class="top-page-lead">What interviews made me revisit.</p>
 </section>

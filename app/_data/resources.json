@@ -1,0 +1,235 @@
+{
+  "sections": [
+    {
+      "id": "practice",
+      "filter_label": "Practice",
+      "title": "Practice platforms",
+      "description": "Places I use when I need actual problems rather than another explanation."
+    },
+    {
+      "id": "system-design",
+      "filter_label": "System Design",
+      "title": "System design",
+      "description": "HLD problems, walkthroughs, and ways of thinking through design rounds."
+    },
+    {
+      "id": "data",
+      "filter_label": "Data",
+      "title": "Data",
+      "description": "Data engineering, data systems, modeling, and interview prep."
+    },
+    {
+      "id": "cloud-devops",
+      "filter_label": "Cloud / DevOps",
+      "title": "Cloud / DevOps",
+      "description": "Cloud platforms, infrastructure, networking, containers, and operations."
+    },
+    {
+      "id": "ai-ml",
+      "filter_label": "AI / ML",
+      "title": "AI / ML / Math",
+      "description": "Visual intuition, ML fundamentals, research, and deeper technical explanations."
+    },
+    {
+      "id": "software-cs",
+      "filter_label": "Software / CS",
+      "title": "Software / CS",
+      "description": "Programming, software design, computer science, and broader engineering thinking."
+    }
+  ],
+  "resources": [
+    {
+      "name": "StrataScratch",
+      "url": "https://platform.stratascratch.com/coding",
+      "section": "practice",
+      "type": "Practice",
+      "icon": "practice",
+      "description": "SQL and data interview problems with realistic datasets."
+    },
+    {
+      "name": "LeetCode",
+      "url": "https://leetcode.com/",
+      "section": "practice",
+      "type": "Practice",
+      "icon": "practice",
+      "description": "DSA and SQL problem practice. I usually use the topic lists rather than solving randomly."
+    },
+    {
+      "name": "DataLemur",
+      "url": "https://datalemur.com/questions",
+      "section": "practice",
+      "type": "Practice",
+      "icon": "data",
+      "description": "SQL and data interview questions, useful for shorter focused practice."
+    },
+    {
+      "name": "SystemCraft",
+      "url": "https://systemcraft.in/hld",
+      "section": "system-design",
+      "type": "HLD",
+      "icon": "system-design",
+      "description": "High-level design problems and worked system design scenarios."
+    },
+    {
+      "name": "Hello Interview",
+      "url": "https://www.youtube.com/@hello_interview",
+      "section": "system-design",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "System design fundamentals, deep dives, and interview walkthroughs."
+    },
+    {
+      "name": "Aced",
+      "alias": "formerly Exponent",
+      "url": "https://www.youtube.com/@aced_io",
+      "section": "system-design",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Tech interview prep across engineering, product, data, system design, and related roles."
+    },
+    {
+      "name": "Arjay McCandless",
+      "url": "https://www.youtube.com/@arjay_the_dev",
+      "section": "system-design",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "System design, backend engineering, and practical engineering breakdowns."
+    },
+    {
+      "name": "Afaque Ahmad",
+      "url": "https://www.youtube.com/@afaqueahmad7117",
+      "section": "data",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Data engineering, Spark, data modeling, and DE system design interviews."
+    },
+    {
+      "name": "Kahan Data Solutions",
+      "url": "https://www.youtube.com/@KahanDataSolutions",
+      "section": "data",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Modern data engineering, warehouses, dbt, modeling, and practical architecture."
+    },
+    {
+      "name": "Ansh Lamba",
+      "url": "https://www.youtube.com/@anshlambajsr",
+      "section": "data",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Data engineering projects and deep dives across Spark, Databricks, dbt, Airflow, and cloud."
+    },
+    {
+      "name": "Google Cloud Tech",
+      "url": "https://www.youtube.com/@googlecloudtech",
+      "section": "cloud-devops",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Official Google Cloud tutorials, walkthroughs, architecture, and product deep dives."
+    },
+    {
+      "name": "KodeKloud",
+      "url": "https://www.youtube.com/@KodeKloud",
+      "section": "cloud-devops",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Hands-on DevOps, Kubernetes, containers, cloud, and infrastructure fundamentals."
+    },
+    {
+      "name": "TechWorld with Nana",
+      "url": "https://www.youtube.com/@TechWorldwithNana",
+      "section": "cloud-devops",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "DevOps and cloud concepts explained through practical examples."
+    },
+    {
+      "name": "David Bombal",
+      "url": "https://www.youtube.com/@davidbombal",
+      "section": "cloud-devops",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Networking, Linux, security, and infrastructure topics."
+    },
+    {
+      "name": "3Blue1Brown",
+      "url": "https://www.youtube.com/@3blue1brown",
+      "section": "ai-ml",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Visual intuition for linear algebra, calculus, neural networks, and mathematics."
+    },
+    {
+      "name": "Veritasium",
+      "url": "https://www.youtube.com/@veritasium",
+      "section": "ai-ml",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Science and engineering explanations that are useful when I want the intuition behind something."
+    },
+    {
+      "name": "Welch Labs",
+      "url": "https://www.youtube.com/@WelchLabs",
+      "section": "ai-ml",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Math, machine learning, and technical storytelling with strong visual explanations."
+    },
+    {
+      "name": "Google DeepMind",
+      "url": "https://www.youtube.com/@googledeepmind",
+      "section": "ai-ml",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Research talks, demos, and explanations from current AI research."
+    },
+    {
+      "name": "DeepLearning.AI",
+      "url": "https://www.youtube.com/@Deeplearningai",
+      "section": "ai-ml",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "ML and GenAI lessons, research discussions, and practical technical material."
+    },
+    {
+      "name": "Anastasi in Tech",
+      "url": "https://www.youtube.com/@anastasiintech",
+      "section": "ai-ml",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "AI, semiconductors, hardware, and the systems underneath modern computing."
+    },
+    {
+      "name": "ArjanCodes",
+      "url": "https://www.youtube.com/@ArjanCodes",
+      "section": "software-cs",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Python, software design, architecture, testing, and writing maintainable code."
+    },
+    {
+      "name": "Ben Dicken",
+      "url": "https://www.youtube.com/@benjdicken",
+      "section": "software-cs",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Computer science, databases, performance, and software engineering from first principles."
+    },
+    {
+      "name": "IBM Technology",
+      "url": "https://www.youtube.com/@IBMTechnology",
+      "section": "software-cs",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Short explainers across databases, distributed systems, cloud, AI, and infrastructure."
+    },
+    {
+      "name": "Varun Mayya",
+      "url": "https://www.youtube.com/@varunmayya",
+      "section": "software-cs",
+      "type": "YouTube",
+      "icon": "youtube",
+      "description": "Software, AI, products, and broader technology discussions."
+    }
+  ]
+}
