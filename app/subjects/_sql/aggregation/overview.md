@@ -4,7 +4,7 @@ nav_title: "Overview"
 description: "Summarize data and define meaningful denominators."
 chapter: "aggregation"
 order: 0
-sequence: 400
+sequence: 300
 level: "Chapter overview"
 ---
 

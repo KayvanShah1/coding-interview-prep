@@ -3,7 +3,7 @@ title: "Percentiles, WITHIN GROUP, and thresholds"
 description: "Work out the percentile by hand, compare continuous and observed values, and handle tied thresholds."
 chapter: aggregation
 order: 3
-sequence: 403
+sequence: 303
 level: Intermediate
 references:
   - title: PostgreSQL aggregate functions

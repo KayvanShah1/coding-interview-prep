@@ -3,7 +3,7 @@ title: "Set operations & all-item matches"
 description: "Combine result sets and express every-required-item conditions."
 chapter: "joins"
 order: 2
-sequence: 302
+sequence: 402
 level: "Core"
 references: [{"title":"PostgreSQL subquery expressions","url":"https://www.postgresql.org/docs/current/functions-subquery.html"}]
 ---

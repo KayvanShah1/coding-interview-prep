@@ -3,7 +3,7 @@ title: "Joins & row multiplication"
 description: "Keep unmatched rows and avoid inflated totals."
 chapter: "joins"
 order: 1
-sequence: 301
+sequence: 401
 level: "Core"
 references: [{"title":"PostgreSQL table expressions","url":"https://www.postgresql.org/docs/current/queries-table-expressions.html"}]
 ---

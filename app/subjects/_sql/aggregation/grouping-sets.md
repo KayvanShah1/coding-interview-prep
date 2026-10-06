@@ -3,7 +3,7 @@ title: "GROUPING SETS, ROLLUP & CUBE"
 description: "Produce several aggregation levels without hand-writing separate queries."
 chapter: "aggregation"
 order: 2
-sequence: 402
+sequence: 302
 level: "Advanced"
 references: [{"title":"PostgreSQL grouping sets","url":"https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-GROUPING-SETS"}]
 ---

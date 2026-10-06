@@ -3,7 +3,7 @@ title: "Counts, totals & conditional aggregation"
 description: "Choose the counting unit and calculate defensible rates."
 chapter: "aggregation"
 order: 1
-sequence: 401
+sequence: 301
 level: "Core"
 references: [{"title":"PostgreSQL aggregates","url":"https://www.postgresql.org/docs/current/functions-aggregate.html"}]
 ---

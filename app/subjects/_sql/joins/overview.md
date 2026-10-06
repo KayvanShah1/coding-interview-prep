@@ -4,7 +4,7 @@ nav_title: "Overview"
 description: "Combine tables while preserving the intended grain."
 chapter: "joins"
 order: 0
-sequence: 300
+sequence: 400
 level: "Chapter overview"
 ---
 
