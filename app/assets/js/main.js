@@ -1,11 +1,11 @@
 import { searchLessons, searchSnippet, searchTerms } from './search.js';
 
 const $ = (s, r = document) => r.querySelector(s);
-const $ = (s, r = document) => [...r.querySelectorAll(s)];
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
 const platform = navigator.userAgentData?.platform || navigator.platform || '';
 const searchShortcut = /mac|iphone|ipad|ipod/i.test(platform) ? '⌘ K' : 'Ctrl K';
-$('[data-search-shortcut]').forEach((el) => {
+$$('[data-search-shortcut]').forEach((el) => {
   el.textContent = searchShortcut;
 });
 // Build the page outline from actual headings, never from a separately maintained list.
@@ -93,7 +93,7 @@ navButton?.addEventListener('click', () => {
   setNav(!document.body.classList.contains('nav-open'));
 });
 scrim?.addEventListener('click', closeNav);
-$('.mobile-site-links a, .sidebar-site-links a').forEach((link) =>
+$$('.mobile-site-links a, .sidebar-site-links a').forEach((link) =>
   link.addEventListener('click', closeNav),
 );
 window.addEventListener('resize', () => {
