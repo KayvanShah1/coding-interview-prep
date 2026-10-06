@@ -148,6 +148,9 @@ main.home-main {
   color: var(--muted);
   text-align: right;
 }
+.subject-row small.text-icon {
+  justify-self: end;
+}
 .subject-row:first-of-type small {
   color: var(--accent);
 }
@@ -307,9 +310,6 @@ main.home-main {
     grid-column: 2;
     grid-row: 1;
     font-size: 10px;
-  }
-  .subject-row small.text-icon {
-    justify-self: end;
   }
   .home-paths {
     grid-template-columns: 1fr;
