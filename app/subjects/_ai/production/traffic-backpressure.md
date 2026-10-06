@@ -1,0 +1,96 @@
+---
+title: "Rate limits, concurrency, and backpressure"
+description: "Separate tenant quotas, active inference limits, waiting queues, and overload protection in an LLM service."
+chapter: production
+order: 2
+sequence: 402
+level: Core
+keywords:
+  - rate limiting
+  - RPM
+  - TPM
+  - concurrency limit
+  - bounded queue
+  - backpressure
+  - admission control
+aliases:
+  - token rate limit
+  - overload protection
+interview_queries:
+  - how do you rate limit an LLM API
+  - rate limit vs concurrency limit
+  - how do you prevent an LLM service from overloading
+references:
+  - title: NVIDIA Triton dynamic batching and queue policy
+    url: https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/user_guide/batcher.html
+---
+
+These controls answer different questions.
+
+## Rate limit: how much may a caller submit?
+
+A gateway may enforce:
+
+```text
+requests per minute
+input tokens per minute
+output tokens per minute
+daily spend / quota
+maximum context length
+```
+
+Requests per second alone is weak for LLMs because a 20-token prompt and a 100,000-token prompt do not create the same work.
+
+Token-aware quotas are partly cost control and partly fairness between tenants.
+
+## Concurrency limit: how much may execute at once?
+
+A serving replica has finite KV-cache and scheduling capacity.
+
+Even if a customer is within its minute-level quota, letting thousands of its requests become active simultaneously can crowd out other traffic or exhaust cache memory.
+
+Concurrency limits protect the actual serving resource.
+
+## Queue: where does admitted work wait?
+
+A bounded queue can absorb a short burst when demand briefly exceeds immediate capacity.
+
+The word **bounded** matters.
+
+An unbounded queue can turn overload into enormous TTFT rather than an immediate failure. Clients then timeout, retry, and create even more work.
+
+## Backpressure: what happens when the system is full?
+
+A healthy system needs a deliberate response when useful capacity is exhausted:
+
+- reject with a retryable status such as 429;
+- shed lower-priority traffic;
+- route elsewhere;
+- degrade to a smaller model;
+- cap output/context;
+- wait only within a known queue budget.
+
+Backpressure is preferable to pretending every request can be served while latency grows without bound.
+
+## The overload loop to recognize
+
+```text
+arrival rate > service rate
+→ waiting queue grows
+→ TTFT grows
+→ clients timeout
+→ clients retry
+→ arrival rate grows further
+```
+
+Retries need backoff and jitter, and the server needs admission limits. Otherwise a recoverable traffic spike can become a self-sustaining retry storm.
+
+## Keep customer policy separate from engine scheduling
+
+The inference scheduler decides which already-admitted sequences execute.
+
+The gateway and admission layer decide whether work should enter the serving system in the first place.
+
+That separation lets you reason about fairness and product quotas without making the model runtime responsible for tenant policy.
+
+Next: [Autoscaling LLM inference]({{ '/ai-engineering/production/autoscaling/' | relative_url }}).
