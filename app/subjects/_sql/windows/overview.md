@@ -137,6 +137,22 @@ LAG
 value / NULLIF(SUM(value) OVER (), 0)
 ```
 
+## Distribution functions
+
+| Function | What it tells you | Typical use |
+|---|---|---|
+| `NTILE(n)` | Which of `n` roughly equal row buckets this row belongs to | quartiles, deciles, segmentation |
+| `PERCENT_RANK()` | Relative rank from 0 to 1 | relative position within the ordered partition |
+| `CUME_DIST()` | Fraction of rows at or below the current value | cumulative distribution / percentile-style thresholds |
+
+```sql
+NTILE(4) OVER (ORDER BY score DESC)
+```
+
+With 10 rows, the four buckets contain `3, 3, 2, 2` rows. Equal values are not guaranteed to stay in the same `NTILE` bucket because `NTILE` balances row counts rather than value groups.
+
+For the exact formulas, tie behavior, and worked examples, see [NTILE, PERCENT_RANK & CUME_DIST]({{ '/sql/windows/distribution/' | relative_url }}).
+
 ## Default-frame and LAST_VALUE traps
 
 With an `ORDER BY`, do not assume the default frame behaves like an explicit row-by-row `ROWS` frame. Peer rows with equal ordering values can matter.
