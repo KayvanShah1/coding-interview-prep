@@ -4,6 +4,7 @@ description: "Separate SQL values from SQL code and give database roles only the
 chapter: "postgres"
 order: 6
 sequence: 1306
+dialect: "PostgreSQL"
 level: "Core"
 references: [{"title":"PostgreSQL privileges","url":"https://www.postgresql.org/docs/current/ddl-priv.html"},{"title":"PostgreSQL PREPARE","url":"https://www.postgresql.org/docs/current/sql-prepare.html"}]
 ---

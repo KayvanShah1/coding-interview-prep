@@ -5,6 +5,7 @@ description: "Work with arrays, JSON, views, and database routines."
 chapter: "postgres"
 order: 0
 sequence: 1300
+dialect: "PostgreSQL"
 level: "Chapter overview"
 ---
 

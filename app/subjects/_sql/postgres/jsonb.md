@@ -4,6 +4,7 @@ description: "Query nested data while keeping types, missing keys, and row count
 chapter: "postgres"
 order: 3
 sequence: 1303
+dialect: "PostgreSQL"
 level: "Intermediate"
 references: [{"title":"PostgreSQL JSON functions","url":"https://www.postgresql.org/docs/current/functions-json.html"}]
 ---

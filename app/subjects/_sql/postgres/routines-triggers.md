@@ -4,6 +4,7 @@ description: "Recognize when logic belongs in a database routine and when hidden
 chapter: "postgres"
 order: 5
 sequence: 1305
+dialect: "PostgreSQL"
 level: "Advanced"
 references: [{"title":"PostgreSQL SQL functions","url":"https://www.postgresql.org/docs/current/xfunc-sql.html"},{"title":"PostgreSQL triggers","url":"https://www.postgresql.org/docs/current/triggers.html"}]
 ---

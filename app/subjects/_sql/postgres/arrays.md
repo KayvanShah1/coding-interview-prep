@@ -4,6 +4,7 @@ description: "Expand arrays, preserve empty rows, and avoid accidental products.
 chapter: "postgres"
 order: 1
 sequence: 1301
+dialect: "PostgreSQL"
 level: "Core"
 references: [{"title":"PostgreSQL arrays","url":"https://www.postgresql.org/docs/current/functions-array.html"}]
 ---
