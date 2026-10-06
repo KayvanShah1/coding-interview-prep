@@ -11,13 +11,15 @@ A Jekyll handbook for technical interview revision across data, AI, machine lear
 
 ## Screenshots
 
-### Desktop: Home page (dark mode)
+### Desktop: Home page (dark mode, 1440 px viewport)
 
 [![CoreTrail desktop home page with Home, Subjects, Resources, and About navigation above the subject directory](app/assets/images/screenshots/desktop-home.png)](app/assets/images/screenshots/desktop-home.png)
 
 ### Mobile: SQL lesson (light mode)
 
 <a href="app/assets/images/screenshots/mobile-lesson.png"><img src="app/assets/images/screenshots/mobile-lesson.png" alt="CoreTrail mobile Window frames lesson with the current header, page outline, and interactive frame explorer" width="390" /></a>
+
+After visual changes, serve the site locally and recapture affected screenshots from `http://localhost:4000/coretrail/`. The desktop home image uses dark mode and a 2× device scale.
 
 ## Why I built it
 

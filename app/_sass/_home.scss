@@ -151,6 +151,9 @@ main.home-main {
 .subject-row small.text-icon {
   justify-self: end;
 }
+.subject-row small.text-icon .arrow-icon {
+  transform: translateX(0.14em);
+}
 .subject-row:first-of-type small {
   color: var(--accent);
 }
