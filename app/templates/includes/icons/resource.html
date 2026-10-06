@@ -1,0 +1,32 @@
+{% comment %}Small resource-directory icons. Custom line icons; no external asset dependency.{% endcomment %}
+{% assign kind = include.kind | default: 'software' %}
+<svg class="resource-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+  {% case kind %}
+    {% when 'youtube' %}
+      <rect x="2.25" y="3.25" width="11.5" height="9.5" rx="2"></rect>
+      <path d="M6.5 5.8 10.5 8l-4 2.2Z"></path>
+    {% when 'cloud' %}
+      <path d="M4.3 11.75h7.3a2.15 2.15 0 0 0 .35-4.27A3.65 3.65 0 0 0 5 6.2a2.8 2.8 0 0 0-.7 5.55Z"></path>
+    {% when 'data' %}
+      <ellipse cx="8" cy="4" rx="4.75" ry="1.75"></ellipse>
+      <path d="M3.25 4v4c0 .97 2.13 1.75 4.75 1.75S12.75 8.97 12.75 8V4"></path>
+      <path d="M3.25 8v4c0 .97 2.13 1.75 4.75 1.75s4.75-.78 4.75-1.75V8"></path>
+    {% when 'system-design' %}
+      <rect x="2" y="2.5" width="4" height="3" rx=".6"></rect>
+      <rect x="10" y="2.5" width="4" height="3" rx=".6"></rect>
+      <rect x="6" y="10.5" width="4" height="3" rx=".6"></rect>
+      <path d="M4 5.5v2h8v-2M8 7.5v3"></path>
+    {% when 'practice' %}
+      <path d="M3 2.5h10v11H3z"></path>
+      <path d="m5 6 1 1 2-2M9.5 6h1.5M5 10h6"></path>
+    {% when 'ai' %}
+      <circle cx="8" cy="8" r="2"></circle>
+      <circle cx="3" cy="4" r="1"></circle>
+      <circle cx="13" cy="4" r="1"></circle>
+      <circle cx="3" cy="12" r="1"></circle>
+      <circle cx="13" cy="12" r="1"></circle>
+      <path d="M4 4.6 6.3 6.7M12 4.6 9.7 6.7M4 11.4l2.3-2.1M12 11.4 9.7 9.3"></path>
+    {% else %}
+      <path d="m6 4-4 4 4 4M10 4l4 4-4 4"></path>
+  {% endcase %}
+</svg>
