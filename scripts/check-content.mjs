@@ -46,8 +46,6 @@ for (const subject of subjects) {
 for (const file of subjectPages) assert.ok(fs.existsSync(file), 'subject page ' + file);
 for (const chapter of chapters) {
   const overview = fs.readFileSync(sqlDir + '/' + chapter.id + '/overview.md', 'utf8');
-  assert.ok(overview.includes('Suggested route:'), 'chapter reading route ' + chapter.id);
-  assert.ok(overview.includes('By the end:'), 'chapter outcome ' + chapter.id);
   for (const file of pages.filter(
     (p) =>
       p.replaceAll('\\', '/').startsWith(sqlDir + '/' + chapter.id + '/') &&

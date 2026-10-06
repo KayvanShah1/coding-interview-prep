@@ -6,6 +6,18 @@ Create `app/subjects/_sql/<chapter>/<slug>.md` with front matter containing `tit
 
 Use `##` headings for the automatic outline. Link internally using Jekyll's `relative_url` filter. Use `<details markdown="1"><summary>Show the answer</summary>` for expandable answers. Mark dialect differences and reference primary documentation. Do not copy platform editorials or upload third-party question PDFs into the site.
 
+## Writing style
+
+Write for revision, not for course completion. Keep the technical terms people will search for, but make the surrounding prose sound like notes from someone who has had to choose, debug, or explain the concept.
+
+Do not force every overview into the same sequence. Reuse tables and navigation patterns where consistency helps, but avoid repeated filler such as identical `Suggested route`, `By the end`, or `How to study` paragraphs. Let the topic determine the structure.
+
+Prefer concrete questions and consequences: `What exactly are you counting?`, `What happens to the grain after this join?`, `Would this still work with a tie?`, `What evidence would justify an index?` Keep counterexamples that expose wrong-but-plausible answers.
+
+For problem-solving pages, make the reasoning visible: **population → grain → operation → edge case → alternative**. Do not name the pattern before the learner has a chance to identify it. For performance pages, use **symptom → evidence → hypothesis → verification**.
+
+Avoid motivational filler, generic learning-objective language, fake first-person stories, and unnecessarily short sentence fragments. Do not simplify away searchable syntax such as `PRECEDING`, `FOLLOWING`, `ROWS`, `RANGE`, or `WITHIN GROUP`.
+
 Run `npm test` and `bundle exec jekyll build`. Add meaningful result checks in `scripts/test-sql.mjs` for tricky examples. The practice fixture is `app/assets/sql/sample-data.sql`.
 
 The SQL landing page is `app/subjects/_sql/index.html`; its explicit permalink keeps it at `/sql/`. Only documents with a `sequence` participate in lesson pagination. Planned subjects live in `app/subjects/<subject>/index.md` with explicit public permalinks.
