@@ -13,13 +13,15 @@ permalink: /resources/
 
 <nav class="resource-filters" aria-label="Filter resources">
   <button class="resource-filter active" type="button" data-resource-filter="all" aria-pressed="true">All</button>
-  {% for section in site.data.resources.sections -%}
+  {% assign ordered_sections = site.data.resources.sections | sort: 'order' %}
+  {% for section in ordered_sections -%}
     <button class="resource-filter" type="button" data-resource-filter="{{ section.id }}" aria-pressed="false">{{ section.filter_label }}</button>
   {%- endfor %}
 </nav>
 
-{% for section in site.data.resources.sections -%}
-  {%- assign section_resources = site.data.resources.resources | where: 'section', section.id -%}
+{% assign ordered_sections = site.data.resources.sections | sort: 'order' %}
+{% for section in ordered_sections -%}
+  {%- assign section_resources = site.data.resources.resources | where: 'section', section.id | sort: 'priority' -%}
   <section class="resource-group" data-resource-group data-resource-category="{{ section.id }}">
     <div class="resource-group-heading">
       <h2>{{ section.title }}</h2>

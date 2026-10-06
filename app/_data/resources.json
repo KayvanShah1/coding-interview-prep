@@ -4,67 +4,78 @@
       "id": "practice",
       "filter_label": "Practice",
       "title": "Practice platforms",
-      "description": "Places I use when I need actual problems rather than another explanation."
+      "description": "Places I use when I need actual problems rather than another explanation.",
+      "order": 1
     },
     {
       "id": "system-design",
       "filter_label": "System Design",
       "title": "System design",
-      "description": "HLD problems, architecture walkthroughs, and system design interview prep."
+      "description": "HLD problems, architecture walkthroughs, and system design interview prep.",
+      "order": 2
     },
     {
       "id": "data",
       "filter_label": "Data",
       "title": "Data",
-      "description": "Data engineering, data systems, modeling, and interview prep."
+      "description": "Data engineering, data systems, modeling, and interview prep.",
+      "order": 3
     },
     {
       "id": "cloud-devops",
       "filter_label": "Cloud / DevOps",
       "title": "Cloud / DevOps",
-      "description": "Cloud platforms, containers, infrastructure, and operations."
+      "description": "Cloud platforms, containers, infrastructure, and operations.",
+      "order": 6
     },
     {
       "id": "networking-security",
       "filter_label": "Networking / Security",
       "title": "Networking / Security",
-      "description": "Networking, Linux, security, and infrastructure fundamentals."
+      "description": "Networking, Linux, security, and infrastructure fundamentals.",
+      "order": 9
     },
     {
       "id": "ai-ml",
       "filter_label": "AI / ML",
       "title": "AI / ML",
-      "description": "Machine learning, deep learning, GenAI, and current AI research."
+      "description": "Machine learning, deep learning, GenAI, and current AI research.",
+      "order": 4
     },
     {
       "id": "math-science",
       "filter_label": "Math / Science",
       "title": "Math / Science",
-      "description": "Mathematics, physics, science, and visual explanations that rebuild intuition."
+      "description": "Mathematics, physics, science, and visual explanations that rebuild intuition.",
+      "order": 8
     },
     {
       "id": "hardware-deep-tech",
       "filter_label": "Hardware / Deep Tech",
       "title": "Hardware / Deep Tech",
-      "description": "Semiconductors, chips, compute hardware, and the physical systems behind modern AI."
+      "description": "Semiconductors, chips, compute hardware, and the physical systems behind modern AI.",
+      "order": 10
     },
     {
       "id": "software-cs",
       "filter_label": "Software / Systems",
       "title": "Software / Systems / CS",
-      "description": "Software design, programming, databases, computer science, and systems fundamentals."
+      "description": "Software design, programming, databases, computer science, and systems fundamentals.",
+      "order": 5
     },
     {
       "id": "tech-product",
       "filter_label": "Tech / Product",
       "title": "Tech / Product",
-      "description": "AI products, startups, technology shifts, and broader product and industry thinking."
+      "description": "AI products, startups, technology shifts, and broader product and industry thinking.",
+      "order": 11
     },
     {
       "id": "university-courses",
       "filter_label": "University / Courses",
       "title": "University / Courses",
-      "description": "University lectures, open courses, and research channels I return to for deeper study."
+      "description": "University lectures, open courses, and research channels I return to for deeper study.",
+      "order": 7
     }
   ],
   "resources": [
@@ -74,7 +85,8 @@
       "section": "practice",
       "type": "Practice",
       "icon": "practice",
-      "description": "SQL and data interview problems with realistic datasets."
+      "description": "SQL and data interview problems with realistic datasets.",
+      "priority": 1
     },
     {
       "name": "LeetCode",
@@ -82,7 +94,8 @@
       "section": "practice",
       "type": "Practice",
       "icon": "practice",
-      "description": "DSA and SQL problem practice. I usually use the topic lists rather than solving randomly."
+      "description": "DSA and SQL problem practice. I usually use the topic lists rather than solving randomly.",
+      "priority": 2
     },
     {
       "name": "DataLemur",
@@ -90,7 +103,8 @@
       "section": "practice",
       "type": "Practice",
       "icon": "data",
-      "description": "SQL and data interview questions, useful for shorter focused practice."
+      "description": "SQL and data interview questions, useful for shorter focused practice.",
+      "priority": 3
     },
     {
       "name": "SystemCraft",
@@ -98,7 +112,8 @@
       "section": "system-design",
       "type": "HLD",
       "icon": "system-design",
-      "description": "High-level design problems and worked system design scenarios."
+      "description": "High-level design problems and worked system design scenarios.",
+      "priority": 2
     },
     {
       "name": "Hello Interview",
@@ -106,7 +121,8 @@
       "section": "system-design",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "System design fundamentals, interview frameworks, and worked architecture walkthroughs."
+      "description": "System design fundamentals, interview frameworks, and worked architecture walkthroughs.",
+      "priority": 1
     },
     {
       "name": "Aced",
@@ -115,7 +131,8 @@
       "section": "system-design",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "System design interview prep, mock interviews, architecture patterns, and broader technical interview guidance."
+      "description": "System design interview prep, mock interviews, architecture patterns, and broader technical interview guidance.",
+      "priority": 3
     },
     {
       "name": "Arjay McCandless",
@@ -123,7 +140,8 @@
       "section": "system-design",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "System design, backend architecture, and practical engineering breakdowns."
+      "description": "System design, backend architecture, and practical engineering breakdowns.",
+      "priority": 4
     },
     {
       "name": "Afaque Ahmad",
@@ -131,7 +149,8 @@
       "section": "data",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Data engineering, Spark, data modeling, and DE system design interviews."
+      "description": "Data engineering, Spark, data modeling, and DE system design interviews.",
+      "priority": 1
     },
     {
       "name": "Kahan Data Solutions",
@@ -139,7 +158,8 @@
       "section": "data",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Modern data engineering, warehouses, dbt, modeling, and practical architecture."
+      "description": "Modern data engineering, warehouses, dbt, modeling, and practical architecture.",
+      "priority": 2
     },
     {
       "name": "Ansh Lamba",
@@ -147,7 +167,8 @@
       "section": "data",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Data engineering projects and deep dives across Spark, Databricks, dbt, Airflow, and cloud."
+      "description": "Data engineering projects and deep dives across Spark, Databricks, dbt, Airflow, and cloud.",
+      "priority": 3
     },
     {
       "name": "Google Cloud Tech",
@@ -155,7 +176,8 @@
       "section": "cloud-devops",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Official Google Cloud tutorials, walkthroughs, architecture, and product deep dives."
+      "description": "Official Google Cloud tutorials, walkthroughs, architecture, and product deep dives.",
+      "priority": 1
     },
     {
       "name": "KodeKloud",
@@ -163,7 +185,8 @@
       "section": "cloud-devops",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Hands-on DevOps, Kubernetes, containers, cloud, and infrastructure fundamentals."
+      "description": "Hands-on DevOps, Kubernetes, containers, cloud, and infrastructure fundamentals.",
+      "priority": 2
     },
     {
       "name": "TechWorld with Nana",
@@ -171,7 +194,8 @@
       "section": "cloud-devops",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "DevOps and cloud concepts explained through practical examples."
+      "description": "DevOps and cloud concepts explained through practical examples.",
+      "priority": 3
     },
     {
       "name": "David Bombal",
@@ -179,7 +203,8 @@
       "section": "networking-security",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Networking, Linux, cybersecurity, infrastructure, and hands-on technical labs."
+      "description": "Networking, Linux, cybersecurity, infrastructure, and hands-on technical labs.",
+      "priority": 1
     },
     {
       "name": "3Blue1Brown",
@@ -187,7 +212,8 @@
       "section": "math-science",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Visual intuition for linear algebra, calculus, differential equations, neural networks, and mathematics."
+      "description": "Visual intuition for linear algebra, calculus, differential equations, neural networks, and mathematics.",
+      "priority": 1
     },
     {
       "name": "Veritasium",
@@ -195,7 +221,8 @@
       "section": "math-science",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Science and engineering explained through experiments, demonstrations, interviews, and deep conceptual stories."
+      "description": "Science and engineering explained through experiments, demonstrations, interviews, and deep conceptual stories.",
+      "priority": 3
     },
     {
       "name": "Welch Labs",
@@ -203,7 +230,8 @@
       "section": "math-science",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Math, science, and machine learning explained visually with strong technical storytelling."
+      "description": "Math, science, and machine learning explained visually with strong technical storytelling.",
+      "priority": 2
     },
     {
       "name": "Google DeepMind",
@@ -211,7 +239,8 @@
       "section": "ai-ml",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Research talks, demos, and explanations from current AI and machine learning research."
+      "description": "Research talks, demos, and explanations from current AI and machine learning research.",
+      "priority": 2
     },
     {
       "name": "DeepLearning.AI",
@@ -219,7 +248,8 @@
       "section": "ai-ml",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Machine learning, deep learning, GenAI, agents, and practical AI engineering lessons."
+      "description": "Machine learning, deep learning, GenAI, agents, and practical AI engineering lessons.",
+      "priority": 1
     },
     {
       "name": "Anastasi in Tech",
@@ -227,7 +257,8 @@
       "section": "hardware-deep-tech",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Semiconductors, chip architecture, AI hardware, and the technologies underneath modern computing."
+      "description": "Semiconductors, chip architecture, AI hardware, and the technologies underneath modern computing.",
+      "priority": 1
     },
     {
       "name": "ArjanCodes",
@@ -235,7 +266,8 @@
       "section": "software-cs",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Python, software design, architecture, testing, design patterns, and maintainable code."
+      "description": "Python, software design, architecture, testing, design patterns, and maintainable code.",
+      "priority": 1
     },
     {
       "name": "Ben Dicken",
@@ -243,7 +275,8 @@
       "section": "software-cs",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Computer science, databases, systems, performance, and software engineering from first principles."
+      "description": "Computer science, databases, systems, performance, and software engineering from first principles.",
+      "priority": 2
     },
     {
       "name": "IBM Technology",
@@ -251,7 +284,8 @@
       "section": "software-cs",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Technical explainers across software systems, databases, distributed computing, cloud, security, and AI."
+      "description": "Technical explainers across software systems, databases, distributed computing, cloud, security, and AI.",
+      "priority": 3
     },
     {
       "name": "Varun Mayya",
@@ -259,7 +293,8 @@
       "section": "tech-product",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "AI products, startups, technology shifts, software businesses, and broader product and industry discussions."
+      "description": "AI products, startups, technology shifts, software businesses, and broader product and industry discussions.",
+      "priority": 1
     },
     {
       "name": "Stanford Online",
@@ -267,7 +302,8 @@
       "section": "university-courses",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Stanford lectures, seminars, engineering courses, AI, computer science, and professional education."
+      "description": "Stanford lectures, seminars, engineering courses, AI, computer science, and professional education.",
+      "priority": 1
     },
     {
       "name": "Carnegie Mellon University",
@@ -276,7 +312,8 @@
       "section": "university-courses",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "University lectures, research, talks, and computing work from Carnegie Mellon."
+      "description": "University lectures, research, talks, and computing work from Carnegie Mellon.",
+      "priority": 4
     },
     {
       "name": "MIT OpenCourseWare",
@@ -284,7 +321,8 @@
       "section": "university-courses",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Full MIT courses across computer science, mathematics, engineering, and related subjects."
+      "description": "Full MIT courses across computer science, mathematics, engineering, and related subjects.",
+      "priority": 2
     },
     {
       "name": "UC Berkeley EECS",
@@ -292,7 +330,8 @@
       "section": "university-courses",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Electrical engineering and computer science lectures, seminars, research, and department talks."
+      "description": "Electrical engineering and computer science lectures, seminars, research, and department talks.",
+      "priority": 3
     },
     {
       "name": "NYU Tandon",
@@ -300,7 +339,8 @@
       "section": "university-courses",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Engineering, computer science, AI, research talks, and technical material from NYU Tandon."
+      "description": "Engineering, computer science, AI, research talks, and technical material from NYU Tandon.",
+      "priority": 7
     },
     {
       "name": "Michigan EECS 498/598",
@@ -308,7 +348,8 @@
       "section": "university-courses",
       "type": "Course playlist",
       "icon": "youtube",
-      "description": "University of Michigan deep learning for computer vision lectures from EECS 498/598."
+      "description": "University of Michigan deep learning for computer vision lectures from EECS 498/598.",
+      "priority": 6
     },
     {
       "name": "MIT CSAIL",
@@ -316,7 +357,8 @@
       "section": "university-courses",
       "type": "YouTube",
       "icon": "youtube",
-      "description": "Computer science and AI research, systems, robotics, vision, theory, and research talks from MIT CSAIL."
+      "description": "Computer science and AI research, systems, robotics, vision, theory, and research talks from MIT CSAIL.",
+      "priority": 5
     }
   ]
 }
