@@ -20,21 +20,8 @@
   letter-spacing: -0.3px;
   white-space: nowrap;
 }
-.brand .brand-mark {
-  font-size: 23px;
-  line-height: 1;
-  letter-spacing: -3px;
-}
 .brand:hover {
   text-decoration: none;
-}
-.brand-mark {
-  color: var(--accent);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 25px;
-  letter-spacing: -4px;
-  white-space: nowrap;
-  padding-right: 4px;
 }
 .brand small {
   display: block;
@@ -68,6 +55,9 @@
   height: 3px;
   background: var(--accent);
   border-radius: 3px;
+}
+.sidebar-site-navigation {
+  display: none;
 }
 .search-trigger {
   margin: 18px 20px 15px;
@@ -185,4 +175,31 @@
   padding: 0 12px;
   color: var(--dim);
   font-size: 13px;
+}
+
+@media (max-width: 780px) {
+  .sidebar-site-navigation {
+    display: block;
+    padding: 10px 13px 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sidebar-site-links {
+    display: grid;
+    gap: 2px;
+  }
+  .sidebar-site-links a {
+    padding: 9px 12px;
+    border-radius: 4px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .sidebar-site-links a:hover,
+  .sidebar-site-links a[aria-current='page'] {
+    background: var(--hover);
+    color: var(--text);
+    text-decoration: none;
+  }
+  .sidebar-site-links a[aria-current='page'] {
+    color: var(--accent);
+  }
 }

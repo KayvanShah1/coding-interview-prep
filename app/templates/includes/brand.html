@@ -1,4 +1,4 @@
 <a class="{{ include.class | default: 'brand' }}" href="{{ '/' | relative_url }}">
-  <span class="brand-mark" aria-hidden="true">[ ]</span>
-  <span>{{ site.title }}</span>
+  <span class="brand-mark" aria-hidden="true">{% include icons/brand-mark.html %}</span>
+  <span class="brand-name">{{ site.title }}</span>
 </a>

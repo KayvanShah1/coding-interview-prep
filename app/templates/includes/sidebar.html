@@ -1,13 +1,14 @@
 <aside class="sidebar" id="sidebar" aria-label="Main navigation">
   {% include brand.html %}
+  <div class="sidebar-site-navigation">
+    {% include site-nav.html class="sidebar-site-links" label="Site navigation" %}
+  </div>
   {% assign current_subject = site.data.subjects | where: 'id', page.subject | first %}
   {% include subject-switcher.html current_subject=current_subject %}
-  <button class="search-open search-trigger">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>
-    </svg>
+  <button class="search-open search-trigger" type="button" aria-keyshortcuts="Control+K Meta+K">
+    {% include icons/search.html %}
     <span>Search the handbook</span>
-    <kbd>Ctrl K</kbd>
+    <kbd data-search-shortcut>Ctrl K</kbd>
   </button>
   <nav class="chapters" aria-label="Chapters">
     {% unless page.subject == 'sql' %}

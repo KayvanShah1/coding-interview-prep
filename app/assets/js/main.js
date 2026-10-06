@@ -1,7 +1,13 @@
 import { searchLessons, searchSnippet, searchTerms } from './search.js';
 
 const $ = (s, r = document) => r.querySelector(s);
-const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const $ = (s, r = document) => [...r.querySelectorAll(s)];
+
+const platform = navigator.userAgentData?.platform || navigator.platform || '';
+const searchShortcut = /mac|iphone|ipad|ipod/i.test(platform) ? '⌘ K' : 'Ctrl K';
+$('[data-search-shortcut]').forEach((el) => {
+  el.textContent = searchShortcut;
+});
 // Build the page outline from actual headings, never from a separately maintained list.
 const headings = $$('.prose h2');
 const used = new Set();
@@ -73,20 +79,26 @@ $$('.highlighter-rouge').forEach((block) => {
 });
 const navButton = $('#nav-toggle'),
   scrim = $('.nav-scrim');
+function setNav(open) {
+  document.body.classList.toggle('nav-open', open);
+  navButton?.setAttribute('aria-expanded', String(open));
+  navButton?.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  if (scrim) scrim.hidden = !open;
+  document.body.style.overflow = open ? 'hidden' : '';
+}
 function closeNav() {
-  document.body.classList.remove('nav-open');
-  navButton?.setAttribute('aria-expanded', 'false');
-  if (scrim) scrim.hidden = true;
-  document.body.style.overflow = '';
+  setNav(false);
 }
 navButton?.addEventListener('click', () => {
-  const open = !document.body.classList.contains('nav-open');
-  document.body.classList.toggle('nav-open', open);
-  navButton.setAttribute('aria-expanded', String(open));
-  scrim.hidden = !open;
-  document.body.style.overflow = open ? 'hidden' : '';
+  setNav(!document.body.classList.contains('nav-open'));
 });
 scrim?.addEventListener('click', closeNav);
+$('.mobile-site-links a, .sidebar-site-links a').forEach((link) =>
+  link.addEventListener('click', closeNav),
+);
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900 && document.body.classList.contains('nav-open')) closeNav();
+});
 const dialog = $('#search-dialog'),
   input = $('#search-input'),
   results = $('#search-results');

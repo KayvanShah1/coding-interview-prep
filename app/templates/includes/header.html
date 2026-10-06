@@ -1,12 +1,13 @@
+{% assign nav_target = 'sidebar' %}
 {% if include.variant == 'home' %}
+  {% assign nav_target = 'mobile-site-menu' %}
   <header class="home-header">
-    <div class="home-container">
+    <div class="home-container home-header-grid">
       {% include brand.html class="home-brand" %}
-      <nav aria-label="Main navigation">
-        <a href="{{ '/sql/' | relative_url }}">SQL</a>
-        <a href="{{ '/' | relative_url }}#subjects">Subjects</a>
-        <a href="{{ '/resources/' | relative_url }}">Resources</a>
-        <a href="{{ '/about/' | relative_url }}">About</a>
+      {% include site-nav.html class="home-nav" label="Primary navigation" %}
+      <div class="home-utilities">
+        {% include search-trigger.html %}
+        {% include theme-toggle.html %}
         <a
           class="icon-button"
           href="https://github.com/{{ site.repository }}"
@@ -15,24 +16,30 @@
         >
           {%- include icons/github.html -%}
         </a>
-        {% include theme-toggle.html %}
-      </nav>
-    </div>
-  </header>
-{% else %}
-  <header class="mobile-header">
-    <button
-      id="nav-toggle"
-      aria-label="Open navigation"
-      aria-controls="sidebar"
-      aria-expanded="false"
-    >
-      ☰
-    </button>
-    <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
-    <div class="header-actions">
-      <button class="search-open" aria-label="Search">Search</button>
-      {% include theme-toggle.html %}
+      </div>
     </div>
   </header>
 {% endif %}
+
+<header class="mobile-header">
+  <div class="mobile-header-side mobile-header-start">
+    <button
+      id="nav-toggle"
+      class="icon-button nav-toggle"
+      type="button"
+      aria-label="Open navigation"
+      aria-controls="{{ nav_target }}"
+      aria-expanded="false"
+    >
+      {%- include icons/menu.html -%}
+      {%- include icons/close.html -%}
+    </button>
+  </div>
+  {% include brand.html class="mobile-brand" %}
+  <div class="header-actions mobile-header-side">
+    <button class="search-open icon-button" type="button" aria-label="Search CoreTrail" title="Search">
+      {%- include icons/search.html -%}
+    </button>
+    {% include theme-toggle.html %}
+  </div>
+</header>

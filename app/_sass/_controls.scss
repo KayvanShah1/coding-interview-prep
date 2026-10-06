@@ -70,16 +70,6 @@
 .sidebar-footer .icon-button {
   margin-left: 0;
 }
-.home-header > .home-container {
-  gap: 12px;
-  flex-wrap: wrap;
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-.home-header nav {
-  align-items: center;
-  gap: 24px;
-}
 .article-footer .github-link {
   font-size: inherit;
 }
@@ -92,8 +82,122 @@
     background: var(--hover);
   }
 }
-@media (max-width: 600px) {
-  .home-header nav {
-    gap: 8px;
-  }
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.brand-mark-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+.home-brand .brand-mark-icon {
+  width: 22px;
+  height: 22px;
+}
+.search-icon,
+.nav-menu-icon,
+.nav-close-icon {
+  display: block;
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.nav-close-icon {
+  display: none;
+}
+.nav-open #nav-toggle .nav-menu-icon {
+  display: none;
+}
+.nav-open #nav-toggle .nav-close-icon {
+  display: block;
+}
+.header-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 7px 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font: 12px 'IBM Plex Mono', monospace;
+}
+.header-search:hover {
+  border-color: var(--border-strong);
+  background: var(--hover);
+  color: var(--text);
+}
+.header-search .search-icon {
+  width: 16px;
+  height: 16px;
+}
+.header-search kbd,
+.search-trigger kbd {
+  font-family: 'IBM Plex Mono', monospace;
+}
+.header-search kbd {
+  padding: 2px 5px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  color: var(--dim);
+  background: var(--surface);
+  font-size: 9px;
+  line-height: 1.4;
+}
+.mobile-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  grid-template-columns: 80px minmax(0, 1fr) 80px;
+  align-items: center;
+  height: 58px;
+  padding: 0 14px;
+  background: var(--header-bg);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.mobile-header-side {
+  display: flex;
+  align-items: center;
+  width: 80px;
+}
+.mobile-header-start {
+  justify-content: flex-start;
+}
+.mobile-header .header-actions {
+  justify-content: flex-end;
+}
+.mobile-brand {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+.mobile-brand:hover {
+  text-decoration: none;
+}
+.mobile-brand .brand-mark-icon {
+  width: 19px;
+  height: 19px;
 }

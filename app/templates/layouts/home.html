@@ -3,5 +3,7 @@ layout: base
 body_class: home-page
 ---
 {% include header.html variant="home" %}
+<div class="nav-scrim" hidden></div>
+{% include mobile-site-menu.html %}
 <main id="main-content" class="home-main home-container" tabindex="-1">{{ content }}</main>
 {% include footer.html %}
