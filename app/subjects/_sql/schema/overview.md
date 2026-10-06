@@ -8,13 +8,10 @@ sequence: 800
 level: "Chapter overview"
 ---
 
-## Use the schema to enforce the contract
+## What rule should the database enforce?
 
 Tables and constraints encode assumptions that query authors otherwise have to guess. Data changes introduce another question: what must happen atomically, and what happens when a write conflicts or repeats?
 
-**Suggested route:** Study DDL and constraints before DML and upserts. Compare a declared uniqueness guarantee with deduplicating a query result.
-
-**By the end:** Choose a constraint from an invariant and explain safe insert/update/delete behavior under that invariant.
 
 ## Decision reference
 
@@ -35,6 +32,6 @@ Tables and constraints encode assumptions that query authors otherwise have to g
 <li><a href="{{ '/sql/schema/upsert-merge/' | relative_url }}">Upserts & MERGE</a><span>Define how incoming records interact with existing keys.</span></li>
 </ul>
 
-## How to study
+## Check the invariant
 
-Use the suggested route above. For each lesson, explain the decision in your own words, test its example, and identify a situation where a different approach would be needed.
+For every constraint or write pattern, state the rule the database is protecting. Then ask what happens on duplicate input, partial failure, or a retry.

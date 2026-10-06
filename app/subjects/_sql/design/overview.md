@@ -8,13 +8,10 @@ sequence: 900
 level: "Chapter overview"
 ---
 
-## Model the relationships your questions depend on
+## Start with what one row represents
 
 A schema is a choice about entities, relationships, history, and access. Normalization addresses dependencies; dimensional modeling makes analytical grain and history explicit. Learn what problem each approach solves.
 
-**Suggested route:** Begin with dependencies and normalization, then choose a fact grain and connect dimensions. Follow physical layout choices into storage and scaling.
-
-**By the end:** Explain what one fact row represents, which attributes change, and how historical answers stay correct.
 
 ## Decision reference
 
@@ -33,6 +30,6 @@ A schema is a choice about entities, relationships, history, and access. Normali
 <li><a href="{{ '/sql/design/dimensional-modeling/' | relative_url }}">Fact tables, dimensions & slowly changing history</a><span>Choose an analytical grain before choosing keys or columns.</span></li>
 </ul>
 
-## How to study
+## Start from the question the model must answer
 
-Use the suggested route above. For each lesson, explain the decision in your own words, test its example, and identify a situation where a different approach would be needed.
+State the grain first. Then decide where each fact belongs, what can change over time, and which historical answer must remain reproducible.

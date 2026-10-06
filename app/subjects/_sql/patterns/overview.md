@@ -13,9 +13,6 @@ mermaid: true
 
 Interview questions often combine a few operations across different grains. The wording map suggests a starting point; the worked lessons show why the stages are needed and where a plausible shortcut breaks.
 
-**Suggested route:** Try a pattern with a tiny fixture, then change the population or tie rule. Use mixed practice when you can identify a technique without its label.
-
-**By the end:** Describe the sequence of transformations and reject an alternative with a concrete counterexample.
 
 ## Wording → first technique
 
@@ -213,6 +210,6 @@ These decisions usually determine the correct SQL pattern before syntax does.
 <li><a href="{{ '/sql/patterns/rates-and-populations/' | relative_url }}">Rates, populations, and weighted averages</a><span>Define numerator and denominator at the same grain before dividing.</span></li>
 </ul>
 
-## How to study
+## Practice without the label
 
-Read the wording column and try to name the technique before looking right. In an interview, write the output grain and edge case before writing syntax.
+Read the problem wording first and hide the technique column. State the output grain and one edge case, then choose the transformation sequence. Use the worked lesson only after you have committed to an approach.

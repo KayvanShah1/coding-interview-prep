@@ -8,13 +8,10 @@ sequence: 1000
 level: "Chapter overview"
 ---
 
-## Reason about interleaved work
+## What can the other session see?
 
 Correct SQL can still behave unexpectedly when two sessions act together. Transactions define atomic work; isolation controls what concurrent work can observe. Locks and waits explain operational behavior beyond a single query plan.
 
-**Suggested route:** Read ACID, then walk through an isolation example as two ordered sessions. Use locks to explain blocking and deadlocks.
-
-**By the end:** Describe an anomaly, choose a consistency requirement, and explain retry behavior where needed.
 
 ## Decision reference
 
@@ -34,6 +31,6 @@ Correct SQL can still behave unexpectedly when two sessions act together. Transa
 <li><a href="{{ '/sql/transactions/locks/' | relative_url }}">Locks, deadlocks & lost updates</a><span>Protect concurrent writes and recognize conflicting lock order.</span></li>
 </ul>
 
-## How to study
+## Rehearse it as two sessions
 
-Use the suggested route above. For each lesson, explain the decision in your own words, test its example, and identify a situation where a different approach would be needed.
+Write the order of operations for session A and session B. Mark what each session can see, where it waits, and what happens on retry. Concurrency problems are easier to explain as a timeline than as isolation-level definitions.

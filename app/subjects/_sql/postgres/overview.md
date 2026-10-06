@@ -8,13 +8,10 @@ sequence: 1300
 level: "Chapter overview"
 ---
 
-## Use PostgreSQL features with explicit grain
+## Use the shortcut without losing the grain
 
 Arrays, JSONB, lateral expansion, and DISTINCT ON are useful extensions of ordinary relational patterns. Expansion can multiply rows; aggregation can collect them again. Keep track of those transitions.
 
-**Suggested route:** Start from the quick reference, then run the arrays and JSON examples with empty and null inputs. Connect views and routines to their lifecycle and access rules.
-
-**By the end:** Explain when a PostgreSQL-specific construct improves clarity and what must change in another dialect.
 
 ## Quick reference
 
@@ -129,6 +126,6 @@ JSONB expansion + LATERAL
 <li><a href="{{ '/sql/postgres/security/' | relative_url }}">Privileges & parameterized queries</a><span>Separate SQL values from SQL code and give database roles only the access they need.</span></li>
 </ul>
 
-## How to study
+## Keep the portable version in mind
 
-Treat this page as a dialect toolbox. Know which constructs are PostgreSQL-specific and be ready to give the portable alternative where one exists.
+Use the shortcut when PostgreSQL makes the intent clearer, but know the standard alternative. Also track whether an expansion such as `UNNEST` or JSON traversal changes row grain.

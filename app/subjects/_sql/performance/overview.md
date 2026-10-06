@@ -9,13 +9,10 @@ dialect: Cross-engine concepts
 level: "Chapter overview"
 ---
 
-## Investigate the work behind the result
+## Something is slow. What do you check first?
 
 Performance starts with a correct result and a measurable symptom. This chapter moves from plans and access paths to reproducible experiments, then contrasts transactional engines with analytical warehouses.
 
-**Suggested route:** Follow workflow → plans → indexes → statistics → joins and predicates. Run the index and partition labs before jumping to engine-specific guidance.
-
-**By the end:** Form a hypothesis from a plan, verify unchanged results, and measure a change without claiming universal speedups.
 
 ## Decision reference
 
@@ -46,6 +43,6 @@ Performance starts with a correct result and a measurable symptom. This chapter 
 <li><a href="{{ '/sql/performance/sql-server/' | relative_url }}">SQL Server performance investigation</a><span>Connect actual plans, logical reads, waits, and Query Store history to a specific regression.</span></li>
 </ul>
 
-## How to study
+## Diagnose before changing anything
 
-Use the suggested route above. For each lesson, explain the decision in your own words, test its example, and identify a situation where a different approach would be needed.
+Keep the result contract fixed. Capture a baseline, identify the expensive work, make one hypothesis, and measure the change. A faster query that changes rows, grain, or semantics is not an optimization.

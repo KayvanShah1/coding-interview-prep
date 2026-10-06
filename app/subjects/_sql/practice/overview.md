@@ -8,13 +8,10 @@ sequence: 1400
 level: "Chapter overview"
 ---
 
-## Move from recognition to independent reasoning
+## Choose the pattern yourself
 
 Practice should expose the decisions behind a solution. Start with a population and expected output, attempt the query, and use hints only when needed. Then introduce an edge case that could invalidate your answer.
 
-**Suggested route:** Use the problem index for focused practice, mixed drills to hide the technique, and diagnosis drills for performance reasoning.
-
-**By the end:** Explain correctness, alternatives, and a justified next investigation in a short spoken answer.
 
 ## Decision reference
 
@@ -47,6 +44,6 @@ Practice should expose the decisions behind a solution. Start with a population 
 <li><a href="{{ '/sql/practice/diagnosis-drills/' | relative_url }}">Practice: diagnose before optimizing</a><span>Use symptoms and evidence to choose your next investigation, then compare the reasoning.</span></li>
 </ul>
 
-## How to study
+## Practice the decision, not the label
 
-Use the suggested route above. For each lesson, explain the decision in your own words, test its example, and identify a situation where a different approach would be needed.
+On a fresh problem, write **population → grain → operation → edge case → alternative** before looking at hints. If you can solve it only after recognizing the chapter name, it still needs another pass.
