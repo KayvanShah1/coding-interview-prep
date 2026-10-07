@@ -1,7 +1,7 @@
 ---
 title: "Replicas, tensor parallelism, and pipeline parallelism"
 nav_title: "Replicas & parallelism"
-description: "Separate splitting one model across GPUs from duplicating model-serving capacity for more traffic."
+description: "Compare model parallelism inside one replica with horizontal replication for more serving capacity."
 chapter: serving
 order: 3
 sequence: 203
@@ -37,7 +37,7 @@ references:
     url: https://docs.cloud.google.com/kubernetes-engine/docs/tutorials/serve-multihost-gpu
 ---
 
-Three different scaling ideas are often collapsed into “use more GPUs.” Keep them separate.
+“Use more graphics processing units (GPUs)” can describe three different scaling choices: tensor parallelism, pipeline parallelism, or more serving replicas.
 
 {% capture diagram_code %}
 flowchart TB
@@ -98,9 +98,9 @@ So:
 
 ## A replica is a logical failure and capacity unit
 
-Do not assume:
+The mapping is not fixed:
 
-`1 replica = 1 GPU = 1 Pod`.
+`1 replica ≠ 1 GPU ≠ 1 Pod`.
 
 A small model might use one GPU and one process. A large model can span eight GPUs on one machine. An even larger replica can span multiple machines.
 
@@ -118,7 +118,7 @@ across nodes
 GPU ↔ network fabric ↔ GPU
 ```
 
-The farther apart the participating GPUs are, the more communication can affect inference latency and throughput. A collective-communication library such as NCCL commonly coordinates this exchange in NVIDIA deployments, but the library or network product is not the concept to memorize.
+The farther apart the participating GPUs are, the more communication can affect inference latency and throughput. In NVIDIA deployments, the NVIDIA Collective Communications Library (NCCL) can coordinate this exchange. The latency comes from the communication pattern and topology, regardless of the library name.
 
 So “the cluster has eight free GPUs” is incomplete information. Eight tightly connected GPUs on one machine and eight GPUs scattered across machines can support very different parallelism strategies.
 
@@ -126,7 +126,7 @@ A distributed replica may also need coordinated placement so enough of its requi
 
 ### Concrete example: one replica across 16 GPUs
 
-A 405B-parameter model at 16-bit precision needs about **810 GB decimal (754 GiB)** for weights alone, before runtime memory.
+A 405-billion-parameter (405B) model at 16-bit precision needs about **810 GB decimal (754 GiB)** for weights alone, before runtime memory.
 
 Google's published Llama 3.1 405B multi-host example uses two eight-GPU machines. One serving replica combines tensor parallelism across the GPUs within each machine with pipeline parallelism across the two machines:
 
@@ -140,7 +140,7 @@ logical model replica
 16 GPUs participate in one serving replica
 ```
 
-The hardware details are not the lesson. The example makes one boundary concrete:
+The example shows why replica count, Pod count, and GPU count have to be reasoned about independently:
 
 `1 replica ≠ 1 Pod ≠ 1 GPU`.
 

@@ -1,6 +1,6 @@
 ---
 title: "Rate limits, concurrency, and backpressure"
-description: "Separate tenant quotas, active inference limits, waiting queues, and overload protection in an LLM service."
+description: "Connect tenant quotas, active inference limits, waiting queues, and overload protection in a large-language-model service."
 chapter: production
 order: 2
 sequence: 402
@@ -39,13 +39,13 @@ daily spend / quota
 maximum context length
 ```
 
-Requests per second alone is weak for LLMs because a 20-token prompt and a 100,000-token prompt do not create the same work.
+Requests per second alone is weak for large language models (LLMs) because a 20-token prompt and a 100,000-token prompt do not create the same work.
 
 Token-aware quotas are partly cost control and partly fairness between tenants.
 
 ## Concurrency limit: how much may execute at once?
 
-A serving replica has finite KV-cache and scheduling capacity.
+A serving replica has finite key-value (KV) cache and scheduling capacity.
 
 Even if a customer is within its minute-level quota, letting thousands of its requests become active simultaneously can crowd out other traffic or exhaust cache memory.
 
@@ -57,11 +57,11 @@ A bounded queue can absorb a short burst when demand briefly exceeds immediate c
 
 The word **bounded** matters.
 
-An unbounded queue can turn overload into enormous TTFT rather than an immediate failure. Clients then timeout, retry, and create even more work.
+An unbounded queue can turn overload into enormous time to first token (TTFT). Clients then timeout, retry, and create even more work.
 
 ## Backpressure: what happens when the system is full?
 
-A healthy system needs a deliberate response when useful capacity is exhausted:
+When serving capacity is exhausted, the system needs a deliberate response:
 
 - reject with a retryable status such as 429;
 - shed lower-priority traffic;
@@ -85,12 +85,12 @@ arrival rate > service rate
 
 Retries need backoff and jitter, and the server needs admission limits. Otherwise a recoverable traffic spike can become a self-sustaining retry storm.
 
-## Keep customer policy separate from engine scheduling
+## Customer policy is decided before engine scheduling
 
 The inference scheduler decides which already-admitted sequences execute.
 
 The gateway and admission layer decide whether work should enter the serving system in the first place.
 
-That separation lets you reason about fairness and product quotas without making the model runtime responsible for tenant policy.
+This keeps fairness and product quotas at the admission edge while the model runtime concentrates on admitted inference work.
 
 Next: [Autoscaling LLM inference]({{ '/ai-engineering/production/autoscaling/' | relative_url }}).

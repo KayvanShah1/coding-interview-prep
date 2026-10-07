@@ -31,7 +31,7 @@ references:
     url: https://docs.vllm.ai/en/stable/configuration/optimization/
 ---
 
-A replica should not receive production traffic merely because its container process exists.
+A running container is still unready if the large language model (LLM) has not finished loading. Production traffic should start only after the serving process can answer requests with the intended model.
 
 {% capture diagram_code %}
 flowchart TD
@@ -52,7 +52,7 @@ Pod scheduled → image available → mount/fetch model → start engine → ini
 
 ## Placement comes first
 
-Kubernetes decides which node can satisfy the Pod's declared resources and placement constraints. For a GPU workload that might include an NVIDIA GPU resource request, node selectors, affinity, taints/tolerations, and topology constraints.
+Kubernetes decides which node can satisfy the Pod's declared resources and placement constraints. For a graphics processing unit (GPU) workload that might include an NVIDIA GPU resource request, node selectors, affinity, taints/tolerations, and topology constraints.
 
 If no suitable node exists, the Pod can remain **Pending**. That is a cluster-capacity problem, not a vLLM scheduling problem.
 
@@ -72,9 +72,9 @@ Multi-GPU replicas also need their communication groups initialized before usefu
 
 Kubernetes readiness probes answer whether the Pod should receive traffic through Services.
 
-For LLM inference, “the HTTP process accepted a socket” can be too early. A useful readiness condition should wait until the model is loaded and the server can actually serve the intended model.
+For LLM inference, “the HTTP process accepted a socket” can be too early. Readiness should remain false until the model is loaded and the server can serve the intended model.
 
-Startup probes are useful when initialization legitimately takes a long time. Kubernetes can delay liveness/readiness behavior until startup succeeds instead of repeatedly killing a healthy process that is still loading.
+Startup probes fit applications with legitimately long initialization. Kubernetes delays normal liveness and readiness checks until startup succeeds, which prevents restarts while the model is still loading.
 
 ## Liveness and readiness mean different things
 

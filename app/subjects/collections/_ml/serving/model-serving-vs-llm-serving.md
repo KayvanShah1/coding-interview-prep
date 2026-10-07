@@ -27,7 +27,7 @@ A traditional online model can often be thought of as:
 
 `features → forward pass → prediction`.
 
-An autoregressive LLM still runs model inference behind an API, but one request remains active through prompt processing and many decode steps while retaining per-request attention state.
+An autoregressive large language model (LLM) still runs inference behind an application programming interface (API), but one request remains active through prompt processing and many decode steps while retaining per-request attention state.
 
 ## What stays the same
 
@@ -42,20 +42,20 @@ Both systems still need familiar production concerns:
 - metrics, logs, and traces;
 - capacity planning and cost control.
 
-Docker and Kubernetes do not become “AI tools” merely because the container happens to load a language model.
+Docker and Kubernetes keep the same responsibilities whether the workload is a web application, a conventional model, or an LLM server.
 
 ## What changes enough to affect the architecture
 
 | Traditional ML serving | LLM serving |
 |---|---|
 | Often one bounded forward pass | Prefill followed by autoregressive decode |
-| Model can be MBs to a few GB | Checkpoints can be tens or hundreds of GB |
-| CPU may be sufficient | GPU/accelerator serving is common |
-| Per-request state is usually small | Active sequences retain KV-cache state |
+| Often smaller and easier to place; size varies widely by model family | Large checkpoints can reach tens or hundreds of gigabytes |
+| Central processing unit (CPU) serving is common for many models | Graphics processing unit (GPU) / accelerator serving is common |
+| Per-request state is often small | Active sequences retain key-value (KV) cache state |
 | Request cost is often relatively predictable | Prompt/output token lengths vary widely |
 | Ordinary/dynamic batching | Continuous batching across active sequences |
 | Replica often maps simply to one process/device | One logical replica may span several GPUs/nodes |
-| CPU/RPS can be useful scaling signals | Queue depth, TTFT, KV pressure, token throughput become important |
+| CPU and requests per second (RPS) can be useful scaling signals | Queue depth, time to first token (TTFT), KV pressure, token throughput become important |
 | Startup can be quick | Weight transfer/loading/warmup can dominate scale-out |
 
 ## Same system-design fundamentals, different bottlenecks
@@ -77,12 +77,12 @@ inter-GPU communication
 model startup time
 ```
 
-That is why blindly copying a CPU-based autoscaling rule such as “scale at 70% utilization” can fail even though horizontal autoscaling itself is still the right general concept.
+An autoscaling rule such as “scale at 70% CPU utilization” can miss queue or memory pressure in an LLM service even though horizontal scaling remains the right general mechanism.
 
-## Keep MLOps and LLM serving connected
+## MLOps still owns the model lifecycle
 
-Model registries, versioning, deployment promotion, evaluation gates, monitoring, and rollback remain part of the production ML lifecycle.
+Machine learning operations (MLOps) still covers model registries, versioning, deployment promotion, evaluation gates, monitoring, and rollback.
 
-LLM systems add their own serving mechanics and quality concerns; they do not invalidate the rest of MLOps.
+LLM serving adds token-generation, memory, and concurrency constraints on top of that lifecycle.
 
 Continue with [LLM inference]({{ '/ai-engineering/inference/overview/' | relative_url }}) for the execution details or [Infrastructure & DevOps]({{ '/infrastructure/' | relative_url }}) for the reusable deployment mechanics.

@@ -27,7 +27,7 @@ references:
     url: https://kubernetes.io/docs/concepts/storage/volumes/
 ---
 
-Container filesystems are useful for packaged software and temporary runtime state. Data with a different lifecycle should be modeled separately.
+Container filesystems work well for packaged software and temporary runtime state. Persistent application data needs a storage lifecycle that can outlive an individual container or Pod.
 
 ## Volumes give containers another storage lifecycle
 
@@ -43,11 +43,33 @@ Depending on the volume type, the data may be:
 
 The design question is: **what should survive container replacement, and where should the authoritative copy live?**
 
+## Persistent storage separates capacity from the Pod
+
+Kubernetes uses three related objects for persistent storage:
+
+- a **PersistentVolume (PV)** represents storage capacity available to the cluster;
+- a **PersistentVolumeClaim (PVC)** is a workload's request for persistent storage;
+- a **StorageClass** describes a class of storage and can drive dynamic provisioning.
+
+A Pod normally mounts the claim, not a cloud disk directly:
+
+```text
+Pod
+ ↓ mounts
+PVC
+ ↓ binds to
+PV
+ ↓ backed by
+disk / network filesystem / cloud storage
+```
+
+The exact provisioning path depends on the storage driver, but the Pod consumes a claim while the storage resource can have a different lifecycle.
+
 ## Init containers run before the app containers
 
 Kubernetes init containers run to completion during Pod initialization. Each configured init container must succeed before the next one and before the normal application containers start.
 
-That is useful for setup work such as:
+This fits setup work that has to finish before the application starts, such as:
 
 ```text
 fetch artifact
@@ -57,7 +79,7 @@ wait for dependency
 prepare shared volume
 ```
 
-For an LLM deployment:
+For a large language model (LLM) deployment:
 
 ```text
 init container
@@ -69,15 +91,13 @@ vLLM application container
 
 The serving process does not need to own every model-distribution concern.
 
-## Do not use an init container merely because setup exists
+## Init containers are for ordered setup
 
-If the main application can safely and efficiently load its own immutable artifact, an extra init layer may add complexity without benefit.
-
-Use it when ordering and separation are operationally useful.
+If the main application can safely load its own immutable artifact, another container can add lifecycle and debugging complexity. Init containers make sense when setup has to complete first or when download, verification, and application startup need different responsibilities.
 
 ## Persistent volume does not guarantee fast startup
 
-A model available through shared storage may avoid a remote internet download while still being slower to read than local NVMe. Several replicas starting at once can also contend for storage bandwidth.
+A model available through shared storage may avoid a remote internet download while still being slower to read than local non-volatile memory express (NVMe) storage. Several replicas starting at once can also contend for storage bandwidth.
 
 Storage location, caching, and startup time are separate measurements.
 

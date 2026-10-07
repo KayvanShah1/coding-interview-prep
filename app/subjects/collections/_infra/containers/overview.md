@@ -1,7 +1,7 @@
 ---
 title: "Containers"
 nav_title: "Overview"
-description: "Separate images, containers, registries, runtimes, volumes, and hardware access before adding orchestration."
+description: "Follow packaged software from an image registry into a running container before adding orchestration."
 chapter: containers
 order: 0
 sequence: 100
@@ -23,9 +23,9 @@ references:
     url: https://docs.docker.com/get-started/docker-overview/
 ---
 
-A container is not a lightweight virtual machine in the architectural sense you should rely on for interviews. It is a process environment isolated with operating-system mechanisms and started from an image.
+A container is a process environment started from an image and isolated with operating-system mechanisms while still sharing the host kernel.
 
-The useful questions are simpler: **what is packaged, where is it stored, what starts it, and which host resources can it access?**
+The practical questions are: **what is packaged, where is it stored, what starts the process, and which host resources can it access?**
 
 ## In this chapter
 

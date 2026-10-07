@@ -1,7 +1,7 @@
 ---
 title: "Scaling"
 nav_title: "Overview"
-description: "Separate the desired number of workload replicas from the number and type of machines available to place them."
+description: "Connect workload replica demand to the machine capacity required to place and run those replicas."
 chapter: scaling
 order: 0
 sequence: 300
@@ -28,7 +28,7 @@ references:
     url: https://karpenter.sh/docs/
 ---
 
-“Autoscaling Kubernetes” can mean two different actions.
+Kubernetes autoscaling has two control loops that can move at different times.
 
 ```text
 workload scaling
@@ -38,7 +38,11 @@ node scaling
 → change how much machine capacity exists
 ```
 
-A healthy design knows which loop is waiting on the other.
+The workload loop can ask for more Pods even when the cluster has nowhere to place them. Those Pods remain Pending until suitable machine capacity appears.
+
+The Horizontal Pod Autoscaler (HPA) changes workload replica demand from metrics. Kubernetes Event-driven Autoscaling (KEDA) can feed external or event-driven demand into that loop. A node autoscaler changes the cluster's machine capacity; Karpenter is one implementation.
+
+That sequence matters during incidents: a rising replica target does not create capacity until the scheduler can place the new Pods.
 
 ## In this chapter
 

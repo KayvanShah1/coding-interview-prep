@@ -33,7 +33,7 @@ references:
     url: https://karpenter.sh/docs/
 ---
 
-The autoscaling chain is easiest to remember as a sequence of desired states.
+Autoscaling moves through a sequence of desired states.
 
 {% capture diagram_code %}
 flowchart TD
@@ -55,19 +55,19 @@ Metric/event → HPA or KEDA/HPA → replica count increases → new Pod → sch
 
 ## HPA changes workload replica count
 
-Horizontal Pod Autoscaler watches configured metrics and updates the scale target, commonly a Deployment or StatefulSet.
+The Horizontal Pod Autoscaler (HPA) watches configured metrics and updates the scale target, commonly a Deployment or StatefulSet.
 
-It does not directly create a cloud VM.
+It changes workload replicas; machine provisioning is handled elsewhere.
 
 The workload controller reacts to the new desired replica count by creating or removing Pods.
 
 ## KEDA supplies scaling signals and activation behavior
 
-KEDA monitors supported external/event sources and can feed metrics into Kubernetes/HPA scaling.
+Kubernetes Event-driven Autoscaling (KEDA) monitors supported external/event sources and can feed metrics into Kubernetes/HPA scaling.
 
 For Deployment-style workloads, KEDA handles activation from zero where configured and HPA manages the active 1-to-N scaling phase using the metrics KEDA exposes.
 
-So KEDA is not a replacement term for all Kubernetes autoscaling.
+KEDA therefore covers one part of the scaling path rather than the entire Kubernetes autoscaling system.
 
 ## The scheduler tries to place every new Pod
 

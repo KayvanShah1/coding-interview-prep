@@ -1,6 +1,6 @@
 ---
 title: "Where model weights live"
-description: "Follow model weights from remote storage or cache through local disk and host memory into GPU VRAM."
+description: "Follow model weights from remote storage or cache through local disk and host memory into graphics-processing-unit memory."
 chapter: deployment
 order: 2
 sequence: 302
@@ -36,7 +36,7 @@ references:
     url: https://docs.vllm.ai/en/stable/serving/parallelism_scaling/
 ---
 
-Starting a container does not mean the model is already in GPU memory.
+Container startup is only the beginning of model startup. The checkpoint still has to become available to the process and reach graphics processing unit (GPU) memory.
 
 {% capture diagram_code %}
 flowchart LR
@@ -66,7 +66,7 @@ A command such as:
 
 can resolve a remote model and use a local cache. The first start on a fresh machine may download the checkpoint; later starts can reuse the cache if that cache survives.
 
-The key phrase is **if the cache survives**. An ephemeral container filesystem disappearing with the Pod does not provide the same startup behavior as a persistent or node-local cache.
+The cache helps only when it survives the Pod lifecycle. An ephemeral container filesystem disappearing with the Pod gives different startup behavior from a persistent or node-local cache.
 
 ### Mount shared or persistent storage
 
@@ -84,7 +84,7 @@ That keeps download/authentication/checksum logic separate from the serving proc
 
 ### Preload node-local storage
 
-For very large models, teams may put frequently used checkpoints on local NVMe attached to GPU nodes. A new replica scheduled onto a warm node can avoid remote model transfer.
+For very large models, teams may put frequently used checkpoints on local non-volatile memory express (NVMe) storage attached to GPU nodes. A new replica scheduled onto a warm node can avoid remote model transfer.
 
 That improves startup at the cost of cache management and placement complexity.
 
@@ -97,7 +97,7 @@ Even with a perfect local cache, startup can still require:
 3. initializing CUDA and distributed communication;
 4. moving or mapping weights into accelerator memory;
 5. compiling/capturing runtime artifacts where applicable;
-6. sizing the KV cache;
+6. sizing the key-value (KV) cache;
 7. warming the serving path.
 
 The storage layer therefore solves only part of cold start.

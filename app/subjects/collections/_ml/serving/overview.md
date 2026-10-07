@@ -1,7 +1,7 @@
 ---
 title: "Model serving"
 nav_title: "Overview"
-description: "Compare ordinary prediction serving with autoregressive LLM serving without pretending they are entirely different systems."
+description: "Compare conventional machine-learning prediction serving with autoregressive large-language-model serving."
 chapter: serving
 order: 0
 sequence: 100
@@ -16,9 +16,9 @@ interview_queries:
   - how does serving an LLM differ from serving a traditional ML model
 ---
 
-A trained model becomes useful to an application when callers can send it inputs and receive predictions. Both conventional ML models and LLMs need versioned artifacts, deployments, healthy replicas, and monitoring.
+A trained model becomes useful to an application when callers can send inputs and receive predictions. Both conventional machine learning (ML) models and large language models (LLMs) need versioned artifacts, deployments, healthy replicas, and monitoring.
 
-The request lifecycle changes the serving choices. A conventional prediction may finish in one bounded pass. An autoregressive LLM processes a prompt, generates output over many steps, and keeps per-request attention state while it does so.
+The request lifecycle changes the serving choices. A conventional prediction often finishes in one bounded pass. An autoregressive LLM processes a prompt, generates output over many steps, and keeps per-request attention state while it does so.
 
 ## In this chapter
 

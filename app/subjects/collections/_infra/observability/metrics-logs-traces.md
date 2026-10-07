@@ -1,6 +1,6 @@
 ---
 title: "Metrics, logs, and traces"
-description: "Use aggregate measurements, event records, and request paths together instead of asking one telemetry signal to explain everything."
+description: "Use aggregate measurements, event records, and request paths together to explain distributed-system behavior."
 chapter: observability
 order: 1
 sequence: 401
@@ -45,10 +45,10 @@ Examples:
 
 ```text
 request rate
-p95 latency
+95th-percentile (p95) latency
 error rate
 queue depth
-CPU/GPU memory
+central processing unit (CPU) / graphics processing unit (GPU) memory
 running replicas
 ```
 
@@ -81,7 +81,7 @@ A distributed trace follows one logical request through spans such as:
 
 ```text
 gateway
-→ application API
+→ application programming interface (API)
 → retrieval service
 → model endpoint
 → database
@@ -101,6 +101,6 @@ The signals are complements, not competing observability products.
 
 OpenTelemetry is a vendor-neutral framework for instrumenting, generating, collecting, and exporting telemetry such as traces, metrics, and logs.
 
-Prometheus is commonly a metrics collection/storage/query system. Grafana commonly visualizes and alerts over data sources.
+Prometheus can collect, store, and query time-series metrics. Grafana can visualize and alert over those and other data sources.
 
-Again, keep responsibilities separate rather than memorizing a stack as one product.
+The products can be replaced; the operational responsibilities remain metrics collection/query, visualization/alerting, and telemetry correlation.

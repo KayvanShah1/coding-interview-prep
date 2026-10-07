@@ -1,6 +1,6 @@
 ---
 title: "How containers use GPUs"
-description: "Separate host GPU drivers and devices from CUDA userspace libraries and inference software inside a container."
+description: "Trace graphics processing unit access from application libraries inside a container to the host driver and physical device."
 chapter: containers
 order: 2
 sequence: 102
@@ -26,9 +26,7 @@ references:
     url: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
 ---
 
-A container does not contain a physical GPU.
-
-A useful split is:
+A container reaches a physical graphics processing unit (GPU) through resources exposed by the host. The ownership path is:
 
 {% capture diagram_code %}
 flowchart TD
@@ -79,7 +77,7 @@ So:
 
 ## Multi-GPU communication adds another layer
 
-If one distributed process uses several GPUs, communication libraries such as NCCL coordinate data exchange. The physical path can involve NVLink/NVSwitch, PCIe, or network fabrics across nodes.
+If one distributed process uses several GPUs, a collective-communication library such as the NVIDIA Collective Communications Library (NCCL) can coordinate data exchange. The physical path can involve NVLink/NVSwitch, PCIe, or network fabrics across nodes.
 
 That is a performance/topology issue on top of basic device access.
 

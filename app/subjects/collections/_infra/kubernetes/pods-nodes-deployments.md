@@ -1,6 +1,6 @@
 ---
 title: "Pods, nodes, and Deployments"
-description: "Separate physical/virtual machines, Kubernetes Pods, and controllers that maintain replicated application workloads."
+description: "Follow desired workload replicas from a Deployment into Pods and onto cluster nodes."
 chapter: kubernetes
 order: 1
 sequence: 201
@@ -48,7 +48,7 @@ Deployment wants 3 replicas → Pods A/B/C → scheduler places Pods across Node
 
 ## Node: the resource pool
 
-A node contributes CPU, memory, local storage, networking, and possibly GPUs or other devices.
+A node contributes central processing unit (CPU) capacity, memory, local storage, networking, and possibly GPUs or other devices.
 
 The scheduler considers Pod resource requests and constraints when deciding which node can run it.
 
@@ -72,7 +72,7 @@ but only three matching Pods exist, the control loop creates another.
 
 If the Pod template changes, the Deployment coordinates replacement through ReplicaSets.
 
-The important mental model is **desired state versus actual state**.
+A Deployment continuously reconciles **desired state versus actual state**.
 
 ## What happens when a Pod dies?
 
@@ -80,7 +80,7 @@ For a Deployment-managed stateless workload, a controller creates replacement wo
 
 If the failure came from a dead node, the new Pod may be scheduled elsewhere if suitable capacity exists.
 
-## Scheduling and control are separate
+## Controllers create work; the scheduler places it
 
 The Deployment/controller decides that a Pod should exist.
 

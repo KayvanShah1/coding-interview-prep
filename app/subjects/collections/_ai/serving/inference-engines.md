@@ -1,7 +1,7 @@
 ---
 title: "What an inference engine does"
 nav_title: "Inference engines"
-description: "Separate inference engines, serving frameworks, general model servers, and cluster orchestration by the responsibility each layer owns."
+description: "Place inference engines, serving frameworks, general model servers, and cluster orchestration by the work each component owns."
 chapter: serving
 order: 2
 sequence: 202
@@ -37,12 +37,10 @@ references:
     url: https://kserve.github.io/website/docs/model-serving/generative-inference/overview
 ---
 
-An inference engine sits between an API request and accelerator execution. Its job is to make model execution correct and efficient.
-
-For an autoregressive LLM, that can include:
+An inference engine sits between an application programming interface (API) request and accelerator execution. For an autoregressive large language model (LLM), it can:
 
 - loading model configuration, tokenizer, and weights;
-- allocating GPU and KV-cache memory;
+- allocating graphics processing unit (GPU) and key-value (KV) cache memory;
 - scheduling prompt and decode work;
 - batching active sequences;
 - executing optimized kernels;
@@ -50,9 +48,9 @@ For an autoregressive LLM, that can include:
 - streaming generated output;
 - exposing serving metrics and health endpoints.
 
-## An inference engine is not the cluster orchestrator
+## Inference execution and cluster orchestration make different decisions
 
-The layers are easier to separate by the question each one answers.
+The components are easier to place by the decision each one owns.
 
 | Layer | Main question |
 |---|---|
@@ -75,7 +73,7 @@ Tool names are easier to remember after the responsibility is clear.
 
 These layers can be composed. A higher-level serving framework may run an LLM inference engine, and a general inference server may use an optimized LLM backend. They are not necessarily competing products at the same layer.
 
-The product names will change faster than the boundary. When comparing systems, ask whether you need:
+Product names change faster than these responsibilities. A comparison should look at:
 
 - broad framework support or LLM-specific serving;
 - hardware-specific optimization;
@@ -90,4 +88,4 @@ Exact benchmark winners also change with model, version, GPU, context distributi
 
 Authentication, tenant billing, global quotas, business routing, durable conversation state, and cluster/node lifecycle generally belong elsewhere.
 
-Keeping that boundary clear makes the rest of the architecture easier to reason about: the inference engine owns **efficient model execution**, while other layers own **traffic and infrastructure lifecycle**.
+The inference engine owns **efficient model execution**. Traffic policy, durable application state, and infrastructure lifecycle stay outside it.

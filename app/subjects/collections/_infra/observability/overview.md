@@ -28,7 +28,20 @@ references:
     url: https://opentelemetry.io/docs/concepts/signals/
 ---
 
-Monitoring tells you whether known conditions are healthy. Observability gives you enough evidence to investigate why a system is behaving the way it is, including failures you did not predefine exactly.
+Monitoring usually starts from conditions you already know to watch: latency above a threshold, an error-rate spike, a failed health check, or a saturated resource. Observability is the evidence available when you need to explain why the system reached that state.
+
+Metrics show how behavior changes over time, logs preserve event detail, and traces connect one request across components. None of the three is sufficient for every incident; correlation between them shortens the path from symptom to cause.
+
+Operationally, the sequence is usually:
+
+```text
+alert / user symptom
+→ identify affected service and time window
+→ inspect metrics
+→ follow traces or request IDs
+→ read the relevant logs
+→ confirm the failing component or dependency
+```
 
 ## In this chapter
 

@@ -27,9 +27,7 @@ references:
     url: https://kubernetes.io/docs/tutorials/services/connect-applications-service/
 ---
 
-Pods are replaceable. Their individual IPs should not become the durable address your clients depend on.
-
-A Kubernetes **Service** gives a changing set of backend Pods a stable network identity.
+Pods are replaceable, and their Internet Protocol (IP) addresses can change across restarts and rollouts. A Kubernetes **Service** gives a changing set of backend Pods a stable network identity.
 
 ## Pod addresses are not the service contract
 
@@ -53,9 +51,9 @@ ready Pod
 
 Readiness matters here. A Pod that exists but is not ready should not be treated like a healthy backend for ordinary Service traffic.
 
-## Internal and external exposure are different concerns
+## Internal traffic uses service discovery
 
-Inside the cluster, Services provide stable discovery between workloads.
+Inside the cluster, a Service gets a stable virtual address and Domain Name System (DNS) name. A `ClusterIP` Service is the common internal form: callers target the Service while Kubernetes tracks the ready Pod endpoints behind it through EndpointSlices.
 
 For traffic entering the cluster, common options include:
 
@@ -63,14 +61,14 @@ For traffic entering the cluster, common options include:
 - Gateway API implementations;
 - Ingress in existing deployments.
 
-The exact path depends on environment, but keep the layers distinct:
+The exact path depends on the environment:
 
-`external edge → cluster service/routing → Pod`.
+`external edge → cluster service/routing → ready Pod`.
 
-## Kubernetes networking is broader than load balancing
+## Kubernetes networking also controls reachability
 
-The cluster network also gives Pods network reachability and supports policy controls.
+The cluster network gives Pods routable addresses, while NetworkPolicy can restrict which Pods or namespaces may communicate when the network implementation supports it.
 
-For system design, the important idea is that Kubernetes is maintaining **endpoint membership** as Pods change. Your application or upstream router can target a stable service rather than discovering every Pod itself.
+Kubernetes updates endpoint membership as Pods appear, disappear, or fail readiness. Applications can keep calling the stable Service while the backend set changes underneath it.
 
 Next: [Storage and init containers]({{ '/infrastructure/kubernetes/storage-init-containers/' | relative_url }}).

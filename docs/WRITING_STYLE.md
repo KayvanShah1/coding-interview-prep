@@ -99,7 +99,7 @@ Avoid:
 
 - stacked one-line fragments;
 - every paragraph beginning with a label;
-- repetitive “The key is...”, “The important thing is...”, or “A useful way to think about...” constructions;
+- repetitive “The key is...”, “The important thing is...”, “The point is...”, or “A useful way to think about...” constructions;
 - motivational filler;
 - fake first-person anecdotes;
 - “In today's rapidly evolving landscape...” language;
@@ -115,6 +115,54 @@ Instead of:
 Prefer:
 
 > High GPU utilization can be healthy when continuous batching is keeping the accelerator busy. Queue growth and TTFT tell you more about unserved demand.
+
+## Avoid repeated contrast scaffolding
+
+Contrast is useful when it exposes a real distinction, but it becomes a writing fingerprint when every explanation follows the same shape:
+
+- `X is not Y; it is Z`;
+- `not X, but Y`;
+- `rather than X`;
+- `keep X and Y separate`;
+- `the important boundary is...`;
+- `the point is not...`.
+
+Use those constructions when the contrast itself carries the explanation. Otherwise state the mechanism or consequence directly.
+
+Prefer:
+
+> HPA can request six Pods. If the cluster has room for only four, the remaining Pods stay Pending until node capacity appears.
+
+Over:
+
+> Workload scaling is not node scaling. Keep the two layers separate.
+
+The first version proves the distinction through behavior.
+
+Watch repeated helper words as well. `useful`, `important`, `boundary`, `layer`, `actually`, `simply`, and `commonly` are normal words, but repeated use across neighboring pages makes the prose sound templated. Reserve `boundary` and `layer` for genuine architectural interfaces or system layers.
+
+Instructional commands can create the same effect. Prefer showing the failure or decision over repeatedly telling the reader `Do not...`, `Keep...`, `Remember...`, or `Start with...`.
+
+## Expand short forms on every page
+
+Search can land a reader directly on any page, so a technical acronym should be expanded at its first meaningful use on that page.
+
+Examples:
+
+- `large language model (LLM)`;
+- `graphics processing unit (GPU)`;
+- `key-value (KV) cache`;
+- `time to first token (TTFT)`;
+- `time per output token (TPOT)`;
+- `Horizontal Pod Autoscaler (HPA)`;
+- `PersistentVolumeClaim (PVC)`;
+- `mean time to recovery (MTTR)`.
+
+After the first expansion, use the short form normally.
+
+Do not force product names into artificial acronym expansions. For names such as vLLM, Kubernetes, Karpenter, CUDA, or Triton, explain the product's role when the page needs that context.
+
+Common computing terms such as SQL or HTTP can remain unexpanded when the expanded form would add no useful context, but domain-specific abbreviations should not require the reader to visit a previous page.
 
 ## Use questions when they expose the reasoning
 
