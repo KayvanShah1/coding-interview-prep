@@ -135,7 +135,15 @@ Published lessons currently live in `app/subjects/_sql/`, `app/subjects/_ai/`, a
 
 ## Run locally
 
-Requirements: Ruby with Bundler, and Node.js 22+ for checks.
+With Docker Desktop running, start the site with:
+
+```sh
+docker compose up --build
+```
+
+Open [localhost:4000](http://localhost:4000/coretrail/). Compose mounts `app/` and `_config.yml`; changes to pages, styles, and scripts rebuild the site and refresh the browser. Restart the service after changing `_config.yml`. Stop it with `docker compose down`.
+
+For a local Ruby installation, use Ruby 3.3 with Bundler:
 
 ```sh
 bundle install
