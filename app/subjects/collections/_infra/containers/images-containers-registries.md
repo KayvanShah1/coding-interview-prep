@@ -64,7 +64,7 @@ configuration defaults
 
 Secrets and environment-specific configuration generally should not be permanently baked into the image.
 
-Large mutable data also deserves separate treatment. An LLM checkpoint, for example, can be mounted or downloaded independently rather than forcing every code change to rebuild a huge image.
+Large mutable data also deserves separate treatment. A large language model (LLM) checkpoint, for example, can be mounted or downloaded independently rather than forcing every code change to rebuild a huge image.
 
 ## Tags are convenient; digests are precise
 
@@ -93,4 +93,4 @@ Docker does not inherently decide:
 
 That is where an orchestrator such as Kubernetes enters.
 
-For GPU workloads, one more boundary matters: the image contains userspace libraries, but the physical GPU and kernel driver belong to the host. Continue to [How containers use GPUs]({{ '/infrastructure/containers/gpu-containers/' | relative_url }}).
+For graphics processing unit (GPU) workloads, one more interface matters: the image contains userspace libraries, but the physical GPU and kernel driver belong to the host. Continue to [How containers use GPUs]({{ '/infrastructure/containers/gpu-containers/' | relative_url }}).

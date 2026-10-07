@@ -22,9 +22,9 @@ references:
     url: https://docs.vllm.ai/en/stable/
 ---
 
-Start with the smallest useful system:
+Start with the smallest useful large language model (LLM) system:
 
-`client → model server → GPU`.
+`client → model server → graphics processing unit (GPU)`.
 
 That can be enough for development or a low-traffic internal tool. Every extra layer should answer a concrete production problem.
 
@@ -87,6 +87,6 @@ Later, [Rate limits, concurrency, and backpressure]({{ '/ai-engineering/producti
 
 Containers and Kubernetes enter when you need repeatable deployment, placement, health management, replica lifecycle, and controlled rollout across machines.
 
-Those are general infrastructure problems. The LLM-specific part is the resource shape: expensive GPU nodes, large model artifacts, long startup, and serving metrics that differ from a normal CPU API.
+Those are general infrastructure problems. The LLM-specific part is the resource shape: expensive GPU nodes, large model artifacts, long startup, and serving metrics that differ from a normal central processing unit (CPU) API.
 
 The deployment trail starts at [What actually gets deployed]({{ '/ai-engineering/deployment/what-gets-deployed/' | relative_url }}).

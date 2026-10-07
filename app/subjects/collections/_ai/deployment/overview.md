@@ -23,15 +23,15 @@ references:
     url: https://kubernetes.io/docs/concepts/workloads/pods/probes/
 ---
 
-“Deploy the model” hides several artifacts and lifecycle steps.
+Deploying a large language model (LLM) spans several artifacts and lifecycle steps.
 
-The container image, model checkpoint, infrastructure configuration, and running GPU memory are related, but they are not the same thing. Keeping them separate makes startup failures and rollout trade-offs much easier to explain.
+The container image, model checkpoint, infrastructure configuration, and running graphics processing unit (GPU) memory are related, but they are not the same thing. Keeping them separate makes startup failures and rollout trade-offs much easier to explain.
 
 ## In this chapter
 
 <ul class="topic-list">
 <li><a href="{{ '/ai-engineering/deployment/what-gets-deployed/' | relative_url }}">What actually gets deployed</a><span>Separate software images, model artifacts, configuration, and runtime state.</span></li>
-<li><a href="{{ '/ai-engineering/deployment/model-weights/' | relative_url }}">Where model weights live</a><span>Follow a checkpoint from registry or object storage to disk, RAM, and GPU VRAM.</span></li>
+<li><a href="{{ '/ai-engineering/deployment/model-weights/' | relative_url }}">Where model weights live</a><span>Follow a checkpoint from registry or object storage to disk, RAM, and GPU video memory (VRAM).</span></li>
 <li><a href="{{ '/ai-engineering/deployment/startup-lifecycle/' | relative_url }}">From container start to ready replica</a><span>Trace scheduling, image pull, model loading, warmup, and readiness.</span></li>
 <li><a href="{{ '/ai-engineering/deployment/rollouts/' | relative_url }}">Updating models without breaking traffic</a><span>Reason about rolling updates, canaries, surge capacity, and rollback when replicas are expensive to start.</span></li>
 </ul>

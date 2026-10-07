@@ -31,7 +31,7 @@ references:
     url: https://docs.aws.amazon.com/eks/latest/userguide/ml-inference-autoscaling.html
 ---
 
-Every box in the serving path should own a decision. If two boxes cannot be distinguished by responsibility, the diagram is not helping.
+A large language model (LLM) serving path is easier to reason about when every component owns a specific decision. If two boxes cannot be distinguished by responsibility, the diagram is not helping.
 
 {% capture diagram_code %}
 flowchart TD
@@ -64,13 +64,13 @@ Client → Load balancer/API gateway → Model router → Admission control/boun
 
 **Inference scheduler:** decides how active sequences share execution and cache capacity.
 
-**GPU(s):** perform the tensor computation.
+**Graphics processing unit (GPU):** performs the tensor computation.
 
 ## Control path: how serving capacity exists
 
 **Kubernetes:** keeps the declared workloads running and places Pods on suitable nodes.
 
-**Workload autoscaler:** changes the desired number of serving replicas from metrics or events. HPA/KEDA are common Kubernetes examples.
+**Workload autoscaler:** changes the desired number of serving replicas from metrics or events. The Horizontal Pod Autoscaler (HPA) and Kubernetes Event-driven Autoscaling (KEDA) are common Kubernetes examples.
 
 **Node autoscaler:** obtains or removes machines when the current cluster cannot place those replicas. Karpenter and cluster autoscalers are examples.
 
@@ -92,13 +92,13 @@ Higher-level serving frameworks and general inference servers can compose around
 
 ## Same fundamentals, different bottleneck
 
-A normal backend may saturate on CPU, database connections, or I/O.
+A normal backend may saturate on central processing unit (CPU) capacity, database connections, or I/O.
 
 An LLM service can saturate on:
 
 ```text
 GPU compute
-GPU memory / KV cache
+GPU memory / key-value (KV) cache
 inter-GPU communication
 request queue
 model startup capacity

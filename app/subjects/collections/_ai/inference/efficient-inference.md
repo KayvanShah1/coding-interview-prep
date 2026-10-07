@@ -127,6 +127,6 @@ A router can send simpler work to a smaller model, reserve a larger model for ha
 | Decode latency | Speculative decoding, faster kernels/hardware |
 | Long prompt interference | Chunked/disaggregated prefill |
 | Cost from over-capable models | Model routing |
-| Low GPU utilization | Better scheduling/batching |
+| Low graphics processing unit (GPU) utilization | Better scheduling/batching |
 
 The next chapter moves one level up: [LLM serving]({{ '/ai-engineering/serving/overview/' | relative_url }}).

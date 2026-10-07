@@ -42,7 +42,7 @@ Container startup is only the beginning of model startup. The checkpoint still h
 flowchart LR
 A["Registry / object storage"] --> B["Persistent or local disk"]
 B --> C["Host memory"]
-C --> D["GPU VRAM"]
+C --> D["GPU video memory (VRAM)"]
 D --> E["Ready inference replica"]
 {% endcapture %}
 {% capture diagram_fallback %}

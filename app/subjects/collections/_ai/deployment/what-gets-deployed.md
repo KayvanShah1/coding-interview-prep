@@ -85,8 +85,8 @@ This answers: **where and under what operational constraints should the workload
 Once the process starts, more state appears:
 
 ```text
-model tensors in CPU/GPU memory
-KV cache
+model tensors in central processing unit (CPU) / graphics processing unit (GPU) memory
+key-value (KV) cache
 compiled kernels / graph caches
 active requests
 queues

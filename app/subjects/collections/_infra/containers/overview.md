@@ -31,5 +31,5 @@ The practical questions are: **what is packaged, where is it stored, what starts
 
 <ul class="topic-list">
 <li><a href="{{ '/infrastructure/containers/images-containers-registries/' | relative_url }}">Images, containers, and registries</a><span>Separate the immutable package from the running process and the place images are distributed from.</span></li>
-<li><a href="{{ '/infrastructure/containers/gpu-containers/' | relative_url }}">How containers use GPUs</a><span>Keep host drivers, container libraries, device access, and accelerator scheduling in the right layers.</span></li>
+<li><a href="{{ '/infrastructure/containers/gpu-containers/' | relative_url }}">How containers use GPUs</a><span>Follow graphics processing unit (GPU) access through host drivers, container libraries, device exposure, and accelerator scheduling.</span></li>
 </ul>

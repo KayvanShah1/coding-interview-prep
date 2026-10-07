@@ -23,9 +23,9 @@ references:
     url: https://docs.aws.amazon.com/eks/latest/userguide/ml-inference-autoscaling.html
 ---
 
-The same distributed-systems fundamentals still apply: load balancing, replication, bounded queues, backpressure, health checks, rollouts, capacity planning, observability, and failure domains.
+Large language model (LLM) serving still uses familiar distributed-systems fundamentals: load balancing, replication, bounded queues, backpressure, health checks, rollouts, capacity planning, observability, and failure domains.
 
-What changes is the resource profile. Model replicas are large, accelerator-bound, stateful during generation, and expensive to start.
+What changes is the resource profile. Model replicas are large, graphics processing unit (GPU) / accelerator-bound, stateful during generation, and expensive to start.
 
 ## In this chapter
 

@@ -31,7 +31,7 @@ references:
     url: https://docs.cloud.google.com/kubernetes-engine/docs/concepts/about-gke-inference-gateway
 ---
 
-There is usually no single GPU answering an entire product's traffic. Concurrency comes from **horizontal replicas** and from **sharing each replica efficiently among several active requests**.
+There is usually no single graphics processing unit (GPU) answering an entire large language model (LLM) product's traffic. Concurrency comes from **horizontal replicas** and from **sharing each replica efficiently among several active requests**.
 
 {% capture diagram_code %}
 flowchart LR
@@ -50,7 +50,7 @@ Requests → Router → Replica A, B, or C. Each replica continuously batches se
 
 ## Horizontal replicas multiply independent serving capacity
 
-If one replica reaches its useful concurrency limit, another replica gives the fleet another KV-cache pool, another scheduler, and another set of accelerator resources.
+If one replica reaches its useful concurrency limit, another replica gives the fleet another key-value (KV) cache pool, another scheduler, and another set of accelerator resources.
 
 A router spreads new requests across those serving units.
 
@@ -106,7 +106,7 @@ A small homogeneous fleet may still be better served by simple load balancing. M
 
 Routing alone cannot create capacity.
 
-Requests begin waiting, queue depth increases, TTFT rises, and eventually the system must choose among:
+Requests begin waiting, queue depth increases, time to first token (TTFT) rises, and eventually the system must choose among:
 
 - admit the work and let it wait;
 - reject or shed load;

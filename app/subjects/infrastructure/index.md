@@ -33,13 +33,13 @@ Build image → Registry → Run container → Kubernetes workload → Service/t
 {% endcapture %}
 {% include diagram.html title="From packaged software to an operated workload" code=diagram_code fallback=diagram_fallback caption=true %}
 
-The pages here own the reusable mechanics. AI Engineering links back when an LLM changes the resource profile, startup path, or scaling signal.
+The pages here own the reusable mechanics. Artificial Intelligence (AI) Engineering links back when a large language model (LLM) changes the resource profile, startup path, or scaling signal.
 
 ## Start with the layers
 
 <ul class="topic-list">
-<li><a href="{{ '/infrastructure/containers/overview/' | relative_url }}">Containers</a><span>Images, registries, runtimes, and GPU access.</span></li>
+<li><a href="{{ '/infrastructure/containers/overview/' | relative_url }}">Containers</a><span>Images, registries, runtimes, and graphics processing unit (GPU) access.</span></li>
 <li><a href="{{ '/infrastructure/kubernetes/overview/' | relative_url }}">Kubernetes</a><span>Pods, nodes, Deployments, Services, storage, init containers, and probes.</span></li>
-<li><a href="{{ '/infrastructure/scaling/overview/' | relative_url }}">Scaling</a><span>Workload replicas versus machine capacity, with HPA, KEDA, and node autoscaling.</span></li>
+<li><a href="{{ '/infrastructure/scaling/overview/' | relative_url }}">Scaling</a><span>Workload replicas versus machine capacity, with the Horizontal Pod Autoscaler (HPA), Kubernetes Event-driven Autoscaling (KEDA), and node autoscaling.</span></li>
 <li><a href="{{ '/infrastructure/observability/overview/' | relative_url }}">Operations & observability</a><span>Metrics, logs, traces, health, and the evidence used during incidents.</span></li>
 </ul>

@@ -36,7 +36,7 @@ A startup probe protects slow-starting applications from being treated as dead b
 
 While startup has not succeeded, Kubernetes does not run the normal liveness/readiness probes.
 
-This is useful for applications with predictable long initialization, including large model servers.
+This is useful for applications with predictable long initialization, including large language model (LLM) servers.
 
 ## Readiness: should new traffic come here?
 
@@ -44,7 +44,7 @@ A readiness failure removes the Pod from normal Service traffic.
 
 The process can remain alive while temporarily unable to serve: it may still be warming, reloading, or recovering from a dependency issue.
 
-For LLM serving, readiness should wait until the intended model is actually loaded enough to serve, not merely until a web process has bound a port.
+For LLM serving, readiness should wait until the intended model is loaded enough to serve. A bound web port only proves that the process is listening.
 
 ## Liveness: should the container be restarted?
 
@@ -60,6 +60,6 @@ Only after new Pods become ready should they count as available capacity.
 
 Settings such as `maxSurge` and `maxUnavailable` control the temporary capacity envelope during rollout.
 
-For large GPU workloads, those numbers can translate directly into expensive temporary accelerator demand. The mechanics are generic Kubernetes; the cost profile is workload-specific.
+For large graphics processing unit (GPU) workloads, those numbers can translate directly into expensive temporary accelerator demand. The mechanics are generic Kubernetes; the cost profile is workload-specific.
 
 The next chapter separates scaling the workload from scaling the cluster: [Scaling]({{ '/infrastructure/scaling/overview/' | relative_url }}).

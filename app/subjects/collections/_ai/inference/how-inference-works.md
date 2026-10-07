@@ -90,7 +90,7 @@ That means two requests are not equivalent merely because both count as one HTTP
 | Request | Likely pressure |
 |---|---|
 | Short prompt, short answer | Small amount of serving work |
-| Long prompt, short answer | Heavy prefill and KV-cache allocation |
+| Long prompt, short answer | Heavy prefill and key-value (KV) cache allocation |
 | Short prompt, long answer | Long-lived decode work |
 | Long prompt, long answer | Both memory pressure and sustained generation |
 

@@ -22,13 +22,13 @@ references:
 
 ## Begin below the API
 
-A request to an LLM endpoint eventually becomes tensor work on an accelerator. Before thinking about Kubernetes or autoscaling, understand what one replica is trying to do.
+A request to a large language model (LLM) endpoint eventually becomes tensor work on a graphics processing unit (GPU) or another accelerator. Before thinking about Kubernetes or autoscaling, understand what one replica is trying to do.
 
 The serving problems in this chapter follow directly from four facts:
 
 1. the prompt is processed before generation begins;
 2. output is generated autoregressively rather than all at once;
-3. active requests keep attention state in a KV cache;
+3. active requests keep attention state in a key-value (KV) cache;
 4. GPUs become efficient when useful work from several requests can be scheduled together.
 
 ## In this chapter

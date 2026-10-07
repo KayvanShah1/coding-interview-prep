@@ -23,7 +23,7 @@ The request lifecycle changes the serving choices. A conventional prediction oft
 ## In this chapter
 
 <ul class="topic-list">
-<li><a href="{{ '/ml/serving/model-serving-vs-llm-serving/' | relative_url }}">Traditional ML serving vs LLM serving</a><span>See which deployment fundamentals carry over and which constraints change for token generation, batching, GPU memory, and scaling.</span></li>
+<li><a href="{{ '/ml/serving/model-serving-vs-llm-serving/' | relative_url }}">Traditional ML serving vs LLM serving</a><span>See which deployment fundamentals carry over and which constraints change for token generation, batching, graphics processing unit (GPU) memory, and scaling.</span></li>
 </ul>
 
 Continue into [LLM inference]({{ '/ai-engineering/inference/overview/' | relative_url }}) for the execution details or [Infrastructure & DevOps]({{ '/infrastructure/' | relative_url }}) for the shared deployment mechanics.

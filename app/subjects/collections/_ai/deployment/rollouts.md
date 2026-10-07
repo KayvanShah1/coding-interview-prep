@@ -28,7 +28,7 @@ references:
     url: https://kubernetes.io/docs/concepts/workloads/pods/probes/
 ---
 
-A normal backend can often start in seconds. A large LLM replica may need a scarce GPU node, a large checkpoint, runtime initialization, and warmup before it is ready.
+A normal backend can often start in seconds. A large language model (LLM) replica may need a scarce graphics processing unit (GPU) node, a large checkpoint, runtime initialization, and warmup before it is ready.
 
 That makes rollout capacity a first-class concern.
 
@@ -52,7 +52,7 @@ The old serving capacity should not disappear before enough new capacity is actu
 
 Kubernetes Deployments gradually create a new ReplicaSet and scale down the old one. `maxSurge` and `maxUnavailable` control how much temporary extra capacity and how much temporary loss are allowed.
 
-For CPU services, a little surge may be cheap.
+For central processing unit (CPU) services, a little surge may be cheap.
 
 For an LLM where each replica consumes several expensive GPUs, “one extra replica during rollout” can be a meaningful capacity and cost decision.
 
@@ -63,7 +63,7 @@ A new model or runtime version can change:
 - answer quality;
 - tokenization or generation behavior;
 - memory use;
-- TTFT/TPOT;
+- time to first token (TTFT) / time per output token (TPOT);
 - throughput;
 - failure rate;
 - tool-call behavior.

@@ -12,7 +12,7 @@ keywords:
 
 ## Start with model serving
 
-The first chapter compares a conventional prediction API with autoregressive LLM serving. It starts with the production concerns both systems share, then looks at the request shape and resource constraints that change the serving architecture.
+The first chapter compares a conventional prediction API with autoregressive large language model (LLM) serving. It starts with the production concerns both systems share, then looks at the request shape and resource constraints that change the serving architecture.
 
 <ul class="topic-list">
 <li><a href="{{ '/ml/serving/overview/' | relative_url }}">Model serving</a><span>Follow the chapter overview into the comparison between traditional ML serving and LLM serving.</span></li>

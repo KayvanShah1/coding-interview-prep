@@ -71,7 +71,7 @@ Compare:
 
 - TPOT and inter-token latency (ITL);
 - batch/concurrency changes;
-- GPU and memory pressure;
+- graphics processing unit (GPU) and memory pressure;
 - quantization/runtime changes;
 - multi-GPU communication;
 - model/version changes.
