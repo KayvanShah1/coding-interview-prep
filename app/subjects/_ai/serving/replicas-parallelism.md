@@ -5,7 +5,7 @@ description: "Separate splitting one model across GPUs from duplicating model-se
 chapter: serving
 order: 3
 sequence: 203
-level: Core
+level: "Core + deep dive"
 mermaid: true
 keywords:
   - tensor parallelism
@@ -14,8 +14,7 @@ keywords:
   - replicas
   - multi GPU inference
   - distributed inference
-  - NCCL
-  - NVLink
+  - GPU topology
 aliases:
   - TP
   - PP
@@ -23,7 +22,6 @@ aliases:
   - multi-GPU serving
 tools:
   - vLLM
-  - NCCL
 interview_queries:
   - how do you serve a model that does not fit on one GPU
   - tensor parallelism vs pipeline parallelism
@@ -37,10 +35,6 @@ references:
     url: https://docs.vllm.ai/en/stable/examples/ray_serving/multi-node-serving/
   - title: Google Cloud - multi-host LLM serving on GKE
     url: https://docs.cloud.google.com/kubernetes-engine/docs/tutorials/serve-multihost-gpu
-  - title: NVIDIA GPUDirect RDMA
-    url: https://docs.nvidia.com/cuda/gpudirect-rdma/
-  - title: Kubernetes gang scheduling
-    url: https://kubernetes.io/docs/concepts/scheduling-eviction/gang-scheduling/
 ---
 
 Three different scaling ideas are often collapsed into “use more GPUs.” Keep them separate.
@@ -73,7 +67,7 @@ One logical model replica might therefore require:
 
 `GPU 0 + GPU 1 + GPU 2 + GPU 3`.
 
-The GPUs must exchange intermediate results frequently, so communication topology matters. Fast links such as NVLink/NVSwitch inside a node can make this much more practical than spreading tightly coupled tensor-parallel work over ordinary networking.
+The GPUs must exchange intermediate results frequently, so communication topology matters. High-bandwidth links inside a node can make tightly coupled tensor-parallel work much more practical than spreading it across ordinary cross-node networking.
 
 vLLM's current guidance is straightforward: if the model fits on one GPU, distributed inference may be unnecessary; if it needs several GPUs in one node, tensor parallelism is a common choice.
 
@@ -114,54 +108,40 @@ That changes failure handling. If one worker is required for a distributed repli
 
 ## Optional deep dive: topology changes the cost of parallelism
 
-Multi-GPU communication may involve NCCL over NVLink/NVSwitch, PCIe, InfiniBand or RoCE, and GPUDirect RDMA depending on where the workers are placed.
-
-The physical paths are very different:
+When one logical replica spans several GPUs, the workers have to exchange intermediate results.
 
 ```text
 same node
-GPU ↔ NVLink / NVSwitch ↔ GPU
+GPU ↔ high-bandwidth GPU interconnect ↔ GPU
 
 across nodes
-GPU ↔ NIC ↔ InfiniBand / RoCE ↔ NIC ↔ GPU
+GPU ↔ network fabric ↔ GPU
 ```
 
-NCCL is the collective-communication library commonly coordinating those transfers for NVIDIA GPU workloads. GPUDirect RDMA can let a network device exchange data directly with GPU memory rather than bouncing the payload through host CPU memory.
+The farther apart the participating GPUs are, the more communication can affect inference latency and throughput. A collective-communication library such as NCCL commonly coordinates this exchange in NVIDIA deployments, but the library or network product is not the concept to memorize.
 
-The important point is not to memorize interconnect products:
+So “the cluster has eight free GPUs” is incomplete information. Eight tightly connected GPUs on one machine and eight GPUs scattered across machines can support very different parallelism strategies.
 
-> Splitting one model creates communication. The farther apart the participating GPUs are, the more communication topology can become part of inference latency and throughput.
-
-That is why “the cluster has eight free GPUs” is incomplete information. Eight GPUs on one NVLink-connected node and eight GPUs scattered across machines can support very different parallelism strategies.
-
-### Placement can become a group-scheduling problem
-
-A distributed replica is only useful when enough of its workers can run together. Starting one worker while the other required GPU Pods remain unschedulable can reserve expensive resources without producing a ready model.
-
-For tightly coupled workloads, platforms can use topology-aware placement and **gang scheduling** so a required group is admitted together rather than Pod by Pod. Kubernetes now has gang-scheduling primitives for `PodGroup` workloads, although this is a deeper orchestration concern than most serving interviews require.
-
-This also explains why multi-node inference systems often manage the workers of one logical replica as a unit for rollout and recovery.
+A distributed replica may also need coordinated placement so enough of its required workers can become available together. The scheduler mechanics belong in infrastructure; the serving consequence is that a partially placed replica may consume resources without becoming useful capacity.
 
 ### Concrete example: one replica across 16 GPUs
 
-Google's GKE multi-host serving guidance uses Llama 3.1 405B as a concrete example. The FP16 model is roughly 750 GB, so the documented setup uses two A3 nodes with eight H100 GPUs each.
+A 405B-parameter model at 16-bit precision needs about **810 GB decimal (754 GiB)** for weights alone, before runtime memory.
 
-The parallelism is split as:
+Google's published Llama 3.1 405B multi-host example uses two eight-GPU machines. One serving replica combines tensor parallelism across the GPUs within each machine with pipeline parallelism across the two machines:
 
 ```text
 logical model replica
         ↓
-pipeline parallelism = 2 nodes
+2 machines
         ↓
-tensor parallelism = 8 GPUs inside each node
+8 GPUs per machine
         ↓
 16 GPUs participate in one serving replica
 ```
 
-That makes the earlier distinction concrete:
+The hardware details are not the lesson. The example makes one boundary concrete:
 
 `1 replica ≠ 1 Pod ≠ 1 GPU`.
-
-vLLM's current multi-node documentation uses the same general shape for examples: keep tensor parallelism within an eight-GPU node and use pipeline parallelism across two nodes when the model must span hosts.
 
 Next: [Routing and serving many users]({{ '/ai-engineering/serving/routing-concurrency/' | relative_url }}).

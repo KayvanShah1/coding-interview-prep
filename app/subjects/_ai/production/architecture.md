@@ -19,10 +19,6 @@ aliases:
 tools:
   - Kubernetes
   - vLLM
-  - KEDA
-  - Karpenter
-  - Prometheus
-  - llm-d
 interview_queries:
   - design an LLM serving architecture
   - what does each component in an LLM stack do
@@ -33,11 +29,9 @@ references:
     url: https://kubernetes.io/docs/concepts/workloads/
   - title: Amazon EKS inference autoscaling
     url: https://docs.aws.amazon.com/eks/latest/userguide/ml-inference-autoscaling.html
-  - title: Google Cloud - GKE Inference Gateway powered by llm-d
-    url: https://docs.cloud.google.com/kubernetes-engine/docs/concepts/about-gke-inference-gateway
 ---
 
-At this point every box should solve a specific problem rather than appear because it belongs to a fashionable stack.
+Every box in the serving path should own a decision. If two boxes cannot be distinguished by responsibility, the diagram is not helping.
 
 {% capture diagram_code %}
 flowchart TD
@@ -76,56 +70,25 @@ Client → Load balancer/API gateway → Model router → Admission control/boun
 
 **Kubernetes:** keeps the declared workloads running and places Pods on suitable nodes.
 
-**HPA/KEDA or another workload autoscaler:** changes the desired number of serving replicas from metrics or events.
+**Workload autoscaler:** changes the desired number of serving replicas from metrics or events. HPA/KEDA are common Kubernetes examples.
 
-**Node autoscaler/Karpenter:** obtains or removes machines when the current cluster cannot place those replicas.
+**Node autoscaler:** obtains or removes machines when the current cluster cannot place those replicas. Karpenter and cluster autoscalers are examples.
 
 **Observability:** provides the evidence used for scaling, SLOs, and debugging.
 
 ## The “who does what?” map
 
-| Tool/layer | Main responsibility |
-|---|---|
-| Docker/container image | Package the serving software environment |
-| Kubernetes Deployment | Maintain and roll workload replicas |
-| Kubernetes scheduler | Choose a node for a Pod |
-| Service/gateway | Expose and route network traffic |
-| HPA | Adjust replica count from metrics |
-| KEDA | Feed event/custom metrics into Kubernetes scaling behavior |
-| Karpenter / cluster autoscaler | Change machine/node capacity |
-| vLLM / SGLang | Schedule and execute LLM inference |
-| CUDA | Accelerator execution interface/runtime |
-| NCCL | Multi-GPU communication |
-| Prometheus | Collect time-series metrics |
-| Grafana | Visualize/alert on metrics |
-| KServe / Ray Serve | Optional higher-level serving/orchestration abstractions |
-| Triton | General inference-serving platform |
+| Layer | Main responsibility | Example |
+|---|---|---|
+| Container image | Package the serving software environment | Docker / OCI image |
+| Workload orchestrator | Maintain, place, and roll workload replicas | Kubernetes |
+| Service/gateway | Expose traffic, enforce policy, and route requests | API gateway / Service |
+| Workload autoscaler | Change desired replica count | HPA / KEDA |
+| Node autoscaler | Change machine capacity | Karpenter / cluster autoscaler |
+| Inference engine | Schedule and execute LLM inference | vLLM / SGLang |
+| Telemetry | Expose and collect evidence for operations and scaling | metrics / logs / traces |
 
-You would not necessarily use all of these together.
-
-## One production shape: an inference gateway in front of serving pools
-
-A current GKE design powered by llm-d makes the generic boxes above more concrete:
-
-```text
-client
-  ↓
-Inference Gateway
-  ↓
-state-aware endpoint selection
-  ↓
-InferencePool
-  ↓
-model-server replicas
-  ↓
-GPU(s)
-```
-
-The gateway can combine ordinary traffic control with inference-specific state such as prefix-cache matches, KV-cache pressure, pending queues, and LoRA placement. It can also queue or shed work when the serving pool is saturated.
-
-This is deliberately an **example**, not the canonical CoreTrail architecture. The generic responsibilities still matter even if a different platform calls the gateway, scheduler, pool, or model server by different names.
-
-The routing details live in [Routing and serving many users]({{ '/ai-engineering/serving/routing-concurrency/' | relative_url }}).
+Higher-level serving frameworks and general inference servers can compose around these layers. The [inference engine page]({{ '/ai-engineering/serving/inference-engines/' | relative_url }}) keeps those tool boundaries in one place instead of repeating the ecosystem here.
 
 ## Same fundamentals, different bottleneck
 

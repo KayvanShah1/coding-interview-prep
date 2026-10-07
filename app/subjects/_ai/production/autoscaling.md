@@ -41,13 +41,13 @@ There are two different scaling loops.
 
 {% capture diagram_code %}
 flowchart TD
-A["Queue / latency pressure"] --> B["HPA / KEDA"]
+A["Queue / latency pressure"] --> B["Workload autoscaler<br/>(for example HPA / KEDA)"]
 B --> C["Desired model replicas increase"]
 C --> D["Kubernetes creates Pod"]
 D --> E{"GPU node has room?"}
 E -- "Yes" --> F["Schedule Pod"]
 E -- "No" --> G["Pod Pending"]
-G --> H["Karpenter / node autoscaler"]
+G --> H["Node autoscaler<br/>(for example Karpenter)"]
 H --> I["Provision GPU node"]
 I --> F
 F --> J["Load model + become ready"]
@@ -58,13 +58,13 @@ Queue/latency pressure → HPA/KEDA → desired replicas increase → Kubernetes
 {% endcapture %}
 {% include diagram.html title="Workload scaling and node scaling are separate" code=diagram_code fallback=diagram_fallback caption=true %}
 
-## Pod scaling asks for more serving replicas
+## Workload scaling asks for more serving replicas
 
-Kubernetes HPA updates the replica count of a scalable workload from configured metrics.
+A workload autoscaler changes the desired replica count from demand signals.
 
-KEDA can monitor external/event/custom signals and expose the scaling demand through Kubernetes/HPA behavior.
+In Kubernetes, HPA is the common replica-scaling mechanism. KEDA is one way to bring external or event-driven signals into that scaling loop.
 
-For example, Prometheus might expose waiting requests from vLLM, and KEDA can use that signal to drive the workload replica target.
+For LLM serving, a signal such as waiting requests can therefore increase the desired number of inference replicas.
 
 ## Node scaling supplies machines for those Pods
 
@@ -72,13 +72,15 @@ Creating a Pod does not create a GPU.
 
 If every suitable GPU node is full, the new Pod is unschedulable and remains Pending.
 
-A node lifecycle system such as Karpenter sees unschedulable Pods, evaluates their scheduling constraints, and provisions nodes that can fit them.
+A node autoscaler sees unschedulable Pods, evaluates their scheduling constraints, and provisions machines that can fit them. Karpenter is one Kubernetes example.
 
 So:
 
-`HPA/KEDA → how many replicas?`
+`workload autoscaler → how many replicas?`
 
-`Karpenter/cluster autoscaler → how many machines?`
+`node autoscaler → how many machines?`
+
+HPA/KEDA and Karpenter are concrete implementations of those two different loops.
 
 ## Why GPU utilization alone can mislead
 
