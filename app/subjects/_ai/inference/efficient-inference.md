@@ -29,6 +29,8 @@ references:
     url: https://docs.vllm.ai/en/stable/api/vllm/config/cache/
   - title: vLLM optimization and tuning
     url: https://docs.vllm.ai/en/stable/configuration/optimization/
+  - title: vLLM disaggregated prefilling
+    url: https://docs.vllm.ai/en/latest/features/disagg_prefill/
 ---
 
 Do not start an optimization discussion with a list of techniques. Start with the expensive resource or delay you are trying to reduce.
@@ -73,9 +75,39 @@ It is useful when the extra proposer/verification work produces enough accepted 
 
 ## If prompts are large: schedule prefill carefully
 
-Large prefills can monopolize execution and hurt other requests' first-token latency. Chunked or disaggregated prefill approaches split or separate prompt processing so the scheduler can balance it against decode traffic.
+Large prefills can monopolize execution and hurt other requests' first-token latency. Two related approaches attack that interference at different levels.
 
-This becomes increasingly relevant when a serving fleet mixes long-document requests with interactive chat.
+### Chunked prefill shares one serving pool more carefully
+
+Instead of processing one large prompt as a single block of work, the scheduler can break prefill into chunks and interleave it with decode work already in flight.
+
+That can improve fairness between long prompts and interactive generation without changing the basic deployment shape:
+
+`same replica → prefill chunks + decode work`.
+
+The trade-off moves into scheduling. Chunk size and scheduling policy can improve one latency metric while hurting another, so this should be tuned against the actual prompt distribution rather than enabled because “chunking is faster.”
+
+### Disaggregated prefill separates the phases
+
+A more structural design runs prefill and decode on different serving instances:
+
+```text
+prompt
+  ↓
+prefill pool
+  ↓  KV state transfer
+decode pool
+  ↓
+generated tokens
+```
+
+This matters because prefill and decode stress hardware differently. Separate pools can use different parallelism or capacity settings and let operators tune **TTFT** and **inter-token latency** more independently.
+
+The price is an extra distributed-systems problem: the KV state produced during prefill has to reach the decode worker efficiently. Network bandwidth, KV-transfer mechanisms, routing, and failure handling now become part of the serving path.
+
+vLLM currently describes disaggregated prefilling as experimental. Its documentation is also explicit that the feature is primarily about controlling latency behavior, not magically increasing total throughput.
+
+This becomes most relevant when long-context prefill and latency-sensitive decode compete heavily enough that scheduler tuning inside one replica is no longer sufficient.
 
 ## If the request does not need the largest model: route differently
 

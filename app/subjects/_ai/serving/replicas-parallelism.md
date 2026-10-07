@@ -33,6 +33,14 @@ references:
     url: https://docs.vllm.ai/en/stable/serving/parallelism_scaling/
   - title: vLLM data parallel deployment
     url: https://docs.vllm.ai/en/stable/serving/data_parallel_deployment/
+  - title: vLLM multi-node serving example
+    url: https://docs.vllm.ai/en/stable/examples/ray_serving/multi-node-serving/
+  - title: Google Cloud - multi-host LLM serving on GKE
+    url: https://docs.cloud.google.com/kubernetes-engine/docs/tutorials/serve-multihost-gpu
+  - title: NVIDIA GPUDirect RDMA
+    url: https://docs.nvidia.com/cuda/gpudirect-rdma/
+  - title: Kubernetes gang scheduling
+    url: https://kubernetes.io/docs/concepts/scheduling-eviction/gang-scheduling/
 ---
 
 Three different scaling ideas are often collapsed into “use more GPUs.” Keep them separate.
@@ -104,14 +112,56 @@ A small model might use one GPU and one process. A large model can span eight GP
 
 That changes failure handling. If one worker is required for a distributed replica and that worker disappears, the useful capacity loss may be the whole replica, not merely one GPU's fraction of traffic.
 
-## Why topology becomes a deep-infra concern
+## Optional deep dive: topology changes the cost of parallelism
 
-Multi-GPU communication may involve NCCL over NVLink/NVSwitch, PCIe, InfiniBand, or GPUDirect RDMA depending on topology.
+Multi-GPU communication may involve NCCL over NVLink/NVSwitch, PCIe, InfiniBand or RoCE, and GPUDirect RDMA depending on where the workers are placed.
 
-You do not need those details for every AI Engineer interview. The useful mental model is:
+The physical paths are very different:
 
-> Splitting a model creates communication. The more tightly the GPUs cooperate, the more the interconnect can become part of inference performance.
+```text
+same node
+GPU ↔ NVLink / NVSwitch ↔ GPU
 
-That is why a scheduler finding “four free GPUs” is not always enough. Which four GPUs, on which nodes, with which links can matter.
+across nodes
+GPU ↔ NIC ↔ InfiniBand / RoCE ↔ NIC ↔ GPU
+```
+
+NCCL is the collective-communication library commonly coordinating those transfers for NVIDIA GPU workloads. GPUDirect RDMA can let a network device exchange data directly with GPU memory rather than bouncing the payload through host CPU memory.
+
+The important point is not to memorize interconnect products:
+
+> Splitting one model creates communication. The farther apart the participating GPUs are, the more communication topology can become part of inference latency and throughput.
+
+That is why “the cluster has eight free GPUs” is incomplete information. Eight GPUs on one NVLink-connected node and eight GPUs scattered across machines can support very different parallelism strategies.
+
+### Placement can become a group-scheduling problem
+
+A distributed replica is only useful when enough of its workers can run together. Starting one worker while the other required GPU Pods remain unschedulable can reserve expensive resources without producing a ready model.
+
+For tightly coupled workloads, platforms can use topology-aware placement and **gang scheduling** so a required group is admitted together rather than Pod by Pod. Kubernetes now has gang-scheduling primitives for `PodGroup` workloads, although this is a deeper orchestration concern than most serving interviews require.
+
+This also explains why multi-node inference systems often manage the workers of one logical replica as a unit for rollout and recovery.
+
+### Concrete example: one replica across 16 GPUs
+
+Google's GKE multi-host serving guidance uses Llama 3.1 405B as a concrete example. The FP16 model is roughly 750 GB, so the documented setup uses two A3 nodes with eight H100 GPUs each.
+
+The parallelism is split as:
+
+```text
+logical model replica
+        ↓
+pipeline parallelism = 2 nodes
+        ↓
+tensor parallelism = 8 GPUs inside each node
+        ↓
+16 GPUs participate in one serving replica
+```
+
+That makes the earlier distinction concrete:
+
+`1 replica ≠ 1 Pod ≠ 1 GPU`.
+
+vLLM's current multi-node documentation uses the same general shape for examples: keep tensor parallelism within an eight-GPU node and use pipeline parallelism across two nodes when the model must span hosts.
 
 Next: [Routing and serving many users]({{ '/ai-engineering/serving/routing-concurrency/' | relative_url }}).

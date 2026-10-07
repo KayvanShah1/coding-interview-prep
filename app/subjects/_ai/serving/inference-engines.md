@@ -31,6 +31,10 @@ references:
     url: https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/user_guide/architecture.html
   - title: NVIDIA Triton model repository
     url: https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/user_guide/model_repository.html
+  - title: Ray Serve LLM API
+    url: https://docs.ray.io/en/master/serve/api/llm.html
+  - title: KServe generative inference runtime
+    url: https://kserve.github.io/website/docs/model-serving/generative-inference/overview
 ---
 
 An inference engine sits between an API request and accelerator execution. Its job is to make model execution correct and efficient.
@@ -85,6 +89,58 @@ The design question is not “Which acronym wins?” Ask what you need:
 Both target high-throughput language-model workloads and include scheduling/cache/runtime optimizations designed around autoregressive generation.
 
 Exact benchmark winners change with model, version, GPU, context distribution, and configuration. In an interview, it is stronger to explain the responsibilities and benchmark criteria than to claim one engine is universally faster.
+
+## Where higher-level serving layers fit
+
+The tool names become easier to place when you draw the stack instead of comparing every product directly.
+
+A minimal deployment can be:
+
+```text
+Kubernetes
+   ↓
+Deployment / Service
+   ↓
+vLLM or SGLang
+   ↓
+GPU
+```
+
+A higher-level serving framework can add another operational layer:
+
+```text
+Kubernetes
+   ↓
+KServe or Ray Serve
+   ↓
+vLLM
+   ↓
+GPU
+```
+
+And NVIDIA's stack can look different again:
+
+```text
+Kubernetes
+   ↓
+Triton Inference Server
+   ↓
+TensorRT-LLM backend/runtime
+   ↓
+GPU
+```
+
+These are examples, not mandatory compositions.
+
+**Ray Serve** adds distributed application deployment, replicas, autoscaling, routing, and multi-model serving around the engine. Its current LLM APIs build vLLM-backed deployments rather than replacing vLLM's token scheduler.
+
+**KServe** provides Kubernetes-native serving abstractions such as `InferenceService` and model runtimes. Its current Hugging Face generative runtime uses vLLM as the default backend for supported LLM workloads.
+
+**Triton** is a broad inference-serving platform that can host different backends. **TensorRT-LLM** focuses on optimized NVIDIA LLM execution. A Triton + TensorRT-LLM deployment therefore occupies different layers rather than representing two competing names for exactly the same component.
+
+The interview question is usually not “which one is best?” It is:
+
+> Which layer do I actually need beyond the inference engine, and what operational responsibility does it remove from my application?
 
 ## What should stay outside the inference engine?
 

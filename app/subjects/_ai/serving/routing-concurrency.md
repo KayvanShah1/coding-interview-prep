@@ -14,6 +14,8 @@ keywords:
   - cache aware routing
   - queue depth
   - prefix cache
+  - inference gateway
+  - llm-d
 aliases:
   - concurrent inference
   - high throughput inference
@@ -26,6 +28,8 @@ references:
     url: https://docs.vllm.ai/en/stable/serving/data_parallel_deployment/
   - title: vLLM production metrics
     url: https://docs.vllm.ai/en/stable/usage/metrics/
+  - title: Google Cloud - GKE Inference Gateway powered by llm-d
+    url: https://docs.cloud.google.com/kubernetes-engine/docs/concepts/about-gke-inference-gateway
 ---
 
 There is usually no single GPU answering an entire product's traffic. Concurrency comes from **horizontal replicas** and from **sharing each replica efficiently among several active requests**.
@@ -81,6 +85,40 @@ Suppose several requests share a large prefix and replica A already has reusable
 But blindly preferring cache locality can overload A while B sits idle. A real policy has to balance locality against current load and latency.
 
 This is a good example of why an LLM router can become more specialized than an ordinary round-robin load balancer without making ordinary load-balancing fundamentals obsolete.
+
+## Production example: inference-aware routing on GKE
+
+Google's current GKE Inference Gateway, powered by llm-d, is a useful example of what this looks like once the router can see model-serving state.
+
+Its routing score can account for:
+
+- **prefix-cache match:** prefer a replica that can reuse more of the request prefix;
+- **load:** consider KV-cache utilization and pending queue depth;
+- **LoRA locality:** prefer a server that already has the requested adapter loaded or has room for it.
+
+Conceptually:
+
+```text
+request
+   ↓
+inference gateway
+   ↓
+state-aware scheduler / endpoint picker
+   ↓
+┌────────────┬────────────┬────────────┐
+│ replica A  │ replica B  │ replica C  │
+│ queue / KV │ queue / KV │ queue / KV │
+│ prefixes   │ prefixes   │ prefixes   │
+└────────────┴────────────┴────────────┘
+```
+
+The implementation is one production example, not a requirement for every LLM service. A small homogeneous fleet may still be better served by simple load balancing.
+
+What it demonstrates is the progression:
+
+`round robin → load-aware routing → inference-state-aware routing`.
+
+The more state the router consumes, the more routing quality can improve, but the control plane also becomes more complex and tightly coupled to serving metrics.
 
 ## What happens when every replica is busy?
 

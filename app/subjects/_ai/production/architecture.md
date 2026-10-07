@@ -22,6 +22,7 @@ tools:
   - KEDA
   - Karpenter
   - Prometheus
+  - llm-d
 interview_queries:
   - design an LLM serving architecture
   - what does each component in an LLM stack do
@@ -32,6 +33,8 @@ references:
     url: https://kubernetes.io/docs/concepts/workloads/
   - title: Amazon EKS inference autoscaling
     url: https://docs.aws.amazon.com/eks/latest/userguide/ml-inference-autoscaling.html
+  - title: Google Cloud - GKE Inference Gateway powered by llm-d
+    url: https://docs.cloud.google.com/kubernetes-engine/docs/concepts/about-gke-inference-gateway
 ---
 
 At this point every box should solve a specific problem rather than appear because it belongs to a fashionable stack.
@@ -99,6 +102,30 @@ Client → Load balancer/API gateway → Model router → Admission control/boun
 | Triton | General inference-serving platform |
 
 You would not necessarily use all of these together.
+
+## One production shape: an inference gateway in front of serving pools
+
+A current GKE design powered by llm-d makes the generic boxes above more concrete:
+
+```text
+client
+  ↓
+Inference Gateway
+  ↓
+state-aware endpoint selection
+  ↓
+InferencePool
+  ↓
+model-server replicas
+  ↓
+GPU(s)
+```
+
+The gateway can combine ordinary traffic control with inference-specific state such as prefix-cache matches, KV-cache pressure, pending queues, and LoRA placement. It can also queue or shed work when the serving pool is saturated.
+
+This is deliberately an **example**, not the canonical CoreTrail architecture. The generic responsibilities still matter even if a different platform calls the gateway, scheduler, pool, or model server by different names.
+
+The routing details live in [Routing and serving many users]({{ '/ai-engineering/serving/routing-concurrency/' | relative_url }}).
 
 ## Same fundamentals, different bottleneck
 
