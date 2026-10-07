@@ -250,12 +250,12 @@ Do not add a diagram merely because the page feels text-heavy.
 
 Tables work best when the columns encode a real comparison:
 
-| Question | Good table use |
-|---|---|
-| What changes? | traditional ML serving vs LLM serving |
-| Who owns the decision? | workload autoscaler vs node autoscaler |
-| Which symptom points where? | queue pressure vs decode slowdown |
-| Which operation changes grain? | join / aggregate / window |
+| Question                       | Good table use                         |
+| ------------------------------ | -------------------------------------- |
+| What changes?                  | traditional ML serving vs LLM serving  |
+| Who owns the decision?         | workload autoscaler vs node autoscaler |
+| Which symptom points where?    | queue pressure vs decode slowdown      |
+| Which operation changes grain? | join / aggregate / window              |
 
 Do not convert prose into a table just to make a page look structured.
 
