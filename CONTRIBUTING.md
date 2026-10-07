@@ -8,6 +8,8 @@ Use `##` headings for the automatic outline. Link internally using Jekyll's `rel
 
 ## Writing style
 
+The full writing and content philosophy lives in [`docs/WRITING_STYLE.md`](docs/WRITING_STYLE.md). Use it when deciding what belongs on a page, how deep to go, and how to phrase explanations.
+
 Write for revision, not for course completion. Keep the technical terms people will search for, but make the surrounding prose sound like notes from someone who has had to choose, debug, or explain the concept.
 
 Do not force every overview into the same sequence. Reuse tables and navigation patterns where consistency helps, but avoid repeated filler such as identical `Suggested route`, `By the end`, or `How to study` paragraphs. Let the topic determine the structure.
