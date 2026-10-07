@@ -4,6 +4,16 @@ title: SQL handbook
 subject: sql
 mermaid: true
 permalink: /sql/
+description: A practical SQL handbook covering queries, joins, window functions, database design, and query performance.
+keywords:
+  - SQL
+  - PostgreSQL
+  - joins
+  - window functions
+  - query performance
+aliases:
+  - SQL interview guide
+  - SQL handbook
 ---
 <div class="breadcrumb"><span>SQL handbook</span></div>
 <header class="article-header">

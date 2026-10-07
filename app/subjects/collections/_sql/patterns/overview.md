@@ -2,6 +2,13 @@
 title: "Interview patterns"
 nav_title: "Overview"
 description: "Recognize recurring problems and choose a reliable approach."
+keywords:
+  - deduplication
+  - gaps and islands
+  - funnels
+  - retention
+aliases:
+  - SQL interview patterns
 chapter: "patterns"
 order: 0
 sequence: 700

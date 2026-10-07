@@ -2,6 +2,16 @@
 title: "Joins & sets"
 nav_title: "Overview"
 description: "Combine tables while preserving the intended grain."
+keywords:
+  - INNER JOIN
+  - LEFT JOIN
+  - UNION
+  - INTERSECT
+  - EXCEPT
+aliases:
+  - SQL joins
+interview_queries:
+  - why does a join multiply rows
 chapter: "joins"
 order: 0
 sequence: 400

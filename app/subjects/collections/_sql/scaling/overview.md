@@ -2,6 +2,16 @@
 title: "Storage & scaling"
 nav_title: Overview
 description: "Choose physical layout, distribution, and replication from workload requirements."
+keywords:
+  - partitioning
+  - replication
+  - sharding
+  - clustering
+  - failover
+aliases:
+  - database scaling
+interview_queries:
+  - when should I shard a database
 chapter: scaling
 order: 0
 sequence: 1200

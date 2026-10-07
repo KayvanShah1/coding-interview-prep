@@ -2,6 +2,13 @@
 title: "Aggregation"
 nav_title: "Overview"
 description: "Summarize data and define meaningful denominators."
+keywords:
+  - GROUP BY
+  - COUNT
+  - SUM
+  - percentiles
+aliases:
+  - SQL aggregates
 chapter: "aggregation"
 order: 0
 sequence: 300

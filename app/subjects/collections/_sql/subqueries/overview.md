@@ -2,6 +2,13 @@
 title: "Subqueries & CTEs"
 nav_title: "Overview"
 description: "Break down problems and query related or hierarchical data."
+keywords:
+  - EXISTS
+  - correlated subqueries
+  - recursive CTE
+  - LATERAL
+aliases:
+  - common table expressions
 chapter: "subqueries"
 order: 0
 sequence: 500

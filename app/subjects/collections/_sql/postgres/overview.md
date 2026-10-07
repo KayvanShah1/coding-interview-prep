@@ -2,6 +2,16 @@
 title: "PostgreSQL toolkit"
 nav_title: "Overview"
 description: "Work with arrays, JSON, views, and database routines."
+keywords:
+  - JSONB
+  - arrays
+  - DISTINCT ON
+  - materialized views
+  - stored procedures
+aliases:
+  - Postgres toolkit
+tools:
+  - PostgreSQL
 chapter: "postgres"
 order: 0
 sequence: 1300

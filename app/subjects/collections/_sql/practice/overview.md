@@ -2,6 +2,12 @@
 title: "Practice & revision"
 nav_title: "Overview"
 description: "Apply the patterns, compare dialects, and test your understanding."
+keywords:
+  - SQL interview questions
+  - dialect differences
+  - revision drills
+aliases:
+  - SQL practice problems
 chapter: "practice"
 order: 0
 sequence: 1400

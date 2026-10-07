@@ -2,6 +2,13 @@
 title: "Filtering & expressions"
 nav_title: "Overview"
 description: "Select the right rows and reason carefully about missing values."
+keywords:
+  - WHERE
+  - "NULL"
+  - CASE
+  - predicates
+aliases:
+  - SQL filtering
 chapter: "filtering"
 order: 0
 sequence: 100

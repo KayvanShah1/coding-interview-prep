@@ -2,6 +2,13 @@
 title: "Functions & dates"
 nav_title: "Overview"
 description: "Transform strings, numbers, dates, and timestamps."
+keywords:
+  - CAST
+  - date arithmetic
+  - string functions
+  - timestamps
+aliases:
+  - SQL functions
 chapter: "functions"
 order: 0
 sequence: 200

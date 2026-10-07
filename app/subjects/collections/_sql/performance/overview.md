@@ -2,6 +2,17 @@
 title: "Performance"
 nav_title: "Overview"
 description: "Read plans, choose indexes, and reduce unnecessary work."
+keywords:
+  - EXPLAIN
+  - indexes
+  - query plans
+  - sargability
+  - statistics
+aliases:
+  - query optimization
+  - SQL performance tuning
+interview_queries:
+  - why is my SQL query slow
 chapter: "performance"
 order: 0
 sequence: 1100

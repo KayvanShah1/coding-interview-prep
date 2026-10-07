@@ -2,6 +2,15 @@
 title: "Foundations"
 nav_title: "Overview"
 description: "Understand tables, keys, data types, and how a query is evaluated."
+keywords:
+  - table grain
+  - primary keys
+  - SQL data types
+  - query execution order
+aliases:
+  - SQL basics
+interview_queries:
+  - how is a SQL query evaluated
 chapter: "foundations"
 order: 0
 sequence: 0

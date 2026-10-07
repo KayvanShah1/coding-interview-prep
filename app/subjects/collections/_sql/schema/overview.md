@@ -2,6 +2,14 @@
 title: "Schema & data changes"
 nav_title: "Overview"
 description: "Define tables, enforce constraints, and modify data safely."
+keywords:
+  - DDL
+  - DML
+  - constraints
+  - UPSERT
+  - MERGE
+aliases:
+  - database schema
 chapter: "schema"
 order: 0
 sequence: 900

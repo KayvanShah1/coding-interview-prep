@@ -2,6 +2,13 @@
 title: "Database design"
 nav_title: "Overview"
 description: "Model relationships, dependencies, and analytical history."
+keywords:
+  - normalization
+  - functional dependencies
+  - dimensional modeling
+  - slowly changing dimensions
+aliases:
+  - data modeling
 chapter: "design"
 order: 0
 sequence: 800

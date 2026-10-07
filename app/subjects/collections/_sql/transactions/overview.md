@@ -2,6 +2,15 @@
 title: "Transactions"
 nav_title: "Overview"
 description: "Understand concurrent work, isolation, and locks."
+keywords:
+  - ACID
+  - isolation levels
+  - locks
+  - deadlocks
+aliases:
+  - database transactions
+interview_queries:
+  - what do isolation levels prevent
 chapter: "transactions"
 order: 0
 sequence: 1000

@@ -2,6 +2,16 @@
 title: "Window functions"
 nav_title: "Overview"
 description: "Compare ordered rows without losing detail."
+keywords:
+  - OVER
+  - PARTITION BY
+  - window frames
+  - LAG
+  - LEAD
+aliases:
+  - analytic functions
+interview_queries:
+  - when should I use window functions
 chapter: "windows"
 order: 0
 sequence: 600
