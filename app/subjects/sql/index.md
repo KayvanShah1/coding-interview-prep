@@ -109,7 +109,7 @@ click D href "{{ '/sql/scaling/overview/' | relative_url }}" "Open Storage and s
   {% include diagram.html title="Investigate performance" code=diagram_code fallback=diagram_fallback caption=true %}
   <h2 id="chapters">Explore the chapters</h2>
   <div class="chapter-index">
-    {% for chapter in site.data.chapters -%}
+    {% for chapter in site.data.chapters.sql -%}
       {%- assign topics = site.sql
         | where: 'chapter', chapter.id
         | where_exp: 'item', 'item.order > 0'

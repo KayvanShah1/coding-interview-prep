@@ -2,11 +2,7 @@
 layout: default
 ---
 {% assign subject = site.data.subjects | where: 'id', page.subject | first %}
-{% if page.subject == 'sql' %}
-  {% assign chapters = site.data.chapters %}
-{% else %}
-  {% assign chapters = site.data.subject_chapters[page.subject] %}
-{% endif %}
+{% assign chapters = site.data.chapters[page.subject] %}
 {% assign chapter = chapters | where: 'id', page.chapter | first %}
 {% assign collection_key = subject.collection %}
 {% assign subject_lessons = site[collection_key] %}

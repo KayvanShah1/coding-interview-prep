@@ -18,7 +18,8 @@
     "id": "ml",
     "title": "Machine Learning",
     "url": "/ml/",
-    "status": "Planned",
+    "status": "Available",
+    "collection": "ml",
     "description": "Models, evaluation, and production systems."
   },
   {

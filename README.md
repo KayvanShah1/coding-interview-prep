@@ -117,7 +117,7 @@ Jekyll + Liquid, Markdown, custom CSS, vanilla JavaScript, PostgreSQL/PGlite, Pl
 app/
   templates/          # Liquid layouts and reusable includes
   subjects/           # Subject content
-    collections/      # Jekyll lesson collections (_sql, _ai, _infra)
+    collections/      # Jekyll lesson collections (_sql, _ml, _ai, _infra)
     <subject>/index.md # Subject landing pages
   _data/              # Subject, chapter, and practice metadata
   _sass/              # Stylesheet partials
@@ -133,7 +133,7 @@ tests/                # Search regression tests
 _config.yml           # Jekyll configuration; source is app/
 ```
 
-Subject landing pages live in `app/subjects/<subject>/index.md`. Published lessons live in `app/subjects/collections/_sql/`, `_ai/`, and `_infra/`. Source locations are independent of public routes such as `/sql/windows/frames/` and `/ai-engineering/production/autoscaling/`.
+Subject landing pages live in `app/subjects/<subject>/index.md`. Published lessons live in `app/subjects/collections/_sql/`, `_ml/`, `_ai/`, and `_infra/`. Source locations are independent of public routes such as `/sql/windows/frames/` and `/ai-engineering/production/autoscaling/`.
 
 ## Run locally
 

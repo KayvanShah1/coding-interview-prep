@@ -14,17 +14,13 @@
     {% if current_subject.status == 'Available' and current_subject.collection %}
       {% assign collection_key = current_subject.collection %}
       {% assign subject_lessons = site[collection_key] %}
-      {% if page.subject == 'sql' %}
-        {% assign subject_chapters = site.data.chapters %}
-      {% else %}
-        {% assign subject_chapters = site.data.subject_chapters[page.subject] %}
-      {% endif %}
+      {% assign chapters = site.data.chapters[page.subject] %}
       <a
         class="nav-start {% if page.url == current_subject.url %}active{% endif %}"
         href="{{ current_subject.url | relative_url }}"
         >Start here <span aria-hidden="true">↗</span></a
       >
-      {% for chapter in subject_chapters %}
+      {% for chapter in chapters %}
         <details
           class="chapter"
           {% if page.chapter == chapter.id %}

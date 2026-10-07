@@ -23,6 +23,9 @@ collections:
   ai:
     output: true
     permalink: /ai-engineering/:path/
+  ml:
+    output: true
+    permalink: /ml/:path/
   infra:
     output: true
     permalink: /infrastructure/:path/
@@ -39,6 +42,12 @@ defaults:
     values:
       layout: lesson
       subject: ai-engineering
+  - scope:
+      path: ''
+      type: ml
+    values:
+      layout: lesson
+      subject: ml
   - scope:
       path: ''
       type: infra

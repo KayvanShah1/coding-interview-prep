@@ -41,14 +41,13 @@ console.log(
 );
 
 const chapters = JSON.parse(fs.readFileSync('app/_data/chapters.json', 'utf8'));
-const subjectChapters = JSON.parse(fs.readFileSync('app/_data/subject_chapters.json', 'utf8'));
 const subjects = JSON.parse(fs.readFileSync('app/_data/subjects.json', 'utf8'));
 const subjectPages = subjects.map((subject) => `app/subjects/${subject.id}/index.md`);
 
 for (const subject of subjects) urls.add(subject.url);
 for (const file of subjectPages) assert.ok(fs.existsSync(file), 'subject page ' + file);
 
-for (const chapter of chapters) {
+for (const chapter of chapters.sql) {
   const overview = fs.readFileSync(sqlDir + '/' + chapter.id + '/overview.md', 'utf8');
   for (const file of pages.filter(
     (p) =>
@@ -64,6 +63,7 @@ for (const chapter of chapters) {
 }
 
 const publishedCollections = [
+  { id: 'ml', dir: `${collectionRoot}/_ml`, prefix: '/ml/' },
   { id: 'ai-engineering', dir: `${collectionRoot}/_ai`, prefix: '/ai-engineering/' },
   { id: 'infrastructure', dir: `${collectionRoot}/_infra`, prefix: '/infrastructure/' },
 ];
@@ -73,7 +73,7 @@ for (const collection of publishedCollections) {
   const collectionPages = walk(collection.dir).filter((p) => p.endsWith('.md'));
   publishedPages.push(...collectionPages);
   const collectionSequences = new Set();
-  const validChapters = new Set(subjectChapters[collection.id].map((chapter) => chapter.id));
+  const validChapters = new Set(chapters[collection.id].map((chapter) => chapter.id));
 
   for (const file of collectionPages) {
     const text = fs.readFileSync(file, 'utf8');
@@ -94,7 +94,7 @@ for (const collection of publishedCollections) {
     urls.add(collection.prefix + relative + '/');
   }
 
-  for (const chapter of subjectChapters[collection.id]) {
+  for (const chapter of chapters[collection.id]) {
     const overviewPath = collection.dir + '/' + chapter.id + '/overview.md';
     assert.ok(fs.existsSync(overviewPath), 'chapter overview ' + overviewPath);
     const overview = fs.readFileSync(overviewPath, 'utf8');

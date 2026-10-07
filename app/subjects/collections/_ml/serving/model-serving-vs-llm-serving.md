@@ -1,9 +1,10 @@
 ---
-layout: default
 title: "Traditional ML serving vs LLM serving"
-subject: ml
-permalink: /ml/model-serving-vs-llm-serving/
-description: "Compare ordinary prediction serving with autoregressive LLM serving without pretending they are entirely different systems."
+description: "The deployment fundamentals survive. The expensive resource, request shape, and useful scaling signals change."
+chapter: serving
+order: 1
+sequence: 101
+level: Core
 keywords:
   - model serving
   - ML inference
@@ -21,17 +22,6 @@ references:
   - title: vLLM documentation
     url: https://docs.vllm.ai/en/stable/
 ---
-
-<div class="breadcrumb">
-  <a href="{{ '/ml/' | relative_url }}">Machine Learning</a><span>/</span><span>Model serving</span>
-</div>
-
-<header class="article-header">
-  <h1>Traditional ML serving vs LLM serving</h1>
-  <p class="lead">The deployment fundamentals survive. The expensive resource, request shape, and useful scaling signals change.</p>
-</header>
-
-<article class="prose">
 
 A traditional online model can often be thought of as:
 
@@ -96,16 +86,3 @@ Model registries, versioning, deployment promotion, evaluation gates, monitoring
 LLM systems add their own serving mechanics and quality concerns; they do not invalidate the rest of MLOps.
 
 Continue with [LLM inference]({{ '/ai-engineering/inference/overview/' | relative_url }}) for the execution details or [Infrastructure & DevOps]({{ '/infrastructure/' | relative_url }}) for the reusable deployment mechanics.
-
-</article>
-
-{% if page.references and page.references != empty %}
-<section class="references prose">
-  <h2 id="references">References</h2>
-  <ul>
-    {% for ref in page.references %}
-      <li><a href="{{ ref.url }}">{{ ref.title }}</a></li>
-    {% endfor %}
-  </ul>
-</section>
-{% endif %}

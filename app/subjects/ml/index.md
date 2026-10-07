@@ -10,14 +10,14 @@ keywords:
   - MLOps
 ---
 
-## From a baseline to a useful model
+## Start with model serving
 
-The planned path covers problem framing, data splits, leakage, feature engineering, model selection, evaluation, error analysis, deployment, and monitoring.
-
-One production comparison is already published because it is useful when moving between classical ML and AI Engineering:
+The first chapter compares a conventional prediction API with autoregressive LLM serving. It starts with the production concerns both systems share, then looks at the request shape and resource constraints that change the serving architecture.
 
 <ul class="topic-list">
-<li><a href="{{ '/ml/model-serving-vs-llm-serving/' | relative_url }}">Traditional ML serving vs LLM serving</a><span>See which deployment fundamentals stay the same and which constraints change once inference becomes autoregressive and GPU-memory heavy.</span></li>
+<li><a href="{{ '/ml/serving/overview/' | relative_url }}">Model serving</a><span>Follow the chapter overview into the comparison between traditional ML serving and LLM serving.</span></li>
 </ul>
 
-The rest of the Machine Learning trail is still being built.
+## What comes next
+
+The broader Machine Learning trail will cover problem framing, data splits, leakage, feature engineering, model selection, evaluation, error analysis, deployment, and monitoring. Those chapters are still being built.

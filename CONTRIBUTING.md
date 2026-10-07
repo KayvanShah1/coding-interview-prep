@@ -41,7 +41,7 @@ Each subject landing page is `app/subjects/<subject>/index.md`; the SQL page's e
 
 `app/templates/layouts/base.html` owns the document shell, shared head, skip link, and search dialog. The home and handbook layouts inherit it; lesson and subject layouts inherit the handbook layout in `default.html`.
 
-Reusable markup lives in `app/templates/includes/`: brand, header, home footer, sidebar, subject switcher, and page outline. Keep the lesson's edit-page footer in its lesson layout. Subjects live in `app/_data/subjects.json`; SQL chapters remain in `chapters.json`, while published non-SQL chapter maps live in `subject_chapters.json`. The root `_config.yml` sets `source: app` and points Jekyll to the template folders; run build and serve commands from the repository root.
+Reusable markup lives in `app/templates/includes/`: brand, header, home footer, sidebar, subject switcher, and page outline. Keep the lesson's edit-page footer in its lesson layout. Subjects live in `app/_data/subjects.json`, and chapters for every published subject live in `app/_data/chapters.json`. The root `_config.yml` sets `source: app` and points Jekyll to the template folders; run build and serve commands from the repository root.
 
 Edit styles in `app/_sass/`. Jekyll compiles `app/assets/css/main.scss` into the existing `/assets/css/main.css` URL. Keep the `@use` order: shared responsive rules precede home styles so their overrides retain the existing cascade.
 
