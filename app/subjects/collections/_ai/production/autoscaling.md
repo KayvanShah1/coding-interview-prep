@@ -37,7 +37,7 @@ references:
     url: https://karpenter.sh/docs/
 ---
 
-There are two different scaling loops.
+Large language model (LLM) autoscaling has two different control loops.
 
 {% capture diagram_code %}
 flowchart TD
@@ -62,13 +62,13 @@ Queue/latency pressure → HPA/KEDA → desired replicas increase → Kubernetes
 
 A workload autoscaler changes the desired replica count from demand signals.
 
-In Kubernetes, HPA is the common replica-scaling mechanism. KEDA is one way to bring external or event-driven signals into that scaling loop.
+In Kubernetes, the Horizontal Pod Autoscaler (HPA) is the common replica-scaling mechanism. Kubernetes Event-driven Autoscaling (KEDA) is one way to bring external or event-driven signals into that loop.
 
 For LLM serving, a signal such as waiting requests can therefore increase the desired number of inference replicas.
 
 ## Node scaling supplies machines for those Pods
 
-Creating a Pod does not create a GPU.
+Creating a Pod does not create a graphics processing unit (GPU).
 
 If every suitable GPU node is full, the new Pod is unschedulable and remains Pending.
 
@@ -86,9 +86,9 @@ HPA/KEDA and Karpenter are concrete implementations of those two different loops
 
 High GPU utilization can be a sign that an inference engine is doing its job well. Efficient batching may keep an accelerator busy across both healthy and overloaded traffic levels.
 
-AWS's EKS inference guidance therefore recommends queue depth as a strong leading signal, with latency such as p95/TTFT and KV-cache utilization as additional layers.
+Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) inference guidance recommends queue depth as a strong leading signal, with 95th-percentile (p95) latency, time to first token (TTFT), and key-value (KV) cache utilization as additional evidence.
 
-That is a systems lesson: scale on a signal tied to **unserved demand or SLO pressure**, not merely on a resource being busy.
+Scaling should react to **unserved demand or service-level objective (SLO) pressure**, not only to a busy resource.
 
 ## Useful signals
 
@@ -104,7 +104,7 @@ That is a systems lesson: scale on a signal tied to **unserved demand or SLO pre
 
 Do not pick “queue > 10” because it sounds reasonable.
 
-Load test one replica with realistic prompt/output distributions, increase offered load, and observe where TTFT, TPOT, errors, and queue depth stop meeting the target.
+Load test one replica with realistic prompt/output distributions, increase offered load, and observe where TTFT, time per output token (TPOT), errors, and queue depth stop meeting the target.
 
 That gives you a capacity curve and an evidence-based scaling threshold.
 

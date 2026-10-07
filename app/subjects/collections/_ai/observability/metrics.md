@@ -34,11 +34,11 @@ references:
     url: https://docs.vllm.ai/en/stable/benchmarking/cli/
 ---
 
-Organize metrics by the question they answer.
+Large language model (LLM) serving metrics are most useful when grouped by the question they answer.
 
 ## Is the user waiting too long to see anything?
 
-**TTFT — time to first token** measures from sending the request until the first streamed output arrives.
+**Time to first token (TTFT)** measures from sending the request until the first streamed output arrives.
 
 It can include:
 
@@ -54,9 +54,9 @@ A poor TTFT therefore does not identify the bottleneck by itself. It tells you w
 
 ## Once generation begins, is it progressing quickly?
 
-**TPOT — time per output token** amortizes generation time after the first token across the remaining generated tokens.
+**Time per output token (TPOT)** amortizes generation time after the first token across the remaining generated tokens.
 
-**ITL — inter-token latency** measures gaps between streamed outputs.
+**Inter-token latency (ITL)** measures gaps between streamed outputs.
 
 vLLM notes that terminology differs across tools, especially with speculative decoding, so compare definitions and measurement points rather than only metric names.
 
@@ -73,7 +73,7 @@ A growing queue with healthy individual decode performance usually points toward
 
 ## Is request state filling accelerator memory?
 
-Watch KV-cache utilization or available cache blocks/tokens.
+Watch key-value (KV) cache utilization or available cache blocks/tokens.
 
 This tells you whether the active sequence mix is approaching the memory budget that supports concurrency.
 
@@ -81,7 +81,7 @@ Prompt and generation length distributions should be tracked alongside it; a fle
 
 ## Is the hardware doing useful work?
 
-GPU utilization, memory occupancy, kernel behavior, power, and communication metrics help at the infrastructure layer.
+Graphics processing unit (GPU) utilization, video memory (VRAM) occupancy, kernel behavior, power, and communication metrics help at the infrastructure layer.
 
 Do not use a busy GPU as proof that latency is healthy. A saturated queue and an efficiently busy GPU can exist at the same time.
 

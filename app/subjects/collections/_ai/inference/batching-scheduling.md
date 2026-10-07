@@ -29,7 +29,7 @@ references:
     url: https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/user_guide/batcher.html
 ---
 
-A GPU is good at large parallel tensor operations. Running tiny independent pieces of work one after another leaves expensive hardware underused.
+A graphics processing unit (GPU) is good at large parallel tensor operations. Running tiny independent pieces of work one after another leaves expensive hardware underused.
 
 Batching tries to turn several requests into useful work together.
 
@@ -65,7 +65,7 @@ The exact scheduling policy is engine-specific, but the goal is straightforward:
 
 Kubernetes works at the workload-placement layer. It can place a vLLM Pod on a node with four GPUs. Once that model server is running, vLLM's scheduler decides how admitted inference requests share those GPUs.
 
-If an interview answer says “Kubernetes batches the LLM requests,” the abstraction boundary is wrong.
+Kubernetes does not batch large language model (LLM) requests. It places Pods; the inference scheduler decides how admitted sequences share model execution.
 
 ## Throughput and latency pull in different directions
 
@@ -80,7 +80,7 @@ That creates a familiar systems trade-off:
 | Prioritize latency | Less opportunity to batch |
 | Prioritize throughput | More work shared per execution step |
 
-There is no universally correct batch size. The target comes from the workload and latency SLO.
+There is no universally correct batch size. The target comes from the workload and its latency service-level objective (SLO).
 
 ## Waiting is different from running
 

@@ -3,23 +3,23 @@ layout: subject
 title: AI Engineering
 subject: ai-engineering
 permalink: /ai-engineering/
-description: Retrieval, agents, evaluation, inference, and production AI systems.
+description: LLM inference, serving, deployment, observability, and production systems.
 mermaid: true
 keywords:
   - LLM inference
   - LLM serving
-  - RAG
-  - agents
-  - evaluation
+  - LLM deployment
+  - LLM observability
+  - production inference
 aliases:
   - AI engineering handbook
 ---
 
 ## Start from what the model is actually doing
 
-Calling a hosted model can make the infrastructure disappear. That is useful until an interview, production incident, or cost problem forces you to explain where the latency comes from and which part of the stack owns it.
+The current Artificial Intelligence (AI) Engineering trail focuses on large language model (LLM) inference and serving. A hosted model can hide most of that machinery until latency, capacity, cost, or a production failure makes the execution path relevant.
 
-This trail starts with the model's inference loop, then adds the serving machinery around it.
+The trail starts with one model request, then adds serving, deployment, production traffic, and observability around it.
 
 {% capture diagram_code %}
 flowchart LR
@@ -34,7 +34,7 @@ Prompt → Inference → Serving → Deployment → Production traffic → Obser
 {% endcapture %}
 {% include diagram.html title="From a model call to a production service" code=diagram_code fallback=diagram_fallback caption=true %}
 
-The point is not to memorize a modern AI stack. It is to know why each layer exists, what signal tells you it is failing, and which trade-off changes when the workload is an autoregressive model instead of a normal API.
+Each component should answer a concrete question: where the request goes, where it can wait, how inference runs, how capacity changes, and which signals explain a slowdown.
 
 ## Follow the serving path
 

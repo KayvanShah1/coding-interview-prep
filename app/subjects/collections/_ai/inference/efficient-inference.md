@@ -33,15 +33,17 @@ references:
     url: https://docs.vllm.ai/en/latest/features/disagg_prefill/
 ---
 
-Do not start an optimization discussion with a list of techniques. Start with the expensive resource or delay you are trying to reduce.
+Large language model (LLM) inference can be expensive for different reasons: model memory, key-value (KV) cache pressure, prefill work, sequential decode, or underused accelerator capacity. The optimization should match the bottleneck.
 
 ## If model weights consume too much memory: quantize
 
 Lower-precision weight formats reduce the memory footprint of the model and can improve execution efficiency on supported hardware.
 
-A rough intuition is enough for interviews:
+A 70-billion-parameter (70B) model needs roughly:
 
-`70B parameters × 2 bytes ≈ 140 GB` for 16-bit weights before other memory.
+`70B parameters × 2 bytes ≈ 140 GB`
+
+for 16-bit weights before other memory.
 
 Moving to a lower-bit representation can cut that substantially, but the real outcome depends on the quantization method, hardware, kernels, and acceptable quality change.
 
@@ -55,7 +57,7 @@ Conceptually:
 
 `[A][A][B][C][A][B][D] ...`
 
-The point is not the name. The point is that variable-length requests make naïve memory reservation wasteful. Better allocation lets more useful request state fit in the same VRAM budget.
+Variable-length requests make naïve memory reservation wasteful. Block-based allocation lets more active request state fit in the same video memory (VRAM) budget.
 
 ## If prompts repeat: reuse prefix work
 
@@ -101,7 +103,7 @@ decode pool
 generated tokens
 ```
 
-This matters because prefill and decode stress hardware differently. Separate pools can use different parallelism or capacity settings and let operators tune **TTFT** and **inter-token latency** more independently.
+This matters because prefill and decode stress hardware differently. Separate pools can use different parallelism or capacity settings and let operators tune **time to first token (TTFT)** and **inter-token latency** more independently.
 
 The price is an extra distributed-systems problem: the KV state produced during prefill has to reach the decode worker efficiently. Network bandwidth, KV-transfer mechanisms, routing, and failure handling now become part of the serving path.
 

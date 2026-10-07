@@ -23,9 +23,7 @@ references:
     url: https://docs.vllm.ai/en/stable/benchmarking/cli/
 ---
 
-“GPU utilization is high” is not enough to explain whether users are getting a healthy service.
-
-You need signals from several layers.
+Large language model (LLM) observability connects user-visible latency to queueing, token generation, key-value (KV) cache pressure, and graphics processing unit (GPU) state. A high GPU-utilization number by itself cannot tell you which of those paths is causing the delay.
 
 ## In this chapter
 
@@ -34,4 +32,4 @@ You need signals from several layers.
 <li><a href="{{ '/ai-engineering/observability/debugging/' | relative_url }}">Debugging a slow or saturated LLM service</a><span>Use TTFT, queue time, prompt length, TPOT, KV cache, and startup state to narrow the bottleneck.</span></li>
 </ul>
 
-The goal is not a dashboard with every metric. It is a short chain from a user-visible symptom to the component that can plausibly cause it.
+The useful path is short: start with the user-visible symptom, then follow the few signals that can explain it. Time to first token (TTFT) and time per output token (TPOT) split waiting/prefill from ongoing generation before lower-level metrics enter the investigation.

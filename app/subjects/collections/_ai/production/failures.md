@@ -27,11 +27,11 @@ references:
     url: https://docs.vllm.ai/en/stable/serving/parallelism_scaling/
 ---
 
-Start by defining what must work together for one serving unit to be useful.
+For large language model (LLM) serving, recovery depends on what must work together for one serving unit to produce output.
 
 ## A multi-GPU replica can fail as one unit
 
-Suppose one logical replica uses tensor parallelism across eight GPUs.
+Suppose one logical replica uses tensor parallelism across eight graphics processing units (GPUs).
 
 If one worker or GPU disappears, the remaining seven do not necessarily provide seven-eighths of that replica's useful capacity. The distributed process may need to be restarted or replaced as a group.
 
@@ -64,9 +64,7 @@ These are not interchangeable actions.
 
 ## Recovery time includes model startup
 
-For LLM serving:
-
-`MTTR ≠ just restart process time`.
+Mean time to recovery (MTTR) includes more than process restart time.
 
 Replacement may need a GPU node, model loading, distributed initialization, and readiness.
 

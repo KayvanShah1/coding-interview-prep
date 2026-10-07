@@ -28,11 +28,11 @@ references:
     url: https://docs.vllm.ai/en/stable/benchmarking/cli/
 ---
 
-Start with the user-visible symptom, then split the path.
+A slow large language model (LLM) request becomes easier to diagnose once the latency shape is split into waiting, prefill, and decode.
 
 {% capture diagram_code %}
 flowchart TD
-A["TTFT high"] --> B{"Queue time high?"}
+A["Time to first token (TTFT) high"] --> B{"Queue time high?"}
 B -- "Yes" --> C["Capacity / routing / admission"]
 B -- "No" --> D{"Prompts larger?"}
 D -- "Yes" --> E["Prefill pressure"]
@@ -48,7 +48,7 @@ TTFT high → check queue time. High queue → capacity/routing/admission. Low q
 
 ## High TTFT: first separate waiting from execution
 
-If queue time rose sharply while prompt lengths and TPOT stayed normal, the model may simply be underprovisioned or traffic may be imbalanced across replicas.
+If queue time rose sharply while prompt lengths and time per output token (TPOT) stayed normal, the model may simply be underprovisioned or traffic may be imbalanced across replicas.
 
 Check:
 
@@ -61,7 +61,7 @@ recent failures
 autoscaler state
 ```
 
-If queue time is low but TTFT rises with prompt length, investigate prefill.
+If queue time is low but time to first token (TTFT) rises with prompt length, investigate prefill.
 
 ## Healthy TTFT, poor generation speed
 
@@ -69,18 +69,18 @@ If the first token arrives on time but subsequent tokens are slow, focus on deco
 
 Compare:
 
-- TPOT / ITL;
+- TPOT and inter-token latency (ITL);
 - batch/concurrency changes;
 - GPU and memory pressure;
 - quantization/runtime changes;
 - multi-GPU communication;
 - model/version changes.
 
-Do not blame the API gateway for a problem that begins only after token generation starts.
+A problem that begins only after token generation starts points downstream of the application programming interface (API) gateway, toward decode execution or memory/communication pressure.
 
 ## Concurrency falls as context grows
 
-If the number of simultaneous healthy requests drops while average context length rises, inspect KV-cache pressure.
+If the number of simultaneous healthy requests drops while average context length rises, inspect key-value (KV) cache pressure.
 
 That is often a capacity-shape problem rather than a simple request-count problem.
 
@@ -93,7 +93,7 @@ Pending for node?
 image pull?
 model transfer?
 weight loading?
-CUDA/NCCL init?
+CUDA / NVIDIA Collective Communications Library (NCCL) init?
 compile / graph capture?
 readiness?
 ```

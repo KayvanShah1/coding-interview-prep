@@ -25,7 +25,7 @@ A normal prediction endpoint often looks like one bounded computation:
 
 `features → model → prediction`.
 
-An LLM request has a different shape. The prompt is processed, then generation repeatedly produces another token until a stopping condition is reached.
+A large language model (LLM) request has a different shape. The prompt is processed, then generation repeatedly produces another token until a stopping condition is reached.
 
 {% capture diagram_code %}
 flowchart LR
@@ -41,13 +41,32 @@ Prompt text → Tokenize → Prefill prompt → Generate next token → repeat u
 {% endcapture %}
 {% include diagram.html title="One request through autoregressive inference" code=diagram_code fallback=diagram_fallback caption=true %}
 
+## One model step still contains the transformer
+
+Prefill and decode describe **when** the model runs. Inside each model step, the computation still passes through the transformer:
+
+```text
+token IDs
+→ embeddings
+→ transformer layers
+   → self-attention
+   → feed-forward network
+→ final hidden state
+→ vocabulary logits
+→ select / sample next token
+```
+
+During prefill, this computation covers the prompt positions needed to build reusable attention state. During decode, the same model produces the logits for the next token while reusing cached attention state from earlier tokens.
+
+This page stays at the serving-level view. Attention heads, positional encoding, residual connections, normalization, and training belong in a deeper transformer chapter.
+
 ## The prompt is not generated token by token
 
 Suppose the request contains 2,000 input tokens. The model can process those prompt tokens together to establish the attention state needed for generation. This stage is **prefill**.
 
 Once prefill completes, the model begins **decode**. At each decode step it produces logits for the next token, selects or samples a token, then uses that new token as part of the state for the following step.
 
-A 300-token answer therefore involves roughly 300 sequential decode steps. Work inside each step is massively parallel on the GPU, but token 250 cannot be finalized before the state produced by token 249 exists.
+A 300-token answer therefore involves roughly 300 sequential decode steps. Work inside each step is massively parallel on a graphics processing unit (GPU), but token 250 cannot be finalized before the state produced by token 249 exists.
 
 That sequential dependency is why an LLM endpoint behaves differently from a classifier that returns one score after a single forward pass.
 

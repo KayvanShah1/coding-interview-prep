@@ -22,21 +22,21 @@ references:
     url: https://docs.vllm.ai/en/stable/benchmarking/cli/
 ---
 
-A production answer gets stronger when each optimization is paired with what it costs.
+Every large language model (LLM) serving optimization buys something by spending something else: memory, latency, throughput, quality, reliability, or graphics processing unit (GPU) capacity.
 
 | Decision | Helps | Costs / risks |
 |---|---|---|
 | More replicas | Concurrency, resilience | More duplicated model memory and GPU spend |
-| Larger/fuller batches | Throughput, cost per token | Queueing and TTFT can rise |
+| Larger/fuller batches | Throughput, cost per token | Queueing and time to first token (TTFT) can rise |
 | Quantization | Fit, memory, often cost | Quality/performance depends on method and hardware |
-| Longer context | Capability on long inputs | More KV-cache pressure and lower concurrency |
+| Longer context | Capability on long inputs | More key-value (KV) cache pressure and lower concurrency |
 | Prefix caching | Repeated-prefix prefill | Cache memory, locality/routing complexity |
 | Tensor parallelism | Fit one model across GPUs | Communication overhead |
 | Warm spare capacity | Burst handling and recovery | Idle GPU cost |
 | Scale to zero | Idle-cost savings | Cold-start latency |
 | Smaller routed model | Cost and often latency | Must prove quality remains sufficient |
 
-## Optimize against an SLO, not a benchmark headline
+## Optimize against a service-level objective (SLO), not a benchmark headline
 
 A configuration with the highest total tokens/sec can still be wrong for an interactive product if first-token latency is poor.
 
@@ -64,7 +64,7 @@ So “support 128k context” belongs in the same architecture conversation as �
 
 ## Model choice can dominate infrastructure optimization
 
-If an 8B model meets the task's quality bar, tuning a 70B deployment for weeks may still be the wrong economic decision.
+If an 8-billion-parameter (8B) model meets the task's quality bar, tuning a 70-billion-parameter (70B) deployment for weeks may still be the wrong economic decision.
 
 Conversely, using a cheaper model without measuring quality can move cost out of infrastructure and into product failures.
 

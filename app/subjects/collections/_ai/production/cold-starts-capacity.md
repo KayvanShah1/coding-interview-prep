@@ -31,12 +31,12 @@ references:
     url: https://docs.vllm.ai/en/stable/configuration/optimization/
 ---
 
-Autoscaling reacts to demand, but the capacity it asks for can take a long time to become useful.
+Large language model (LLM) autoscaling reacts to demand, but the requested graphics processing unit (GPU) capacity can take a long time to become ready.
 
 A scale-out path can include:
 
 ```text
-provision GPU VM
+provision GPU virtual machine (VM)
 → join Kubernetes cluster
 → pull container image
 → obtain model weights
@@ -51,7 +51,7 @@ Any one of those can dominate.
 
 ## “Download the model” is not the whole cold start
 
-If weights are already on node-local NVMe, remote transfer can disappear while model loading or compilation remains expensive.
+If weights are already on node-local non-volatile memory express (NVMe) storage, remote transfer can disappear while model loading or compilation remains expensive.
 
 If compilation is cached, a much larger checkpoint may make storage and weight loading dominate again.
 
@@ -59,7 +59,7 @@ This is why measuring startup as one number is not enough. Break it into phases 
 
 ## Production story: AWS measured different bottlenecks at different model sizes
 
-In a 2026 EKS model-loading investigation, AWS described tested model artifacts in roughly the 60–200 GiB range. Their measurements showed that a smaller model's startup could be dominated by compilation while a much larger model shifted the bottleneck toward weight loading.
+In a 2026 Elastic Kubernetes Service (EKS) model-loading investigation, Amazon Web Services (AWS) described tested model artifacts in roughly the 60–200 GiB range. Their measurements showed that a smaller model's startup could be dominated by compilation while a much larger model shifted the bottleneck toward weight loading.
 
 For one 64 GiB tested configuration, subsequent launch time on the same node was reduced from 82 seconds to 16 seconds after loading/compilation optimizations.
 

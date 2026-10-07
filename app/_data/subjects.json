@@ -28,7 +28,7 @@
     "url": "/ai-engineering/",
     "status": "Available",
     "collection": "ai",
-    "description": "Retrieval, agents, evaluation, inference, and production AI systems."
+    "description": "LLM inference, serving, deployment, observability, and production systems."
   },
   {
     "id": "infrastructure",

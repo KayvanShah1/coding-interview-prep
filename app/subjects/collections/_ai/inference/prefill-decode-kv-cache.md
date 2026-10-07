@@ -30,7 +30,7 @@ references:
     url: https://docs.vllm.ai/en/stable/serving/parallelism_scaling/
 ---
 
-The KV cache exists because recomputing attention state for every earlier token on every decode step would waste a large amount of work.
+The key-value (KV) cache exists because recomputing attention state for every earlier token on every decode step would waste a large amount of work.
 
 ## Prefill builds the state generation will reuse
 
@@ -57,7 +57,7 @@ The cache does not contain the original prose. It contains intermediate key/valu
 
 ## GPU memory has more than model weights in it
 
-A useful capacity model is:
+Graphics processing unit (GPU) memory is roughly:
 
 `GPU memory ≈ model weights + KV cache + execution/runtime memory`
 
@@ -88,8 +88,8 @@ Prefill has a large amount of prompt work that can exploit parallel computation.
 
 That distinction later matters for metrics:
 
-- **TTFT** includes waiting plus prompt processing before the first output arrives.
-- **TPOT / inter-token latency** says more about ongoing decode performance.
+- **Time to first token (TTFT)** includes waiting plus prompt processing before the first output arrives.
+- **Time per output token (TPOT)** and inter-token latency say more about ongoing decode performance.
 
 If TTFT is high while TPOT remains healthy, do not immediately conclude that “the GPU is slow.” The request may simply be waiting or processing a large prompt.
 
