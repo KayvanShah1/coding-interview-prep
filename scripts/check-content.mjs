@@ -8,7 +8,8 @@ const walk = (dir) =>
     .readdirSync(dir, { withFileTypes: true })
     .flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]));
 
-const sqlDir = 'app/subjects/_sql';
+const collectionRoot = 'app/subjects/collections';
+const sqlDir = `${collectionRoot}/_sql`;
 const pages = walk(sqlDir).filter((p) => p.endsWith('.md'));
 const urls = new Set(
   pages.map(
@@ -42,9 +43,7 @@ console.log(
 const chapters = JSON.parse(fs.readFileSync('app/_data/chapters.json', 'utf8'));
 const subjectChapters = JSON.parse(fs.readFileSync('app/_data/subject_chapters.json', 'utf8'));
 const subjects = JSON.parse(fs.readFileSync('app/_data/subjects.json', 'utf8'));
-const subjectPages = subjects.map((subject) =>
-  subject.id === 'sql' ? `${sqlDir}/index.html` : `app/subjects/${subject.id}/index.md`,
-);
+const subjectPages = subjects.map((subject) => `app/subjects/${subject.id}/index.md`);
 
 for (const subject of subjects) urls.add(subject.url);
 for (const file of subjectPages) assert.ok(fs.existsSync(file), 'subject page ' + file);
@@ -65,8 +64,8 @@ for (const chapter of chapters) {
 }
 
 const publishedCollections = [
-  { id: 'ai-engineering', dir: 'app/subjects/_ai', prefix: '/ai-engineering/' },
-  { id: 'infrastructure', dir: 'app/subjects/_infra', prefix: '/infrastructure/' },
+  { id: 'ai-engineering', dir: `${collectionRoot}/_ai`, prefix: '/ai-engineering/' },
+  { id: 'infrastructure', dir: `${collectionRoot}/_infra`, prefix: '/infrastructure/' },
 ];
 const publishedPages = [];
 
@@ -91,10 +90,7 @@ for (const collection of publishedCollections) {
     assert.ok(match[2].length > 150, 'empty page ' + file);
     assert.ok(!/TODO|Lorem ipsum/.test(text), 'unfinished text ' + file);
 
-    const relative = path
-      .relative(collection.dir, file)
-      .replaceAll('\\', '/')
-      .replace(/\.md$/, '');
+    const relative = path.relative(collection.dir, file).replaceAll('\\', '/').replace(/\.md$/, '');
     urls.add(collection.prefix + relative + '/');
   }
 
@@ -117,7 +113,7 @@ for (const collection of publishedCollections) {
 }
 
 const standalonePages = walk('app/subjects').filter(
-  (p) => p.endsWith('.md') && !p.replaceAll('\\', '/').includes('/_'),
+  (p) => p.endsWith('.md') && !p.replaceAll('\\', '/').startsWith(`${collectionRoot}/`),
 );
 for (const file of standalonePages) {
   const text = fs.readFileSync(file, 'utf8');

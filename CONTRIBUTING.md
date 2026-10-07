@@ -2,7 +2,7 @@
 
 Keep each page focused on one concept or a closely related comparison. Include input assumptions, an explanation, a query or system flow where it helps, expected behavior, and an edge case or trade-off.
 
-SQL lessons live in `app/subjects/_sql/<chapter>/<slug>.md`. Other published subjects use the same collection pattern, for example `app/subjects/_ai/` and `app/subjects/_infra/`. Front matter for ordered lessons contains `title`, `description`, `chapter`, `order`, `sequence`, and `level`. Optional `references` is an array of title/url objects. SQL keeps its existing chapter-index × 100 sequence convention; each other subject owns a separate sequence range inside its collection.
+SQL lessons live in `app/subjects/collections/_sql/<chapter>/<slug>.md`. Other published subjects use the same collection pattern, for example `app/subjects/collections/_ai/` and `app/subjects/collections/_infra/`. Front matter for ordered lessons contains `title`, `description`, `chapter`, `order`, `sequence`, and `level`. Optional `references` is an array of title/url objects. SQL keeps its existing chapter-index × 100 sequence convention; each other subject owns a separate sequence range inside its collection.
 
 Use `##` headings for the automatic outline. Link internally using Jekyll's `relative_url` filter. Use `<details markdown="1"><summary>Show the answer</summary>` for expandable answers. Mark implementation differences and reference primary documentation. Do not copy platform editorials or upload third-party question PDFs into the site.
 
@@ -35,7 +35,7 @@ The local search index consumes these fields without rendering them. The shared 
 
 Run `npm test` and `bundle exec jekyll build`. Add meaningful result checks in `scripts/test-sql.mjs` for tricky SQL examples. The practice fixture is `app/assets/sql/sample-data.sql`.
 
-The SQL landing page is `app/subjects/_sql/index.html`; its explicit permalink keeps it at `/sql/`. Published non-SQL subjects keep their landing page in `app/subjects/<subject>/index.md` and lessons in the configured Jekyll collection. Only documents with a `sequence` participate in lesson pagination.
+Each subject landing page is `app/subjects/<subject>/index.md`; the SQL page's explicit permalink keeps it at `/sql/`. Published lessons live in the configured Jekyll collections. Only documents with a `sequence` participate in lesson pagination.
 
 ## Templates and styles
 

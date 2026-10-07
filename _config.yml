@@ -5,7 +5,7 @@ baseurl: /coretrail
 repository: KayvanShah1/coretrail
 source: app
 destination: _site
-collections_dir: subjects
+collections_dir: subjects/collections
 layouts_dir: templates/layouts
 includes_dir: templates/includes
 markdown: kramdown
