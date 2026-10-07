@@ -20,15 +20,15 @@ references:
 
 | Platform | Where to start | How to use it with CoreTrail |
 |---|---|---|
-| [StrataScratch](https://platform.stratascratch.com/coding) | Search by question name or ID | Retry familiar problems without your old solution, then compare with the linked CoreTrail lesson. |
-| [LeetCode](https://leetcode.com/studyplan/top-sql-50/) | SQL 50 study plan | Work through its sequence, keeping a short note on the mistakes you repeat. |
-| [DataLemur](https://datalemur.com/questions?category=SQL) | SQL question list | Choose a weak topic, attempt a problem, then revisit the related concept. |
+| [StrataScratch](https://platform.stratascratch.com/coding){:target="_blank" rel="noopener noreferrer"} | Search by question name or ID | Retry familiar problems without your old solution, then compare with the linked CoreTrail lesson. |
+| [LeetCode](https://leetcode.com/studyplan/top-sql-50/){:target="_blank" rel="noopener noreferrer"} | SQL 50 study plan | Work through its sequence, keeping a short note on the mistakes you repeat. |
+| [DataLemur](https://datalemur.com/questions?category=SQL){:target="_blank" rel="noopener noreferrer"} | SQL question list | Choose a weak topic, attempt a problem, then revisit the related concept. |
 
 Choose the SQL dialect before starting. Access, difficulty labels, and available editors can change; the original page is the source of truth. The level labels below are practice guidance. CoreTrail's linked examples explain related techniques and may use different fixtures or assumptions from the platform question.
 
 ## A starting list
 
-Try the question before opening the related lesson. Each problem link opens the original platform in the same tab, so the browser's Back button brings you here.
+Try the question before opening the related lesson. Each problem link opens the original platform in a new tab, so CoreTrail stays open for the related lesson.
 
 <div class="filter-controls">
 <label>Platform <select class="practice-filter" data-field="platform"><option value="">All platforms</option><option>StrataScratch</option><option>LeetCode</option><option>DataLemur</option></select></label>
@@ -40,7 +40,7 @@ Try the question before opening the related lesson. Each problem link opens the 
 {% for problem in site.data.practice_problems %}
 <div class="practice-item" data-platform="{{ problem.platform }}" data-topic="{{ problem.topic }}" data-level="{{ problem.level }}">
 <small>{{ problem.platform }} · {{ problem.level }} · {{ problem.topic }}</small>
-<h3><a href="{{ problem.url }}">{{ problem.title }} ↗</a></h3>
+<h3><a href="{{ problem.url }}" target="_blank" rel="noopener noreferrer">{{ problem.title }} ↗</a></h3>
 <p>{{ problem.focus }}</p><a class="practice-revise" href="{{ problem.lesson | relative_url }}">Revisit the concept →</a>
 </div>
 {% endfor %}

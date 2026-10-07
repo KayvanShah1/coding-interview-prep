@@ -76,8 +76,8 @@ Work through the drills without opening the answer hints first. After each query
 
 These are places to apply the patterns, not claims about exact employer interview frequency:
 
-- [LeetCode SQL 50](https://leetcode.com/studyplan/top-sql-50/): a structured set of SQL exercises. Look for joins, aggregation, subqueries, and ranking problems.
-- [DataLemur SQL questions](https://datalemur.com/questions?category=SQL): use the question catalog for analytical exercises such as rolling averages and rates.
-- [LeetCode Students and Examinations](https://leetcode.com/problems/students-and-examinations/): practice constructing expected pairs and preserving zero counts.
+- [LeetCode SQL 50](https://leetcode.com/studyplan/top-sql-50/){:target="_blank" rel="noopener noreferrer"}: a structured set of SQL exercises. Look for joins, aggregation, subqueries, and ranking problems.
+- [DataLemur SQL questions](https://datalemur.com/questions?category=SQL){:target="_blank" rel="noopener noreferrer"}: use the question catalog for analytical exercises such as rolling averages and rates.
+- [LeetCode Students and Examinations](https://leetcode.com/problems/students-and-examinations/){:target="_blank" rel="noopener noreferrer"}: practice constructing expected pairs and preserving zero counts.
 
 For a few drills, solve the same requirement a second way and compare the outputs on a deliberately awkward fixture. The useful part is finding where two plausible queries stop being equivalent.

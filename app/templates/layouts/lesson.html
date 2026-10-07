@@ -38,7 +38,7 @@ layout: default
     <ul>
       {% for ref in page.references %}
         <li>
-          <a href="{{ ref.url }}">{{ ref.title }}</a>
+          <a href="{{ ref.url }}" target="_blank" rel="noopener noreferrer">{{ ref.title }}</a>
         </li>
       {% endfor %}
     </ul>
@@ -75,6 +75,8 @@ layout: default
   ><a
     class="github-link"
     href="https://github.com/{{ site.repository }}/edit/main/app/{{ site.collections_dir }}/{{ page.path }}"
+    target="_blank"
+    rel="noopener noreferrer"
   >
     {%- include icons/github.html -%}
     <span>Edit this page</span></a
