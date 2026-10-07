@@ -52,3 +52,9 @@
   color: var(--accent);
   font-size: 14px;
 }
+
+@media (max-width: 780px) {
+  .subject-switcher {
+    margin: 12px 20px 2px;
+  }
+}
