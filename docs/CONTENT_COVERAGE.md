@@ -140,6 +140,10 @@ This is a scope map, not a claim of exhaustive SQL coverage. Each chapter has a 
 
 - [BigQuery slots, shuffle, and concurrency](../app/subjects/collections/_de/gcp/slots-shuffle-concurrency.md)
 
+- [CTEs, materialization, and optimizer trade-offs](../app/subjects/collections/_sql/performance/cte-planner-tradeoffs.md)
+- [Partition pruning, clustering order, and layout costs](../app/subjects/collections/_sql/performance/pruning-layout-tradeoffs.md)
+- [MERGE, late updates, and replay correctness](../app/subjects/collections/_sql/schema/replay-merge-versions.md)
+
 ## Validation boundaries
 
 PostgreSQL query results are checked with deterministic fixtures. Native PostgreSQL CI checks the index and pruning labs. SQL Server and cloud warehouse guidance is source-backed but requires those platforms for execution. Multi-session replication, failover, and sharding behavior is explained through scenarios rather than simulated by single-session tests.
