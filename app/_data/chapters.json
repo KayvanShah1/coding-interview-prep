@@ -131,5 +131,42 @@
       "title": "Operations & observability",
       "description": "Connect metrics, logs, traces, health, and deployment state during incidents."
     }
+  ],
+  "data-engineering": [
+    {
+      "id": "foundations",
+      "title": "Pipeline architecture",
+      "description": "ETL, ELT, batch, streaming, and choosing where transformations run."
+    },
+    {
+      "id": "incremental",
+      "title": "Incremental ingestion & CDC",
+      "description": "Watermarks, change streams, idempotency and recovery."
+    },
+    {
+      "id": "storage",
+      "title": "Storage & modeling",
+      "description": "File formats, lakehouse tables, facts, dimensions, and history."
+    },
+    {
+      "id": "gcp",
+      "title": "GCP & BigQuery",
+      "description": "Query execution, physical layout, capacity and costs."
+    },
+    {
+      "id": "processing",
+      "title": "Distributed processing",
+      "description": "Spark, Beam, Dataflow, event time, and skew."
+    },
+    {
+      "id": "orchestration",
+      "title": "Orchestration & transformations",
+      "description": "Airflow, Cloud Composer, dbt, retries, and backfills."
+    },
+    {
+      "id": "reliability",
+      "title": "Reliability & operations",
+      "description": "Data quality, reconciliation, monitoring, failures and deployments."
+    }
   ]
 }
