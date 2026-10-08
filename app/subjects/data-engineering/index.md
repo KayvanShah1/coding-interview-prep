@@ -19,7 +19,7 @@ The chapters follow an event from source to warehouse, including how records are
 - [Incremental ingestion & CDC]({{ '/data-engineering/incremental/overview/' | relative_url }}) — Watermarks, change streams, idempotency and recovery.
 - [Storage & modeling]({{ '/data-engineering/storage/overview/' | relative_url }}) — File formats, lakehouse tables, facts, dimensions, and history.
 - [GCP & BigQuery]({{ '/data-engineering/gcp/overview/' | relative_url }}) — Query execution, physical layout, capacity and costs.
-- [Distributed processing]({{ '/data-engineering/processing/overview/' | relative_url }}) — Spark, Beam, Dataflow, event time, and skew.
+- [Distributed processing]({{ '/data-engineering/processing/overview/' | relative_url }}) — Spark, Beam, Dataflow, stream schema evolution, event time, and state migration.
 - [Orchestration & transformations]({{ '/data-engineering/orchestration/overview/' | relative_url }}) — Airflow, Cloud Composer, dbt, retries, and backfills.
 - [Reliability & operations]({{ '/data-engineering/reliability/overview/' | relative_url }}) — Data quality, schema evolution, data contracts, migrations and incident recovery.
 

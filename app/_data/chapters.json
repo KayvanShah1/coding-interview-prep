@@ -176,7 +176,7 @@
     {
       "id": "processing",
       "title": "Distributed processing",
-      "description": "Spark, Beam, Dataflow, event time, and skew."
+      "description": "Spark, Beam, Dataflow, event time, stream schema evolution and state migration."
     },
     {
       "id": "orchestration",

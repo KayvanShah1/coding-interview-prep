@@ -41,7 +41,7 @@ Compatibility also depends on direction. A *backward-compatible* schema lets a n
 
 ## Where the change lands in Bronze, Silver and Gold
 
-These names describe a common medallion design, not a universal enterprise standard.
+These names describe a common medallion design, not a universal enterprise standard. Low-latency event-driven systems may process typed events directly from Kafka or Pub/Sub without passing through these warehouse stages. Their producer/consumer upgrade order and persistent stream state need separate handling in [Schema evolution in real-time pipelines]({{ '/data-engineering/processing/streaming-schema-evolution/' | relative_url }}).
 
 **Bronze / raw:** Keep a recoverable record of what arrived, ideally with a source event identifier, event time, ingestion time, source/schema version and original payload. Avro or a schema registry can preserve versioned structure; JSON or variant payloads can accept less structured input. Raw storage may still validate envelopes and quarantine unreadable records. It does not have to blindly accept everything.
 

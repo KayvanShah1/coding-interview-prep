@@ -28,3 +28,5 @@ Apache Beam supplies PCollections and PTransforms for batch and streaming; Dataf
 Event time describes when the record was created, while processing time describes when it was handled. A reading generated at 10:02 and received at 10:09 still belongs to an event-time 10:00–10:05 window. A watermark estimates progress in event time; triggers determine when outputs are emitted; allowed lateness determines how late corrections are treated.
 
 Pub/Sub normally offers at-least-once delivery. Even where exactly-once features apply, duplicate source events and external API side effects require idempotency. If backlog grows, inspect publish and consumption rates, watermark lag, hot keys, retries and sink throttling before adding workers.
+
+Continuously running processors also face [schema evolution and state migration]({{ '/data-engineering/processing/streaming-schema-evolution/' | relative_url }}): a serializer change can be compatible with new events but incompatible with buffered records or checkpointed state.
