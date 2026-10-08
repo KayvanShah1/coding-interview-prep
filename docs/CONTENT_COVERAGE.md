@@ -132,6 +132,9 @@ This is a scope map, not a claim of exhaustive SQL coverage. Each chapter has a 
 - [Database interview questions](../app/subjects/collections/_sql/practice/theory-questions.md)
 - [Top 5%: thresholds & quotas](../app/subjects/collections/_sql/practice/top-percent.md)
 
+- [Payments and merchants: SQL interview exercises](../app/subjects/collections/_sql/practice/payment-merchant-queries.md)
+- [BigQuery slowdown and cost](../app/subjects/collections/_sql/performance/bigquery-workload-investigation.md)
+
 ## Validation boundaries
 
 PostgreSQL query results are checked with deterministic fixtures. Native PostgreSQL CI checks the index and pruning labs. SQL Server and cloud warehouse guidance is source-backed but requires those platforms for execution. Multi-session replication, failover, and sharding behavior is explained through scenarios rather than simulated by single-session tests.
