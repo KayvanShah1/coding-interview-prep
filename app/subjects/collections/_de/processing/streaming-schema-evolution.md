@@ -13,6 +13,7 @@ keywords:
   - Protobuf
   - Kafka
   - Pub/Sub
+  - GCP
   - backward compatibility
   - forward compatibility
   - Flink savepoints
@@ -115,9 +116,9 @@ Google Cloud Dataflow has a related but distinct update model. A **replacement j
 
 Test event decoding and state restoration independently. A passing registry compatibility check cannot establish that the upgraded job will restore yesterday's checkpoint.
 
-## Pub/Sub → Dataflow → BigQuery on GCP
+## Pub/Sub → Dataflow → BigQuery on Google Cloud
 
-A real-time GCP implementation might be:
+A real-time Google Cloud implementation might be:
 
 ~~~text
 application
@@ -158,10 +159,10 @@ For the warehouse-side version of the problem, including Silver mappings, model 
 
 ## References
 
-- [Confluent — Schema evolution and compatibility](https://docs.confluent.io/platform/8.2/schema-registry/fundamentals/schema-evolution.html)
-- [Confluent — Schema Registry serialization](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/overview.html)
-- [Google Cloud — Pub/Sub schemas](https://docs.cloud.google.com/pubsub/docs/schemas)
-- [Google Cloud — Pub/Sub schema revisions](https://docs.cloud.google.com/pubsub/docs/commit-schema-revision)
-- [Google Cloud — Updating a Dataflow pipeline](https://docs.cloud.google.com/dataflow/docs/guides/updating-a-pipeline)
-- [Google Cloud — Upgrading a streaming pipeline](https://docs.cloud.google.com/dataflow/docs/guides/upgrade-guide)
-- [Apache Flink — Checkpoints and savepoints](https://nightlies.apache.org/flink/flink-docs-master/docs/ops/state/checkpoints_vs_savepoints/)
+- [Confluent: Schema evolution and compatibility](https://docs.confluent.io/platform/8.2/schema-registry/fundamentals/schema-evolution.html)
+- [Confluent: Schema Registry serialization](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/overview.html)
+- [Google Cloud: Pub/Sub schemas](https://docs.cloud.google.com/pubsub/docs/schemas)
+- [Google Cloud: Pub/Sub schema revisions](https://docs.cloud.google.com/pubsub/docs/commit-schema-revision)
+- [Google Cloud: Updating a Dataflow pipeline](https://docs.cloud.google.com/dataflow/docs/guides/updating-a-pipeline)
+- [Google Cloud: Upgrading a streaming pipeline](https://docs.cloud.google.com/dataflow/docs/guides/upgrade-guide)
+- [Apache Flink: Checkpoints and savepoints](https://nightlies.apache.org/flink/flink-docs-master/docs/ops/state/checkpoints_vs_savepoints/)

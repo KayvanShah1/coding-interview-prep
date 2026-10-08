@@ -150,11 +150,11 @@ For each proposed schema change, identify **the affected interface**, **which hi
 
 ## References
 
-- [Uber Engineering — DBEvents and Avro schema evolution](https://www.uber.com/de/en/blog/dbevents-ingestion-framework/)
-- [Spotify Engineering — Data Platform Explained, Part II](https://engineering.atspotify.com/2024/5/data-platform-explained-part-ii)
-- [Spotify Engineering — Dataset migrations across downstream pipelines (2026)](https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4)
-- [LinkedIn Engineering — DataHub schema annotations](https://www.linkedin.com/blog/engineering/data-management/shifting-left-on-governance-datahub-and-schema-annotations)
-- [Airbnb Engineering — Minerva metric consistency](https://medium.com/airbnb-engineering/how-airbnb-achieved-metric-consistency-at-scale-f23cc53dea70)
-- [dbt — Incremental schema-change handling](https://docs.getdbt.com/docs/build/incremental-models)
-- [dbt — Model contracts and versions](https://docs.getdbt.com/docs/mesh/govern/about-model-governance)
-- [Google Cloud — Modifying BigQuery table schemas](https://cloud.google.com/bigquery/docs/managing-table-schemas)
+- [Uber Engineering: DBEvents and Avro schema evolution](https://www.uber.com/de/en/blog/dbevents-ingestion-framework/)
+- [Spotify Engineering: Data Platform Explained, Part II](https://engineering.atspotify.com/2024/5/data-platform-explained-part-ii)
+- [Spotify Engineering: Dataset migrations across downstream pipelines (2026)](https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4)
+- [LinkedIn Engineering: DataHub schema annotations](https://www.linkedin.com/blog/engineering/data-management/shifting-left-on-governance-datahub-and-schema-annotations)
+- [Airbnb Engineering: Minerva metric consistency](https://medium.com/airbnb-engineering/how-airbnb-achieved-metric-consistency-at-scale-f23cc53dea70)
+- [dbt: Incremental schema-change handling](https://docs.getdbt.com/docs/build/incremental-models)
+- [dbt: Model contracts and versions](https://docs.getdbt.com/docs/mesh/govern/about-model-governance)
+- [Google Cloud: Modifying BigQuery table schemas](https://cloud.google.com/bigquery/docs/managing-table-schemas)
