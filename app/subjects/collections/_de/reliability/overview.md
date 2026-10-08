@@ -14,5 +14,5 @@ A pipeline can complete successfully and still publish a broken dataset. Investi
 
 <ul class="topic-list">
 <li><a href="{{ '/data-engineering/reliability/quality-incidents-and-cicd/' | relative_url }}">Reconciliation, schema drift, incident recovery, and CI/CD</a><span>Restore trustworthy data and identify the layer responsible for production regressions.</span></li>
-<li><a href="{{ '/data-engineering/reliability/schema-evolution-and-contracts/' | relative_url }}">Schema evolution, data contracts, and safe migrations</a><span>How Bronze absorbs changes, why Silver needs mappings, and how teams migrate shared datasets.</span></li>
+<li><a href="{{ '/data-engineering/reliability/schema-evolution-and-contracts/' | relative_url }}">Schema evolution, data contracts, and safe migrations</a><span>Source schema changes, curated mappings, consumer contracts and migration plans.</span></li>
 </ul>

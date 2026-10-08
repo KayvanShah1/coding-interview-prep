@@ -1,6 +1,6 @@
 ---
 title: "Schema evolution, data contracts, and safe migrations"
-description: "Follow an upstream schema change through Bronze, Silver and Gold without surprising data consumers."
+description: "Handle source changes across event ingestion, curated warehouse models, and downstream consumers."
 chapter: reliability
 order: 2
 sequence: 702
@@ -21,13 +21,13 @@ interview_queries:
   - how do you migrate a breaking data contract without downtime
 ---
 
-A producer renames `amount` to `total_amount`. The raw pipeline may continue ingesting events, but a Silver transformation that selects `amount` can fail or begin producing nulls. Gold tables, dashboards and feature pipelines still depend on yesterday's meaning of the field. This is the practical problem behind schema evolution: which changes can be accepted automatically, and who updates the transformations and consumers that depend on them?
+A producer renames `amount` to `total_amount`. Raw ingestion continues, but a Silver model that selects `amount` might fail or start returning nulls. Dashboards, feature pipelines and finance reports can still depend on the existing column and its meaning. The team needs to decide whether ingestion can accept the change, how curated mappings should be updated, and when affected consumers can migrate.
 
 ## Drift, evolution, and contracts
 
 **Schema drift** is the difference between the structure you expected and what arrived. **Schema evolution** is the mechanism and process used to accept or migrate that difference. A **data contract** states the expectations that a producer or published dataset commits to: field names, types, required fields, sometimes meaning, ownership, freshness and compatibility rules.
 
-A schema registry can validate that a new event schema is structurally compatible with previous versions. That does not tell you whether a new amount field uses the same currency or includes tax. Two schemas can be identical while a business metric changes meaning. Compatibility checks need semantic review for changes of this kind.
+A schema registry can approve a structurally compatible event while leaving the business meaning uncertain. For example, an `amount` field could start including tax or switch currency without changing its type. That calls for review of the calculation and its consumers even if the schema check passes.
 
 | Producer change | Ingestion decision | Silver / serving consequence |
 | --- | --- | --- |
@@ -39,17 +39,17 @@ A schema registry can validate that a new event schema is structurally compatibl
 
 Compatibility also depends on direction. A *backward-compatible* schema lets a newer reader consume older data; a *forward-compatible* schema lets an older reader consume newer data, under the serialization system's definitions. Backward, forward and full compatibility are different registry policies. A nullable addition can be allowed in one format or policy and rejected in another.
 
-## Where the change lands in Bronze, Silver and Gold
+## Bronze, Silver and Gold: handling upstream changes
 
-These names describe a common medallion design, not a universal enterprise standard. Low-latency event-driven systems may process typed events directly from Kafka or Pub/Sub without passing through these warehouse stages. Their producer/consumer upgrade order and persistent stream state need separate handling in [Schema evolution in real-time pipelines]({{ '/data-engineering/processing/streaming-schema-evolution/' | relative_url }}).
+In a medallion warehouse, raw, curated and serving datasets have different responsibilities. An online event-driven service may instead process typed Kafka or Pub/Sub messages directly. For producer/consumer rollout order and stream state migration, see [Schema evolution in real-time pipelines]({{ '/data-engineering/processing/streaming-schema-evolution/' | relative_url }}).
 
-**Bronze / raw:** Keep a recoverable record of what arrived, ideally with a source event identifier, event time, ingestion time, source/schema version and original payload. Avro or a schema registry can preserve versioned structure; JSON or variant payloads can accept less structured input. Raw storage may still validate envelopes and quarantine unreadable records. It does not have to blindly accept everything.
+**Bronze / raw:** Retain a recoverable copy of the source event, ideally including its event ID, event time, ingestion time, schema version and original payload. Avro or a schema registry supports versioned structure; JSON or variant payloads can accommodate less structured input. Ingestion can still validate envelopes and quarantine unreadable events.
 
 **Silver / staging and core:** Explicit SQL, dbt or Spark logic normalizes source versions into an agreed representation: casts, deduplication, field mappings, keys and quality checks. A well-defined Silver model will often *keep the same output schema* when the producer changes. Its transformation code or declarative mapping is updated to absorb the source change. Silver itself evolves deliberately when the business needs a new attribute, grain or definition.
 
-**Gold / serving:** Published tables and metrics have identifiable consumers. Their names, types, grain and meanings should change on a planned release path. Views, stable aliases or versioned models can keep old consumers running while new versions are adopted. A Gold dataset can still gain compatible columns, but a new meaning for `net_revenue` should not silently replace the old calculation.
+**Gold / serving:** Published tables and metrics have identifiable consumers. Changes to names, types, grain and business definitions follow a planned release. Views, stable aliases or versioned models can support both old and new consumers during migration. Adding a compatible output column is usually easier than changing the definition of `net_revenue` used in financial reports.
 
-Nothing about a medallion architecture automatically rewrites downstream SQL. Some systems can add columns to a lakehouse table or warehouse table; that is a storage/catalog operation, not a business mapping decision.
+Warehouse and lakehouse table-evolution features update physical or catalog schemas. An upstream field still needs a mapping into the curated model, and consumers still need to agree on its meaning.
 
 ## A source rename without a Gold schema change
 
@@ -72,25 +72,25 @@ SELECT
 FROM bronze.orders;
 ~~~
 
-This example assumes both amount fields have the *same business meaning and units*. The code also produces nulls for malformed amounts and unknown versions; production processing must detect those cases, reject or quarantine invalid records, and alert on changes in invalid rates. A `SAFE_CAST` that silently turns bad data into null is not sufficient validation.
+The mapping is valid only if both amount fields use the *same business definition and units*. Malformed values and unknown schema versions would produce nulls in this example. A production job should classify and quarantine those records or fail validation, with alerts on the invalid rate. Simply using `SAFE_CAST` could conceal the change.
 
-The Silver output remains `order_id, order_amount`. Gold models that depend on those columns need no structural migration. The Silver **transformation** changed, while its published **schema** stayed stable. Keeping a schema-version mapping in configuration can reduce repetitive code, but it still needs a defined source-to-target mapping and tests.
+Silver still publishes `order_id, order_amount`, so existing Gold models can continue using that interface. The version-specific logic changed inside Silver. A configuration-driven mapping can reduce repetitive SQL, provided the source-to-target semantics and tests remain explicit.
 
 If version 2 instead changes from gross to net amount, the normalization above would be wrong even though it executes successfully. A domain owner must decide whether to add another column, change the metric definition with a versioned release, or retain both.
 
-## How a breaking change is shipped
+## Expand-and-contract migrations for shared models
 
 A typical mature-team workflow starts with a producer pull request. The proposed event or database schema diff goes through compatibility checks and tests. Metadata and lineage identify the datasets, jobs and teams that consume the affected field. For incompatible changes, the data model owner reviews mappings and updates the transformation in a separate change or coordinated release.
 
-Consider a shared `gold.payments` contract where hundreds of consumers use `amount`, and the team now needs `net_amount`:
+Suppose hundreds of consumers read `gold.payments.amount`, and the team wants to introduce `net_amount`:
 
 1. **Expand:** Introduce `net_amount` without immediately removing `amount`. Keep both available if their definitions are valid and reconcile them over representative records.
 2. **Migrate:** Publish and test an updated Silver model and a `payments_v2` serving model or view. Find affected consumers using lineage, code search and ownership metadata. Move each consumer deliberately, with a documented deprecation window.
 3. **Contract:** Once consumers have migrated, retire the old field or old version. Confirm no scheduled jobs, dashboards, exports or machine-learning features still depend on it.
 
-This is the *expand-and-contract* migration pattern. Sometimes it is cheaper to make a breaking change directly inside one team's private staging model. Versioning becomes more valuable when many independently managed consumers rely on the dataset.
+This rollout is called *expand-and-contract*. A private staging model with one owning team might be changed directly. A widely used payments model benefits from versions and a migration window because independent consumers cannot all deploy at once.
 
-## What CI checks, and what still needs judgment
+## Schema checks and semantic validation in CI
 
 Continuous integration (CI) can compare a new schema with the last deployed version, test compatibility rules, compile SQL models, evaluate contracts and run representative transformations. A release pipeline can update a schema registry or catalog only after approval. For a critical dataset, the following checks cover different failure modes:
 
@@ -101,11 +101,11 @@ Continuous integration (CI) can compare a new schema with the last deployed vers
 - **Consumers:** Lineage impact, owner approval, a migration/deprecation plan and tests for affected downstream queries.
 - **Operations:** Quarantine count, failed writes, freshness, reconciliation totals and a way to repair already-published data.
 
-Schema compatibility alone cannot verify metric meaning. Lineage helps find likely consumers, but can miss dynamic SQL, spreadsheet extracts, external exports and untracked usage. Where discovery is incomplete, maintain published contracts and give consumers time to migrate.
+A compatible field type says little about whether the business calculation is still correct. Lineage can locate many dependent jobs, although dynamic SQL, spreadsheet extracts and external exports may escape tracking. When the consumer inventory is incomplete, stable published contracts and a migration window reduce the risk of unnoticed breakage.
 
-A rollback also has two parts: revert the code, then decide what to do about rows and partitions already written using the new logic. A software rollback does not restore overwritten warehouse data.
+Reverting code leaves rows written during the faulty release in place. Recovering the dataset may require rebuilding affected partitions from raw data and reconciling corrected output.
 
-## dbt and BigQuery: what the settings really guarantee
+## dbt model contracts and BigQuery schema evolution
 
 A dbt model can declare a schema contract in its YAML configuration:
 
@@ -130,23 +130,23 @@ BigQuery can add nullable or repeated fields and supports some column renames an
 
 For incremental ingestion, see [CDC, checkpoints and MERGE]({{ '/data-engineering/incremental/cdc-checkpoints-and-merge/' | relative_url }}). For lakehouse table-level evolution, see [Storage formats and lakehouse tables]({{ '/data-engineering/storage/parquet-lakehouse-and-grain/' | relative_url }}).
 
-## How companies have approached this
+## Published engineering approaches
 
 The published examples illustrate different parts of the system. They are not claims that every team at those companies uses the same architecture.
 
-**Uber — compatibility at ingestion.** Uber's [DBEvents framework](https://www.uber.com/de/en/blog/dbevents-ingestion-framework/) describes an Avro Schema-Service that accepts backward-compatible schema changes and applies the corresponding table definition changes. It standardizes ingestion from heterogeneous sources. Domain-specific downstream transformations still need their own logic.
+**Uber: compatibility at ingestion.** Uber's [DBEvents framework](https://www.uber.com/de/en/blog/dbevents-ingestion-framework/) describes an Avro Schema-Service that accepts backward-compatible schema changes and applies the corresponding table definition changes. It standardizes ingestion from heterogeneous sources. Domain-specific downstream transformations still need their own logic.
 
-**Spotify — schema-driven events and consumer migrations.** Spotify's [data platform write-up](https://engineering.atspotify.com/2024/5/data-platform-explained-part-ii) describes event schemas triggering resource deployments and separate ownership of consumption datasets. In a [2026 migration case study](https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4), two heavily used datasets had about 1,800 direct downstream pipelines. Spotify used Backstage lineage, code search and automated pull requests; it reported 240 automated migration PRs. The team had to specify field mappings explicitly, leave ambiguous cases for human engineers and rely on owning teams to test changes where build-time tests were missing. Automation helped with repetition, while migration decisions and validation remained necessary.
+**Spotify: schema-driven events and consumer migrations.** Spotify's [data platform write-up](https://engineering.atspotify.com/2024/5/data-platform-explained-part-ii) describes event schemas triggering resource deployments and separate ownership of consumption datasets. In a [2026 migration case study](https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4), two heavily used datasets had about 1,800 direct downstream pipelines. Spotify used Backstage lineage, code search and automated pull requests; it reported 240 automated migration PRs. The team had to specify field mappings explicitly, leave ambiguous cases for human engineers and rely on owning teams to test changes where build-time tests were missing. Automation helped with repetition, while migration decisions and validation remained necessary.
 
-**LinkedIn — metadata checks before release.** LinkedIn's [DataHub governance account](https://www.linkedin.com/blog/engineering/data-management/shifting-left-on-governance-datahub-and-schema-annotations) describes schema annotations living with code and builds failing when event-tracking fields lack required business metadata. Its [DataHub architecture](https://www.linkedin.com/blog/engineering/archive/data-hub) also describes build-time compatibility checking for metadata event schemas. These practices make changes visible earlier; they are not a promise that every SQL consumer will update automatically.
+**LinkedIn: metadata checks before release.** LinkedIn's [DataHub governance account](https://www.linkedin.com/blog/engineering/data-management/shifting-left-on-governance-datahub-and-schema-annotations) describes schema annotations living with code and builds failing when event-tracking fields lack required business metadata. Its [DataHub architecture](https://www.linkedin.com/blog/engineering/archive/data-hub) also describes build-time compatibility checking for metadata event schemas. Build-time checks catch missing metadata before release. Downstream SQL still needs its own compatibility checks and updates.
 
-**Airbnb — stable business definitions.** Airbnb's [Minerva write-up](https://medium.com/airbnb-engineering/how-airbnb-achieved-metric-consistency-at-scale-f23cc53dea70) describes curated core data models and a metric platform serving consistent definitions to different consumers. The [follow-up on Minerva's computation](https://medium.com/airbnb-engineering/airbnb-metric-computation-with-minerva-part-2-9afe6695b486) covers version-controlled declarative definitions, backfills and testing before release. It highlights why structural schema compatibility alone cannot make revenue or bookings metrics consistent.
+**Airbnb: stable business definitions.** Airbnb's [Minerva write-up](https://medium.com/airbnb-engineering/how-airbnb-achieved-metric-consistency-at-scale-f23cc53dea70) describes curated core data models and a metric platform serving consistent definitions to different consumers. The [follow-up on Minerva's computation](https://medium.com/airbnb-engineering/airbnb-metric-computation-with-minerva-part-2-9afe6695b486) covers version-controlled declarative definitions, backfills and testing before release. It highlights why structural schema compatibility alone cannot make revenue or bookings metrics consistent.
 
-## Decide what is allowed to change
+## Choosing a schema-change policy
 
 An internal staging table with one owning team can evolve quickly. A published payments model used by finance, fraud and external reports needs an owner, compatibility policy, consumer inventory and a migration window. Pick the level of ceremony from the number and importance of consumers.
 
-When asked how to handle schema evolution at scale, explain **which interface is changing**, **whether old and new data remain readable**, **who owns the canonical mapping**, **which consumers are affected**, and **how you will verify historical and future results**. Those decisions determine whether a schema registry, configurable mapper, dbt contract or versioned serving model is the right tool.
+For each proposed schema change, identify **the affected interface**, **which historic and current data must remain readable**, **who owns the canonical mapping**, **which consumers need updates**, and **how correctness will be verified**. That tells the team whether it needs a registry rule, configurable mapping, dbt contract or versioned serving model.
 
 ## References
 

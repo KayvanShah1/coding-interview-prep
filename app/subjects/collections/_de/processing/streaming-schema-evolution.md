@@ -26,11 +26,11 @@ interview_queries:
 
 An order producer adds `discount_amount` at noon. Some service instances still publish the old event, while others publish the new one. A consumer is hours behind and may first encounter the older version. A streaming aggregation also has window state written by yesterday's code. The warehouse might be able to add a nullable column, but that fixes only one part of the deployment.
 
-Streaming schema evolution is a **rolling compatibility and state-migration problem**. Batch pipelines can often be changed and verified between scheduled runs. A real-time pipeline stays alive while old and new messages, application versions, buffered records and sometimes persisted processing state coexist.
+A stream keeps processing while application versions change. The rollout has to account for messages already in the log, consumers still running older code, records buffered in the processor, and state saved by previous deployments. Batch transformations often have a scheduled point at which new code can take over; a live stream usually does not.
 
-## A streaming pipeline may have no Bronze, Silver or Gold
+## Event-driven pipelines without medallion stages
 
-Consider a low-latency payment risk service:
+A low-latency payment-risk service might look like this:
 
 ~~~text
 payment API
@@ -40,11 +40,11 @@ payment API
   → separate sink for analytics
 ~~~
 
-There may be no warehouse transformation between the event and the decision. The contract at the **topic** and the expectations inside the **stream processor** govern the application. Another stream may simultaneously archive events to object storage and write BigQuery tables for analytics.
+The payment-risk processor reads from the topic and publishes a decision directly. A separate consumer could archive the same events or load BigQuery for analytics. In this setup, the topic's event contract and the processor's expectations control the live decision.
 
-A medallion design is possible for continuous ingestion, but it is not required. The same structural change can be harmless for an archival sink, rejected by a streaming parser and dangerous for an online risk calculation. Schema acceptance needs to be decided at each interface.
+Some streaming platforms also use Bronze, Silver and Gold datasets. This payment service has no such intermediate tables. Adding a field might work in the archive but fail during decoding, or change the inputs to a risk calculation. Each consumer has to decide whether it can handle the new event version.
 
-## Three compatibilities to check
+## Event, processor-state, and sink compatibility
 
 | Interface | What can break | Mechanism |
 | --- | --- | --- |
@@ -52,11 +52,11 @@ A medallion design is possible for continuous ingestion, but it is not required.
 | Stream processor → checkpointed state | A new job cannot restore an old aggregate, timer, window or key-value state | Compatible serializers, savepoints/checkpoints, upgrade validation or state migration |
 | Processor → sink / external consumer | A database rejects a row, a downstream event changes meaning, or a dashboard expects an old field | Sink schema policy, explicit mappings, parallel versions, consumer contracts and reconciliation |
 
-Kafka itself transports bytes; event-schema enforcement depends on the schema registry, serializers, validation in producers/consumers and any configured platform controls. Registering a compatible schema does not automatically rewrite a Kafka Streams topology or a Flink transformation.
+Kafka brokers store and deliver message bytes. Producers and consumers apply the schema format through serializers, deserializers and validation; a schema registry can enforce compatibility when new schemas are registered. Any Kafka Streams or Flink transformation using the changed fields still needs review.
 
-## How mixed event versions are decoded
+## Decoding mixed event versions
 
-With Avro or Protocol Buffers, producers commonly serialize events against a registered schema and include a **schema identifier** with each message, in an agreed envelope or header. The reader uses that identifier to interpret the writer's schema and then resolves fields against a compatible reader schema. Cache schema lookups in a busy consumer instead of fetching a definition on every message.
+With registered Avro or Protocol Buffers events, the producer writes data using a known schema and includes a **schema identifier** in an agreed wire format or message envelope. A consumer uses the identifier to load the writer's definition. Avro supports reader/writer schema resolution; Protocol Buffers handles fields according to its own compatibility rules. Busy consumers normally cache schema definitions instead of fetching them for every event.
 
 For example, a Kafka topic can contain the following logical events:
 
@@ -67,7 +67,7 @@ For example, a Kafka topic can contain the following logical events:
 
 These JSON records show the idea; a registered Avro or Protobuf message normally uses its own serialization format and metadata. A consumer built for version 2 may default a missing `discount_amount` to zero when reading version 1, **if the serialization format and schema definition support that default**. The consumer's business calculation still has to decide whether zero really means no discount.
 
-For genuinely incompatible changes, one option is an explicit normalizer:
+When old and new event versions require different decoding or field mapping, an adapter can publish a common event format:
 
 ~~~text
 payments.events.v1 ─┐
@@ -92,7 +92,7 @@ Confluent Schema Registry defaults to `BACKWARD`, not `BACKWARD_TRANSITIVE`. Wit
 
 Upgrade order is particularly important when an old consumer cannot decode the new producer's messages. It also depends on whether the consumer is stateless or stores changelog/state data. Confluent's documentation calls out Kafka Streams separately because the upgraded application may need to read previously serialized state as well as input events.
 
-## What a producer rollout can look like
+## Rolling out a new event field
 
 Suppose the payment team adds an optional `merchant_category` field and the new fraud rules will use it.
 
@@ -103,17 +103,17 @@ Suppose the payment team adds an optional `merchant_category` field and the new 
 
 If the new attribute is missing for historical events, the correct fallback is a domain decision. Imputing a convenient value can change fraud scores, revenue totals or eligibility logic.
 
-A field rename is more disruptive than an additive optional field. Treat `amount` and `total_amount` as different fields until an explicit alias/mapping is approved; don't assume a serialization format recognizes a rename as equivalent.
+A rename from `amount` to `total_amount` changes the field contract. The consuming team needs an approved alias or mapping, plus a migration plan for older events and applications.
 
-## Stateful stream processing adds another migration
+## Migrating stateful Flink and Dataflow jobs
 
 Imagine a rolling five-minute payment total keyed by `account_id`. A Flink job keeps per-key aggregates and timers in managed state. Updating the event decoder might be safe, while changing the key type or the serialized aggregate breaks state restoration.
 
-Apache Flink can restore from a **savepoint**, subject to serializer and state compatibility. A supported state schema evolution can migrate compatible serialized state, but arbitrary changes to key types, serializers, operator identity or complex state layouts are not inherently safe. For incompatible changes, teams may need a planned rebuild, explicit state transformation, a new job started from a controlled replay point or parallel processing while the old job drains.
+Apache Flink can restore from a **savepoint** when the restored job and its serializers can read the saved state. Some changes to a state schema can be migrated automatically. Changing the key type, serializer, operator identity or a complex state layout can prevent restoration. The team then has to plan a state transformation, rebuild from a controlled replay point or run old and new jobs in parallel during the transition.
 
 Google Cloud Dataflow has a related but distinct update model. A **replacement job** can preserve intermediate state and in-flight records when its pipeline graph and coders are compatible. The documented schema changes permitted for schema-aware Apache Beam `PCollection` updates include adding fields and making required fields nullable. Removing fields, renaming fields and changing field types are not permitted by that update mechanism. Other pipeline-graph and coder changes may also block replacement. In such cases, Dataflow documents **parallel pipelines** as one migration option. The cutover still needs a strategy for duplicate outputs, in-flight work and sink ownership.
 
-Keep event-wire compatibility and persisted-state compatibility as separate test cases. Passing schema registry checks says nothing about whether the job can restore its checkpoint.
+Test event decoding and state restoration independently. A passing registry compatibility check cannot establish that the upgraded job will restore yesterday's checkpoint.
 
 ## Pub/Sub → Dataflow → BigQuery on GCP
 
@@ -132,19 +132,19 @@ Pub/Sub can validate published messages against an attached schema and its allow
 
 The Dataflow code still defines the output fields and business rules. On an additive event-field change, it may keep writing the old stable BigQuery projection until a reviewed update exposes the new field. The destination needs its own compatible change, and historical rows will not automatically gain meaningful values.
 
-For a disruptive sink migration, parallel pipelines can produce into separate staging tables while a stable view or controlled switchover serves consumers. Avoid having two uncoordinated pipeline versions append duplicate business events to the same production target.
+For a disruptive sink migration, old and new pipelines can write to separate staging tables while a stable view serves consumers. If both versions append to the same production table without coordinated ownership or deduplication, the cutover can duplicate business events.
 
 ## Malformed messages, replay and a safe cutover
 
 A decoder cannot process an arbitrary future version just because the event contains a schema ID. Decide what happens to an unrecognized schema, malformed value or impossible enum. Depending on the system, reject publication, isolate the record for later repair or route processing failures to a dead-letter queue (DLQ). Put event IDs, schema versions and error reasons in that record; avoid endless retries of permanently malformed messages.
 
-A DLQ is not a substitute for a replay strategy. Document topic retention, archived raw copies, checkpoints/offsets and an idempotent sink key. A pipeline cutover may require comparing old and new outputs for a bounded time window before moving traffic, then verifying counts, keys and business measures.
+Messages in a DLQ still need a repair or replay path. Record topic retention, raw archives, checkpoints or offsets, and the sink's idempotency key. During cutover, compare both pipeline versions over a defined time window, then reconcile counts, keys and business measures before switching consumers.
 
 For a streaming deployment, watch **schema/decoder failures, message age and consumer lag, checkpoint or replacement-job failures, DLQ volume, duplicate sink writes and output discrepancies**. A deployment can be technically healthy while its fraud logic or aggregate amounts are wrong.
 
-## How to choose the mechanism
+## Choosing a streaming migration strategy
 
-Use the simplest versioning and migration method that fits the consumer relationship:
+The appropriate migration depends on how independently consumers deploy and what happens if a record is processed incorrectly:
 
 - A short-lived internal stream with coordinated deployments can rely on a compatible additive change and tests.
 - A shared topic with independently deployed consumers benefits from a registry, clear compatibility policy, schema-aware serializers and consumer ownership.
@@ -152,7 +152,7 @@ Use the simplest versioning and migration method that fits the consumer relation
 - A stateful processor requires separate checkpoint/savepoint compatibility testing.
 - An analytics sink needs its own stable output contract; its table-evolution settings are a separate decision from event-schema compatibility.
 
-The governing question is: **which producer and consumer versions, historic records, persisted state and downstream sinks must coexist during the rollout?** Once that is explicit, the right approach is easier to choose.
+A rollout plan should name the producer and consumer versions that will overlap, the oldest records that might be replayed, whether persisted state can be restored, and how sinks will switch over. Those details determine which migrations are safe.
 
 For the warehouse-side version of the problem, including Silver mappings, model contracts and expand-and-contract migrations, see [Schema evolution, data contracts, and safe migrations]({{ '/data-engineering/reliability/schema-evolution-and-contracts/' | relative_url }}).
 
