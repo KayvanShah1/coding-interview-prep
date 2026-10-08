@@ -7,6 +7,7 @@ This is a scope map, not a claim of exhaustive SQL coverage. Each chapter has a 
 - [Data types & casting](../app/subjects/collections/_sql/foundations/data-types.md)
 - [Think in rows and grain](../app/subjects/collections/_sql/foundations/grain.md)
 - [Query structure & execution order](../app/subjects/collections/_sql/foundations/query-order.md)
+- [PostgreSQL and BigQuery: rows, columns, and workload](../app/subjects/collections/_sql/foundations/oltp-olap-storage.md)
 - [Relational databases & SQL commands](../app/subjects/collections/_sql/foundations/relational-basics.md)
 - [Practice dataset & example conventions](../app/subjects/collections/_sql/foundations/sample-data.md)
 
@@ -134,6 +135,10 @@ This is a scope map, not a claim of exhaustive SQL coverage. Each chapter has a 
 
 - [Payments and merchants: SQL interview exercises](../app/subjects/collections/_sql/practice/payment-merchant-queries.md)
 - [BigQuery slowdown and cost](../app/subjects/collections/_sql/performance/bigquery-workload-investigation.md)
+
+## Data Engineering: BigQuery internals
+
+- [BigQuery slots, shuffle, and concurrency](../app/subjects/collections/_de/gcp/slots-shuffle-concurrency.md)
 
 ## Validation boundaries
 

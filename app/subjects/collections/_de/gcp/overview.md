@@ -14,4 +14,5 @@ Query execution, physical layout, capacity and costs. Start by identifying the r
 
 <ul class="topic-list">
 <li><a href="{{ '/data-engineering/gcp/bigquery-execution-and-cost/' | relative_url }}">BigQuery execution, partitioning, clustering, and cost</a><span>Diagnose stage-level work and explain how physical layout changes scans.</span></li>
+<li><a href="{{ '/data-engineering/gcp/slots-shuffle-concurrency/' | relative_url }}">BigQuery slots, shuffle, and concurrency</a><span>Explain stage work, join skew, reservation contention and runtime regressions.</span></li>
 </ul>
