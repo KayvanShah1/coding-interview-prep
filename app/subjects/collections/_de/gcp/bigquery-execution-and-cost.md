@@ -20,14 +20,14 @@ When a query grows from five seconds to forty seconds, compare it with an earlie
 ~~~sql
 SELECT job_id, total_bytes_processed, total_slot_ms,
        TIMESTAMP_DIFF(end_time, start_time, SECOND) AS runtime_s
-FROM [REGION].INFORMATION_SCHEMA.JOBS_BY_PROJECT
+FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
 WHERE creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
   AND job_type = 'QUERY' AND state = 'DONE'
 ORDER BY total_slot_ms DESC
 LIMIT 20;
 ~~~
 
-Replace [REGION] with the BigQuery region qualifier, for example the quoted region-us identifier, and use appropriate permissions.
+Replace `region-us` with the region where your BigQuery jobs ran, and use appropriate permissions.
 
 ## Partitioning and clustering
 
