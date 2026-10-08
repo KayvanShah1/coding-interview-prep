@@ -25,6 +25,8 @@ dbt defines SQL models, dependency relationships, materializations and tests. St
 
 An incremental model filters changed records and uses a supported insert or merge strategy. Its unique_key must match the actual target grain. A single timestamp watermark can miss late updates. Overlap plus deterministic deduplication or a proper CDC change feed may be needed.
 
+A shared dbt model can enforce a declared output contract, while an incremental model's `on_schema_change` setting only governs how its target columns change. Neither can infer whether an upstream rename preserves meaning. See [Schema evolution and model contracts]({{ '/data-engineering/reliability/schema-evolution-and-contracts/' | relative_url }}) for the complete change process.
+
 ## A dependable dependency chain
 
 ~~~text

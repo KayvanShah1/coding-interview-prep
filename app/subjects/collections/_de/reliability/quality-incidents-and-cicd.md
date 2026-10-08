@@ -17,7 +17,7 @@ A data-quality contract describes the expected population, grain, key uniqueness
 
 Two tables can have identical row counts and entirely different keys. Reconcile source versus target key coverage, delete state, totals by stable partition, update versions and sampled values. Agree on units, currency precision, timestamp interpretation and null handling before comparing measures.
 
-Schema drift can be additive, such as a new nullable field, or breaking, such as an amount arriving as the string NA. Safe casting prevents some crashes but can silently turn valid business values into nulls. Retain raw input, quarantine or classify invalid records, and monitor the invalid-rate trend.
+Schema drift can be additive, such as a new nullable field, or breaking, such as an amount arriving as the string NA. Safe casting prevents some crashes but can silently turn valid business values into nulls. Retain raw input, quarantine or classify invalid records, and monitor the invalid-rate trend. For ownership, compatibility policies and downstream migrations, see [Schema evolution and data contracts]({{ '/data-engineering/reliability/schema-evolution-and-contracts/' | relative_url }}).
 
 ## Incident investigation
 

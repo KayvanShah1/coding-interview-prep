@@ -186,7 +186,7 @@
     {
       "id": "reliability",
       "title": "Reliability & operations",
-      "description": "Data quality, reconciliation, monitoring, failures and deployments."
+      "description": "Quality, schema evolution, data contracts, reconciliation and recovery."
     }
   ]
 }

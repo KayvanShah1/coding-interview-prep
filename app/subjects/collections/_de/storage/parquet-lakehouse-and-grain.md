@@ -15,7 +15,7 @@ CSV is a widely supported row-oriented text format, but it has no native column 
 
 ## A file is different from a table
 
-Apache Iceberg, Delta Lake and Apache Hudi add transaction and metadata protocols around collections of data files. Features vary by format and engine, but can include snapshots, schema evolution and safe concurrent writes. A bucket full of Parquet files does not, on its own, make a multi-file update atomic.
+Apache Iceberg, Delta Lake and Apache Hudi add transaction and metadata protocols around collections of data files. Features vary by format and engine, but can include snapshots, schema evolution and safe concurrent writes. A bucket full of Parquet files does not, on its own, make a multi-file update atomic. Adding a field to the table metadata also does not teach downstream transformations what the new field means. See [Schema evolution, Silver mappings and data contracts]({{ '/data-engineering/reliability/schema-evolution-and-contracts/' | relative_url }}) for the consumer-facing migration.
 
 Tiny files increase metadata and task scheduling overhead. Partitioning by an excessively high-cardinality key can create many nearly empty directories or partitions. Compaction and layout optimization help, but rewrite data and consume I/O.
 

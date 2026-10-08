@@ -32,6 +32,8 @@ QUALIFY ROW_NUMBER() OVER (
 
 This BigQuery query chooses the latest staged version, assuming both ordering fields are meaningful. A MERGE with event_id as a key can update or insert the destination, but a merge is only safe when the staged source is unique at the target grain and the update rule rejects stale changes. Deletes require explicit tombstones or operation codes.
 
+If the CDC feed introduces a new event or column version, retain enough source metadata to interpret old and new changes during replay. Version-aware canonical mappings and a consumer migration process are covered in [Schema evolution and data contracts]({{ '/data-engineering/reliability/schema-evolution-and-contracts/' | relative_url }}).
+
 ## Retrying correctly
 
 If the destination committed but checkpoint persistence failed, the next attempt must safely replay. If checkpoint persistence succeeded before the destination committed, records could be lost. Record extraction ranges, source offsets, stage counts, merge results and the last verified destination checkpoint.

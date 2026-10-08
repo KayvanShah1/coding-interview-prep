@@ -21,6 +21,6 @@ The chapters follow an event from source to warehouse, including how records are
 - [GCP & BigQuery]({{ '/data-engineering/gcp/overview/' | relative_url }}) — Query execution, physical layout, capacity and costs.
 - [Distributed processing]({{ '/data-engineering/processing/overview/' | relative_url }}) — Spark, Beam, Dataflow, event time, and skew.
 - [Orchestration & transformations]({{ '/data-engineering/orchestration/overview/' | relative_url }}) — Airflow, Cloud Composer, dbt, retries, and backfills.
-- [Reliability & operations]({{ '/data-engineering/reliability/overview/' | relative_url }}) — Data quality, reconciliation, monitoring, failures and deployments.
+- [Reliability & operations]({{ '/data-engineering/reliability/overview/' | relative_url }}) — Data quality, schema evolution, data contracts, migrations and incident recovery.
 
 For SQL semantics and indexing, visit [SQL]({{ '/sql/' | relative_url }}). Infrastructure mechanics shared with other applications live under [Infrastructure & DevOps]({{ '/infrastructure/' | relative_url }}).

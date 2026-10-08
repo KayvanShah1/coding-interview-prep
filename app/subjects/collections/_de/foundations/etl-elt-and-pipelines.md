@@ -26,6 +26,8 @@ source API or devices
 
 Pub/Sub transports asynchronous messages. Cloud Storage provides durable objects and can preserve a replayable archive. Dataflow processes distributed input; BigQuery handles analytical SQL. Airflow or Cloud Composer orchestrates dependencies. Each component has a different failure and cost model.
 
+A raw landing table may accept a newer source schema while a curated model still expects yesterday's field names. [Schema evolution and data contracts]({{ '/data-engineering/reliability/schema-evolution-and-contracts/' | relative_url }}) follows that change through Bronze, Silver and Gold, including the consumer migration work.
+
 ## Decide whether streaming is required
 
 Suppose readings arrive every fifteen seconds but the consumer only refreshes every five minutes. A five-minute micro-batch may satisfy the agreed freshness while reducing idle compute. Streaming is valuable when event-time windows, continuous detection or very low latency are genuine requirements. Compare end-to-end age of usable data, not merely source publish time.
