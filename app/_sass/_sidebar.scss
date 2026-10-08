@@ -202,4 +202,17 @@
   .sidebar-site-links a[aria-current='page'] {
     color: var(--accent);
   }
+  .search-trigger {
+    margin: 12px 20px 14px;
+  }
+  .chapters {
+    border-top: 1px solid var(--line);
+    padding: 8px 13px 24px;
+  }
+  .chapter summary {
+    padding: 9px 12px;
+  }
+  .chapter-links a {
+    padding: 7px 12px;
+  }
 }

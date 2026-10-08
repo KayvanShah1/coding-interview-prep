@@ -1,10 +1,15 @@
 ---
 layout: default
 ---
-{% assign chapter = site.data.chapters | where: 'id', page.chapter | first %}
+{% assign subject = site.data.subjects | where: 'id', page.subject | first %}
+{% assign chapters = site.data.chapters[page.subject] %}
+{% assign chapter = chapters | where: 'id', page.chapter | first %}
+{% assign collection_key = subject.collection %}
+{% assign subject_lessons = site[collection_key] %}
+{% assign chapter_url = subject.url | append: chapter.id | append: '/overview/' %}
 <div class="breadcrumb">
-  <a href="{{ '/sql/' | relative_url }}">SQL</a><span>/</span
-  ><a href="{{ '/sql/' | append: chapter.id | append: '/overview/' | relative_url }}">
+  <a href="{{ subject.url | relative_url }}">{{ subject.title }}</a><span>/</span
+  ><a href="{{ chapter_url | relative_url }}">
     {{- chapter.title -}}
   </a>
 </div>
@@ -33,13 +38,16 @@ layout: default
     <ul>
       {% for ref in page.references %}
         <li>
-          <a href="{{ ref.url }}">{{ ref.title }}</a>
+          <a href="{{ ref.url }}" target="_blank" rel="noopener noreferrer">{{ ref.title }}</a>
         </li>
       {% endfor %}
     </ul>
   </section>
 {% endif %}
-{% assign ordered = site.sql | where_exp: 'item', 'item.sequence != nil' | sort: 'sequence' %}
+{% assign ordered = subject_lessons
+  | where_exp: 'item', 'item.sequence != nil'
+  | sort: 'sequence'
+%}
 {% for item in ordered -%}
   {%- if item.url == page.url -%}
     {%- assign prev_index = forloop.index0 | minus: 1 -%}
@@ -56,17 +64,19 @@ layout: default
   {%- else -%}
     <span></span>
   {%- endif -%}
-  {%- if following -%}
+  {% if following -%}
     <a class="next" href="{{ following.url | relative_url }}"
       ><small>Next</small><span>{{ following.title }} →</span></a
     >
   {%- endif %}
 </nav>
 <footer class="article-footer">
-  <span>CoreTrail · SQL handbook</span
+  <span>CoreTrail · {{ subject.title }}</span
   ><a
     class="github-link"
     href="https://github.com/{{ site.repository }}/edit/main/app/{{ site.collections_dir }}/{{ page.path }}"
+    target="_blank"
+    rel="noopener noreferrer"
   >
     {%- include icons/github.html -%}
     <span>Edit this page</span></a

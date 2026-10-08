@@ -1,77 +1,135 @@
-[
-  {
-    "id": "foundations",
-    "title": "Foundations",
-    "description": "Understand tables, keys, data types, and how a query is evaluated."
-  },
-  {
-    "id": "filtering",
-    "title": "Filtering & expressions",
-    "description": "Select the right rows and reason carefully about missing values."
-  },
-  {
-    "id": "functions",
-    "title": "Functions & dates",
-    "description": "Transform strings, numbers, dates, and timestamps."
-  },
-  {
-    "id": "aggregation",
-    "title": "Aggregation",
-    "description": "Summarize data and define meaningful denominators."
-  },
-  {
-    "id": "joins",
-    "title": "Joins & sets",
-    "description": "Combine tables while preserving the intended grain."
-  },
-  {
-    "id": "subqueries",
-    "title": "Subqueries & CTEs",
-    "description": "Break down problems and query related or hierarchical data."
-  },
-  {
-    "id": "windows",
-    "title": "Window functions",
-    "description": "Compare ordered rows without losing detail."
-  },
-  {
-    "id": "patterns",
-    "title": "Interview patterns",
-    "description": "Recognize recurring problems and choose a reliable approach."
-  },
-  {
-    "id": "design",
-    "title": "Database design",
-    "description": "Model relationships, dependencies, and analytical history."
-  },
-  {
-    "id": "schema",
-    "title": "Schema & data changes",
-    "description": "Define tables, enforce constraints, and modify data safely."
-  },
-  {
-    "id": "transactions",
-    "title": "Transactions",
-    "description": "Understand concurrent work, isolation, and locks."
-  },
-  {
-    "id": "performance",
-    "title": "Performance",
-    "description": "Read plans, choose indexes, and reduce unnecessary work."
-  },
-  {
-    "id": "scaling",
-    "title": "Storage & scaling",
-    "description": "Choose physical layout, distribution, and replication from workload requirements."
-  },
-  {
-    "id": "postgres",
-    "title": "PostgreSQL toolkit",
-    "description": "Work with arrays, JSON, views, and database routines."
-  },
-  {
-    "id": "practice",
-    "title": "Practice & revision",
-    "description": "Apply the patterns, compare dialects, and test your understanding."
-  }
-]
+{
+  "sql": [
+    {
+      "id": "foundations",
+      "title": "Foundations",
+      "description": "Understand tables, keys, data types, and how a query is evaluated."
+    },
+    {
+      "id": "filtering",
+      "title": "Filtering & expressions",
+      "description": "Select the right rows and reason carefully about missing values."
+    },
+    {
+      "id": "functions",
+      "title": "Functions & dates",
+      "description": "Transform strings, numbers, dates, and timestamps."
+    },
+    {
+      "id": "aggregation",
+      "title": "Aggregation",
+      "description": "Summarize data and define meaningful denominators."
+    },
+    {
+      "id": "joins",
+      "title": "Joins & sets",
+      "description": "Combine tables while preserving the intended grain."
+    },
+    {
+      "id": "subqueries",
+      "title": "Subqueries & CTEs",
+      "description": "Break down problems and query related or hierarchical data."
+    },
+    {
+      "id": "windows",
+      "title": "Window functions",
+      "description": "Compare ordered rows without losing detail."
+    },
+    {
+      "id": "patterns",
+      "title": "Interview patterns",
+      "description": "Recognize recurring problems and choose a reliable approach."
+    },
+    {
+      "id": "design",
+      "title": "Database design",
+      "description": "Model relationships, dependencies, and analytical history."
+    },
+    {
+      "id": "schema",
+      "title": "Schema & data changes",
+      "description": "Define tables, enforce constraints, and modify data safely."
+    },
+    {
+      "id": "transactions",
+      "title": "Transactions",
+      "description": "Understand concurrent work, isolation, and locks."
+    },
+    {
+      "id": "performance",
+      "title": "Performance",
+      "description": "Read plans, choose indexes, and reduce unnecessary work."
+    },
+    {
+      "id": "scaling",
+      "title": "Storage & scaling",
+      "description": "Choose physical layout, distribution, and replication from workload requirements."
+    },
+    {
+      "id": "postgres",
+      "title": "PostgreSQL toolkit",
+      "description": "Work with arrays, JSON, views, and database routines."
+    },
+    {
+      "id": "practice",
+      "title": "Practice & revision",
+      "description": "Apply the patterns, compare dialects, and test your understanding."
+    }
+  ],
+  "ml": [
+    {
+      "id": "serving",
+      "title": "Model serving",
+      "description": "Compare prediction APIs with autoregressive LLM serving and their operating constraints."
+    }
+  ],
+  "ai-engineering": [
+    {
+      "id": "inference",
+      "title": "LLM inference",
+      "description": "Follow a prompt through prefill, decode, memory, batching, and token generation."
+    },
+    {
+      "id": "serving",
+      "title": "LLM serving",
+      "description": "Turn one model process into a service that can handle concurrent traffic."
+    },
+    {
+      "id": "deployment",
+      "title": "Deploying LLMs",
+      "description": "Trace model artifacts, containers, GPU startup, readiness, and safe rollouts."
+    },
+    {
+      "id": "production",
+      "title": "Production LLM systems",
+      "description": "Design routing, backpressure, autoscaling, capacity, and failure handling."
+    },
+    {
+      "id": "observability",
+      "title": "LLM observability",
+      "description": "Use latency, queue, cache, GPU, and cost signals to explain serving behavior."
+    }
+  ],
+  "infrastructure": [
+    {
+      "id": "containers",
+      "title": "Containers",
+      "description": "Separate images, containers, registries, runtimes, and hardware access."
+    },
+    {
+      "id": "kubernetes",
+      "title": "Kubernetes",
+      "description": "Understand Pods, nodes, Deployments, Services, storage, init containers, and probes."
+    },
+    {
+      "id": "scaling",
+      "title": "Scaling",
+      "description": "Separate workload replicas from the machines required to run them."
+    },
+    {
+      "id": "observability",
+      "title": "Operations & observability",
+      "description": "Connect metrics, logs, traces, health, and deployment state during incidents."
+    }
+  ]
+}

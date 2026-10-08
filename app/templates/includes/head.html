@@ -7,6 +7,28 @@
   {% assign meta_title = page.title | append: ' · ' | append: site.title %}
 {% endif %}
 <meta name="description" content="{{ meta_description | escape }}">
+{% if page.keywords %}
+  <meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">
+{% endif %}
+<meta name="docsearch:language" content="en">
+{% if page.subject %}
+  <meta name="docsearch:subject" content="{{ page.subject | escape }}">
+{% endif %}
+{% if page.chapter %}
+  <meta name="docsearch:chapter" content="{{ page.chapter | escape }}">
+{% endif %}
+{% if page.level %}
+  <meta name="docsearch:level" content="{{ page.level | escape }}">
+{% endif %}
+{% if page.aliases %}
+  <meta name="docsearch:aliases" content="{{ page.aliases | join: ', ' | escape }}">
+{% endif %}
+{% if page.keywords %}
+  <meta name="docsearch:keywords" content="{{ page.keywords | join: ', ' | escape }}">
+{% endif %}
+{% if page.tools %}
+  <meta name="docsearch:tools" content="{{ page.tools | join: ', ' | escape }}">
+{% endif %}
 <title>{{ meta_title | escape }}</title>
 <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
 <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>

@@ -33,7 +33,7 @@ CREATE TABLE country_month_comments(country text,month_start date,comment_count 
 INSERT INTO country_month_comments VALUES('A','2019-12-01',10),('B','2019-12-01',20),('A','2020-01-01',30),('B','2020-01-01',20);
 `);
 function block(file, marker) {
-  const text = fs.readFileSync('app/subjects/_sql/' + file + '.md', 'utf8');
+  const text = fs.readFileSync('app/subjects/collections/_sql/' + file + '.md', 'utf8');
   const blocks = [...text.matchAll(/```sql\n([\s\S]*?)```/g)].map((m) => m[1]);
   const found = blocks.find((b) => b.includes(marker));
   assert.ok(found, `block ${file} ${marker}`);

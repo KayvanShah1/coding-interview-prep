@@ -11,18 +11,16 @@
     <kbd data-search-shortcut>Ctrl K</kbd>
   </button>
   <nav class="chapters" aria-label="Chapters">
-    {% unless page.subject == 'sql' %}
-      <a class="nav-start active" href="{{ current_subject.url | relative_url }}">
-        {{- current_subject.title }} Overview</a
-      >
-      <p class="nav-empty">This subject is planned. Explore its scope or continue learning SQL.</p>
-    {% else %}
+    {% if current_subject.status == 'Available' and current_subject.collection %}
+      {% assign collection_key = current_subject.collection %}
+      {% assign subject_lessons = site[collection_key] %}
+      {% assign chapters = site.data.chapters[page.subject] %}
       <a
-        class="nav-start {% if page.url == '/sql/' or page.url == '/' %}active{% endif %}"
-        href="{{ '/sql/' | relative_url }}"
+        class="nav-start {% if page.url == current_subject.url %}active{% endif %}"
+        href="{{ current_subject.url | relative_url }}"
         >Start here <span aria-hidden="true">↗</span></a
       >
-      {% for chapter in site.data.chapters %}
+      {% for chapter in chapters %}
         <details
           class="chapter"
           {% if page.chapter == chapter.id %}
@@ -36,7 +34,7 @@
             </svg>
           </summary>
           <div class="chapter-links">
-            {% assign lessons = site.sql | where: 'chapter', chapter.id | sort: 'order' %}
+            {% assign lessons = subject_lessons | where: 'chapter', chapter.id | sort: 'order' %}
             {% for lesson in lessons %}
               <a
                 href="{{ lesson.url | relative_url }}"
@@ -50,7 +48,12 @@
           </div>
         </details>
       {% endfor %}
-    {% endunless %}
+    {% else %}
+      <a class="nav-start active" href="{{ current_subject.url | relative_url }}">
+        {{- current_subject.title }} Overview</a
+      >
+      <p class="nav-empty">This subject is planned. Explore its scope or continue learning SQL.</p>
+    {% endif %}
   </nav>
   <div class="sidebar-footer">
     <span class="status-dot"></span>Notes & practice
@@ -58,6 +61,8 @@
       <a
         class="icon-button"
         href="https://github.com/{{ site.repository }}"
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label="GitHub repository"
         title="GitHub repository"
       >

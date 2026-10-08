@@ -5,7 +5,7 @@ baseurl: /coretrail
 repository: KayvanShah1/coretrail
 source: app
 destination: _site
-collections_dir: subjects
+collections_dir: subjects/collections
 layouts_dir: templates/layouts
 includes_dir: templates/includes
 markdown: kramdown
@@ -20,6 +20,15 @@ collections:
   sql:
     output: true
     permalink: /sql/:path/
+  ai:
+    output: true
+    permalink: /ai-engineering/:path/
+  ml:
+    output: true
+    permalink: /ml/:path/
+  infra:
+    output: true
+    permalink: /infrastructure/:path/
 defaults:
   - scope:
       path: ''
@@ -27,5 +36,23 @@ defaults:
     values:
       layout: lesson
       subject: sql
+  - scope:
+      path: ''
+      type: ai
+    values:
+      layout: lesson
+      subject: ai-engineering
+  - scope:
+      path: ''
+      type: ml
+    values:
+      layout: lesson
+      subject: ml
+  - scope:
+      path: ''
+      type: infra
+    values:
+      layout: lesson
+      subject: infrastructure
 exclude:
   - templates

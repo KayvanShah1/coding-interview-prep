@@ -1,0 +1,17 @@
+.git
+.github
+.bundle
+.jekyll-cache
+.sass-cache
+_site
+node_modules
+vendor
+tmp
+test-results
+docs
+scripts
+tests
+package*.json
+README.md
+CONTRIBUTING.md
+LICENSE
