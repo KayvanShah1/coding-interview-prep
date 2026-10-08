@@ -78,6 +78,11 @@
   ],
   "ml": [
     {
+      "id": "fundamentals",
+      "title": "Model fundamentals",
+      "description": "Validation, leakage, tree ensembles, metrics, and deployment drift."
+    },
+    {
       "id": "serving",
       "title": "Model serving",
       "description": "Compare prediction APIs with autoregressive LLM serving and their operating constraints."
@@ -108,6 +113,21 @@
       "id": "observability",
       "title": "LLM observability",
       "description": "Use latency, queue, cache, GPU, and cost signals to explain serving behavior."
+    },
+    {
+      "id": "retrieval",
+      "title": "RAG & retrieval",
+      "description": "Parsing, embeddings, hybrid ranking, retrieval quality, and context assembly."
+    },
+    {
+      "id": "agents",
+      "title": "Agents & tool execution",
+      "description": "Tool contracts, execution state, policies, and reliable agent workflows."
+    },
+    {
+      "id": "evaluation",
+      "title": "AI evaluation",
+      "description": "Measure retrieval, answer quality, agent trajectories, regressions, and cost."
     }
   ],
   "infrastructure": [
